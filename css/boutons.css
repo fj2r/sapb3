@@ -1,0 +1,126 @@
+@CHARSET "ISO-8859-1";
+/*
+	Feuille de styles pour les boutons utilises par les taglibs sur Postbac
+	
+	date: 2/9/2010 
+*/
+a.bouton,
+table.bouton a.bouton:visited,
+table.bouton p a.bouton,
+table.bouton p a.bouton:visited,
+table.bouton p.txt13 a.bouton,
+table.bouton p.txt13 a.bouton:visited {
+	display: table-cell; /* semble ok pour FF 2.0.0.3 */
+	display:inline-block; /* display:-moz-inline-table;*/
+ 	width:auto;
+	text-decoration: none;
+	color:#000000;
+	font-weight:bold;
+	height: 23px;
+	padding-top:2px;
+	text-align:center;
+	padding:0 0 0 0;
+}
+
+table.bouton a.bouton:hover	{
+	cursor:pointer;
+	cursor:hand;
+}
+
+table.bouton a.bouton img {
+	float:left;
+}
+table.bouton a.bouton span {
+	float:left;
+}
+
+table.bouton a.bouton span span,
+button.bouton span span {
+	float:left;
+	padding:0 0 0 5px;		/* Largeur du côté gauche */
+	vertical-align:middle;
+	background:url(../IMG/bouton/btn_left.gif) left top no-repeat;
+}
+
+table.bouton a.bouton:hover span span {
+	float:left;
+	padding:0 0 0 5px;		/* Largeur du côté gauche */
+	vertical-align:middle;
+	background:url(../IMG/bouton/btn_lefth.gif) left top no-repeat;
+}
+
+table.bouton a.bouton span span span,
+button.bouton span span span {
+	padding:0 5px 0 0;		/* Largeur du côté droite */
+	background:url(../IMG/bouton/btn_right.gif) right top no-repeat;
+}
+table.bouton a.bouton:hover span span span {
+	padding:0 5px 0 0;		/* Largeur du côté droite */
+	background:url(../IMG/bouton/btn_righth.gif) right top no-repeat;
+}
+
+table.bouton a.bouton span span span span,
+button.bouton span span span span {
+	height:27px;		/* Hauteur du bouton */
+	padding-top:0;
+	padding-bottom:0;
+	padding-left:3px;
+	padding-right:3px;
+	line-height:2;	/* Alignement vertical du texte (2.2 en 29px) */
+	background : url('../IMG/bouton/btn_bg.gif') repeat-x top;
+}
+
+table.bouton a.bouton:hover span span span span {
+	color:#FFFFFF;
+	text-decoration: none;
+	padding-top:0;
+	padding-bottom:0;
+	padding-left:3px;
+	padding-right:3px;
+	line-height:2;	/* Alignement vertical du texte */
+	background : url('../IMG/bouton/btn_bgh.gif') repeat-x top;
+}
+
+
+table.bouton {
+	display:inline;
+}
+	
+table.bouton a:link,
+table.bouton a:visited {
+	text-decoration: none;
+	font:12px Arial;
+	color:#000000;
+	font-weight:bold;
+	text-align:center;
+}
+table.bouton a:hover{
+	color:red;
+}
+table.bouton td {
+	padding:0px;
+	height:27px;
+	vertical-align:middle;
+}	
+table.bouton td.boutonleft {
+	width:8px;
+	text-align:right;
+	background:url(../IMG/bouton2/btn_left.gif) right center no-repeat;
+}	
+table.bouton td.boutonright {
+	width:8px;
+	text-align:left;
+	background:url(../IMG/bouton2/btn_right.gif) left center no-repeat;
+}
+table.bouton td.boutonmid {
+	text-align:center;
+	background:url(../IMG/bouton2/btn_bg.gif) repeat-x center;
+}
+table.bouton td.boutonmid a:hover {
+	background:url(../IMG/bouton2/btn_bg.gif) repeat-x center;
+}	
+
+.btt_comment {float: right; position: bottom;}
+.btt_tableau {display : inline-block ; float:right ; background:white url("../IMG/modifier.gif") no-repeat center center ; visibility : visible;  }
+.btt_tableau_h {display : inline-block ; float:right ; background:white url("../IMG/modifier.gif") no-repeat center center ; visibility : hidden;  }
+.input_tab {display : inline-block; }

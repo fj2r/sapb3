@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<identifiants_base>
+	<host>localhost</host>
+	<nomdb>sapb3</nomdb>
+	<login>root</login>
+	<passwd>fred2001</passwd>
+
+
+</identifiants_base>

@@ -1,0 +1,8 @@
+@CHARSET "UTF-8";
+#complementaire .intitule {
+	background: #E6FFF0 none;
+	font-weight: normal;
+}
+textarea.disabled {
+	background: #ccc;
+}

@@ -1,0 +1,38 @@
+{# Layout principal pour le template sapb3 #}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        {% block head %}
+            <title>{% block title %}{{titrePage}} - {% endblock %}</title>
+            {{ include('meta.twig',{charset:'UTF-8'},with_context= true) }}
+            {{ include('FeuillesDeStyle.twig') }}
+        {% endblock %}
+        
+    </head>
+    <body>
+       <div id ="cadre">
+        <div id ="header"> 
+            <div id="identifiants"> {% block identifiants %}{% endblock %}</div>
+            <div id ="cadre_haut">{% block cadre_haut %}{% endblock %}</div>
+        </div>
+        <div id="content">
+        {% block contenu %}{% endblock %}
+       </div>
+        
+        <div id="footer"> 
+            
+            {% block footer %}
+            <div id="pied">
+                &copy; Copyleft LMN Autun {{date|date('Y')}} - Version {{version}}
+            </div>
+            {% endblock %}
+            
+        </div>
+      </div>
+    </body>
+    
+    
+    
+</html>

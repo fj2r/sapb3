@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<informations>
+
+    <identifiants_base>
+            <host>localhost</host>
+            <nomdb>sapb3</nomdb>
+            <login>root</login>
+            <passwd>fred2001</passwd>
+    </identifiants_base>
+
+    <informations_etablissement>
+        <nom>Lycée Militaire Autun</nom>
+        <adresse_postale>3 rue Gaston Joliet</adresse_postale>
+        <cp>71400</cp>
+        <commune>AUTUN</commune>
+        <pays>France</pays>
+        <mail></mail>
+        <telephone></telephone>
+    </informations_etablissement>
+
+    <informations_administration>
+        <proviseur>M. Philippe TAMISIER</proviseur>
+        <proviseur_adjoint>M. Jean-Marc BALLANDRAS</proviseur_adjoint>
+        <administrateur_sapb>Frédéric ROUSSEAU</administrateur_sapb>
+    </informations_administration>
+
+</informations>

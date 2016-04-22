@@ -1,0 +1,1115 @@
+@charset "utf-8";
+/* CSS Document */
+
+body, html { 
+        margin:0;
+
+	padding:0; /*sans scroll*/
+	/*width:800px; avec scroll */
+	font-family:Arial, Helvetica, sans-serif, Verdana, Geneva, sans-serif; /*
+	 FONT-FAMILLY: ARIAL PAR DEFAUT*/
+/*	font-size:100%;
+*/	word-wrap: break-word;
+	font-size:1em;
+
+}
+
+
+#cadre #chapeau{
+	height: auto;
+}
+
+#cadre #chapeau div{
+	white-space: normal;
+	float: none;
+}
+
+
+
+div#cadre div#chapeau div.headermobile{
+	width:100%;
+	height:auto;
+	background: -moz-linear-gradient(top, #414040, #212020, black);
+	background: -o-linear-gradient(top, #414040, #212020, black);
+	background: -webkit-linear-gradient(top, #414040, #212020, black);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #414040),color-stop(1, #black));
+	border-bottom: 1px #6b6b6b solid;
+	display:block;
+}
+
+div#cadre div#chapeau div.headermobile IMG#logo-marianne{
+	margin: 0px auto;
+	padding: 2% 2%;
+	width: 24%;
+	max-width: 162px;
+
+}
+
+div#cadre div#chapeau div.headermobile IMG#logo-admissionpostbac{
+	margin: 0px auto;
+	padding-top: 2%;
+	padding-right: 2%;
+	right: 0px;
+	float: right;
+	width: 68%;
+	max-width: 392px;
+	color: white;
+}
+
+div#cadre div#chapeau div#bandeau2{
+	margin-top: 0px;
+}
+
+div#cadre div#chapeau div#bandeau2 div#identite{
+/*	position:relative;*/
+	display:table;
+
+	width:100%;
+
+/*	height: 3%;*/
+	/*background:-moz-linear-gradient(top, #3e3e3e, #363636, #2d2d2d);*/
+	/*background:-o-linear-gradient(top, #3e3e3e, #363636, #2d2d2d);*/
+	/*background:-webkit-linear-gradient(top, #3e3e3e, #363636, #2d2d2d);*/
+	/*background:-webkit-gradient(linear,left top,left bottom,color-stop(0, #3e3e3e),color-stop(1, #2d2d2d));*/
+
+	border-bottom: 1px #a8a8a8 solid;
+	background-color:#000;
+	color: white;
+	font-weight: normal;
+	height: auto;
+	line-height: normal;
+	padding-left: 0;
+}
+
+div#cadre div#chapeau div#bandeau2 div#identite span{
+	display:table-cell;
+	vertical-align:middle;
+/*	width:65%;*/
+	min-height:20px;
+	color:#FFF;
+	padding:4px 8px 4px 8px;
+	min-height:20px;
+	font-size:0.9em;
+/*	padding-top: 1%;
+	padding-left: 3%;*/
+}
+
+div#cadre div#chapeau div#bandeau2 div#identite a#lien_deconnexion_bis{
+	
+	/*/////////////////////////////////////////////////////// A DEFINIR UNE TAILLE DE FONT /////////////////////////////////////////////////////*/
+	display:table-cell;
+	padding:4px 8px 4px 8px;
+	text-decoration: none;
+	color:#000;
+/*	width: 35%;*/
+	min-height:20px;
+	text-align:center;
+/*	right: 2px;*/
+	float:right;
+	font-size:1em;
+/*	border: 1px #8b9c2f solid;*/
+	background: -moz-linear-gradient(top, #e0e0e0, #b2b2b2, #8f8f8f);
+	background: -o-linear-gradient(top, #e0e0e0, #b2b2b2, #8f8f8f);
+	background: -webkit-linear-gradient(top, #e0e0e0, #b2b2b2, #8f8f8f);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #e0e0e0),color-stop(1, #8f8f8f));
+/*	border: 1px #767676 solid;*/
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+}
+
+div#cadre div#panneaudroite {
+	margin-left:0;
+	float: none;
+	margin-top: 0;
+	width: auto;
+
+}		
+	
+
+div#cadre div#panneaudroite div#page div#admission{
+	width: 100%;
+}
+
+body div#cadre br { display:none;}
+
+div#cadre div#panneaudroite div#page div#admission div.contentproposition{
+/*	position: relative;*/
+/*	width:100%;*/
+/*	height: auto;*/
+	min-height: 70%;
+/*	padding-top: 1px;
+	padding-bottom: 0px;*/
+	background: linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -moz-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -o-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -webkit-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #c7e044),color-stop(1, #77a907));
+	/*border-bottom: 1px #404a25 solid;*/
+	padding:5px;
+}
+div#cadre div#panneaudroite div#page div#admission div.contentproposition div#proposition {
+	margin: 1% auto;
+	padding: 1% 2%;
+	width: 94%;
+	/*padding:4px 8px 4px 8px;*/
+	border: 1px #8b9c2f solid;
+	background: -moz-linear-gradient(top, #ddec8f, #daeb8b, #d6e886);
+	background: -o-linear-gradient(top, #ddec8f, #daeb8b, #d6e886);
+	background: -webkit-linear-gradient(top, #ddec8f, #daeb8b, #d6e886);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ddec8f),color-stop(1, #d6e886));
+	height: auto;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+	text-align:center;
+	font-size:1em;
+
+
+}
+div#cadre div#panneaudroite div#page div#admission div.contentproposition div#proposition br {display: inline;}	/*attention, FF n'affiche pas car il ne connait pas cette instruction depuis toujours*/
+
+div#cadre div#panneaudroite div#page div#admission div.contentproposition div#reponseProposition{
+	margin-left : 0;
+	margin-bottom : 0;
+}
+
+
+/*////////////////////////////////////////////////////////////////////////PROPOSITION REPONSE JONO/////////////////////////////////////////*/
+
+div#cadre div#panneaudroite div#page div#admission div.contentproposition div#reponseProposition div.ligneReponseProposition {
+/*	margin: 1% auto;
+	padding: 1% 2%;*/
+	/*width: 98%;*/
+	height: auto;
+	display: table;
+	word-wrap: break-word;
+/*	min-height: 74px;*/
+	background: -moz-linear-gradient(top, #ddec8f, #daeb8b, #d6e886);
+	background: -o-linear-gradient(top, #ddec8f, #daeb8b, #d6e886);
+	background: -webkit-linear-gradient(top, #ddec8f, #daeb8b, #d6e886);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ddec8f),color-stop(1, #d6e886));
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+	border: 1px #758327 solid;
+	font-size:0.9em;
+	margin-bottom:5px; 
+	margin:0 auto;
+	padding-top: 5px;
+	padding-bottom:5px;
+}
+
+div#cadre div#panneaudroite div#page div#admission div.contentproposition div#reponseProposition div.ligneReponseProposition p.colonneMessReponse{
+/*	width: 80%;*/
+	height:100%;
+	display: table-cell;
+	border : none;
+	padding-top: 0px;
+	padding-bottom : 0px;
+	padding-left : 0px;
+	padding-right : 0px;
+	word-wrap: break-word;
+	vertical-align:middle;
+	padding:4px 8px 4px 8px;
+}
+
+
+
+div#cadre div#panneaudroite div#page div#admission div.contentproposition div#reponseProposition div.ligneReponseProposition div.colonneBoutonReponse{
+	width: auto;
+	height: 100%;
+	border : none;
+	display: table-cell;
+	vertical-align: middle;
+	min-width: 0%;
+}
+
+
+
+div#cadre div#panneaudroite div#page div#admission div.contentproposition div#reponseProposition div.ligneReponseProposition div.colonneBoutonReponse a.newBouton {
+
+	display:inline-table;
+	text-decoration: none;
+	color:#000;
+	text-align:center;
+	height: 55px;
+	background: -moz-linear-gradient(top, #e0e0e0, #b2b2b2, #8f8f8f);
+	background: -o-linear-gradient(top, #e0e0e0, #b2b2b2, #8f8f8f);
+	background: -webkit-linear-gradient(top, #e0e0e0, #b2b2b2, #8f8f8f);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #e0e0e0),color-stop(1, #8f8f8f));
+	/*background: -moz-linear-gradient(top, #c651a9, #a92080, #8d1262);*/
+	/*background: -o-linear-gradient(top, #c651a9, #a92080, #8d1262);*/
+	/*background: -webkit-linear-gradient(top, #c651a9, #a92080, #8d1262);*/
+	/*background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #c651a9),color-stop(1, #8d1262));*/
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+	/*border: 1px #8d1262 solid;*/
+	padding:20px 10px 10px 10px;
+	font-size:1em;
+	font-weight: bold;
+	width:90px;
+	vertical-align:middle;
+	margin-right:5px;
+}
+
+div#cadre div#panneaudroite div#page div#admission div.contentproposition div#reponseProposition div.ligneReponseProposition div.colonneBoutonReponse a#btn_1.newBouton {
+	vertical-align:middle;
+	display:inline-table;
+	text-decoration: none;
+	color:#000;
+	text-align:center;
+	height: 55px;
+	background: -moz-linear-gradient(top, #e0e0e0, #b2b2b2, #8f8f8f);
+	background: -o-linear-gradient(top, #e0e0e0, #b2b2b2, #8f8f8f);
+	background: -webkit-linear-gradient(top, #e0e0e0, #b2b2b2, #8f8f8f);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #e0e0e0),color-stop(1, #8f8f8f));
+	/*background: -moz-linear-gradient(top, #c651a9, #a92080, #8d1262);*/
+	/*background: -o-linear-gradient(top, #c651a9, #a92080, #8d1262);*/
+	/*background: -webkit-linear-gradient(top, #c651a9, #a92080, #8d1262);*/
+	/*background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #c651a9),color-stop(1, #8d1262));*/
+	/*border: 1px #8d1262 solid;*/
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+	padding:10px 10px 10px 10px;
+	font-size:1em;
+	width:90px;
+}
+
+div#cadre div#panneaudroite div#page div#admission div.contentproposition div#reponseProposition div.ligneReponseProposition div.colonneBoutonReponse a#btn_4.newBouton {
+	vertical-align:middle;
+	display:inline-table;	
+	text-decoration: none;
+	color:#000;
+	text-align:center;	
+	height: 55px;
+	background: -moz-linear-gradient(top, #e0e0e0, #b2b2b2, #8f8f8f);
+	background: -o-linear-gradient(top, #e0e0e0, #b2b2b2, #8f8f8f);
+	background: -webkit-linear-gradient(top, #e0e0e0, #b2b2b2, #8f8f8f);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #e0e0e0),color-stop(1, #8f8f8f));
+	/*background: -moz-linear-gradient(top, #c651a9, #a92080, #8d1262);*/
+	/*background: -o-linear-gradient(top, #c651a9, #a92080, #8d1262);*/
+	/*background: -webkit-linear-gradient(top, #c651a9, #a92080, #8d1262);*/
+	/*background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #c651a9),color-stop(1, #8d1262));*/
+	/*border: 1px #8d1262 solid;*/
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+	padding:5px 5px 5px 5px;
+	font-size:1em;
+	width:90px;
+}
+
+
+
+div#cadre div#panneaudroite div#page div#admission.page  div.contentproposition div#reponseProposition div.separateur{
+	width: 50%;
+	height:2px;
+	background: #7d902c;
+	border-bottom: 1px #d3f53a solid;
+	margin-left: 25%;
+	margin-bottom: 5px;
+	margin-top: 3px;
+}
+
+div#cadre div#panneaudroite div#page div#admission.page  div#lienListeVoeuxOrdonnes{
+	display: block;
+	background: #aba9a9;
+	width: 100%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-top: 1px #404a25 solid;
+	text-align: center;
+}
+
+/*div#cadre div#panneaudroite div#page div#admission.page  div#lienListeVoeuxOrdonnes a{
+	margin: 0 auto;
+	height:30px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: center;
+	background: -moz-linear-gradient(top, #dadada, #bebebe, #a2a2a2);
+	background: -o-linear-gradient(top, #dadada, #bebebe, #a2a2a2);
+	background: -webkit-linear-gradient(top, #dadada, #bebebe, #a2a2a2);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #dadada),color-stop(1, #a2a2a2));
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+	display:inline;
+}*/
+
+div#cadre div#panneaudroite div#page div#admission.page  div#lienListeVoeuxApresProposition{
+	margin: 0px 0px 5px -20px;
+
+	
+}
+
+div#cadre div#panneaudroite div#page div#admission.page  div#lienListeVoeuxApresProposition a{
+	width:98%;
+	height:30px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: center;
+	background: -moz-linear-gradient(top, #dadada, #bebebe, #a2a2a2);
+	background: -o-linear-gradient(top, #dadada, #bebebe, #a2a2a2);
+	background: -webkit-linear-gradient(top, #dadada, #bebebe, #a2a2a2);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #dadada),color-stop(1, #a2a2a2));
+	border-top: 1px #404a25 solid;
+	border-bottom: 1px #404a25 solid;
+}
+
+div#cadre div#panneaudroite div#page div#admission.page  div#lienListeVoeuxApresProposition{
+	display: block;
+	margin: 2px;
+}
+
+div#cadre div#panneaudroite div#page div#admission.page  div#lienListeVoeuxOrdonnes a#lien_listeVoeuxOrdonnes,
+div#cadre div#panneaudroite div#page div#admission.page  div#lienListeVoeuxApresProposition a#lien_listeVoeuxApresProposition{
+	margin: auto;
+	text-decoration: none;
+	color:#000;
+	width: 98%;
+	height:100%;
+	display: inline-block;
+	background: -moz-linear-gradient(top, #e0e0e0, #b2b2b2, #8f8f8f);
+	background: -o-linear-gradient(top, #e0e0e0, #b2b2b2, #8f8f8f);
+	background: -webkit-linear-gradient(top, #e0e0e0, #b2b2b2, #8f8f8f);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #e0e0e0),color-stop(1, #8f8f8f));
+	padding:15px 0px 15px 0px;
+	font-size:0.9em;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+	border: 1px #404a25 solid;
+}
+
+div#cadre div#panneaudroite div#page div#admission.page  div#lienListeVoeuxApresProposition a#lien_listeVoeuxApresProposition{
+	border: 1px #404a25 solid;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+}
+
+div#cadre div#panneaudroite div#page div#admission.page  div#listeVoeuxOrdonnes{
+/*	position:relative;*/
+	background: -moz-repeating-linear-gradient(top left -45deg, #aba9a9, #aba9a9 1px, #adacac 2px, #adacac 4px);
+	background: -o-linear-gradient(top, #aba9a9, #adacac);
+	background: -webkit-linear-gradient(top, #aba9a9 , #adacac );
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #aba9a9),color-stop(1, #adacac));
+	padding:5px;
+	border-bottom: 1px #404a25 solid;
+	display:none;  /*A REMETTRE APRES LES TESTS IMPORTANTISSIME*/
+	margin-bottom: 0px;
+	margin-left: 0;
+	margin-top: 0;
+}
+
+div#cadre div#panneaudroite div#page div#admission.page  div#listeVoeuxOrdonnes div#listeVoeuxApresProposition{
+	display:none;  /*A REMETTRE APRES LES TESTS IMPORTANTISSIME*/
+}
+
+
+div#cadre div#panneaudroite div#page div#admission.page  div#listeVoeuxOrdonnes div#listeVoeuxProposition div.ligneVoeu,
+div#cadre div#panneaudroite div#page div#admission.page  div#listeVoeuxOrdonnes div#listeVoeuxApresProposition div.ligneVoeu {
+	/*position: relative;*/
+	/*width: 100%;*/
+	height:100%;
+	display:table;
+	background: #d2d2d2;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+	border: 1px #535353 solid;
+	margin-bottom: 5px;
+	padding:5px;
+}
+
+div#cadre div#panneaudroite div#page div#admission.page div#listeVoeuxOrdonnes div#listeVoeuxProposition div.ligneVoeu span.colonneVoeu,
+div#cadre div#panneaudroite div#page div#admission.page div#listeVoeuxOrdonnes div#listeVoeuxApresProposition div.ligneVoeu span.colonneVoeu{
+	display:table-cell;
+	margin:0 auto;
+	vertical-align:middle;
+	word-wrap: break-word;
+	color:#8d1262;
+/*	margin-left:10px;
+	margin-top: 20px;*/
+/*	float: left;*/
+/*	min-width: 40px;
+	height:40px;*/
+/*	text-height: font-size;*/
+	font-size: 0.9em;
+	text-align: center;
+	border: none;
+	font-weight: normal;
+	width: auto;
+	min-width :20px;
+/*	background-color: #8d1262;*/
+/*	background: -moz-linear-gradient(top, #bd3e9d, #a92080, #8d1262);
+	background: -o-linear-gradient(top, #bd3e9d, #a92080, #8d1262);
+	background: -webkit-linear-gradient(top, #bd3e9d, #a92080, #8d1262);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #bd3e9d),color-stop(1, #8d1262));*/
+/*/*	padding:5px;*/
+/*/*	border: 1px #8d1262 solid;*/
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+    }
+    
+div#cadre div#panneaudroite div#page div#admission.page  div#listeVoeuxOrdonnes div#listeVoeuxProposition div.ligneVoeu span.colonneVoeu span.num,
+div#cadre div#panneaudroite div#page div#admission.page  div#listeVoeuxOrdonnes div#listeVoeuxApresProposition div.ligneVoeu span.colonneVoeu span.num{
+	display: table-cell;
+	background-color: #8d1262;	
+	/*background: -moz-linear-gradient(top, #bd3e9d, #a92080, #8d1262);*/
+	/*background: -o-linear-gradient(top, #bd3e9d, #a92080, #8d1262);*/
+	/*background: -webkit-linear-gradient(top, #bd3e9d, #a92080, #8d1262);*/
+	/*background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #bd3e9d),color-stop(1, #8d1262));*/
+/*	padding:5px;*/
+/*	border: 1px #8d1262 solid;*/
+	color: white;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+	margin: 0 auto;
+	width: 20px;
+	height:20px;
+	vertical-align: middle;
+}
+
+div#cadre div#panneaudroite div#page div#admission.page div#listeVoeuxOrdonnes div#listeVoeuxProposition div#titreLigneVoeu {display:none} 
+
+div#cadre div#panneaudroite div#page div#admission.page  div#listeVoeuxOrdonnes div#listeVoeuxProposition div.ligneVoeu p.colonneFormation,
+div#cadre div#panneaudroite div#page div#admission.page  div#listeVoeuxOrdonnes div#listeVoeuxApresProposition div.ligneVoeu p.colonneFormation{
+	display:table-cell;
+	vertical-align:middle;
+	padding-left:5px;
+	padding-right: 10px;
+	font-size:0.75em;
+	border: none;
+}
+
+div#cadre div#panneaudroite div#page div#admission.page  div#listeVoeuxOrdonnes div#listeVoeuxProposition div.ligneVoeu p.colonneSituation,
+div#cadre div#panneaudroite div#page div#admission.page  div#listeVoeuxOrdonnes div#listeVoeuxApresProposition div.ligneVoeu p.colonneSituation{
+	display:block;
+	font-size: 1em;
+	font-style:italic;
+	text-align:center;
+	min-width:0%;
+	width: 100%;
+/*	margin-bottom:20px;*/
+	border:none;
+}
+
+
+
+div#cadre div#panneaudroite div#page div#admission.page div#listeVoeuxOrdonnes div#listeVoeuxProposition div.ligneVoeu div.colonneDemissionner,
+div#cadre div#panneaudroite div#page div#admission.page  div#listeVoeuxOrdonnes div#listeVoeuxApresProposition div.ligneVoeu div.colonneDemissionner{
+	border:none;
+	width: 100%;
+	min-width: 0%;
+	display: block;
+	padding-bottom: 5px;
+}
+
+div#cadre div#panneaudroite div#page div#admission.page div#listeVoeuxOrdonnes div#listeVoeuxProposition div.ligneVoeu div.colonneDemissionner a,
+div#cadre div#panneaudroite div#page div#admission.page  div#listeVoeuxOrdonnes div#listeVoeuxApresProposition div.ligneVoeu div.colonneDemissionner a{
+	display:table-cell;
+	vertical-align: bottom;
+/*	top: 2.5%;*/
+/*	bottom: 2.5%;*/
+	text-align: center;
+/*	padding-top: 20px;*/
+/*	position: absolute;*/
+/*	display:block;*/
+	vertical-align:top;
+	color: white;
+	min-width: 0%;
+/*	height: 30px;*/
+	background: -moz-linear-gradient(top, #727272, #494949, #363636);
+	background: -o-linear-gradient(top, #727272, #494949, #363636);
+	background: -webkit-linear-gradient(top, #727272, #494949, #363636);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #727272),color-stop(1, #363636));
+	text-decoration: none;
+/*	border: 1px black solid;*/
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+	padding:4px 8px 4px 8px;
+	border:none;
+	margin:0 0;
+	font-size:0.8em;
+/*	right: 5px;*/
+}
+
+div#cadre div#pied span#copyright{
+	font-size:0.7em;
+	text-align: center;
+	display: inline-block;
+	width: 100%;
+/*	height: auto;*/
+	background: -moz-linear-gradient(top, #dadada, #d1d1d1, #c3c3c3);
+	background: -o-linear-gradient(top, #dadada, #d1d1d1, #c3c3c3);
+	background: -webkit-linear-gradient(top, #dadada, #d1d1d1, #c3c3c3);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #dadada),color-stop(1, #c3c3c3));
+	border-bottom: 1px #404a25 solid;
+}
+
+
+
+
+
+/*/////////////////////////////////////////////CONNEXION/////////////////////////////////////////////////////////////////*/
+
+
+div#cadre div#chapeau div#bandeau2 div#connexion{
+	text-align: center;
+/*	position: relative;*/
+	width:100%;
+	top: 0px;
+	height: auto;
+/*	bottom: 4%;*/
+/*	height: 80%;*/
+/*	padding-top: 10%;
+	padding-bottom: 20%;*/
+	background: linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -moz-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -o-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -webkit-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #c7e044),color-stop(1, #77a907));
+	border-bottom: 1px #404a25 solid;
+}
+
+div#cadre div#chapeau div#bandeau2 div#connexion label{
+	display: block;
+	font-size: 1.3em;
+}
+
+div#cadre div#chapeau div#bandeau2 div#connexion input{
+	text-align: center;
+	display:block;
+	margin: 0 auto;
+	margin-bottom:15px;
+	font-size: 1.3em;
+}
+
+div#cadre div#chapeau div#bandeau2 div#connexion input.btn_submit_frm_auth {
+	cursor: pointer;
+	text-decoration: none;
+	color: black;
+	width: auto;
+	font-size: 1.3em !important;
+	height: 50px;
+/*	min-height: 70%;*/
+	background: -moz-linear-gradient(top, #e0e0e0, #c4c4c4, #a6a6a6);
+	background: -o-linear-gradient(top, #e0e0e0, #c4c4c4, #a6a6a6);
+	background: -webkit-linear-gradient(top, #e0e0e0, #c4c4c4, #a6a6a6);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #e0e0e0),color-stop(1, #a6a6a6));
+	border: 1px #767676 solid;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+}
+
+#authentification a.newBouton {
+
+	text-align: center;
+	display:block;
+	margin: 20px auto;
+	text-decoration: none;
+	color: black;
+	width: auto;
+	font-size: 20px;
+	height: 100px;
+	min-height: 50%;
+	background: -moz-linear-gradient(top, #e0e0e0, #d5d5d5, #c5c5c5);
+	background: -o-linear-gradient(top, #e0e0e0, #d5d5d5, #c5c5c5);
+	background: -webkit-linear-gradient(top, #e0e0e0, #d5d5d5, #e0e0e0);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #e0e0e0),color-stop(1, #e0e0e0));
+	border: 1px #767676 solid;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+}
+
+div#cadre div#panneaudroite div#page div#authentification.page table a{display:none;}
+
+div#cadre div#panneaudroite div#page div#authentification.page form#premierevisite{
+	display:none;
+}
+
+
+
+div#cadre div#panneaudroite div#page div#authentification.page form p{
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+
+
+/*//////////////////////////////////////////////MESSAGE ERREUR////////////////////////////////////////////////*/
+
+/*A tester sur page de connexion avec num dossier et mot de passe erron�s.*/
+
+div#cadre div#panneaudroite div#page div#authentification.page table{
+	background-color: #5e8305; /*font vert derri�re le contenant rouge*/
+}
+
+
+div#cadre div#panneaudroite div#page div#authentification.page table tbody tr td div.titre{
+/*	position: relative;
+	margin: 1% auto;
+	padding: 1% 1%;
+	width: 94%;*/
+	display: block;
+	margin-top: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	border: 1px #334703 solid;
+	background: -moz-linear-gradient(top, #FFA89B, #FC716D, #FA351F);
+	background: -o-linear-gradient(top, #FFA89B, #FC716D, #FA351F);
+	background: -webkit-linear-gradient(top, #FFA89B, #FC716D, #FA351F);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #FFA89B),color-stop(1, #FA351F));
+/*	border: 1px #767676 solid;*/
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+/*	margin: 0.5em;*/
+	padding:10px 15px 10px 15px;
+	font-size:0.9em;
+}
+
+
+div#cadre div#panneaudroite div#page div#authentification.page table tbody tr{
+	display: inline;
+}
+
+div#cadre div#panneaudroite div#page div#authentification.page p {display:none;}
+
+/* page erreur de connexion */
+div#cadre div#panneaudroite div#page #authentification div#titre {
+	display:block;
+	font-size:0.9em;
+}
+div#cadre div#panneaudroite div#page div#authentification.page table tbody tr td br{
+	display:inline;
+
+}
+
+div#cadre div#panneaudroite div#page div#titre {display:block;
+font-size:1em;}
+
+
+/*#divContinuer .boutonContinuer a#null {display:run-in;}*/
+
+
+
+div#cadre div#panneaudroite div#page div#authentification table tbody div:first-child  br{
+	display:run-in;
+}
+
+div#cadre div#panneaudroite div#page div#authentification.page div#divContinuer div#titre,
+div#cadre div#panneaudroite div#page div#authentification.page div#divContinuer div.txt13{
+	display:none;
+}
+
+div#cadre div#panneaudroite div#page div#authentification.page div#divContinuer div.boutonContinuer{
+	display:block;
+}
+
+div#cadre div#panneaudroite div#page div#authentification.page div#divContinuer div.boutonContinuer a.newBouton{
+	text-align: center;
+	display:inline-block;
+	text-decoration: none;
+	padding: 20px 20px;
+	color:#000;
+	width: auto;
+	font-size: 1.2em;
+	height: auto;
+	background: linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -moz-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -o-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -webkit-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #c7e044),color-stop(1, #77a907));
+	border:1px mediumblue;
+}
+
+/*////////page confirmation////////////*/
+
+div#cadre div#panneaudroite div#page #admission.page div#messageConfirmationReponse{
+	min-height: 70%;
+	background: linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -moz-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -o-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -webkit-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #c7e044),color-stop(1, #77a907));
+	/*border-bottom: 1px #404a25 solid;*/
+	padding:5px;
+	/*width: 98%;*/
+	display: block;
+	margin: 0 0;
+}
+
+
+div#cadre div#panneaudroite div#page #admission.page div#messageConfirmationReponse p.txt13{
+	margin: 2.5px auto;
+	padding: 1% 2%;
+	width: 96%;
+	display: inline-block;
+	/*padding:4px 8px 4px 8px;*/
+	border: 1px #8b9c2f solid;
+	background: -moz-linear-gradient(top, #ddec8f, #daeb8b, #d6e886);
+	background: -o-linear-gradient(top, #ddec8f, #daeb8b, #d6e886);
+	background: -webkit-linear-gradient(top, #ddec8f, #daeb8b, #d6e886);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ddec8f),color-stop(1, #d6e886));
+	height: auto;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+	text-align:center;
+	font-size:1em;
+}
+
+div#cadre div#panneaudroite div#page #admission.page div#messageConfirmationReponse p.txt13 br,
+div#cadre div#panneaudroite div#page #admission.page div#messageConfirmationReponse p.txt13 strong{
+	display: inline;
+}
+
+div#cadre div#panneaudroite div#page #admission.page #boutonConfirmationReponse{
+	margin : 0 auto;
+	display: block;
+}
+
+div#cadre div#panneaudroite div#page #admission.page #boutonConfirmationReponse #ligneBoutonConfirmationReponse {
+	min-width: 0px;
+	font-weight: normal;
+	width: 100%;
+	background: red;
+	display:block;
+	margin: 0 0;
+}
+
+div#cadre div#panneaudroite div#page #admission.page #boutonConfirmationReponse #ligneBoutonConfirmationReponse #boutonConfirmConfirmationReponse{
+	display: inline-block;
+	width: 100%;
+
+}
+
+#cadre #panneaudroite #page #admission.page #boutonConfirmationReponse #ligneBoutonConfirmationReponse #boutonAnnulerConfirmationReponse{
+	display: inline-block;
+	width:100%;
+
+}
+
+
+/* //////////////page voeu validé/////////////// */
+div#cadre div#panneaudroite div#page #admission.page #boutonConfirmationReponse #ligneBoutonConfirmationReponse #boutonConfirmConfirmationReponse a {
+	text-decoration:none;
+	color:#000;
+	display:block;
+	text-align: center;
+	background: linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -moz-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -o-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -webkit-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #c7e044),color-stop(1, #77a907));
+	font-size:1.2em;
+	font-weight: normal;
+	width:100%;
+	height:100%;
+	margin: 0 0;
+	padding: 20px 0px 20px 0px;
+	border-radius: 0px;
+	border: 0px;
+}
+
+#cadre #panneaudroite #page #admission.page #boutonConfirmationReponse #ligneBoutonConfirmationReponse #boutonAnnulerConfirmationReponse a {
+	text-decoration: none;
+	display:block;
+	background: -moz-linear-gradient(top, #e0e0e0, #b2b2b2, #8f8f8f);
+	background: -o-linear-gradient(top, #e0e0e0, #b2b2b2, #8f8f8f);
+	background: -webkit-linear-gradient(top, #e0e0e0, #b2b2b2, #8f8f8f);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #e0e0e0),color-stop(1, #8f8f8f));
+	width: 100%;
+	height:100%;
+	font-size:1.2em;
+	font-weight: normal;
+	border-radius: 0px 0px 0px 0px;
+	padding: 20px 0px 20px 0px;
+	margin: 0 0;
+	border: 0px;
+}
+
+
+/*/////////////////////////////////////////////////////////////////////CORRECTION DE LA BARRE BLANCHE A DROITE//////////////////////////////////////////*/
+
+
+#cadre #panneaudroite #page #admission.page .contentproposition div{
+	display: block;
+}
+
+#cadre #panneaudroite #page #admission.page .contentproposition div a#lienMessageEtablissement{
+	margin: 0 auto;
+	display: inline-block;
+	text-decoration: none;
+	color:#000;
+	text-align:center;
+	height: 100%;
+	background: -moz-linear-gradient(top, #e0e0e0, #b2b2b2, #8f8f8f);
+	background: -o-linear-gradient(top, #e0e0e0, #b2b2b2, #8f8f8f);
+	background: -webkit-linear-gradient(top, #e0e0e0, #b2b2b2, #8f8f8f);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #e0e0e0),color-stop(1, #8f8f8f));
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+	padding:20px 2% 20px 2%;
+	font-size:1.2em;
+	font-weight: normal;
+	width:95%;
+	vertical-align:middle;
+}
+
+
+#cadre #panneaudroite #page #admission.page div.attestation{
+	background-color: #77a907;
+	padding: 0px 3px 5px 3px;
+}
+
+/* bouton d'impression de l'attestation */
+#cadre #panneaudroite #page #admission.page div.attestation a#attestation {
+	text-decoration:none;
+	display: inline-block;
+	color:#000;
+	height: 100%;
+	text-align: center;
+	background: linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -moz-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -o-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -webkit-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #c7e044),color-stop(1, #77a907));
+	padding:20px 2% 20px 2%;
+	font-size:1.2em;
+/*	margin:0 auto;
+	width:97%;*/
+	font-weight: normal;
+	border:0px;
+	border-radius: 10px;
+	
+	/*margin: 0% auto;*/
+	/*width: 98%;*/
+	margin: 1% auto;
+	width: 94%;
+}
+
+
+
+
+/*///////////////////////////////////////////////// Message Etablissement //////////////////////////////////////////////////////*/
+div#cadre div#panneaudroite div#page div#admission div#messageEtablissement {
+	min-height: 70%;
+	background: linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -moz-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -o-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -webkit-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #c7e044),color-stop(1, #77a907));
+	/*border-bottom: 1px #404a25 solid;*/
+	padding:1%;
+	width: 98%;
+	display: block;
+	margin: 0 0;
+}
+
+
+
+div#cadre div#panneaudroite div#page div#admission div#messageEtablissement div.messageEtablissementRdvMobile {
+/*	display : block;*/
+/*	width :25%;*/
+/*	display:table-cell; */
+/*   	border : 1px solid black;	*/
+/*	background-color :#E4E3F9;*/
+/*	padding : 5px;*/
+	
+	display: inline-block;
+	margin: 5px auto;
+	padding: 1% 2%;
+	width: 96%;
+	/*padding:4px 8px 4px 8px;*/
+	border: 1px #8b9c2f solid;
+	background: -moz-linear-gradient(top, #ddec8f, #daeb8b, #d6e886);
+	background: -o-linear-gradient(top, #ddec8f, #daeb8b, #d6e886);
+	background: -webkit-linear-gradient(top, #ddec8f, #daeb8b, #d6e886);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ddec8f),color-stop(1, #d6e886));
+	height: auto;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+	text-align:center;
+	font-size:1em;
+	
+	font-weight:bold;
+	
+	}
+	
+div#cadre div#panneaudroite div#page div#admission div#messageEtablissement div.texteMessageEtablissement{
+		margin: 2.5px auto;
+	padding: 1% 2%;
+	width: 96%;
+	display: inline-block;
+	/*padding:4px 8px 4px 8px;*/
+	border: 1px #8b9c2f solid;
+	background: -moz-linear-gradient(top, #ddec8f, #daeb8b, #d6e886);
+	background: -o-linear-gradient(top, #ddec8f, #daeb8b, #d6e886);
+	background: -webkit-linear-gradient(top, #ddec8f, #daeb8b, #d6e886);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ddec8f),color-stop(1, #d6e886));
+	height: auto;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+	text-align:center;
+	font-size:1em;
+}
+
+div#cadre div#panneaudroite div#page div#admission div#messageEtablissement div.texteMessageEtablissement br{
+	display: inline;
+}
+
+div#cadre div#panneaudroite div#page div#admission div#messageEtablissement div.boutonRetourMobile a{
+	text-decoration:none;
+	display: inline-block;
+	color:#000;
+	height: 100%;
+	text-align: center;
+	background: linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -moz-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -o-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -webkit-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #c7e044),color-stop(1, #77a907));
+	padding:20px 2% 20px 2%;
+	font-size:1.2em;
+/*	margin:0 auto;
+	width:97%;*/
+	font-weight: normal;
+	border:1px #507104 solid;
+	border-radius: 10px;
+	
+	/*margin: 0% auto;*/
+	width: 96%;
+	margin: 1% auto;
+}
+
+
+
+div#cadre div#panneaudroite div#page div#admission div.messageProcedureCmpMobile {
+	display : block;
+	background-color :#77A907;
+	text-align:center;
+	padding-bottom : 15px;
+	font-weight:bold;
+}
+
+
+
+
+/*/////////////////////////////////////////////////SESSION EXPIRE//////////////////////////////////////////////////////*/
+
+div#cadre div#panneaudroite div#page div#Postbac.page{
+	background: #adacac;
+}
+
+div#cadre div#panneaudroite div#page div#Postbac.page div#divContinuer {
+	display: block;
+	margin: 0;
+	border: 1px #334703 solid;
+	background: #d2d2d2;
+/*	border: 1px #767676 solid;*/
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+/*	margin: 0.5em;*/
+	padding:10px 15px 10px 15px;
+	font-size:0.9em;
+	text-align: center;
+	
+}
+	
+div#cadre div#panneaudroite div#page div#Postbac.page div#divContinuer a{
+	text-align: center;
+	display:inline-block;
+	text-decoration: none;
+	padding: 20px 20px;
+	color:#000;
+	width: auto;
+	font-size: 1.2em;
+	height: auto;
+	background: linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -moz-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -o-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -webkit-linear-gradient(top, #c7e044, #b0d226, #77a907);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #c7e044),color-stop(1, #77a907));
+	border:0px mediumblue;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+}
+
+
+/*////////////////////////////////////////////////DISPLAY NONE////////////////////////////////////////////////////*/
+
+body hr,
+div#admission div#messageEtablissement div.messageEtablissementRdv,
+.messageProcedureCmp,
+div#authentificationMessageNonLuEntete,
+div#cadre div#panneaudroite div#page div#authentification #messages_param,
+/*div#cadre div#panneaudroite div#page div#authentification a.newBouton,*/
+div#cadre div#chapeau div#logo_mesr,
+div#cadre div#chapeau div#bandeau3,
+div#cadre div#chapeau div#IMGBiseau,
+div#cadre div#panneaugauche,
+div#cadre div#panneaudroite div#menu,
+div#cadre div#panneaudroite div#page div#letitre,
+div#cadre div#panneaudroite div#page div#titre,
+div#cadre div#panneaudroite div#page div#admission hr,
+div#cadre div#panneaudroite div#page div#admission #listeVoeuxOrdonnes .titreListeVoeuxOrdonnes,
+/*div#panneaudroite div#page div#admission div#listeVoeuxOrdonnes div#listeVoeuxProposition #titreLigneVoeu,*/
+div#panneaudroite div#page div#admission .txt13,
+div.spacer,
+div#pied hr
+{
+	display : none;
+}
+
+
+div#cadre div#panneaudroite div#page div#admission form.frmRaisonDem,
+div#cadre div#panneaudroite div#page div#admission form.frmRaisonDem .txt13,
+div#cadre div#panneaudroite div#page div#admission form.frmRaisonDem table{
+
+	display : block;	
+}	
+
+
+div.contentproposition div#proposition div#boutonLienPC{
+	display : block;
+
+}

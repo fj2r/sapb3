@@ -1,0 +1,202 @@
+.eXtremeTable {
+	margin: 0;
+	padding: 0;
+	font-family: arial, verdana, helvetica, sans-serif;
+	font-size: 12px;
+}
+
+.eXtremeTable a, .eXtremeTable a:visited {
+	font-family: arial, verdana, helvetica, sans-serif;
+	color: blue;
+	text-decoration: underline;
+}
+
+.eXtremeTable select {
+	font-size: 9px;
+	border: solid 1px #EEE;
+	width: 75px;
+}
+
+.eXtremeTable .tableRegion {
+	padding: 2px;
+	margin-top: 7px;
+	border: 1px solid #C0C0C0;
+}
+
+.eXtremeTable .filter {
+}
+
+.eXtremeTable .filter td {
+	padding: 2px;
+}
+
+.eXtremeTable .title {
+	color: #444444;
+	font-weight: bold;
+	font-size: 15px;
+	vertical-align: middle;
+}
+
+.eXtremeTable .titleRow {
+	background-color: #F4F4F4;
+}
+
+.eXtremeTable .titleRow td {
+	border-bottom: 1px solid #008CFF;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.eXtremeTable .titleRow span {
+	color: #444444;
+	font-weight: bold;
+}
+
+.eXtremeTable .filter input {
+	border: solid 1px grey;
+	padding: 1px;
+	width: 80px;
+}
+
+.eXtremeTable .filter select {
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 9px;
+	border: solid 1px #EEE;
+}
+
+.eXtremeTable .tableHeader {
+	background-image: url("../templates/IMG/bouton.gif");
+	background-repeat: repeat-x;
+	background-color: white;
+	padding-right: 3px;
+	padding-left: 3px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	margin: 0px;
+	font-weight: bolder;
+	text-align: center;
+	background-color: #C6E6FE;
+}
+
+.eXtremeTable .tableHeaderSort {
+	text-decoration: underline;
+	background-image: url("../templates/IMG/bouton.gif");
+	background-repeat: repeat-x;
+	background-color: #C6E6FE;
+	padding-right: 3px;
+	padding-left: 3px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	margin: 0px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.eXtremeTable .odd a, .even a {
+	/*color: Black;
+	font-size: 10px;*/
+}
+
+.eXtremeTable .odd td, .eXtremeTable .even td {
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-right: 3px;
+	padding-left: 3px;
+	vertical-align: middle;
+}
+
+.eXtremeTable .odd {
+}
+
+.eXtremeTable .even {
+	background-color: #E0E9EF;
+}
+
+.eXtremeTable .highlight td {
+	/*color: black;
+	/*font-size: 10px;*/
+	/*padding-top: 2px;
+	padding-right: 3px;
+	padding-bottom: 2px;
+	padding-left: 3px;*/
+	/*vertical-align: middle;
+	background-color: #5FBBFF;
+	cursor: pointer;*/
+}
+
+.eXtremeTable .highlight a, .highlight a {
+	color: black;
+	/*font-size: 10px;*/
+}
+
+.eXtremeTable .compactToolbar {
+}
+
+.eXtremeTable .toolbar {
+	font-size: 9px;
+	margin-right: 1px;
+	border-right: 1px solid silver;
+	border-left: 1px solid silver;
+	border-top: 1px solid silver;
+	border-bottom: 1px solid silver;
+	float: right;
+}
+
+.eXtremeTable .toolbar a:hover {
+}
+
+.eXtremeTable .toolbar td {
+	
+	padding: 0px 3px 0px 3px;
+	text-align:center;
+}
+
+.eXtremeTable .separator {
+	width: 7px;
+	color: black;
+	background-color: black;
+}
+
+.eXtremeTable .statusBar {
+	font-size: 10px;
+}
+
+.eXtremeTable .filterButtons {
+
+	text-align: right;
+}
+
+.eXtremeTable .title span {
+	margin-left: 7px;
+}
+
+.eXtremeTable .formButtons {
+	display: block;
+	margin-top: 10px;
+	margin-left: 5px;
+}
+
+.eXtremeTable .formButton {
+	cursor: pointer;
+	font-size:10px;
+	font-weight: bold;
+	color: white;
+	margin-top: 5px;
+	border: outset 1px #333;
+	vertical-align: middle;
+}
+
+.eXtremeTable .calcRow {
+}
+
+.eXtremeTable .calcTitle {
+	color: black;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+.eXtremeTable .calcResult {
+	color: black;
+}

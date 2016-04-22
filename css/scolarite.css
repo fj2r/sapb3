@@ -1,0 +1,188 @@
+@CHARSET "UTF-8";
+
+/* Intitule de champs de formulaire */
+#scolarite .intitule {
+	background: #FFF5E6 none;
+}
+
+#scolarite .couleurNoteClassic {
+	background: #FFF5E6 none;
+}
+
+#scolarite .couleurNoteFacultative {
+	background-color: #CCFFCC;
+}
+
+/* Recherche Etablissement *****************************************/
+#scolarite legend.rechercherEtablissement {
+	font-weight: bold;
+}
+
+/* Input texte sans bordure non modifiable*/
+#scolarite input.displayOnly {
+	display:inline;
+	border:none;
+	color:black;
+	font-family:Arial;
+	font-size:13px;
+	font-weight:normal;
+	text-decoration:none;
+	width: 90%;
+	background-color : white;
+}
+
+/* Scolarit� ant�rieure **************************************************/
+table.scolarite-anterieure {
+	border: 1px solid grey;
+	font-size: 12px;
+	font-weight: normal;
+}
+table.scolarite-anterieure td.annee,
+table.scolarite-anterieure td.scolarite-anterieure-titre {
+	background-color: #FFF5E6;
+	font-weight: bold;
+}
+
+table.scolarite-anterieure hr {
+	color :  #FFF5E6;
+}
+
+/* Bac *******************************************************************/
+#lienInfoBulleOcean{
+	border :none;
+}
+
+#BulleInfoNoOcean {
+	/*position:absolute;*/
+	z-index:2;
+	background-color: #FFFFCC;
+	/*visibility:hidden;*/
+	/*width:100%;*/
+	margin:auto;
+	text-align:left;
+	font-size: 13px;
+	font-weight:normal;
+}
+
+/* Bulletins scolaires ****************************************************/
+table.barre-bulletins{
+	border: 1px solid grey;
+}
+
+table.barre-bulletins,
+table.annees-scolaires{
+	background-color: #FFF5E6;
+	font-size: 12px;
+	text-align: center;
+}
+
+table.annees-scolaires td.annee,
+table.annees-scolaires td.annee-intitule {
+	font-weight: bold;
+}
+
+/* Etat de saisie des bulletins scolaires */
+table.barre-bulletins td.trimestre-selected {
+	background-color: white;
+	border: 1px solid grey;
+}
+/* Bulletin incomplet */
+table.barre-bulletins td.trimestre-0 {
+	background-color: #F0E68C;
+	border: 1px solid #DBD281;
+}
+table.barre-bulletins td.trimestre-0:hover{
+	background-color: #DBD281;
+}
+/* Bulletin complet */
+table.barre-bulletins td.trimestre-1 {
+	background-color: #DBF9DB;
+	border: 1px solid #C5E0C5;
+}
+table.barre-bulletins td.trimestre-1:hover{
+	background-color: #C5E0C5;
+}
+
+p.titre-bulletin{
+	font-size: 12px;
+	font-weight: bold;
+}
+table.bulletin-scolaire{
+	border: 1px solid grey;
+}
+table.bulletin-scolaire tr.intitule {
+	font-weight: bold;
+	font-size: 12px;
+	text-align: center;
+	/*background-color: #FFF5E6;*/
+}
+
+table.bulletin-scolaire td.intitule {
+	font-weight: bold;
+	font-size: 12px;
+	text-align: center;
+}
+
+table.bulletin-scolaire td.intituleMatFac {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+
+table.bulletin-scolaire td.matiere_0{
+	background-color: #FFF5E6;
+	font-size: 12px;
+}
+table.bulletin-scolaire td.matiere_1{
+	background-color: #FFF5E6;
+	font-size: 12px;
+}
+/* Fond sp�ciaux pour les mati�res facultatives */
+table.bulletin-scolaire td.matiere-libelle-facultative{
+	background-color: #CCFFCC;
+}
+
+table.bulletin-scolaire td.matiere-libelle{
+	background-color: #FFF5E6;
+}
+table.bulletin-scolaire td.matiere-libelle a {
+	font-weight: bold;
+	text-decoration: underline;
+}
+table.bulletin-scolaire hr {
+	color: #FFF5E6;
+}
+table.bulletin-scolaire td.note{
+	font-size: 11px;
+	font-weight: bold;
+}
+table.bulletin-scolaire td.appreciation{
+	font-size: 11px;
+}
+input.note{
+	text-align: center;
+	font-weight: bold;
+	font-size: 13px;
+}
+textarea{
+	font-family: Arial;
+	font-size: 12px;
+}
+
+td.erreur{
+	border-style:solid;
+	border-width:thin;
+	border-color:red; 
+	background-color:#F4BDC7; 
+}
+
+div.erreur{
+	border-style:solid;
+	border-width:thin;
+	border-color:red; 
+	background-color:#F4BDC7; 
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	padding-bottom : 10px;
+}
