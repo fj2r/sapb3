@@ -1,0 +1,35 @@
+<?php
+	
+class bdd {
+
+protected $connexion ;
+protected $host;
+protected $dbname ;
+protected $utilisateur;
+protected $passwd;
+
+
+
+public function connexion (){
+	
+		$this->dom = new DomDocument ();
+		$this->dom->load('admin/identifiants_base.xml');
+		
+		$this->host = $this->dom->getElementsByTagName('host')	;	
+		$this->dbname = $this->dom->getElementsByTagName('nomdb');
+		$this->utilisateur = $this->dom->getElementsByTagName('login');
+		$this->passwd = $this->dom->getElementsByTagName('passwd');
+		
+		
+		$this->connexion = new PDO('mysql:host='.$this->host->firstChild->nodeValue.'; dbname='.$this->dbname->firstChild->nodeValue.'',
+		 ''.$this->utilisateur->firstChild->nodeValue.'' , ''.$this->passwd->firstChild->nodeValue.''
+		 , array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING) );
+		
+		if ($this->connexion) echo 'connexion OK <br />';		
+
+		return $this->connexion;
+}
+
+}
+
+?>

@@ -1,0 +1,11 @@
+@CHARSET "UTF-8";
+/*
+	Styles pour l'espace admission	
+*/
+#admission .intitule {
+	background: #E6F0FF none;
+}
+table.voeux td.situation-voeu {
+	font-weight: normal;
+	line-height: 20px;
+}

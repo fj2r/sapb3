@@ -1,0 +1,39 @@
+<?php
+
+class etablissement {
+
+protected $dom;
+protected $racine;
+protected $fichierXML;
+protected $nom;
+protected $tag;
+protected $bdd;
+protected $nomTable;
+
+public function setDom (){
+	$this->dom = new DomDocument();
+	
+	return $this->dom ;
+}
+
+public function lireXML($fichierXML) {
+	$this->dom->load($fichierXML);
+	
+	$this->racine = $this->dom->documentElement ;
+	echo $this->racine->nodeName.'<hr />';
+	
+}
+public function afficherEtablissement ($req){
+	
+	$this->tag = $this->dom->getElementsByTagName($req);
+	
+	foreach ($this->tag as $liste){
+		if($liste->firstChild->nodeValue != NULL) echo $liste->firstChild->nodeValue.'<br />';	
+		
+	}
+
+}
+
+}
+
+?>

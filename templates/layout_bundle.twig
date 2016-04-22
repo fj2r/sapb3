@@ -1,0 +1,28 @@
+{# Bundle pour le  Twig template principal 'layout' #}
+
+{% extends "layout.twig" %}
+
+{% block identifiants %}{{parent()}}
+    <div id="chapeau">
+        <table class ="header_table" ><td> 
+    {% if connecte == FALSE %}
+        Veuillez vous connecter. 
+    {% elseif connecte == TRUE %}
+        Vous êtes bien connecté{% if sexe == 'F' %}e{% endif %} en tant que : {{prenom|capitalize}} {{nom|upper}} 
+    {% endif %}
+            </td> 
+        </table>
+    </div>
+{% endblock %}
+
+{% block cadre_haut %}{{parent()}}
+    <div id="logo_mesr"></div>
+    <div id="connexion"></div>
+    <div id="imgBiseau"></div>
+    <div id="bandeau3"></div>
+    
+{% endblock %}
+
+{% block contenu %}{{parent()}}<div id="panneaugauche">&nbsp;</div>{% endblock %}
+
+{% block footer %}{{parent()}}{% endblock %}

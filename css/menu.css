@@ -1,0 +1,154 @@
+@CHARSET "ISO-8859-1";
+/*
+	Feuille de styles pour le menu par onglets (espaces)
+	et sous rubriques
+	
+	date: 2/9/2010 
+*/
+#menu .inscription {
+	position: relative; display: inline-block ; background-color: #fff3d2; border-color : lightgrey; border-style: solid; border-width : thin; vertical-align : top ;
+		
+}
+#menu .inscription a:hover {background-color: #ffff66; }
+
+#menu .conseils {
+	background-color: #ffde5c;
+}
+
+#menu {
+	display:inline;margin-left : 10px;  
+}
+#menu ul {
+	padding:0px;
+	margin:0px;
+}
+#menu li{
+	display:inline;
+	padding:10px;
+}
+	
+#menu a:link, 
+#menu a:hover, 
+#menu a:visited  {
+	text-decoration: none;
+	font-weight:bold;
+	font-size : 12px;
+}
+#menu a:link, 
+#menu a:visited {
+	color : #000000;
+}
+#menuactif a:hover {
+	color : red;
+}
+#menu a:active {
+	color : #666666;
+}
+
+#submenu a:link,
+#submenu a:hover,
+#submenu a:visited  {
+	text-decoration: none;
+	font-weight:bold;
+	font-size : 8pt;
+}
+#submenu a:link, 
+#submenu a:visited {
+	color : #000000;
+}
+#submenu a:hover {
+	color : red; 
+}
+#submenu a:active {
+	color : #666666;
+}
+
+#menu div {
+	margin-top:10px;/* la valeur doit etre égale au padding de #menu li */
+}
+
+#menuactif {
+	/* permet de recouvrir la bordure du sous-menu pour l'espace sélectionné */
+	position:relative; 
+	top:1px; 
+	z-index:10;
+	border-top:1px solid black;
+	border-left:1px solid black;
+	border-right:1px solid black;
+}
+#menuactif.inscription{
+	border-bottom: 1px solid #fff3d2;
+}
+
+#submenu {
+	margin-top:0px;
+	padding-top:10px;
+	padding-bottom:7px;
+	padding-left:10px;
+	padding-right:5px;
+	border-top:1px solid black;
+	border-bottom:1px solid black;
+	border-left:1px solid black;
+	border-right:1px solid black;
+}
+
+#submenu{
+	display:block;
+}
+#submenu ul {
+	display:block;
+}
+#submenu li {
+	display:inline;
+	line-height : 15px;
+	background: transparent url(../IMG/cadre/PuceMenu.gif) center left no-repeat;
+	padding-left:15px;
+	padding-right:10px;
+	padding-top:0px;
+	padding-bottom:0px;
+}
+
+#submenu li.selected{
+	background: transparent url(../IMG/cadre/PuceMenuSelected.gif) center left no-repeat;
+}
+
+
+/* Les espaces du menu ******************************************************************/
+.inscription {
+	background : #F9F9E0 none;
+}
+#menuactif.inscription{	
+	border-bottom: 1px solid #fff3d2;	/* Ceci permet de couvrir la bordure du bas*/
+
+}
+.scolarite {
+	background : #FCF4EA none;
+}
+#menuactif.scolarite{
+	border-bottom: 1px solid #FCF4EA;
+}
+.conseils {
+	background : #ffde5c none;
+}
+#menuactif.conseils{
+	border-bottom: 1px solid #ffde5c;
+}
+.candidatures {
+	background : #E4E3F9 none;
+}
+#menuactif.candidatures{
+	border-bottom: 1px solid #E4E3F9;
+}
+.admission {
+	background : #E6F0FF none;
+}
+#menuactif.admission{
+	border-bottom: 1px solid #E6F0FF;
+}
+.complementaire {
+	background : #E6FFF0 none;
+}
+#menuactif.complementaire{
+	border-bottom: 1px solid #E6FFF0;
+}
+

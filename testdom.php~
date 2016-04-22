@@ -1,0 +1,28 @@
+<?php
+
+include_once('lib/bdd.class.php');
+$maBase = new bdd();
+$maBase->connexion();
+
+include_once('lib/etablissement.class.php');
+
+
+
+
+$recherche = 'adresse';
+$fichierXML = 'datas/etablissement_superieur.xml';
+
+
+
+
+
+
+
+$etablissement = new etablissement;
+
+$etablissement->setDom();
+$etablissement->lireXML($fichierXML);
+$etablissement->afficherEtablissement($recherche);
+
+
+?>
