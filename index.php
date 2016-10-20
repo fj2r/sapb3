@@ -16,11 +16,11 @@ include_once('inc/mainLib.inc.php');
 
 $maConnexion = new bdd();
 $maConnexion->connexion();
-/*
+
 $table = 'etablissement';
 $champ = 'commune';
 $valeur = 'Strasbourg';
-//$maConnexion->lireValeurBdd($valeur); */
+$maConnexion->lireValeurBdd($valeur);
 ///////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////Lecture des infos du site////////////////////////////
