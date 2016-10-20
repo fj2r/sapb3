@@ -1,16 +1,10 @@
 <?php
-////////////////////////////* Appel du header - Sessions*//////////////////////
- include_once ('inc/headers.inc.php');
-//////////////////////////////////Fin de l'appel du header/////////////////////
-
-////////////////////////////* Appel du moteur de templates Twig*////////////////
- include_once ('inc/initTwig.inc.php');
-//////////////////////////////////Fin de l'appel du moteur de template/////////
-
 ///////////////////////////////Appel des libraires  nécessaires////////////////
-include_once('inc/mainLib.inc.php');  
-///////////////////////////////Fin de l'appel des lib//////////////////////////
-
+include_once('inc/mainLib.inc.php');
+////////////////////////////* Appel du header - Sessions*//////////////////////
+include_once ('inc/headers.inc.php');
+////////////////////////////* Appel du moteur de templates Twig*////////////////
+include_once ('inc/initTwig.inc.php');
 
 ////////////////////////////Connexion à la bdd/////////////////////////////////
 
@@ -19,8 +13,11 @@ $maConnexion->connexion();
 
 $table = 'etablissement';
 $champ = 'commune';
+$enregistrement = '*';
 $valeur = 'Strasbourg';
-$maConnexion->lireValeurBdd($valeur);
+$ordre ='asc';
+
+$maConnexion->lireValeurBdd($champ);
 ///////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////Lecture des infos du site////////////////////////////
@@ -46,7 +43,10 @@ $connecte = TRUE;
 $prenom = "titi";
 $nom = "toto";
 $sexe = "F";
-///////////////////////////Fin des décla de variables///////////////////////////
+
+/*pour le footer*/
+$texte_footer = 'Copyright LMN Autun';
+///////////////////////////Fin des décla de variables pour le template//////////
 
 
 $template = $twig->loadTemplate('index.twig'); //on va chercher le template associé
@@ -59,8 +59,6 @@ echo $template->render(array(
     'prenom'=>''.$prenom.'',
     'nom'=>''.$nom.'',
     'sexe'=>''.$sexe.'',
+    'texte_footer'=>''.$texte_footer.'',
     )); //on envoie la variable au template
 
-
-    
-    

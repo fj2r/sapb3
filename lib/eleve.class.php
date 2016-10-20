@@ -1,6 +1,6 @@
 <?php
 
-class eleve extends utilisateur {
+class eleve extends Utilisateur {
     
     protected $connexion;
     protected $numeroDossier;
@@ -8,14 +8,26 @@ class eleve extends utilisateur {
     protected $statut;
     protected $num_eleve_etab;
     protected $carteIdentite;
+    
 
-    public function __construct(){
-        $this->carteIdentite =[];
+    public function __construct() {
+        parent::__construct();
+        $this->statut = 'eleve';
+    }
+    
+    public function setDossier (){
+        $this->numeroDossier=  htmlentities($_POST(['num_dossier']));
+        $this->codeConfidentiel=htmlentities($_POST(['code_confidentiel']));
         
     }
     
-    public function identifierEleve ($connexion, $statut, $numeroDossier,$codeConfidentiel){
-       
+    public function creerDossier (){
+        
+    }
+    
+    public function identifierEleve ($connexion, $statut){
+       $numeroDossier = $this->numeroDossier;
+       $codeConfidentiel = $this->codeConfidentiel;
         if ($this->statut =='eleve'){
             try {
             $requete = $this->connexion->prepare("SELECT * FROM cfg_eleves WHERE num_dossier = :numeroDossier AND code_conf = :codeConfidentiel");
@@ -36,26 +48,26 @@ class eleve extends utilisateur {
             }
             
             try {
-                $requete_carteIdentite = $this->connexion->prepare("SELECT * FROM import_eleve WHERE num_eleve_etab = :num_eleve_etab");
+                $requete_carteIdentite = $this->connexion->prepare("SELECT * FROM import_eleve_complet WHERE 'Num. Elève Etab' = :num_eleve_etab");
                 $requete_carteIdentite->bindParam(':num_eleve_etab',$this->num_eleve_etab,PDO::PARAM_STR);
                 $requete_carteIdentite->execute();
                 
                 if ($requete_carteIdentite->fetch()){
                     foreach ($requete_carteIdentite as $liste) {
-                    $this->carteIdentite['sexe'] = $liste ['sexe'] ;
-                        $this->carteIdentite['nom'] = $liste ['nom'] ;
-                        $this->carteIdentite['prenom'] = $liste ['prenom'] ;
-                        $this->carteIdentite['prenom2'] = $liste ['prenom2'] ;
-                        $this->carteIdentite['prenom3'] = $liste ['prenom3'] ;
-                        $this->carteIdentite['naissance'] = $liste ['naissance'] ;
-                        $this->carteIdentite['code_mef'] = $liste ['code_mef'] ;
-                        $this->carteIdentite['lib_mef'] = $liste ['lib_mef'] ;
-                        $this->carteIdentite['code_structure'] = $liste ['code_structure'] ;
-                        $this->carteIdentite['type_structure'] = $liste ['type_structure'] ;
-                        $this->carteIdentite['lib_structure'] = $liste ['lib_structure'] ;
-                        $this->carteIdentite['cle_gestion1'] = $liste ['cle_gestion1'] ;
-                        $this->carteIdentite['lib_matiere1'] = $liste ['lib_matier1'] ;
-                        $this->carteIdentite['email'] = $liste ['email'] ;
+                    $this->carteIdentite['sexe'] = $liste ['Sexe'] ;
+                        $this->carteIdentite['nom'] = $liste ['Nom de famille'] ;
+                        $this->carteIdentite['prenom'] = $liste ['Prénom'] ;
+                        $this->carteIdentite['prenom2'] = $liste ['Prénom 2'] ;
+                        $this->carteIdentite['prenom3'] = $liste ['Prénom 3'] ;
+                        $this->carteIdentite['naissance'] = $liste ['Date Naissance'] ;
+                        $this->carteIdentite['code_mef'] = $liste ['Code MEF'] ;
+                        $this->carteIdentite['lib_mef'] = $liste ['Lib. MEF'] ;
+                        $this->carteIdentite['code_structure'] = $liste ['Code Structure'] ;
+                        $this->carteIdentite['type_structure'] = $liste ['Type Structure'] ;
+                        $this->carteIdentite['lib_structure'] = $liste ['Lib. Structure'] ;
+                        $this->carteIdentite['cle_gestion1'] = $liste ['Clé Gestion Mat. Enseignée 1'] ;
+                        $this->carteIdentite['lib_matiere1'] = $liste ['Lib. Mat. Enseignée 1'] ;
+                        $this->carteIdentite['email'] = $liste ['Email'] ;
                         
                         
                         
@@ -73,4 +85,19 @@ class eleve extends utilisateur {
     return $this->carteIdentite;   
     }
     
+    public function tableauNotes (){
+        
+        
+    }
+    public function listeProfesseurs(){
+        
+    }
+    public function listerVoeux(){
+        
+    }
+    
+    public function formLoginEleve (){
+        
+        
+    }
 }

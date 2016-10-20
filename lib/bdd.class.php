@@ -18,6 +18,8 @@ private $contenuPasswd;
 private $table;
 private $champ;
 private $valeur;
+private $infos_connexion;
+private $parsed_json;
 
 public function __construct() {
     /*
@@ -68,7 +70,8 @@ public function getConnexion () {
 }
 
 public function connexion (){
-    $this->dom = new DomDocument ();
+   //////////////////récupération des infos de connexion via un xml///////////
+    /* $this->dom = new DomDocument ();
     $this->dom->load('admin/config.xml'); //lecture du DOM pour la connexion à la bdd
 
     $this->host = $this->dom->getElementsByTagName('host')	;	
@@ -88,11 +91,21 @@ public function connexion (){
     foreach ($this->passwd as $p){
        $contenuPasswd = $p->firstChild->nodeValue;
         }
+        */
+   //////////////////récupération des infos de connexion via un json///////////
+    $this->infos_connexion = file_get_contents('admin/config_bdd.json');
+    $this->parsed_json = json_decode($this->infos_connexion);
+    $contenuHote = $this->parsed_json->{'informations_base_de_donnee'}->{'identifiants_base'}->{'host'};
+    $contenuDatabase = $this->parsed_json->{'informations_base_de_donnee'}->{'identifiants_base'}->{'nomdb'};
+    $contenuUtilisateur = $this->parsed_json->{'informations_base_de_donnee'}->{'identifiants_base'}->{'login'};
+    $contenuPasswd = $this->parsed_json->{'informations_base_de_donnee'}->{'identifiants_base'}->{'passwd'};
+    
+    /////////////////Connexion à la base////////////////////////////////////////
     try{
             $this->connexion = new PDO('mysql:host='.$contenuHote.'; dbname='.$contenuDatabase.'',
          ''.$contenuUtilisateur.'' , ''.$contenuPasswd.''
             , array(
-                     PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
                     PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
                     )
                                        ); //création de l'objet PDO pour la connexion à la BDD
@@ -110,7 +123,9 @@ public function lireValeurBdd ($valeur) {
   try {
     
     $requete = $this->connexion->prepare('SELECT * FROM etablissement WHERE commune = :valeur');
+    
     $requete->bindParam(':valeur',$valeur, PDO::PARAM_STR);
+    
     
     $requete->execute();
     

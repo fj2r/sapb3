@@ -1,0 +1,11 @@
+{
+   "informations_base_de_donnee": {
+      "identifiants_base": {
+         "host": "localhost",
+         "nomdb": "sapb3",
+         "login": "root",
+         "passwd": "fred2001"
+      }
+ 
+}
+}

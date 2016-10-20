@@ -1,5 +1,4 @@
 {# Layout principal pour le template sapb3 #}
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,7 +24,7 @@
             
             {% block footer %}
             <div id="pied">
-                &copy; Copyleft LMN Autun {{date|date('Y')}} - Version {{version}}
+                &copy;{{texte_footer}} {{date|date('Y')}} - Version {{version}}
             </div>
             {% endblock %}
             
