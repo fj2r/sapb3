@@ -1,16 +1,19 @@
 <?php
-///////////////////////////////Appel des libraires  nécessaires////////////////
-include_once('inc/mainLib.inc.php');
 ////////////////////////////* Appel du header - Sessions*//////////////////////
 include_once ('inc/headers.inc.php');
+///////////////////////////////Appel des libraires  ////////////////////////////
+include_once('inc/mainLib.inc.php');
+
 ////////////////////////////* Appel du moteur de templates Twig*////////////////
 include_once ('inc/initTwig.inc.php');
 
 ////////////////////////////Connexion à la bdd/////////////////////////////////
 
 $maConnexion = new bdd();
-$maConnexion->connexion();
-
+$maBDD = $maConnexion->getConnexion();  //récupération de l'objet BDD
+$maConnexion->connexion(); //instance de connexion à la base
+echo $maBDD;
+///////////////////////test
 $table = 'etablissement';
 $champ = 'commune';
 $enregistrement = '*';
@@ -20,6 +23,12 @@ $ordre ='asc';
 $maConnexion->lireValeurBdd($champ);
 ///////////////////////////////////////////////////////////////////////////////
 
+$maPomme = new eleve();
+$maPomme->code_confidentiel = 00000;
+$maPomme->num_dossier = 00000;
+$maPomme->setDossier(000000, 000000);
+//$maPomme->genererSession($maBDD,1);
+//$maPomme->identifierEleve($maBDD, 'eleve');
 //////////////////////////Lecture des infos du site////////////////////////////
 $mesInfos = new infos();
 $mesInfos->lireInfos();
@@ -38,11 +47,17 @@ $version = $_SESSION['version'];
 $charset = "UTF-8";
 $titrePage = $_SESSION['nom_application'];
 
+if (isset($_SESSION)){
 $connecte = TRUE;
 
 $prenom = "titi";
 $nom = "toto";
 $sexe = "F";
+
+}
+else {
+    $connecte= FALSE;
+}
 
 /*pour le footer*/
 $texte_footer = 'Copyright LMN Autun';

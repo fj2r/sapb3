@@ -77,7 +77,7 @@ class infos {
         
         $_SESSION = $arrayInfoEtab;
     }
-    print_r($_SESSION);
+   // print_r($_SESSION);
     
     return  $arrayInfoEtab; 
     }

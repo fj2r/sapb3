@@ -3,40 +3,51 @@
 class eleve extends Utilisateur {
     
     protected $connexion;
+    protected $maBDD;
     protected $numeroDossier;
     protected $codeConfidentiel;
     protected $statut;
     protected $num_eleve_etab;
     protected $carteIdentite;
-    
+    protected $id_eleve;
+    public $num_dossier;  
+    public $code_confidentiel;
 
     public function __construct() {
         parent::__construct();
         $this->statut = 'eleve';
+        
+        if (isset($_POST['num_dossier']) && isset($_POST['code_confidentiel'])){
+        $num_dossier  = htmlentities($_POST(['num_dossier']));
+        $code_confidentiel  = htmlentities($_POST(['code_confidentiel']));
+       }
+        
+       
     }
     
-    public function setDossier (){
-        $this->numeroDossier=  htmlentities($_POST(['num_dossier']));
-        $this->codeConfidentiel=htmlentities($_POST(['code_confidentiel']));
-        
+    public function setDossier ($num_dossier, $code_confidentiel){
+       
+       $this->num_dossier = $num_dossier;
+       $this->code_confidentiel = $code_confidentiel;
+       
     }
     
     public function creerDossier (){
         
     }
     
-    public function identifierEleve ($connexion, $statut){
-       $numeroDossier = $this->numeroDossier;
-       $codeConfidentiel = $this->codeConfidentiel;
+    public function identifierEleve ($maBDD, $statut){
+      
         if ($this->statut =='eleve'){
             try {
-            $requete = $this->connexion->prepare("SELECT * FROM cfg_eleves WHERE num_dossier = :numeroDossier AND code_conf = :codeConfidentiel");
-            $requete->bindParam(':numeroDossier',$numeroDossier,PDO::PARAM_STR);
-            $requete->bindParam(':codeConfidentiel',$codeConfidentiel,PDO::PARAM_STR);
+            
+            $requete = $maBDD->prepare("SELECT * FROM cfg_eleves WHERE num_dossier = :numeroDossier AND code_conf = :codeConfidentiel");
+            $requete->bindParam(':numeroDossier',$this->num_dossier ,PDO::PARAM_STR);
+            $requete->bindParam(':codeConfidentiel',$this->code_confidentiel,PDO::PARAM_STR);
             $requete->execute();
             if ($requete->fetch()){
                 foreach ($requete as $liste){
-                $this->num_eleve_etab = $liste ['num_eleve_etab'] ;
+                $this->id_eleve = $liste ['id_eleve'] ;
                 }
             }
             else {echo 'Eleve inconnu...';}
@@ -48,13 +59,13 @@ class eleve extends Utilisateur {
             }
             
             try {
-                $requete_carteIdentite = $this->connexion->prepare("SELECT * FROM import_eleve_complet WHERE 'Num. Elève Etab' = :num_eleve_etab");
-                $requete_carteIdentite->bindParam(':num_eleve_etab',$this->num_eleve_etab,PDO::PARAM_STR);
+                $requete_carteIdentite = $this->connexion->prepare("SELECT * FROM import_eleve_complet WHERE 'id_eleve' = :id_eleve");
+                $requete_carteIdentite->bindParam(':id_eleve',$this->id_eleve,PDO::PARAM_STR);
                 $requete_carteIdentite->execute();
                 
                 if ($requete_carteIdentite->fetch()){
                     foreach ($requete_carteIdentite as $liste) {
-                    $this->carteIdentite['sexe'] = $liste ['Sexe'] ;
+                        $this->carteIdentite['sexe'] = $liste ['Sexe'] ;
                         $this->carteIdentite['nom'] = $liste ['Nom de famille'] ;
                         $this->carteIdentite['prenom'] = $liste ['Prénom'] ;
                         $this->carteIdentite['prenom2'] = $liste ['Prénom 2'] ;
@@ -82,14 +93,14 @@ class eleve extends Utilisateur {
             
         }
         
-    return $this->carteIdentite;   
+    return $this->id_eleve;   
     }
     
     public function tableauNotes (){
         
         
     }
-    public function listeProfesseurs(){
+    public function listerProfesseurs(){
         
     }
     public function listerVoeux(){
@@ -100,4 +111,56 @@ class eleve extends Utilisateur {
         
         
     }
+    public function genererSession($connexion,$id_eleve){
+        
+        try {
+                $requete_session = $this->connexion->prepare("SELECT * FROM import_eleve_complet WHERE 'id_eleve' = :id_eleve");
+                $requete_session->bindParam(':id_eleve',$this->id_eleve,PDO::PARAM_STR);
+                $requete_session->execute();
+                
+                if ($requete_session->fetch()){
+                    foreach ($requete_session as $liste) {
+                        $this->session['sexe'] = $liste ['Sexe'] ;
+                        $this->session['nom'] = $liste ['Nom de famille'] ;
+                        $this->session['prenom'] = $liste ['Prénom'] ;
+                        $this->session['prenom2'] = $liste ['Prénom 2'] ;
+                        $this->session['prenom3'] = $liste ['Prénom 3'] ;
+                        $this->session['naissance'] = $liste ['Date Naissance'] ;
+                        $this->session['code_mef'] = $liste ['Code MEF'] ;
+                        $this->session['lib_mef'] = $liste ['Lib. MEF'] ;
+                        $this->session['code_structure'] = $liste ['Code Structure'] ;
+                        $this->session['type_structure'] = $liste ['Type Structure'] ;
+                        $this->session['lib_structure'] = $liste ['Lib. Structure'] ;
+                        $this->session['cle_gestion1'] = $liste ['Clé Gestion Mat. Enseignée 1'] ;
+                        $this->session['lib_matiere1'] = $liste ['Lib. Mat. Enseignée 1'] ;
+                        $this->session['email'] = $liste ['Email'] ;
+                        
+                        
+                        
+                    }
+                        $_SESSION ['sapb_nom'] = $this->session['nom'];
+                        $_SESSION ['sapb_prenom'] = $this->session['prenom'];
+                        $_SESSION ['sapb_classe'] = $this->session['code_structure'];
+                        $_SESSION ['sapb_email'] = $this->session['email'];
+                        $_SESSION ['sapb_num_eleve_etab'] = $this->session['nom'];
+                        $_SESSION ['id_eleve'] = $this->id_eleve;
+                    
+                }
+            
+            }
+            catch (Exception $e){
+                die('Erreur :'.$e->getMessage());
+            }
+        
+    }
+    public function genererCookie() {
+       if ($this->statut == 'eleve'){
+            setcookie('sapb_num_dossier',$_SESSION['num_dossier'],time()+3600);
+            setcookie('sapb_code_conf',$_SESSION['code_conf'],time()+3600);
+            setcookie('sapb_num_eleve_etab',$_SESSION['num_eleve_etab'],time()+3600);
+            setcookie('sapb_nom_eleve',$_SESSION['nom'],time()+3600);
+            setcookie('sapb_prenom_eleve',$_SESSION['prenom'],time()+3600);
+            setcookie('sapb_classe',$_SESSION['classe'], time()+3600);
+       }
+   }   
 }

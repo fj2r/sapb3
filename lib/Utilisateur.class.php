@@ -12,10 +12,13 @@ class Utilisateur {
     protected $statut;
     protected $login;
     protected $passwd;
+    protected $maBDD;
 
 
     public function __construct() {
-       if (isset($statut)){
+       
+        
+        if (isset($statut)){
             $this->statut=$statut;
        }
        else{
@@ -25,21 +28,21 @@ class Utilisateur {
     }
    ///////////////////////*Gestion des cookies*//////////////////////////////
     public function detruireCookie() {
-        if ($statut=='eleve'){
+        if ($this->statut=='eleve'){
             setcookie('sapb_num_dossier','',time()-3600*3);
             setcookie('sapb_code_conf','',time()-3600*3);
             setcookie('sapb_num_eleve_etab','',time()-3600*3);
             setcookie('sapb_nom_eleve','',time()-3600*3);
             setcookie('sapb_prenom_eleve','',time()-3600*3);
         }    
-        elseif ($statut=='prof') {
+        elseif ($this->statut=='prof') {
             setcookie('sapb_login','',time()-3600*3);
             setcookie('sapb_passwd','',time()-3600*3);
             setcookie('sapb_id_pedago','',time()-3600*3);
             setcookie('sapb_nom_prof','',time()-3600*3);
             setcookie('sapb_prenom_prof','',time()-3600*3);
         }
-        elseif ($statut=='admin') {
+        elseif ($this->statut=='admin') {
             setcookie('sapb_login','',time()-3600*3);
             setcookie('sapb_passwd','',time()-3600*3);
             setcookie('sapb_nom_admin','',time()-3600*3);
@@ -49,9 +52,7 @@ class Utilisateur {
         
     }
         
-   public function genererCookie() {
-       
-   }    
+    
     
    /////////////////////////////Gestion des Sessions pour les Utilisateurs//////
  

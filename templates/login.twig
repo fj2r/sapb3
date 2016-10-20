@@ -1,0 +1,36 @@
+{# extension du template layout pour la page de login #}
+
+{% extends "layout_bundle.twig" %}
+
+
+{% block identifiants %}{{parent()}}{% endblock %}
+
+{% block title %}{{parent()}}Accueil{% endblock %}
+{% block cadre_haut %}{{parent()}}{% endblock %}
+
+{% block contenu %}{{parent()}}
+    
+    
+    
+    <div id ="panneaudroite">
+        <div class = "">
+        Application Simulation APB
+        
+        <br /></div>
+        <div id="index_ul">
+            <ul type="square">
+                <li>
+                    <img src="templates/IMG/eleve.png" />&nbsp;<a href="login.php?statut=eleve">Elèves</a>
+                </li>
+                <li>
+                    <img src="templates/IMG/professeur.png" />&nbsp;<a href="login.php?statut=professeur">Equipe pédagogique</a>
+                </li>
+                <li>
+                    <img src="templates/IMG/admin.png" />&nbsp;<a href="login.php?statut=administrateur">Equipe administrative</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}{{parent()}}<hr />{% endblock %}
