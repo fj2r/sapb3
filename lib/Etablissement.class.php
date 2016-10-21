@@ -1,6 +1,8 @@
 <?php
 
-class etablissement {
+namespace lib;
+
+class Etablissement {
 
 protected $dom;
 protected $racine;
@@ -10,11 +12,34 @@ protected $tag;
 protected $bdd;
 protected $nomTable;
 protected $maBase;
+private $UAI;
+private $type;
+private $nom;
+private $sigle;
+private $statut;
+private $tutelle;
+private $universite;
+private $adresse;
+private $cp;
+private $commune;
+private $departement;
+private $academie;
+private $region;
+private $longitude;
+private $latitude;
+private $lien;
+private $requete;
+private $datas;
 
 public function __construct ($bdd){
     
-    $this->maBase = $bdd->getConnexion();
+    $this->maBase = $bdd->getPDO();
     
+}
+public function rechercheEtablissement ($champ, $critere){
+    $requete = 'SELECT * FROM etablissement WHERE '.$champ.' = '.$critere.' ORDER BY ASC';
+    $datas = $this->maBase->queryPDO($requete);
+    return $datas;
 }
 
 public function setDom (){
@@ -48,8 +73,61 @@ public function afficherEtablissement ($attr){
                 else {echo '------<br/>';}
         
 	}
-
+        
+        
 }
+////////////////////////////////Accesseurs/////////////////////////////////////
+
+        public function getUAI (){
+            return $this->UAI;
+        }
+        public function getType (){
+            return $this->type;
+        }
+        public function getNom (){
+            return $this->nom;
+        }
+        public function getSigle (){
+            return $this->sigle;
+        }
+        public function getStatut (){
+            return $this->statut;
+        }
+        public function getTutelle (){
+            return $this->tutelle;
+        }
+        public function getUniversite (){
+            return $this->universite;
+        }
+        public function getAdresse (){
+            return $this->adresse;
+        }
+        public function getCp (){
+            return $this->cp;
+        }
+        public function getCommune (){
+            return $this->commune;
+        }
+        public function getDepartement (){
+            return $this->departement;
+        }
+        public function getAcademie (){
+            return $this->academie;
+        }
+        public function getRegion (){
+            return $this->region;
+        }
+        public function getLongitude (){
+            return $this->longitude;
+        }
+        public function getLatitude (){
+            return $this->latitude;
+        }
+        public function getLien (){
+            return $this->lien;
+        }
+        
+        
 public function exportEtablissementBdd () {
     
     
@@ -194,6 +272,11 @@ public function exportEtablissementBdd () {
     
 // $this->maBase->query('INSERT INTO etablissement VALUES ()')
 }
+
+    private function infosEtablissement (){
+        $this->
+        
+    }
 
 }
 

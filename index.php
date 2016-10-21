@@ -8,22 +8,21 @@ include_once('inc/mainLib.inc.php');
 include_once ('inc/initTwig.inc.php');
 
 ////////////////////////////Connexion à la bdd/////////////////////////////////
-
-$maConnexion = new bdd();
-$maBDD = $maConnexion->getConnexion();  //récupération de l'objet BDD
-$maConnexion->connexion(); //instance de connexion à la base
-echo $maBDD;
-///////////////////////test
 $table = 'etablissement';
 $champ = 'commune';
 $enregistrement = '*';
 $valeur = 'Strasbourg';
 $ordre ='asc';
 
-$maConnexion->lireValeurBdd($champ);
+$db = new lib\bdd('localhost','sapb3','root','fred2001');
+$maBDD = $db->getPDO();  //récupération de l'objet BDD
+$datas = $db->queryPDO("SELECT $enregistrement FROM $table WHERE $champ = '$valeur' "); //instance de connexion à la base
+
+///////////////////////test
+
 ///////////////////////////////////////////////////////////////////////////////
 
-$maPomme = new eleve();
+$maPomme = new Eleve();
 $maPomme->code_confidentiel = 00000;
 $maPomme->num_dossier = 00000;
 $maPomme->setDossier(000000, 000000);

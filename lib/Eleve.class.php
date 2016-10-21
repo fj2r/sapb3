@@ -1,6 +1,6 @@
 <?php
 
-class eleve extends Utilisateur {
+class Eleve extends \Utilisateur {
     
     protected $connexion;
     protected $maBDD;
@@ -10,8 +10,7 @@ class eleve extends Utilisateur {
     protected $num_eleve_etab;
     protected $carteIdentite;
     protected $id_eleve;
-    public $num_dossier;  
-    public $code_confidentiel;
+    
 
     public function __construct() {
         parent::__construct();
@@ -24,25 +23,39 @@ class eleve extends Utilisateur {
         
        
     }
-    
-    public function setDossier ($num_dossier, $code_confidentiel){
-       
-       $this->num_dossier = $num_dossier;
-       $this->code_confidentiel = $code_confidentiel;
-       
+    ///////////////////////////mutateurs///////////////////////////////////////
+    public function numeroDossier (){
+        return $this->numeroDossier; 
     }
+    public function codeConfidentiel (){
+        return $this->codeConfidentiel; 
+    }
+    public function statut (){
+        return $this->statut; 
+    }
+    public function id_eleve (){
+        return $this->id_eleve; 
+    }
+    //////////////////////////
     
+    public function setNumDossier ($num_dossier){
+       $this->numeroDossier = htmlspecialchars($num_dossier);
+    }
+    public function setCodeConfidentiel ($code_confidentiel){
+         $this->code_confidentiel = htmlspecialchars($code_confidentiel);
+    }
+    //////////////////////////////
     public function creerDossier (){
         
     }
     
-    public function identifierEleve ($maBDD, $statut){
+    public function profilEleve ($maBDD, $statut){
       
         if ($this->statut =='eleve'){
             try {
             
             $requete = $maBDD->prepare("SELECT * FROM cfg_eleves WHERE num_dossier = :numeroDossier AND code_conf = :codeConfidentiel");
-            $requete->bindParam(':numeroDossier',$this->num_dossier ,PDO::PARAM_STR);
+            $requete->bindParam(':numeroDossier',$this->numeroDossier ,PDO::PARAM_STR);
             $requete->bindParam(':codeConfidentiel',$this->code_confidentiel,PDO::PARAM_STR);
             $requete->execute();
             if ($requete->fetch()){
@@ -163,4 +176,10 @@ class eleve extends Utilisateur {
             setcookie('sapb_classe',$_SESSION['classe'], time()+3600);
        }
    }   
+   
+   public function envoiMail() {
+       
+       
+       
+   }
 }

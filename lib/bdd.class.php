@@ -1,4 +1,5 @@
 <?php
+namespace lib;
 
 class bdd {
 
@@ -7,8 +8,12 @@ class bdd {
     protected $connexion;
     protected $host;
     protected $dbname;
-    protected $utilisateur;
+    protected $dbuser;
     protected $passwd;
+    private $requete; 
+    private $statement;
+    private $nbr_enregistrements_modifies;
+    private $pdo;
     private $dom;
     private $contenuHote;
     private $contenuDatabase;
@@ -20,13 +25,13 @@ class bdd {
     private $infos_connexion;
     private $parsed_json;
 
-    public function __construct() {
-        /*
-          $this->host = 'localhost';
-          $this->dbname ='sapb3';
-          $this->utilisateur='root';
-          $this->passwd='';
-         */
+    public function __construct($host='localhost', $dbname, $dbuser='root', $passwd='') {
+        
+          $this->host = $host;
+          $this->dbname = $dbname;
+          $this->dbuser = $dbuser;
+          $this->passwd = $passwd;
+         
     }
 
     /* public function connexionBase (){
@@ -64,11 +69,9 @@ class bdd {
       }
      */
 
-    public function getConnexion() {
-        return $this->connexion; //on retourne l'objet par l'accesseur
-    }
+ 
 
-    public function connexion() {
+    public function getPDO() {
         //////////////////récupération des infos de connexion via un xml///////////
         /* $this->dom = new DomDocument ();
           $this->dom->load('admin/config.xml'); //lecture du DOM pour la connexion à la bdd
@@ -100,18 +103,21 @@ class bdd {
         $contenuPasswd = $this->parsed_json->{'informations_base_de_donnee'}->{'identifiants_base'}->{'passwd'};
 
         /////////////////Connexion à la base////////////////////////////////////////
-        try {
-            $this->connexion = new PDO('mysql:host=' . $contenuHote . '; dbname=' . $contenuDatabase . '', '' . $contenuUtilisateur . '', '' . $contenuPasswd . ''
+        if($this->pdo === null ){
+            try {
+            
+                $this->pdo = new \PDO('mysql:host=' . $contenuHote . '; dbname=' . $contenuDatabase . '', '' . $contenuUtilisateur . '', '' . $contenuPasswd . ''
                     , array(
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
-                PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
+                \PDO::ATTR_ERRMODE => \PDO::ERRMODE_WARNING,
+                \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
                     )
             ); //création de l'objet PDO pour la connexion à la BDD
         } catch (Exception $e) {
             die('Erreur de connexion à la base de donnée : ' . $e->getMessage() . '<br />');
+        } 
         }
 
-        return $this->connexion;
+        return $this->pdo;
     }
 
     public function lireValeurBdd($valeur) {
@@ -136,8 +142,23 @@ class bdd {
         }
     }
 
-    public function ecrireValeurBdd() {
+    public function queryPDO ($statement) {
         
+        $requete = $this->getPDO()->query($statement) ;
+        $datas = $requete->fetchAll(\PDO::FETCH_BOTH);
+        $requete->closeCursor();
+        return $datas;
+    }
+    
+    public function executerPDO ($statement){
+        $nbr_enregistrements_modifies = $this->getPDO()->exec($statement) ;
+        
+        return $nbr_enregistrements_modifies;
+    }
+    
+    //////////////////////mutateurs/////////////////////////////////////////////
+    public function setStatement (){
+        $this->statement = $statement;
     }
 
 }
