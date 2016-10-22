@@ -11,6 +11,8 @@
  *
  * @author fred
  */
+namespace lib;
+
 class infos {
     
     protected $fichierConfig;
@@ -44,8 +46,8 @@ class infos {
     public function lireInfos (){
     $arrayInfoEtab = [];    //tableau qu'on va renvoyer
     
-    $this->domConfig = new DomDocument ();
-    $this->domInfos = new DomDocument ();
+    $this->domConfig = new \DomDocument ();
+    $this->domInfos = new \DomDocument ();
     $this->domConfig->load($this->fichierConfig);
     $this->domInfos->load($this->fichierInfos);
     

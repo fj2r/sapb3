@@ -32,6 +32,7 @@ class bdd {
           $this->dbuser = $dbuser;
           $this->passwd = $passwd;
          
+          
     }
 
     /* public function connexionBase (){
@@ -94,19 +95,14 @@ class bdd {
           $contenuPasswd = $p->firstChild->nodeValue;
           }
          */
-        //////////////////récupération des infos de connexion via un json///////////
-        $this->infos_connexion = file_get_contents('admin/config_bdd.json');
-        $this->parsed_json = json_decode($this->infos_connexion);
-        $contenuHote = $this->parsed_json->{'informations_base_de_donnee'}->{'identifiants_base'}->{'host'};
-        $contenuDatabase = $this->parsed_json->{'informations_base_de_donnee'}->{'identifiants_base'}->{'nomdb'};
-        $contenuUtilisateur = $this->parsed_json->{'informations_base_de_donnee'}->{'identifiants_base'}->{'login'};
-        $contenuPasswd = $this->parsed_json->{'informations_base_de_donnee'}->{'identifiants_base'}->{'passwd'};
+        
 
         /////////////////Connexion à la base////////////////////////////////////////
         if($this->pdo === null ){
             try {
             
-                $this->pdo = new \PDO('mysql:host=' . $contenuHote . '; dbname=' . $contenuDatabase . '', '' . $contenuUtilisateur . '', '' . $contenuPasswd . ''
+                $this->pdo = new \PDO('mysql:host=' . $this->host . '; dbname=' . $this->dbname . '',
+                        '' . $this->dbuser . '', '' . $this->passwd . ''
                     , array(
                 \PDO::ATTR_ERRMODE => \PDO::ERRMODE_WARNING,
                 \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
@@ -150,7 +146,7 @@ class bdd {
         return $datas;
     }
     
-    public function executerPDO ($statement){
+    public function executePDO ($statement){
         $nbr_enregistrements_modifies = $this->getPDO()->exec($statement) ;
         
         return $nbr_enregistrements_modifies;

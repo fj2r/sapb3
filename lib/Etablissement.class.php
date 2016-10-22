@@ -7,7 +7,6 @@ class Etablissement {
 protected $dom;
 protected $racine;
 protected $fichierXML;
-protected $nom;
 protected $tag;
 protected $bdd;
 protected $nomTable;
@@ -36,11 +35,7 @@ public function __construct ($bdd){
     $this->maBase = $bdd->getPDO();
     
 }
-public function rechercheEtablissement ($champ, $critere){
-    $requete = 'SELECT * FROM etablissement WHERE '.$champ.' = '.$critere.' ORDER BY ASC';
-    $datas = $this->maBase->queryPDO($requete);
-    return $datas;
-}
+
 
 public function setDom (){
 	$this->dom = new DomDocument();
@@ -273,8 +268,13 @@ public function exportEtablissementBdd () {
 // $this->maBase->query('INSERT INTO etablissement VALUES ()')
 }
 
-    private function infosEtablissement (){
-        $this->
+public function rechercherEtablissement ($database,$enregistrement,$table,$champ,$valeur,$ordre){
+    
+    $requete = 'SELECT $enregistrement FROM $table WHERE $champ = $valeur';
+    $datas = $database->queryPDO($requete); //instance de connexion à la base
+        foreach ($datas as $liste){
+            echo $liste['commune'].' : <a href="'.$liste['lien'].'" target="_blank" >'.$liste['nom'].'</a>; <br />';
+        }
         
     }
 

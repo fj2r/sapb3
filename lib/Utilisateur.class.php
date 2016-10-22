@@ -6,6 +6,8 @@
  * @author fred
 
  */
+namespace lib;
+
 class Utilisateur {
     
     protected $connexion;
@@ -20,7 +22,7 @@ class Utilisateur {
     
 
 
-    public function __construct($statut) {
+    public function __construct($statut='eleve') {
              
         if (isset($statut)){
             $this->statut=$statut;

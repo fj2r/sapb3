@@ -1,6 +1,8 @@
 <?php
 
-class Eleve extends \Utilisateur {
+namespace lib;
+
+class Eleve extends Utilisateur {
     
     protected $connexion;
     protected $maBDD;
@@ -12,9 +14,8 @@ class Eleve extends \Utilisateur {
     protected $id_eleve;
     
 
-    public function __construct() {
-        parent::__construct();
-        $this->statut = 'eleve';
+    public function __construct($statut='eleve') {
+        parent::__construct($statut);
         
         if (isset($_POST['num_dossier']) && isset($_POST['code_confidentiel'])){
         $num_dossier  = htmlentities($_POST(['num_dossier']));

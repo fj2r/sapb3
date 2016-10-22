@@ -13,7 +13,7 @@ namespace lib;
  *
  * @author fred
  */
-class Professeur extends \Utilisateur {
+class Professeur extends Utilisateur {
     
     
 }

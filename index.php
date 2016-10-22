@@ -3,33 +3,30 @@
 include_once ('inc/headers.inc.php');
 ///////////////////////////////Appel des libraires  ////////////////////////////
 include_once('inc/mainLib.inc.php');
-
+include_once('inc/fonctions.inc.php');
 ////////////////////////////* Appel du moteur de templates Twig*////////////////
 include_once ('inc/initTwig.inc.php');
 
 ////////////////////////////Connexion à la bdd/////////////////////////////////
-$table = 'etablissement';
-$champ = 'commune';
-$enregistrement = '*';
-$valeur = 'Strasbourg';
-$ordre ='asc';
-
-$db = new lib\bdd('localhost','sapb3','root','fred2001');
-$maBDD = $db->getPDO();  //récupération de l'objet BDD
-$datas = $db->queryPDO("SELECT $enregistrement FROM $table WHERE $champ = '$valeur' "); //instance de connexion à la base
-
+appelDatabase(); //retourne l'objet $database 
 ///////////////////////test
-
+ $enregistrement = '*';
+    $table = 'etablissement';
+    $champ = 'region';
+    $valeur = 'bourgogne';
+    $ordre ='asc';
+ $monEtablissement = new lib\Etablissement($db);
+ 
 ///////////////////////////////////////////////////////////////////////////////
 
-$maPomme = new Eleve();
-$maPomme->code_confidentiel = 00000;
-$maPomme->num_dossier = 00000;
-$maPomme->setDossier(000000, 000000);
+$maPomme = new lib\Eleve('eleve');
+
+$maPomme->setNumDossier('000000');
+$maPomme->setCodeConfidentiel('0000000');
 //$maPomme->genererSession($maBDD,1);
 //$maPomme->identifierEleve($maBDD, 'eleve');
 //////////////////////////Lecture des infos du site////////////////////////////
-$mesInfos = new infos();
+$mesInfos = new lib\infos();
 $mesInfos->lireInfos();
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -40,6 +37,8 @@ $numeroDossier= 007;
 $codeConfidentiel='JD007';
 print_r($eleveConnecte->identifierEleve($maConnexion, $statut, $numeroDossier, $codeConfidentiel));
 */
+
+///////////////////////////////////// TWIG /////////////////////////////////////
 ////////////////////////////Les variables à passer au template//////////////////
 $date = date('d/m/Y');
 $version = $_SESSION['version']; 
@@ -58,8 +57,12 @@ else {
     $connecte= FALSE;
 }
 
-/*pour le footer*/
-$texte_footer = 'Copyright LMN Autun';
+$lien_eleve = 'login.php?statut=eleve'; //liens sur la page d'accueil
+$lien_professeur = 'login.php?statut=professeur';
+$lien_administratif = 'login.php?statut=administratif';
+        
+
+$texte_footer = 'Copyright LMN Autun'; /*pour le footer*/
 ///////////////////////////Fin des décla de variables pour le template//////////
 
 
@@ -74,5 +77,8 @@ echo $template->render(array(
     'nom'=>''.$nom.'',
     'sexe'=>''.$sexe.'',
     'texte_footer'=>''.$texte_footer.'',
+    'lien_eleve'=>''.$lien_eleve.'',
+    'lien_professeur'=>''.$lien_professeur.'',
+    'lien_administratif'=>''.$lien_administratif.'',
     )); //on envoie la variable au template
 
