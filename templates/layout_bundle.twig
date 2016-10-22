@@ -23,6 +23,21 @@
     
 {% endblock %}
 
-{% block contenu %}{{parent()}}<div id="panneaugauche">&nbsp;</div>{% endblock %}
+{% block contenu %}{{parent()}}
+    {% block panneauGauche %} 
+        <div id="panneaugauche">
+        <img src="templates/IMG/Texte3.png" />
+        </div>
+    {% endblock %}
+    {% block panneauDroite %}
+        <div id ="panneaudroite">
+        <div class = "">
+        <p>Application de simulation admission post-bac sapb</p><hr />
+        
+        <br /></div>
+        
+    </div>
+    {% endblock %}
+{% endblock %}
 
 {% block footer %}{{parent()}}{% endblock %}

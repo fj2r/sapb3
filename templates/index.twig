@@ -8,16 +8,10 @@
 {% block title %}{{parent()}}Accueil{% endblock %}
 {% block cadre_haut %}{{parent()}}{% endblock %}
 
-{% block contenu %}{{parent()}}
-    
-    
-    
-    <div id ="panneaudroite">
-        <div class = "">
-        Application Simulation APB
-        
-        <br /></div>
-        <div id="index_ul">
+{% block contenu %}
+    {% block panneauGauche %}{{parent()}}{%endblock%}   
+    {% block panneauDroite%}{{parent()}}
+    <div id="index_ul">
             <ul type="square">
                 <li>
                     <img src="templates/IMG/eleve.png" />&nbsp;<a href="{{lien_eleve}}">El&egrave;ves</a>
@@ -29,8 +23,18 @@
                     <img src="templates/IMG/admin.png" />&nbsp;<a href="{{lien_administratif}}">Equipe administrative</a>
                 </li>
             </ul>
+    </div>
+    <div id="splashscreen">
+        <div><h3><strong>L\'acc&egrave;s est bloqu&eacute; pour les &eacute;l&#232;ves &agrave; partir du 31 mars, la r&eacute;ouverture de cet 
+    acc&egrave;s pourra se faire ponctuellement dans le cadre du tutorat.</strong></h3>
+                         <br />
+        </div>
+        <div><h3><strong>IMPORTANT : Si vous avez des probl&egrave;mes avec cette application, cela peut &ecirc;tre li&eacute; &agrave; un bug <br/>
+        d\'Internet Explorer. Dans ce cas vous pouvez utiliser le navigateur web FIREFOX &agrave; la place.</strong></h3>
         </div>
     </div>
-{% endblock %}
+    {% endblock %}
+    
+{%endblock%}
 
 {% block footer %}{{parent()}}<hr />{% endblock %}

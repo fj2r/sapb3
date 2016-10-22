@@ -270,7 +270,7 @@ public function exportEtablissementBdd () {
 
 public function rechercherEtablissement ($database,$enregistrement,$table,$champ,$valeur,$ordre){
     
-    $requete = 'SELECT $enregistrement FROM $table WHERE $champ = $valeur';
+    $requete = "SELECT $enregistrement FROM $table WHERE $champ = '$valeur' ORDER BY $ordre";
     $datas = $database->queryPDO($requete); //instance de connexion à la base
         foreach ($datas as $liste){
             echo $liste['commune'].' : <a href="'.$liste['lien'].'" target="_blank" >'.$liste['nom'].'</a>; <br />';

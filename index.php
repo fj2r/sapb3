@@ -8,15 +8,16 @@ include_once('inc/fonctions.inc.php');
 include_once ('inc/initTwig.inc.php');
 
 ////////////////////////////Connexion à la bdd/////////////////////////////////
-appelDatabase(); //retourne l'objet $database 
+ 
+
 ///////////////////////test
  $enregistrement = '*';
     $table = 'etablissement';
     $champ = 'region';
     $valeur = 'bourgogne';
-    $ordre ='asc';
- $monEtablissement = new lib\Etablissement($db);
- 
+    $orderby ='commune ASC';
+ $monEtablissement = new lib\Etablissement(appelDatabase()); //retourne l'objet $database
+ /*$monEtablissement->rechercherEtablissement(appelDatabase(), $enregistrement, $table, $champ, $valeur, $orderby);*/
 ///////////////////////////////////////////////////////////////////////////////
 
 $maPomme = new lib\Eleve('eleve');
