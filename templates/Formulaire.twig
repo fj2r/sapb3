@@ -1,0 +1,40 @@
+{# extension du template layout pour le formulaire #}
+
+{% extends "layout_bundle.twig" %}
+
+
+{% block identifiants %}{{parent()}}{% endblock %}
+
+{% block title %}{{parent()}}Accueil{% endblock %}
+{% block cadre_haut %}{{parent()}}{% endblock %}
+
+{% block contenu %}
+    {% block panneauGauche %}{{parent()}}{%endblock%}   
+    {% block panneauDroite%}{{parent()}}
+        <div class="formulaire">
+	
+            <div class="formTitre"><p>{{titreForm}}</p></div>
+            
+            <div class ="formContenu">
+            <form action="{{lienSubmit}}{{arguments}}" method="{{method}}" />
+            <label>Nom : </label>{{nom|raw}}<br />
+                <label>Pr&eacute;nom : </label>{{prenom|raw}}<br />
+                <label>Date de naissance : </label>{{jj|raw}}{{mm|raw}}{{aaaa|raw}}<br />
+              
+                <label>Adresse mail pour envoi de la confirmation :</label>{{mail1|raw}}
+                <br />
+                <label>Confirmation de votre adresse mail :</label>{{mail2|raw}}
+                <br />
+                {{submit|raw}}
+
+
+            </form>
+            </div>
+	
+	</div>
+  
+    {% endblock %}
+    
+{%endblock%}
+
+{% block footer %}{{parent()}}<hr />{% endblock %}

@@ -12,3 +12,4 @@ Pack de librairies pour charger sur toutes les pages du site
     include_once('lib/Etablissement.class.php');
     include_once ('lib/TableauNotes.class.php');
     include_once ('lib/Professeur.class.php');
+    include_once ('lib/Formulaire.class.php');

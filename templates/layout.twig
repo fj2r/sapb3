@@ -7,6 +7,7 @@
             <title>{% block title %}{{titrePage}} - {% endblock %}</title>
             {{ include('meta.twig',{charset:'UTF-8'},with_context= true) }}
             {{ include('FeuillesDeStyle.twig') }}
+            {{ include ('Scripts.twig') }}
         {% endblock %}
         
     </head>
