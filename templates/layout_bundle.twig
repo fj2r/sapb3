@@ -3,25 +3,42 @@
 {% extends "layout.twig" %}
 
 {% block identifiants %}{{parent()}}
+        
+            <table class ="header_table" ><td> 
+        {% if connecte == FALSE %}
+            Veuillez vous connecter. 
+        {% elseif connecte == TRUE %}
+            Vous êtes bien connecté{% if sexe == 'F' %}e{% endif %} en tant que : {{prenom|capitalize}} {{nom|upper}} 
+        {% endif %}
+                </td> 
+            </table>
+            <br />
+                
+        
+{% endblock %}
+{% block cadre_haut %}{{parent()}}
+    {% block chapeau_haut%}                    
     <div id="chapeau">
-        <table class ="header_table" ><td> 
-    {% if connecte == FALSE %}
-        Veuillez vous connecter. 
-    {% elseif connecte == TRUE %}
-        Vous êtes bien connecté{% if sexe == 'F' %}e{% endif %} en tant que : {{prenom|capitalize}} {{nom|upper}} 
-    {% endif %}
-            </td> 
-        </table>
+    <div id="logo_mesr"></div>
+    <div id="bandeau2">
+        <div id="connexion">
+        {% endblock %}
+        
+        {% block formulaire %}{% endblock %}
+            
+    {% block chapeau_bas%}   
+        </div>
     </div>
+    <div id="imgBiseau"></div>
+    <div id="bandeau3">
+        <a target="_blank" href="">Codes perdus ?</a>
+        <a id="lien_information" href="" target="_blank"> Information</a>
+        <a id="lien_contact" href="" target="">Contact</a>
+    </div>
+    </div>
+    {% endblock %}
 {% endblock %}
 
-{% block cadre_haut %}{{parent()}}
-    <div id="logo_mesr"></div>
-    <div id="connexion"></div>
-    <div id="imgBiseau"></div>
-    <div id="bandeau3"></div>
-    
-{% endblock %}
 
 {% block contenu %}{{parent()}}
     {% block panneauGauche %} 

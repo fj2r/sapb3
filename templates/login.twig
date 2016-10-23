@@ -6,7 +6,15 @@
 {% block identifiants %}{{parent()}}{% endblock %}
 
 {% block title %}{{parent()}}Identification{% endblock %}
-{% block cadre_haut %}{{parent()}}{% endblock %}
+{% block cadre_haut %}
+{% block chapeau_haut %}{{parent()}}{% endblock %}
+    {% block formulaire %} {{parent()}}
+    <form action ="traitementLogin.php" method ="POST">
+            {{bandeauLogin|raw}}
+    </form>
+    {% endblock %}
+    {% block chapeau_bas %}{{parent()}}{% endblock %}
+{% endblock %}
 
 {% block contenu %}{{parent()}}
     
@@ -17,19 +25,7 @@
         Application Simulation APB
         
         <br /></div>
-        <div id="index_ul">
-            <ul type="square">
-                <li>
-                    <img src="templates/IMG/eleve.png" />&nbsp;<a href="login.php?statut=eleve">Elèves</a>
-                </li>
-                <li>
-                    <img src="templates/IMG/professeur.png" />&nbsp;<a href="login.php?statut=professeur">Equipe pédagogique</a>
-                </li>
-                <li>
-                    <img src="templates/IMG/admin.png" />&nbsp;<a href="login.php?statut=administrateur">Equipe administrative</a>
-                </li>
-            </ul>
-        </div>
+        
     </div>
 {% endblock %}
 

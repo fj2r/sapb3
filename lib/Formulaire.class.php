@@ -17,12 +17,14 @@ class Formulaire {
  
    private $data = array();
    private $html = '';
+   public $label = 'Valider';
    public $surround = 'p'; //pour générer des tag propres autour des champs
    public $size = 25;
    public $titre = 'formulaire';
    public $submit = 'inscription.php';
    public $argumentsURL = ''; //pour le passage d'arguments en GET
    public $method = 'POST';
+   public $type = 'text';
     
    public function __construct($data=array()) {
        $this->data = $data ;
@@ -68,14 +70,14 @@ class Formulaire {
    }
    
    public function input ($nomChamp){
-      return $this->surround('<input type="text" name="'.$nomChamp.'" value="'.$this->getValue($nomChamp).'" size="'.$this->size.'" '
-              . 'onFocus="if(this.value==\''.$this->getValue($nomChamp).'\') {this.value=\'\'}"></input> ');
+      return $this->surround('<input type="text" name="'.$nomChamp.'" value="'.$this->getValue($nomChamp).'" type="'.$this->type.'" size="'.$this->size.'" '
+              . 'onFocus="if(this.value==\''.$this->getValue($nomChamp).'\') {this.value=\'\'}" ></input> ');
    }
    public function select ($nomChamp){
        return $this->surround('<select name="'.$nomChamp.'">'.$this->getOptionValue($nomChamp).'</select>');
    }
    public function submit (){
-      return $this->surround('<button type = "submit">Valider</button>');
+      return $this->surround('<button type = "submit">'.$this->label.'</button>');
    }
     
 }

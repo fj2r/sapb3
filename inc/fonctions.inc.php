@@ -85,3 +85,60 @@ $template = $twig->loadTemplate($template); //on va chercher le template associ�
 echo $template->render($tableauPourTemplate); //on envoie le tableau des variables au template qui se débrouille avec
 
 }
+
+function bandeauLogin ($statut){
+        if ($statut == 'eleve'){
+            $tableauPourBandeau = array (
+            'num_dossier'=>'N° de dossier',
+            'code_conf'=>'Mot de passe',);
+           
+
+            $formBandeauEleve = new lib\Formulaire($tableauPourBandeau);
+            
+            $formBandeauEleve->surround = 'span';
+            $formBandeauEleve->label = 'Connexion';
+            $formBandeauEleve->size = 15 ;
+            $formBandeauEleve->type = 'password' ;
+            $httpReturn = $formBandeauEleve->input('num_dossier').$formBandeauEleve->input('code_conf').$formBandeauEleve->submit();
+           
+            return $httpReturn;
+            
+        }
+        elseif ($statut == 'professeur'){
+            $tableauPourBandeau = array (
+            'login'=>'Votre login',
+            'passwd'=>'Votre mot de passe',    
+            );
+
+            $formBandeauProf = new lib\Formulaire($tableauPourBandeau);
+            
+            $formBandeauProf->surround='span';
+            $formBandeauProf->label = 'Connexion';
+            $formBandeauProf->size = 15 ;
+            $formBandeauProf->type = 'password' ;
+            $httpReturn = $formBandeauProf->input('login').$formBandeauProf->input('passwd').$formBandeauProf->submit();
+            
+            return $httpReturn;
+            
+        }
+        elseif ($statut == 'administratif'){
+            $tableauPourBandeau = array (
+            'login'=>'Votre login',
+            'passwd'=>'Votre mot de passe',    
+            );
+
+            $formBandeauAdmin = new lib\Formulaire($tableauPourBandeau);
+            
+                        
+            $formBandeauAdmin->surround='span';
+            $formBandeauAdmin->label = 'Connexion';
+            $formBandeauAdmin->size = 15 ;
+            $formBandeauAdmin->type = 'password' ;
+            $httpReturn = $formBandeauAdmin->input('login').$formBandeauAdmin->input('passwd').$formBandeauAdmin->submit();
+            
+             return $httpReturn;
+        }
+
+        else {return null;}
+
+}

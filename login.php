@@ -10,11 +10,12 @@
 include_once ('inc/headers.inc.php');
 ///////////////////////////////Appel des libraires  ////////////////////////////
 include_once('inc/mainLib.inc.php');
-
+include_once('inc/fonctions.inc.php');
 ////////////////////////////* Appel du moteur de templates Twig*////////////////
 include_once ('inc/initTwig.inc.php');
 
 ////////////////////////////Les variables à passer au template//////////////////
+$statut = (isset($_GET['statut']) && !empty($_GET['statut'])) ? $_GET['statut'] : $statut='eleve';
 $date = date('d/m/Y');
 $version = $_SESSION['version']; 
 $charset = "UTF-8";
@@ -34,11 +35,14 @@ else {
 
 /*pour le footer*/
 $texte_footer = 'Copyright LMN Autun';
+
+
 ///////////////////////////Fin des décla de variables pour le template//////////
 
-$template = $twig->loadTemplate('login.twig'); //on va chercher le template associé
-echo $template->render(array(
-    'annee' => ''.$date.'',
+
+
+$template = 'login';
+$variablesTemplate = array('annee' => ''.$date.'',
     'version'=>''.$version.'',
     'charset'=>''.$charset.'',
     'titrePage'=>''.$titrePage.'',
@@ -47,4 +51,7 @@ echo $template->render(array(
     'nom'=>''.$nom.'',
     'sexe'=>''.$sexe.'',
     'texte_footer'=>''.$texte_footer.'',
-    )); //on envoie la variable au template
+    'bandeauLogin'=>''.bandeauLogin($statut).'',
+    ) ;
+
+appelTemplate($template, $twig, $variablesTemplate);

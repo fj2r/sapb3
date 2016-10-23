@@ -38,6 +38,8 @@ print_r($eleveConnecte->identifierEleve($maConnexion, $statut, $numeroDossier, $
 */
 
 ///////////////////////////////////// TWIG /////////////////////////////////////
+
+
 $template = 'index';
 $variablesTemplate = array('sexe'=>'F') ;
 appelTemplate($template, $twig, $variablesTemplate);
