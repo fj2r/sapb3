@@ -25,6 +25,7 @@
         {% endblock %}
         
         {% block formulaire %}{% endblock %}
+        {% block menuUtilisateur %}{% endblock %}
             
     {% block chapeau_bas%}   
         </div>
@@ -47,13 +48,17 @@
         </div>
     {% endblock %}
     {% block panneauDroite %}
+        {% block panneauDroiteFirstchild%}
         <div id ="panneaudroite">
-        <div class = "">
+        
         <p>Application de simulation admission post-bac sapb</p><hr />
         
-        <br /></div>
-        
-    </div>
+        <br />
+        {% endblock %}
+            {% block article %}{% endblock %}
+        {% block panneauDroiteSecondchild%}
+        </div>
+        {% endblock %}
     {% endblock %}
 {% endblock %}
 

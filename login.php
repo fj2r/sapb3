@@ -14,34 +14,21 @@ include_once('inc/fonctions.inc.php');
 ////////////////////////////* Appel du moteur de templates Twig*////////////////
 include_once ('inc/initTwig.inc.php');
 
-////////////////////////////Les variables à passer au template//////////////////
-$statut = (isset($_GET['statut']) && !empty($_GET['statut'])) ? $_GET['statut'] : $statut='eleve';
-$date = date('d/m/Y');
-$version = $_SESSION['version']; 
-$charset = "UTF-8";
-$titrePage = $_SESSION['nom_application'];
+////////////////////////////Les variables communes à passer au template//////////////////
+include_once ('inc/varTwig.inc.php');
 
-if (isset($_SESSION)){
-$connecte = TRUE;
+////////////////////////////passage du tableau de variables pour template///////
 
-$prenom = "titi";
-$nom = "toto";
-$sexe = "F";
+///////////////éventuelle surcharge des variables pour le template ?//////////
+$template = 'login';     //Nom du template à appeler
 
-}
-else {
-    $connecte= FALSE;
-}
+$page = 'login';         //Nom de l'index pour récupérer les infos pour les textes
+$contenuJSON = new lib\generateurArticle($page); //on instancie le générateur d'article 
+$contenuArticle = $contenuJSON->lireContenu($page)[''.$page.''][0]; // méthode pour lire les infos du fichier de langue
 
-/*pour le footer*/
-$texte_footer = 'Copyright LMN Autun';
+/////////////////////////////////////////////////////////////
 
 
-///////////////////////////Fin des décla de variables pour le template//////////
-
-
-
-$template = 'login';
 $variablesTemplate = array('annee' => ''.$date.'',
     'version'=>''.$version.'',
     'charset'=>''.$charset.'',
@@ -52,6 +39,10 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'sexe'=>''.$sexe.'',
     'texte_footer'=>''.$texte_footer.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'',
+    
     ) ;
 
-appelTemplate($template, $twig, $variablesTemplate);
+$mergeVarTemplate = array_merge($variablesTemplate, $contenuArticle); //construction du tableau avec les données à envoyer au template
+
+
+appelTemplate($template, $twig, $mergeVarTemplate); //construction de la page web

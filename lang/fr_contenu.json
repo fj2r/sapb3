@@ -1,0 +1,15 @@
+{
+    "index":[
+        {
+            "splash1":"L'accès est bloqué pour les élèves à partir du 31 mars,la réouverture de cet accès pourra se faire ponctuellement dans le cadre du tutorat.",
+            "splash2":"IMPORTANT : Si vous avez des problèmes avec cette application, cela peut être lié à un bug d'Internet Explorer. Dans ce cas vous pouvez utiliser le navigateur web FIREFOX à la place."
+        }
+    ],
+    "login":[
+        {
+            "titre":"INSCRIPTION SUR L'APPLICATION DE SIMULATION D'INSCRIPTION POST-BAC.",
+            "informations":"S'il s'agit de votre première connexion, veuillez vous inscrire.",
+            "image":"premierevisite.gif"
+        }
+    ]
+}

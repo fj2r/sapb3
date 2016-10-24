@@ -8,40 +8,37 @@ include_once('inc/fonctions.inc.php');
 include_once ('inc/initTwig.inc.php');
 
 
-///////////////////////test
- $enregistrement = '*';
-    $table = 'etablissement';
-    $champ = 'region';
-    $valeur = 'bourgogne';
-    $orderby ='commune ASC';
- $monEtablissement = new lib\Etablissement(appelDatabase()); //retourne l'objet $database
- /*$monEtablissement->rechercherEtablissement(appelDatabase(), $enregistrement, $table, $champ, $valeur, $orderby);*/
-///////////////////////////////////////////////////////////////////////////////
+////////////////////////////Les variables communes à passer au template//////////////////
+include_once ('inc/varTwig.inc.php');
 
-$maPomme = new lib\Eleve('eleve');
+////////////////////////////passage du tableau de variables pour template///////
 
-$maPomme->setNumDossier('000000');
-$maPomme->setCodeConfidentiel('0000000');
-//$maPomme->genererSession($maBDD,1);
-//$maPomme->identifierEleve($maBDD, 'eleve');
-//////////////////////////Lecture des infos du site////////////////////////////
-$mesInfos = new lib\infos();
-$mesInfos->lireInfos();
-///////////////////////////////////////////////////////////////////////////////
+///////////////éventuelle surcharge des variables pour le template ?//////////
+$template = 'index';     //Nom du template à appeler
 
-/*
-$eleveConnecte = new eleve();
-$statut = 'eleve';
-$numeroDossier= 007;
-$codeConfidentiel='JD007';
-print_r($eleveConnecte->identifierEleve($maConnexion, $statut, $numeroDossier, $codeConfidentiel));
-*/
+$page = 'index';         //Nom de l'index pour récupérer les infos pour les textes
+$contenuJSON = new lib\generateurArticle($page); //on instancie le générateur d'article 
+$contenuArticle = $contenuJSON->lireContenu($page)[''.$page.''][0]; // méthode pour lire les infos du fichier de langue
 
-///////////////////////////////////// TWIG /////////////////////////////////////
+/////////////////////////////////////////////////////////////
 
 
-$template = 'index';
-$variablesTemplate = array('sexe'=>'F') ;
-appelTemplate($template, $twig, $variablesTemplate);
+
+$variablesTemplate = array('annee' => ''.$date.'',
+    'version'=>''.$version.'',
+    'charset'=>''.$charset.'',
+    'titrePage'=>''.$titrePage.'',
+    'connecte'=>''.$connecte.'',
+    'prenom'=>''.$prenom.'',
+    'nom'=>''.$nom.'',
+    'sexe'=>''.$sexe.'',
+    'texte_footer'=>''.$texte_footer.'',
+    'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
+    
+    ) ;
 
 
+$mergeVarTemplate = array_merge($variablesTemplate, $contenuArticle); //construction du tableau avec les données à envoyer au template
+
+
+appelTemplate($template, $twig, $mergeVarTemplate); //construction de la page web
