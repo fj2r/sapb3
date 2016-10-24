@@ -21,21 +21,44 @@ include_once ('inc/varTwig.inc.php');
 
 ////////////////////////////passage du tableau de variables pour template///////
 
+////////////////////////////Construction du formulaire//////////////////////////
+
+$form = formulaireInscription();
+$form->surround = 'span';
 ///////////////éventuelle surcharge des variables pour le template ?//////////
-$template = 'mainTemplate';
+$template = 'inscription';
+
+
+$page = 'inscription';         //Nom de l'index pour récupérer les infos pour les textes
+$contenuJSON = new lib\generateurArticle($page); //on instancie le générateur d'article 
+$contenuArticle = $contenuJSON->lireContenu($page)[''.$page.''][0]; // méthode pour lire les infos du fichier de langue
+
 /////////////////////////////////////////////////////////////
 
-$variablesTemplate = array('annee' => ''.$date.'',
+$variablesTemplate = array(
+    'annee' => ''.$date.'',
     'version'=>''.$version.'',
     'charset'=>''.$charset.'',
     'titrePage'=>''.$titrePage.'',
     'connecte'=>''.$connecte.'',
-    'prenom'=>''.$prenom.'',
-    'nom'=>''.$nom.'',
     'sexe'=>''.$sexe.'',
     'texte_footer'=>''.$texte_footer.'',
-    'bandeauLogin'=>''.bandeauLogin($statut).'',
-    'contenuArticle'=>''.$contenuArticle.'',
+    'bandeauLogin'=>''.bandeauLogin($statut).'',   
+    'titreForm'=>$form->titre='Formulaire d\'inscription : ',
+    'lienSubmit'=>$form->submit='validationInscription.php',
+    'arguments'=>$form->argumentsURL='?statut=eleve',
+    'method'=>$form->method='POST',
+    'nom'=>$form->input('nom'),
+    'prenom'=>$form->input('prenom'),
+    'jj'=>$form->select('jj'),
+    'mm'=>$form->select('mm'),
+    'aaaa'=>$form->select('aaaa'),
+    'mail1'=>$form->input('mail1'),
+    'mail2'=>$form->input('mail2'),
+    'submit'=>$form->submit(),
     ) ;
 
-appelTemplate($template, $twig, $variablesTemplate);
+$mergeVarTemplate = array_merge($variablesTemplate, $contenuArticle); //construction du tableau avec les données à envoyer au template
+
+
+appelTemplate($template, $twig, $mergeVarTemplate); //construction de la page web

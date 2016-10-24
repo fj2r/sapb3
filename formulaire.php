@@ -17,16 +17,7 @@ include_once ('inc/initTwig.inc.php');
 
 ////////////////////////////Construction du formulaire//////////////////////////
 
-$tableauPourFormulaire = array (
-    'nom'=>'Inscrivez votre nom ici',
-    'prenom'=>'Inscrivez votre prénom ici',    
-    'mail1'=>'Inscrivez ici votre adresse email',
-    'mail2'=>'Retapez ici votre adresse email',);
-
-$form = new lib\Formulaire($tableauPourFormulaire);
-
-
-
+formulaireInscription();
 
 
 ///////////////////////////////////// TWIG /////////////////////////////////////

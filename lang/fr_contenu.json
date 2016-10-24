@@ -11,5 +11,15 @@
             "informations":"S'il s'agit de votre première connexion, veuillez vous inscrire.",
             "image":"premierevisite.gif"
         }
+    ],
+    "inscription":[
+        {
+            "titre":"Formulaire d'inscription",
+            "labelNom":"Nom",
+            "labelPrenom":"Prénom",
+            "labelNaissance":"Date de naissance",
+            "labelMail1":"Adresse mail pour envoi de la confirmation",
+            "labelMail2":"Confirmation de votre adresse mail"
+        }
     ]
 }

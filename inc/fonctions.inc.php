@@ -142,3 +142,15 @@ function bandeauLogin ($statut){
         else {return null;}
 
 }
+
+function formulaireInscription (){
+    
+    $tableauPourFormulaire = array (
+    'nom'=>'Inscrivez votre nom ici',
+    'prenom'=>'Inscrivez votre prénom ici',    
+    'mail1'=>'Inscrivez ici votre adresse email',
+    'mail2'=>'Retapez ici votre adresse email',);
+
+    return $form = new lib\Formulaire($tableauPourFormulaire);
+    
+}

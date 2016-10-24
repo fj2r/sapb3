@@ -1,0 +1,51 @@
+
+{# extension du template layout pour le template principal #}
+
+{% extends "layout_bundle.twig" %}
+
+
+{% block identifiants %}{{parent()}}{% endblock %}
+
+{% block title %}{{parent()}}Accueil{% endblock %}
+{% block cadre_haut %}
+        {% block chapeau_haut %}{{parent()}}{% endblock %}
+        {% block menuUtilisateur %}
+        
+        {% endblock %}
+        {% block chapeau_bas %}{{parent()}}{% endblock %}
+    
+{% endblock %}
+
+{% block contenu %}
+    {% block panneauGauche %}{{parent()}}{%endblock%}   
+    {% block panneauDroite %}
+        {% block panneauDroiteFirstchild%} {{parent()}} {% endblock %}
+            {% block article %}{{parent()}}
+                <div class="formulaire">
+	
+            <div class="formTitre"><p>{{titreForm}}</p></div>
+            
+            <div class ="formContenu">
+            <form action="{{lienSubmit}}{{arguments}}" method="{{method}}" />
+            <label>{{labelNom}} : </label>{{nom|raw}}<br />
+                <label>{{labelPrenom}} : </label>{{prenom|raw}}<br />
+                <label>{{labelNaissance}} : </label>{{jj|raw}}{{mm|raw}}{{aaaa|raw}}<br />
+              
+                <label>{{labelMail1}} :</label>{{mail1|raw}}<br />
+                
+                <label>{{labelMail2}} :</label>{{mail2|raw}}<br />
+                
+                {{submit|raw}}
+
+
+            </form>
+            </div>
+	
+	</div>
+            {% endblock %}
+        {% block panneauDroiteSecondchild %} {{parent()}} {% endblock %}    
+    {% endblock %}
+    
+{%endblock%}
+
+{% block footer %}{{parent()}}<hr />{% endblock %}
