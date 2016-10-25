@@ -15,25 +15,37 @@ namespace lib;
  */
 class TraitementFormulaire {
     
-    private $POSTechappe;
-   
+    public $search = "'";
+    private $replace = "\'";
+    private $subject ;
+        
 
-    public function __construct($POST) {
+    public function __construct() {
       
-      $this->POSTechappe->echappementChaine($POST);
-      
-      return $this->POSTechappe;
+    
       
   }
     
     public function echappementChaine ($tableauPOST){
       
-      foreach ($tableauPOST as $cle => $chaine){
-          $chaine = addslashes($chaine);
-      }
+      $this->subject = $tableauPOST;
       
-      return $tableauPOST;
+      $tableauPOSTechappe = str_replace($this->search,$this->replace ,$this->subject );
+      
+           
+      return $tableauPOSTechappe;
       
   }
+  
+    public function estBienUnMail (){
+      
+      
+    } 
+    
+    public function estBienNumeric (){
+        
+    }
+  
+  
     
 }

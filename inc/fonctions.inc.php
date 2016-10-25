@@ -155,3 +155,8 @@ function formulaireInscription (){
     
 }
 
+function formaterDate ($jj, $mm, $aaaa){
+    $date_US="$jj-$mm-$aaaa";
+    $ddn = date("d/m/Y", strtotime($date_US));
+    return $ddn;
+}

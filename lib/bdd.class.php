@@ -25,7 +25,7 @@ class bdd {
     private $infos_connexion;
     private $parsed_json;
 
-    public function __construct($host='localhost', $dbname, $dbuser='root', $passwd='') {
+    public function __construct($host='localhost', $dbname='sapb3', $dbuser='root', $passwd='fred2001') {
         
           $this->host = $host;
           $this->dbname = $dbname;
@@ -97,7 +97,7 @@ class bdd {
          */
         
 
-        /////////////////Connexion à la base////////////////////////////////////////
+ ////////////////////////Connexion à la base////////////////////////////////////////
         if($this->pdo === null ){
             try {
             
@@ -154,15 +154,33 @@ class bdd {
     }
     
     public function queryPDOPrepared ($statement, $tabDatas){
+       
         if (is_array($tabDatas)){
             $requete = $this->getPDO()->prepare($statement);
             $requete->execute($tabDatas);
+            
             $datas = $requete->fetchAll(\PDO::FETCH_BOTH);
-
-            return $datas;
+            if ($datas != null){
+                return $datas;
+            }
+            else {
+                return FALSE;
+            }
         }
         else { return null; }
     }
+    public function queryPDOPreparedExec ($statement, $tabDatas){
+       
+        if (is_array($tabDatas)){
+            $requete = $this->getPDO()->prepare($statement);
+            $requete->execute($tabDatas);
+         
+            return TRUE;
+        }
+        else { return FALSE; }
+    }
+    
+    
     
     //////////////////////mutateurs/////////////////////////////////////////////
     public function setStatement (){

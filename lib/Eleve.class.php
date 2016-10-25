@@ -5,24 +5,24 @@ namespace lib;
 class Eleve extends Utilisateur {
     
     protected $connexion;
-    protected $maBDD;
-    protected $numeroDossier;
-    protected $codeConfidentiel;
+    protected $db;
+    protected $pdo;
+    protected $numDossier;
+    protected $codeConf;
     protected $statut;
     protected $num_eleve_etab;
     protected $carteIdentite;
     protected $id_eleve;
+    protected $nom = 'DOE';
+    protected $prenom;
+    protected $naissance = '31/12/2000';
+    protected $tableauInfos;
+ 
     
 
-    public function __construct($statut='eleve') {
-        parent::__construct($statut);
-        
-        if (isset($_POST['num_dossier']) && isset($_POST['code_confidentiel'])){
-        $num_dossier  = htmlentities($_POST(['num_dossier']));
-        $code_confidentiel  = htmlentities($_POST(['code_confidentiel']));
-       }
-        
-       
+    public function __construct($db, $statut='eleve') {
+        parent::__construct($db, $statut); //l'élève hérite du constructeur 
+        $this->db = $db;    
     }
     ///////////////////////////mutateurs///////////////////////////////////////
     public function numeroDossier (){
@@ -45,7 +45,50 @@ class Eleve extends Utilisateur {
     public function setCodeConfidentiel ($code_confidentiel){
          $this->code_confidentiel = htmlspecialchars($code_confidentiel);
     }
+    
+    public function setNom ($nom){
+        $this->nom = htmlspecialchars($nom);
+    }
+    public function setPrenom ($prenom){
+        $this->prenom = htmlspecialchars($prenom);
+    }
+    public function setNaissance ($naissance){
+        $this->naissance = htmlspecialchars($naissance);
+    }
+    public function setNumEleveEtab ($num_eleve_etab){
+        $this->num_eleve_etab = htmlspecialchars($num_eleve_etab);
+    }
+    public function setIdEleve ($id_eleve){
+        $this->id_eleve = htmlspecialchars($id_eleve);
+    }
     //////////////////////////////
+    public function rechercheEleve ($nom, $prenom, $dateDeNaissance){
+        $statement = "SELECT * FROM import_eleve_complet WHERE `Nom de famille` = ? AND `Prénom` = ? AND `Date Naissance` = ?";
+        $tabDatas = array ($nom,$prenom,$dateDeNaissance);
+
+        $tableau = $this->db->queryPDOPrepared($statement, $tabDatas); //on récupère TOUTES les infos sur l'élève!
+        
+        
+        $infosEleve = $tableau[0]; //ATTENTION car c'est un tableau à 2 dimensions, donc on extrait le tableau du tableau
+        $infosEleve = $this->preparerTableauPourTwig($infosEleve);
+        
+        return $infosEleve;
+        
+    }
+    public function preparerTableauPourTwig ($tableau){ // IMPORTANT : nécessaire car les champs de la database sont par défaut avec des espaces et de points, ca qui est très mal pour Twig
+        
+        $search = array(" ", ".");
+        $replace = array ("_","_");
+        $tabModifie = array();
+        foreach ($tableau as $key=>$values){
+            
+            $tabModifie [$key=str_replace( $search,$replace, $key)] = $values;
+            
+        }
+       
+        return $tabModifie;
+    }
+    
     public function creerDossier (){
         
     }
@@ -121,10 +164,6 @@ class Eleve extends Utilisateur {
         
     }
     
-    public function formLoginEleve (){
-        
-        
-    }
     public function genererSession($connexion,$id_eleve){
         
         try {
@@ -181,6 +220,66 @@ class Eleve extends Utilisateur {
    public function envoiMail() {
        
        
+       
+   }
+   
+   public function construireCodesEleve ($id, $nbItérations = 5) {
+       /*construction d'un numéro de dossier aléatoire (par défaut avec 5 caractères*/
+       $char = [];   
+       $numDossier = 000000;
+       for ($i=0 ; $i<=$nbItérations; $i++){
+           $char[$i]= mt_rand(0, 9);
+       }
+       foreach ($char as $values){
+           $numDossier .= $values;
+       }
+       $this->numDossier = $numDossier;
+       
+       /*construction d'un code confidntiel aléatoire*/
+       $sel = mt_rand(1000, 9999);
+       $codeConf = substr($this->nom,0,2)."$sel";
+       
+       $this->codeConf = $codeConf;
+       
+       $tabIdentifiants = array($numDossier, $codeConf);
+       
+       $this->enregistrerCodesEleve($id, $tabIdentifiants);
+      
+       return $tabIdentifiants;
+   }
+   
+   public function enregistrerCodesEleve ($id, $tabIdentifiants){
+       /*verification pour voir si l'id existe déjà dans la base*/ 
+        $statementSelect = "SELECT * FROM cfg_eleves WHERE `id_eleve` = ? ";
+        $tabDatas = array ($id);
+
+        $tableau = $this->db->queryPDOPrepared($statementSelect, $tabDatas); //vérifie si la config de l'élève est déja faite
+        
+        if ($tableau == FALSE){
+            
+            
+            $statementInsert = "INSERT INTO cfg_eleves (id_eleve,num_eleve_etab, first_login, last_login, inscription_ok, numDossier, codeConf, validation_tuteur) VALUES (?,?,?,?,?,?,?,?)";
+            $tabDatas =array(
+                $this->id_eleve,
+                $this->num_eleve_etab,
+                $firstLogin = mktime(),
+                $lastLogin = mktime(),
+                $inscription = TRUE,
+                $this->numDossier,
+                $this->codeConf,
+                $validationTuteur = TRUE
+                );
+                var_dump($tabDatas);
+            
+            $resultat = $this->db->queryPDOPreparedExec($statementInsert, $tabDatas);
+            
+            $enregistrement = TRUE ;
+        }  
+        else {
+            $enregistrement = FALSE;
+        }
+        
+        return $enregistrement ;
        
    }
 }

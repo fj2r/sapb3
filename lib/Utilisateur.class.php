@@ -15,6 +15,7 @@ class Utilisateur {
     protected $login;
     protected $passwd;
     protected $maBDD;
+    protected $pdo;
     
     const ELEVE = 'eleve';
     const PROFESSEUR = 'professeur';
@@ -22,8 +23,10 @@ class Utilisateur {
     
 
 
-    public function __construct($statut='eleve') {
-             
+    public function __construct($db, $statut='eleve') {
+        
+        $this->pdo = $db->getPDO();
+        
         if (isset($statut)){
             $this->statut=$statut;
        }
@@ -56,6 +59,30 @@ class Utilisateur {
             setcookie('sapb_id_admin','',time()-3600*3);
         }
         
+    }
+    
+    public function genererCookie() {
+        if ($this->statut== self::ELEVE){
+            setcookie('sapb_num_dossier','',time()+0);
+            setcookie('sapb_code_conf','',time()+0);
+            setcookie('sapb_num_eleve_etab','',time()+0);
+            setcookie('sapb_nom_eleve','',time()+0);
+            setcookie('sapb_prenom_eleve','',time()+0);
+        }    
+        elseif ($this->statut== self::PROFESSEUR) {
+            setcookie('sapb_login','',time()+0);
+            setcookie('sapb_passwd','',time()+0);
+            setcookie('sapb_id_pedago','',time()+0);
+            setcookie('sapb_nom_prof','',time()+0);
+            setcookie('sapb_prenom_prof','',time()+0);
+        }
+        elseif ($this->statut== self::ADMINISTRATIF) {
+            setcookie('sapb_login','',time()+0);
+            setcookie('sapb_passwd','',time()+0);
+            setcookie('sapb_nom_admin','',time()+0);
+            setcookie('sapb_prenom_admin','',time()+0);
+            setcookie('sapb_id_admin','',time()+0);
+        }
     }
         
     

@@ -21,7 +21,36 @@
     {% block panneauDroite %}
         {% block panneauDroiteFirstchild%} {{parent()}} {% endblock %}
             {% block article %}{{parent()}}
-                {{contenuArticle | raw}}
+               
+                {% if id_eleve is defined  %}
+                    <div class="article">
+                        <div class="">
+                            {{identite}} : {{Prénom}}&nbsp;{{Nom_de_famille}}&sbquo;&nbsp;{{ne_le}} {{Date_Naissance}} {{a}} {{Commune_Naiss_}}.<br />
+                        </div>
+                        <div class = "">
+                        {{infoMail}} : {{mail1}}<br /><br />
+                        {{messageBienvenue}}<br />
+                        {{messageConnexion}} : <br /><br />
+                        </div>
+                        
+                        <div class="formulaire">
+                            {{labelnumDossier}} : {{numDossier}}<br /><br />
+                            {{labelcodeConf}} : {{codeConf}}<br /><br />
+                            
+                          
+                        </div>
+                        <div class = "lien">
+                            <a href="{{lien}}{{statut}}" target="_self">{{retourLogin}}</a>
+                        </div>
+                        
+                    </div>
+                {% else %}  
+                    <div class="article">
+                        
+                    </div>
+                {% endif %}
+                
+                
             {% endblock %}
         {% block panneauDroiteSecondchild %} {{parent()}} {% endblock %}    
     {% endblock %}
