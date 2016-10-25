@@ -146,10 +146,22 @@ class bdd {
         return $datas;
     }
     
+       
     public function executePDO ($statement){
         $nbr_enregistrements_modifies = $this->getPDO()->exec($statement) ;
         
         return $nbr_enregistrements_modifies;
+    }
+    
+    public function queryPDOPrepared ($statement, $tabDatas){
+        if (is_array($tabDatas)){
+            $requete = $this->getPDO()->prepare($statement);
+            $requete->execute($tabDatas);
+            $datas = $requete->fetchAll(\PDO::FETCH_BOTH);
+
+            return $datas;
+        }
+        else { return null; }
     }
     
     //////////////////////mutateurs/////////////////////////////////////////////

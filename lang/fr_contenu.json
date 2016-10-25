@@ -21,5 +21,17 @@
             "labelMail1":"Adresse mail pour envoi de la confirmation",
             "labelMail2":"Confirmation de votre adresse mail"
         }
+    ],
+    "validationInscription":[
+        {
+            "identite":"Votre Identité",
+            "infoMail":"Un mail vient de vous être envoyé à l'adresse mail suivante",
+            "messageBienvenue":"Bienvenue dans l'application simulation APB,",
+            "messageConnexion":"IMPORTANT : Vous pourrez vous connecter à l'application à l'aide des codes d'accès suivants (ne les perdez pas et notez les bien)",
+            "numDossier":"Numéro de dossier",
+            "codeConf":"Code confidentiel",
+            "retourLogin":"Cliquez sur ce lien pour tester vos codes d'accès",
+            "lien":"login.php?statut="
+        }
     ]
 }

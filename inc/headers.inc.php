@@ -13,11 +13,11 @@ if (isset ($_SESSION)){
     
 }
 
-//récupération des variables stockées dans le cookie
+//récupération des variables stockées dans le(s) cookie(s)
 
-if (isset ($_COOKIE)){
+if (isset ($_COOKIE) && !empty($_COOKIE['PHPSESSID'])){
     
-   $phpsessid = $_COOKIE['PHPSESSID'];
+   $phpsessid = $_COOKIE['PHPSESSID']; //pour le cookie de session
     
 }
 
@@ -25,8 +25,7 @@ if (isset ($_COOKIE)){
 //récupérations des variables passées en post
 
 if (isset ($_POST)){
-    
-    ;
+   
 }
 
 //récupération des variables passées en get

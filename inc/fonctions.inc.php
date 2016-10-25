@@ -114,7 +114,7 @@ function bandeauLogin ($statut){
             
             $formBandeauProf->surround='span';
             $formBandeauProf->label = 'Connexion';
-            $formBandeauProf->size = 15 ;
+            $formBandeauProf->size = 20 ;
             $formBandeauProf->type = 'password' ;
             $httpReturn = $formBandeauProf->input('login').$formBandeauProf->input('passwd').$formBandeauProf->submit();
             
@@ -132,7 +132,7 @@ function bandeauLogin ($statut){
                         
             $formBandeauAdmin->surround='span';
             $formBandeauAdmin->label = 'Connexion';
-            $formBandeauAdmin->size = 15 ;
+            $formBandeauAdmin->size = 20 ;
             $formBandeauAdmin->type = 'password' ;
             $httpReturn = $formBandeauAdmin->input('login').$formBandeauAdmin->input('passwd').$formBandeauAdmin->submit();
             
@@ -154,3 +154,4 @@ function formulaireInscription (){
     return $form = new lib\Formulaire($tableauPourFormulaire);
     
 }
+

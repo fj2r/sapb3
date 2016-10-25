@@ -16,19 +16,24 @@
     {% block chapeau_bas %}{{parent()}}{% endblock %}
 {% endblock %}
 
-{% block contenu %}{{parent()}}
+{% block contenu %}
+    {% block panneauGauche %}{{parent()}}{%endblock%}   
+    {% block panneauDroite %}
+        {% block panneauDroiteFirstchild%} {{parent()}} {% endblock %}
+            {% block article %}{{parent()}}
     
     
-    
-    <div id ="panneaudroite">
-        <div id = "page">
+        
             <div id="titre">{{titre}}</div>
             <div class ="text"><p>{{informations}}</p></div>
             <a href="inscription.php?statut=eleve" ><img src="templates/IMG/{{image}}" /> </a>
         
-        <br /></div>
+            <br />
         
-    </div>
+   
+            {% endblock %}
+        {% block panneauDroiteSecondchild %} {{parent()}} {% endblock %}    
+    {% endblock %}
 {% endblock %}
 
 {% block footer %}{{parent()}}<hr />{% endblock %}
