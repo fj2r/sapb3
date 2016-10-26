@@ -13,6 +13,8 @@ class Utilisateur {
     protected $connexion;
     protected $statut;
     protected $login;
+    protected $codeConf;
+    protected $numDossier;
     protected $passwd;
     protected $maBDD;
     protected $pdo;
@@ -94,7 +96,54 @@ class Utilisateur {
         session_destroy();
     }
     
+    public function ecrireSession ($infosSession) {
+        
+    }
     
+    /////////////////////////////Login des utilisateurs/////////////////////////
+    
+    public function login ($statut, $identifiant1 , $identifiant2 ){
+        
+        if ($statut == 'eleve'){
+            $statement = "SELECT * FROM `cfg_eleves` WHERE numDossier = ? AND codeConf = ?";
+            $tabDatas = array ($identifiant1, $identifiant2);
+            $tableau = $this->db->queryPDOPrepared($statement, $tabDatas);
+            
+            if ($tableau == FALSE){ return FALSE; }
+            else {
+                
+                return $tableau;
+                
+            }
+            
+            
+        }
+        elseif ($statut == 'professeur'){
+            $statement = "SELECT * FROM `identifiants_pedago` WHERE  login = ? AND password = ?";
+            $tabDatas = array ($identifiant1, $identifiant2);
+            $tableau = $this->db->queryPDOPrepared($statement, $tabDatas);
+            
+            if ($tableau == FALSE){ return FALSE; }
+            else {
+                
+                return $tableau;
+                
+            }
+        }
+        elseif ($statut == 'administratif'){
+            $statement = "SELECT * FROM `identifiants_administration` WHERE  login = ? AND password = ?";
+            $tabDatas = array ($identifiant1, $identifiant2);
+            $tableau = $this->db->queryPDOPrepared($statement, $tabDatas);
+            
+            if ($tableau == FALSE){ return FALSE; }
+            else {
+                
+                return $tableau;
+                
+            }
+        }
+        
+    }
     
     
     

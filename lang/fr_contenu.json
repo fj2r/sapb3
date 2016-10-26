@@ -12,6 +12,11 @@
             "image":"premierevisite.gif"
         }
     ],
+    "logout":[
+        {
+            
+        }
+    ],
     "inscription":[
         {
             "titre":"Formulaire d'inscription",
@@ -34,6 +39,34 @@
             "lien":"login.php?statut=",
             "ne_le":"né le ",
             "a":" à "
+        }
+    ],
+    "traitementLogin":[
+        {
+            "listeProfs":"Liste des enseignants",
+            "tuteurs":"Membres de l'équipe pédagogique impliqués dans le tutorat",
+            "labelmesNotes":"Mes résultats scolaires",
+            "labelmesVoeux": "Mes choix d'orientation",
+            "labelnbVoeux": "Nombre de voeux d'orientation déjà enregistrés",
+            "nbVoeuxNull":"Pour le moment il n'y a aucun voeu d'orientation que vous ayez enregistré.",
+            "labelLien" : "Faire un nouveau voeu d'orientation"
+        }
+    ],
+    "menus":[
+        {
+            "recapitulatifEleve":"Récapitulatif",
+            "notesEleve":"Notes",
+            "nouveauVoeuEleve":"Nouveau Voeu"
+            
+        }
+    ],
+    "identifiants":[
+        {
+            "connecteFALSE":"Vous n'êtes pas connecté",
+            "messageM":"Vous êtes bien connecté",
+            "massageF":"Vous êtes bien connectée",
+            "connecteur1" : "en tant que",
+            "logoutMessage":"Déconnexion"
         }
     ]
 }

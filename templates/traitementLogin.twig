@@ -1,0 +1,47 @@
+
+{# extension du template layout pour le template principal #}
+
+{% extends "layout_bundle.twig" %}
+
+
+{% block identifiants %}{{parent()}}{% endblock %}
+
+{% block title %}{{parent()}}Accueil{% endblock %}
+{% block cadre_haut %}
+        {% block chapeau_haut %}{{parent()}}{% endblock %}
+        {% block menuUtilisateur %}
+            {% if statut =='eleve' %}
+                {% include 'menuEleve.twig' %}
+            {%endif%}
+        {% endblock %}
+        {% block chapeau_bas %}{{parent()}}{% endblock %}
+    
+{% endblock %}
+
+{% block contenu %}
+    {% block panneauGauche %}{{parent()}}{%endblock%}   
+    {% block panneauDroite %}
+        {% block panneauDroiteFirstchild%} {{parent()}} {% endblock %}
+            {% block article %}{{parent()}}
+                <div class="liste_profs">
+                    {{listeProfs}} : <br />
+                </div>
+                <div class="tuteurs">
+                    {{tuteurs}} : <br />
+                </div>
+                <div class ="lien_notes">
+                    
+                </div>
+                <div class="voeuxParent">
+                    {{labelnbVoeux}} : <br />
+                    {{nbVoeuxNull}}. <br />
+                    
+                    <a href="traitementVoeux.php?statut=eleve" >{{labelLien}}</a>
+                </div>
+            {% endblock %}
+        {% block panneauDroiteSecondchild %} {{parent()}} {% endblock %}    
+    {% endblock %}
+    
+{%endblock%}
+
+{% block footer %}{{parent()}}<hr />{% endblock %}

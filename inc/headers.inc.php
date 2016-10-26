@@ -5,11 +5,12 @@ session_start();
 $phpVersion = phpversion();
 $magicQuotes  = get_magic_quotes_gpc();
 
-//récupération des variables passés en session
+//récupération des variables passées en get sur tout le site 
 
-if (isset ($_SESSION)){
+if (isset ($_GET) && !empty($_GET['statut'])){
     
-    
+    $statut = $_GET['statut']    ;
+       
     
 }
 
@@ -22,16 +23,4 @@ if (isset ($_COOKIE) && !empty($_COOKIE['PHPSESSID'])){
 }
 
 
-//récupérations des variables passées en post
 
-if (isset ($_POST)){
-   
-}
-
-//récupération des variables passées en get
-
-if (isset ($_GET)){
-    
-    ;
-    
-}

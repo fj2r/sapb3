@@ -1,11 +1,4 @@
 <?php
-
-/* 
- * Sapb - Simulation Application Post-Bac. 
- * Copyleft LMN Autun.
- * Utilisation dans le cadre de la licence incluse.
- */
-
 ////////////////////////////* Appel du header - Sessions*//////////////////////
 include_once ('inc/headers.inc.php');
 ///////////////////////////////Appel des libraires  ////////////////////////////
@@ -14,19 +7,22 @@ include_once('inc/fonctions.inc.php');
 ////////////////////////////* Appel du moteur de templates Twig*////////////////
 include_once ('inc/initTwig.inc.php');
 
+
 ////////////////////////////Les variables communes à passer au template//////////////////
 include_once ('inc/varTwig.inc.php');
 
 ////////////////////////////passage du tableau de variables pour template///////
 
 ///////////////éventuelle surcharge des variables pour le template ?//////////
-$template = 'login';     //Nom du template à appeler
+$template = 'mainTemplate';     //Nom du template à appeler
 
-$page = 'login';         //Nom de l'index pour récupérer les infos pour les textes
+$page = 'logout';         //Nom de l'index pour récupérer les infos pour les textes
 $contenuJSON = new lib\generateurArticle($page); //on instancie le générateur d'article 
 $contenuArticle = $contenuJSON->lireContenu($page)[''.$page.''][0]; // méthode pour lire les infos du fichier de langue
 
+$connecte = FALSE;
 /////////////////////////////////////////////////////////////
+
 
 
 $variablesTemplate = array('annee' => ''.$date.'',
@@ -38,9 +34,10 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'nom'=>''.$nom.'',
     'sexe'=>''.$sexe.'',
     'texte_footer'=>''.$texte_footer.'',
-    'bandeauLogin'=>''.bandeauLogin($statut).'',
-    'statut'=>''.$statut.'',
+    'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
+    
     ) ;
+
 
 $mergeVarTemplate = array_merge($variablesTemplate, $contenuArticle); //construction du tableau avec les données à envoyer au template
 

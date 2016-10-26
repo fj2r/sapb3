@@ -9,7 +9,7 @@
 {% block cadre_haut %}
 {% block chapeau_haut %}{{parent()}}{% endblock %}
     {% block formulaire %} {{parent()}}
-    <form action ="traitementLogin.php" method ="POST">
+    <form action ="traitementLogin.php?statut={{statut}}" method ="POST">
             {{bandeauLogin|raw}}
     </form>
     {% endblock %}

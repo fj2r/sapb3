@@ -32,7 +32,7 @@ class UtilisateurManager {
     public function deleteUtilisateur(\Utilisateur $utilisateur){}
     
 
-    public function setDB (\PDO $db){
+    public function setDB ($db){
         $this->database = $db;
     }
     

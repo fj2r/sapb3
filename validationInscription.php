@@ -17,7 +17,7 @@ include_once ('inc/initTwig.inc.php');
 
 
 
-///////////////////////////// Kernel        ///////////////////////////////////
+///////////////////////////// Modèle         ///////////////////////////////////
 
 $db = new lib\bdd();        //instance de la database
 $pdo = $db->getPDO();       //instance d'un objet PDO pour les requetes

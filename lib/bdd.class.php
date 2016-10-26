@@ -73,31 +73,7 @@ class bdd {
  
 
     public function getPDO() {
-        //////////////////récupération des infos de connexion via un xml///////////
-        /* $this->dom = new DomDocument ();
-          $this->dom->load('admin/config.xml'); //lecture du DOM pour la connexion à la bdd
-
-          $this->host = $this->dom->getElementsByTagName('host')	;
-          $this->dbname = $this->dom->getElementsByTagName('nomdb');
-          $this->utilisateur = $this->dom->getElementsByTagName('login');
-          $this->passwd = $this->dom->getElementsByTagName('passwd');
-
-          foreach ($this->host as $h){
-          $contenuHote = $h->firstChild->nodeValue;
-          }
-          foreach ($this->dbname as $db){
-          $contenuDatabase = $db->firstChild->nodeValue;
-          }
-          foreach ($this->utilisateur as $u){
-          $contenuUtilisateur = $u->firstChild->nodeValue;
-          }
-          foreach ($this->passwd as $p){
-          $contenuPasswd = $p->firstChild->nodeValue;
-          }
-         */
         
-
- ////////////////////////Connexion à la base////////////////////////////////////////
         if($this->pdo === null ){
             try {
             

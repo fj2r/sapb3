@@ -4,15 +4,31 @@
 
 {% block identifiants %}{{parent()}}
         
-            <table class ="header_table" ><td> 
-        {% if connecte == FALSE %}
-            Veuillez vous connecter. 
-        {% elseif connecte == TRUE %}
-            Vous êtes bien connecté{% if sexe == 'F' %}e{% endif %} en tant que : {{prenom|capitalize}} {{nom|upper}} 
-        {% endif %}
-                </td> 
-            </table>
-            <br />
+    <table class ="header_table" >
+        <tr>
+         
+            {% if connecte is defined %}
+                {% if connecte == FALSE %}
+                   <td> {{connecteFALSE}}. </td>
+                {% elseif connecte == TRUE %}
+                    <td><img src="templates/IMG/login.png" /></td>
+                    <td> {% if sexe == 'F' %}{{messageF}}{%else%}{{messageM}}{% endif %} {{connecteur1}} : {{prenom|capitalize}} {{nom|upper}} </td>
+                {% endif %}
+            {%endif%}
+         
+        </tr>
+        <tr>
+            {% if connecte == FALSE %}
+                   <td>  </td>
+                {% elseif connecte == TRUE %}
+                    <td>
+                        <a href=""><img src="templates/IMG/logoff.gif" title="{{logoutMessage}}" /></a> 
+                    </td>
+                    <td><a href=""> {{logoutMessage}} </a></td>
+                {% endif %}
+        </tr>
+    </table>
+    <br />
                 
         
 {% endblock %}

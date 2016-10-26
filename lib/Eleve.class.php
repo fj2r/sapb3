@@ -7,43 +7,81 @@ class Eleve extends Utilisateur {
     protected $connexion;
     protected $db;
     protected $pdo;
-    protected $numDossier;
-    protected $codeConf;
-    protected $statut;
+    protected $numDossier = 000000;
+    protected $codeConf = 'JD0000';
+    protected $statut = 'eleve';
     protected $num_eleve_etab;
-    protected $carteIdentite;
-    protected $id_eleve;
+    protected $carteIdentite = array ();
+    protected $id_eleve = 0;
     protected $nom = 'DOE';
-    protected $prenom;
+    protected $prenom = 'John';
     protected $naissance = '31/12/2000';
     protected $tableauInfos;
+    protected $sexe = 'M';
+    protected $prenom2;
+    protected $prenom3;
+    protected $libMEF ;
+    protected $codeMEF;
+    protected $codeStructure = 'P';
+    protected $libStructure = 'Première';
+    protected $email = 'john.doe@localhost';
+    protected $typeStructure ='D';
+    protected $communeNaissance = 'NYC';
+    
+    
  
     
 
     public function __construct($db, $statut='eleve') {
         parent::__construct($db, $statut); //l'élève hérite du constructeur 
-        $this->db = $db;    
+        $this->db = $db;  
+        
+        $this->pdo = $this->db->getPDO();
+        
     }
-    ///////////////////////////mutateurs///////////////////////////////////////
-    public function numeroDossier (){
-        return $this->numeroDossier; 
+    /////////////////////////// accesseurs ///////////////////////////////////////
+    public function getNumeroDossier (){
+        return $this->numDossier; 
     }
-    public function codeConfidentiel (){
-        return $this->codeConfidentiel; 
+    public function getCodeConfidentiel (){
+        return $this->codeConf; 
     }
-    public function statut (){
+    public function getStatut (){
         return $this->statut; 
     }
-    public function id_eleve (){
+    public function getId_eleve (){
         return $this->id_eleve; 
     }
-    //////////////////////////
+    public function getNom (){
+        return $this->nom; 
+    }
+    public function getPrenom (){
+        return $this->prenom; 
+    }
+    public function getNumEleveEtab (){
+        return $this->num_eleve_etab; 
+    }
+    public function getSexe (){
+        return $this->sexe; 
+    }
+    public function getNaissance (){
+        return $this->naissance; 
+    }
+    public function getCodeStructure (){
+        return $this->codeStructure; 
+    }
+    public function getLibStructure (){
+        return $this->libStructure; 
+    }
+    ////////////////////////// mutateurs ////////////////////////////////////////
     
     public function setNumDossier ($num_dossier){
-       $this->numeroDossier = htmlspecialchars($num_dossier);
+       $this->numDossier = htmlspecialchars($num_dossier);
+        
     }
     public function setCodeConfidentiel ($code_confidentiel){
-         $this->code_confidentiel = htmlspecialchars($code_confidentiel);
+         $this->codeConf = htmlspecialchars($code_confidentiel);
+         
     }
     
     public function setNom ($nom){
@@ -61,7 +99,7 @@ class Eleve extends Utilisateur {
     public function setIdEleve ($id_eleve){
         $this->id_eleve = htmlspecialchars($id_eleve);
     }
-    //////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
     public function rechercheEleve ($nom, $prenom, $dateDeNaissance){
         $statement = "SELECT * FROM import_eleve_complet WHERE `Nom de famille` = ? AND `Prénom` = ? AND `Date Naissance` = ?";
         $tabDatas = array ($nom,$prenom,$dateDeNaissance);
@@ -93,69 +131,72 @@ class Eleve extends Utilisateur {
         
     }
     
-    public function profilEleve ($maBDD, $statut){
+    public function profilEleve (){
       
         if ($this->statut =='eleve'){
             try {
-            
-            $requete = $maBDD->prepare("SELECT * FROM cfg_eleves WHERE num_dossier = :numeroDossier AND code_conf = :codeConfidentiel");
-            $requete->bindParam(':numeroDossier',$this->numeroDossier ,PDO::PARAM_STR);
-            $requete->bindParam(':codeConfidentiel',$this->code_confidentiel,PDO::PARAM_STR);
-            $requete->execute();
-            if ($requete->fetch()){
-                foreach ($requete as $liste){
-                $this->id_eleve = $liste ['id_eleve'] ;
+                $statement = "SELECT * FROM cfg_eleves WHERE numDossier = ? AND codeConf = ?";
+                $tabDatas = array ($this->numDossier, $this->codeConf);
+                $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
+                
+                if ($tableau == FALSE){
+                    header('Location:logout.php');
                 }
-            }
-            else {echo 'Eleve inconnu...';}
-            
-            }
-            catch (Exception $e){
-                die('Erreur :'.$e->getMessage());
-                
-            }
-            
-            try {
-                $requete_carteIdentite = $this->connexion->prepare("SELECT * FROM import_eleve_complet WHERE 'id_eleve' = :id_eleve");
-                $requete_carteIdentite->bindParam(':id_eleve',$this->id_eleve,PDO::PARAM_STR);
-                $requete_carteIdentite->execute();
-                
-                if ($requete_carteIdentite->fetch()){
-                    foreach ($requete_carteIdentite as $liste) {
-                        $this->carteIdentite['sexe'] = $liste ['Sexe'] ;
-                        $this->carteIdentite['nom'] = $liste ['Nom de famille'] ;
-                        $this->carteIdentite['prenom'] = $liste ['Prénom'] ;
-                        $this->carteIdentite['prenom2'] = $liste ['Prénom 2'] ;
-                        $this->carteIdentite['prenom3'] = $liste ['Prénom 3'] ;
-                        $this->carteIdentite['naissance'] = $liste ['Date Naissance'] ;
-                        $this->carteIdentite['code_mef'] = $liste ['Code MEF'] ;
-                        $this->carteIdentite['lib_mef'] = $liste ['Lib. MEF'] ;
-                        $this->carteIdentite['code_structure'] = $liste ['Code Structure'] ;
-                        $this->carteIdentite['type_structure'] = $liste ['Type Structure'] ;
-                        $this->carteIdentite['lib_structure'] = $liste ['Lib. Structure'] ;
-                        $this->carteIdentite['cle_gestion1'] = $liste ['Clé Gestion Mat. Enseignée 1'] ;
-                        $this->carteIdentite['lib_matiere1'] = $liste ['Lib. Mat. Enseignée 1'] ;
-                        $this->carteIdentite['email'] = $liste ['Email'] ;
-                        
-                        
-                        
+                else {
+
+                    if(!empty($tableau)){
+                        $this->id_eleve = $tableau[0]['id_eleve'];
+
+                     try {
+
+                        $statement = "SELECT * FROM import_eleve_complet WHERE `id_eleve` = ?";
+                        $tabDatas = array ($this->id_eleve);
+                        $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
+                        $tableauFils = array ();
+                        $tableauFils = $tableau[0];
+
+
+                            if (!empty($tableauFils)){
+
+                                    $this->sexe = $tableauFils ['Sexe'] ;
+                                    $this->num_eleve_etab = $tableauFils ['Num. Elève Etab'] ;
+                                    $this->nom = $tableauFils ['Nom de famille'] ;
+                                    $this->prenom = $tableauFils ['Prénom'] ;
+                                    $this->prenom2 = $tableauFils ['Prénom 2'] ;
+                                    $this->prenom3 = $tableauFils ['Prénom 3'] ;
+                                    $this->naissance = $tableauFils ['Date Naissance'] ;
+                                    $this->codeMEF = $tableauFils ['Code MEF'] ;
+                                    $this->libMEF = $tableauFils ['Lib. MEF'] ;
+                                    $this->codeStructure = $tableauFils ['Code Structure'] ;
+                                    $this->typeStructure = $tableauFils ['Type Structure'] ;
+                                    $this->libStructure = $tableauFils ['Lib. Structure'] ;                        
+                                    $this->email = $tableauFils ['Email'] ;
+
+                            }
+
+                        }
+                        catch (Exception $e){
+                            die('Erreur :'.$e->getMessage());
+                        }
+
+
                     }
-                    
-                }
-            
+                }   
             }
             catch (Exception $e){
                 die('Erreur :'.$e->getMessage());
+                
             }
+            
+           
             
         }
         
-    return $this->id_eleve;   
+    return ;
     }
-    
+       
     public function tableauNotes (){
-        
-        
+                
     }
     public function listerProfesseurs(){
         
@@ -282,4 +323,7 @@ class Eleve extends Utilisateur {
         return $enregistrement ;
        
    }
+   
+   
+   
 }

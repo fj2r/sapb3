@@ -143,6 +143,8 @@ function bandeauLogin ($statut){
 
 }
 
+
+
 function formulaireInscription (){
     
     $tableauPourFormulaire = array (
