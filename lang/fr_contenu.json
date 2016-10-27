@@ -68,5 +68,13 @@
             "connecteur1" : "en tant que",
             "logoutMessage":"Déconnexion"
         }
+    ],
+    "orientation":[
+        {
+            "messageOnisep":"Pour vous aider à choisir une formation, une filière, vous pouvez visiter le site de l'ONISEP",
+            "labelForm1" :"choisis un établissement en t'aidant des différents choix proposés",
+            "labelForm2":"Si l'établissement n'est pas accessible avec l'outil de recherche, il est possible de le préciser dans le champ ci-dessous"
+            
+        }
     ]
 }

@@ -18,16 +18,13 @@ include_once ('inc/initTwig.inc.php');
 ////////////////////////////Modèle  ////////////////////////////////////////////
 
 
-$db = new lib\bdd();            //instance de la database
+$db = new lib\bdd();                //instance de la database pour passer à l'éleve.
 
 $eleve = new lib\Eleve($db, $statut); //création de l'élève
 
+$connecte = gestionIdentification($eleve);        //gestion de l'identification (session & cookies)
 
-identificationSessionPuisCookie();
-    
-    
-    
-$eleve->profilEleve(); //récupération des infos sur l'élève
+$eleve->profilEleve();                //récupération des infos sur l'élève
 
 $profilEleve =array(
     "nom"=>''.$eleve->getNom().'',
@@ -37,7 +34,7 @@ $profilEleve =array(
     "id"=>''.$eleve->getId_eleve().'',
     "sexe"=>''.$eleve->getSexe().'',
     
-);
+    );
 
 $listeProfesseurs = $eleve->listerProfesseurs(); // qui sont les professeurs de sa classe ? Renvoi un tableau de dimension 2
 
@@ -66,14 +63,15 @@ $contenuMenu = $contenuJSONMenu->lireContenu($pageMenu)[''.$pageMenu.''][0];
 
 /////////////////////////////////////////////////////////////
 
-$connecte = true ;
-$variablesTemplate = array('annee' => ''.$date.'',
+ $connecte = true ;
+$variablesTemplate = array(
+    'annee' => ''.$date.'',
     'version'=>''.$version.'',
     'charset'=>''.$charset.'',
     'titrePage'=>''.$titrePage.'',
     'connecte'=>''.$connecte.'',
     
-    'sexe'=>''.$sexe.'',
+    'sexe'=>''.$eleve->getSexe().'',
     'texte_footer'=>''.$texte_footer.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
     'statut'=>''.$statut.'',

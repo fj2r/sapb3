@@ -31,6 +31,9 @@ $eleve->setNumDossier($_POST['num_dossier']);
 
 $eleve->profilEleve(); //récupération des infos sur l'élève
 
+$eleve->genererSession();
+$eleve->genererCookie();
+
 $profilEleve =array(
     "nom"=>''.$eleve->getNom().'',
     "prenom"=>''.$eleve->getPrenom().'',
@@ -38,6 +41,7 @@ $profilEleve =array(
     "codeClasse"=>''.$eleve->getCodeStructure().'',
     "id"=>''.$eleve->getId_eleve().'',
     "sexe"=>''.$eleve->getSexe().'',
+    "numEleveEtab"=>''.$eleve->getNumEleveEtab().'',
     
 );
 

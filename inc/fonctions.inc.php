@@ -163,17 +163,26 @@ function formaterDate ($jj, $mm, $aaaa){
     return $ddn;
 }
 
-function identificationSessionPuisCookie () {
-    if (!empty($_POST['code_conf']) && !empty($_POST['num_dossier'])){
-    $eleve->setCodeConfidentiel($_SESSION['code_conf']);
-    $eleve->setNumDossier($_SESSION['num_dossier']);
-}
-elseif(!empty($_COOKIE['code_conf']) && !empty($_COOKIE['num_dossier'])){
-    $eleve->setCodeConfidentiel($_COOKIE['code_conf']);
-    $eleve->setNumDossier($_COOKIE['num_dossier']);
-}
-else{
-    $string = 'Location: login.php?statut=eleve';
-        header($string);
-}
+function gestionIdentification ($eleve) {
+        if (isset($_SESSION['code_conf']) && isset($_SESSION['num_dossier']) 
+            && ($_SESSION['code_conf'] !=NULL) && ($_SESSION['num_dossier'] !=NULL)){
+            $eleve->setCodeConfidentiel($_SESSION['code_conf']);
+
+            $eleve->setNumDossier($_SESSION['num_dossier']);
+            $eleve->setIdEleve($_SESSION['id_eleve']);
+
+            $connecte = true ;
+        }
+        elseif(isset($_COOKIE['code_conf']) && isset($_COOKIE['num_dossier']) && !empty($_COOKIE['code_conf']) && !empty($_COOKIE['num_dossier'])){
+                $eleve->setCodeConfidentiel($_COOKIE['code_conf']);
+                $eleve->setNumDossier($_COOKIE['num_dossier']);
+                $eleve->setIdEleve($_COOKIE['id_eleve']);
+
+                $connecte = true ;
+            }
+        else{
+                $connecte = false ;
+            }  
+    
+        return $connecte;
 }

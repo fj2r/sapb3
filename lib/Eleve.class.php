@@ -173,7 +173,7 @@ class Eleve extends Utilisateur {
                 $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
                 
                 if ($tableau == FALSE){
-                    header('Location:logout.php');
+                    //header('Location:logout.php');
                 }
                 else {
 
@@ -261,66 +261,77 @@ class Eleve extends Utilisateur {
         
     }
     
-    public function genererSession($connexion,$id_eleve){
+    public function genererSession(){
+        $_SESSION = array ();
+        $_SESSION = array (
+            'num_dossier' => ''.$this->numDossier.'',
+            'code_conf' => ''.$this->codeConf.'',
+            'nom' => ''.$this->nom.'',
+            'prenom' => ''.$this->prenom.'',
+            'classe' => ''.$this->codeStructure.'',
+            'id_eleve' => ''.$this->id_eleve.'',
+            'num_eleve_etab' => ''.$this->num_eleve_etab.'',
+        );
         
-        try {
-                $requete_session = $this->connexion->prepare("SELECT * FROM import_eleve_complet WHERE 'id_eleve' = :id_eleve");
-                $requete_session->bindParam(':id_eleve',$this->id_eleve,PDO::PARAM_STR);
-                $requete_session->execute();
-                
-                if ($requete_session->fetch()){
-                    foreach ($requete_session as $liste) {
-                        $this->session['sexe'] = $liste ['Sexe'] ;
-                        $this->session['nom'] = $liste ['Nom de famille'] ;
-                        $this->session['prenom'] = $liste ['Prénom'] ;
-                        $this->session['prenom2'] = $liste ['Prénom 2'] ;
-                        $this->session['prenom3'] = $liste ['Prénom 3'] ;
-                        $this->session['naissance'] = $liste ['Date Naissance'] ;
-                        $this->session['code_mef'] = $liste ['Code MEF'] ;
-                        $this->session['lib_mef'] = $liste ['Lib. MEF'] ;
-                        $this->session['code_structure'] = $liste ['Code Structure'] ;
-                        $this->session['type_structure'] = $liste ['Type Structure'] ;
-                        $this->session['lib_structure'] = $liste ['Lib. Structure'] ;
-                        $this->session['cle_gestion1'] = $liste ['Clé Gestion Mat. Enseignée 1'] ;
-                        $this->session['lib_matiere1'] = $liste ['Lib. Mat. Enseignée 1'] ;
-                        $this->session['email'] = $liste ['Email'] ;
-                        
-                        
-                        
-                    }
-                        $_SESSION ['sapb_nom'] = $this->session['nom'];
-                        $_SESSION ['sapb_prenom'] = $this->session['prenom'];
-                        $_SESSION ['sapb_classe'] = $this->session['code_structure'];
-                        $_SESSION ['sapb_email'] = $this->session['email'];
-                        $_SESSION ['sapb_num_eleve_etab'] = $this->session['nom'];
-                        $_SESSION ['id_eleve'] = $this->id_eleve;
-                    
-                }
-            
-            }
-            catch (Exception $e){
-                die('Erreur :'.$e->getMessage());
-            }
+     
         
     }
+    public function detruireSession(){
+        $_SESSION = array ();
+        
+    }
+    
     public function genererCookie() {
        if ($this->statut == 'eleve'){
-            setcookie('sapb_num_dossier',$_SESSION['num_dossier'],time()+3600);
-            setcookie('sapb_code_conf',$_SESSION['code_conf'],time()+3600);
-            setcookie('sapb_num_eleve_etab',$_SESSION['num_eleve_etab'],time()+3600);
-            setcookie('sapb_nom_eleve',$_SESSION['nom'],time()+3600);
-            setcookie('sapb_prenom_eleve',$_SESSION['prenom'],time()+3600);
-            setcookie('sapb_classe',$_SESSION['classe'], time()+3600);
+           
+            setcookie('num_dossier');
+            setcookie('code_conf');
+            setcookie('num_eleve_etab');
+            setcookie('nom');
+            setcookie('prenom');
+            setcookie('classe');
+            setcookie('id_eleve');
+            unset ($_COOKIE['num_dossier']);
+            unset ($_COOKIE['code_conf']);
+            unset ($_COOKIE['num_eleve_etab']);
+            unset ($_COOKIE['nom']);
+            unset ($_COOKIE['prenom']);
+            unset ($_COOKIE['classe']);
+            unset ($_COOKIE['id_eleve']);
+           
+            setcookie('num_dossier',$this->numDossier,time()+3600);
+            setcookie('code_conf',md5($this->codeConf),time()+3600);
+            setcookie('num_eleve_etab',$this->num_eleve_etab,time()+3600);
+            setcookie('nom',$this->nom,time()+3600);
+            setcookie('prenom',$this->prenom,time()+3600);
+            setcookie('classe',$this->codeStructure, time()+3600);
+            setcookie('id_eleve',$this->id_eleve, time()+3600);
        }
    }   
+    public function detruireCookie() {
+            setcookie('num_dossier');
+            setcookie('code_conf');
+            setcookie('num_eleve_etab');
+            setcookie('nom');
+            setcookie('prenom');
+            setcookie('classe');
+            setcookie('id_eleve');
+            unset ($_COOKIE['num_dossier']);
+            unset ($_COOKIE['code_conf']);
+            unset ($_COOKIE['num_eleve_etab']);
+            unset ($_COOKIE['nom']);
+            unset ($_COOKIE['prenom']);
+            unset ($_COOKIE['classe']);
+            unset ($_COOKIE['id_eleve']);
+   }
    
-   public function envoiMail() {
+     public function envoiMail() {
        
        
        
    }
    
-   public function construireCodesEleve ($id, $nbItérations = 5) {
+    public function construireCodesEleve ($id, $nbItérations = 5) {
        /*construction d'un numéro de dossier aléatoire (par défaut avec 5 caractères*/
        $char = [];   
        $numDossier = 000000;
