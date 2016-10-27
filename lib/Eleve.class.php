@@ -386,7 +386,7 @@ class Eleve extends Utilisateur {
         $statement = "SELECT count(*) FROM validations WHERE `id_eleve` = ?";
         $tabDatas = array ($this->id_eleve);
         $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
-        var_dump($tableau[0][0]);
+        
         
         if ($tableau[0][0] == 0){
             
@@ -399,6 +399,26 @@ class Eleve extends Utilisateur {
        
    }
    
+   public function recupererVoeux () {
+        
+        if ($this->verifierVoeux() != 0){
+            $statement = "SELECT * FROM validations WHERE `id_eleve` = ?";
+            $tabDatas = array ($this->id_eleve);
+            $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
+
+            return $tableau;
+        }
+        else {
+            return $tableau = array ();
+        }
+        
+   }
    
+   public function enregistrerVoeu () {
+       
+       $statement = "SELECT * FROM validations WHERE `id_eleve` = ?";
+        $tabDatas = array ($this->id_eleve);
+        $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
+   }
    
 }

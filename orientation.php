@@ -16,19 +16,17 @@ include_once ('inc/initTwig.inc.php');
 
 
 ////////////////////////////Modèle  ////////////////////////////////////////////
-if(isset($_POST)){
-    if(empty($_POST['num_dossier']) || empty($_POST['code_conf']) || $_POST['num_dossier'] =='N° de dossier' || $_POST['code_conf']=='Mot de passe' ){
-        $string = 'Location: login.php?statut=eleve';
-        header($string);
-    }
-}
+
 
 $db = new lib\bdd();            //instance de la database
 
 $eleve = new lib\Eleve($db, $statut); //création de l'élève
-$eleve->setCodeConfidentiel($_POST['code_conf']);
-$eleve->setNumDossier($_POST['num_dossier']);
 
+
+identificationSessionPuisCookie();
+    
+    
+    
 $eleve->profilEleve(); //récupération des infos sur l'élève
 
 $profilEleve =array(
@@ -52,9 +50,9 @@ include_once ('inc/varTwig.inc.php');
 ////////////////////////////passage du tableau de variables pour template///////
 
 ///////////////éventuelle surcharge des variables pour le template ?//////////
-$template = 'traitementLogin';     //Nom du template à appeler
+$template = 'orientation';     //Nom du template à appeler
 
-$page = 'traitementLogin';         //Nom de l'index pour récupérer les infos pour les textes
+$page = 'orientation';         //Nom de l'index pour récupérer les infos pour les textes
 $contenuJSON = new lib\generateurArticle($page); //on instancie le générateur d'article 
 $contenuArticle = $contenuJSON->lireContenu($page)[''.$page.''][0]; // méthode pour lire les infos du fichier de langue
 

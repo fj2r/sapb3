@@ -47,7 +47,7 @@
                     {% if nbVoeux == 0%}{{nbVoeuxNull}}. <br />
                     {%endif%}
                     
-                    <a href="traitementVoeux.php?statut=eleve" >{{labelLien}}</a>
+                    <a href="orientation.php?statut={{statut}}" >{{labelLien}}</a>
                 </div>
             {% endblock %}
         {% block panneauDroiteSecondchild %} {{parent()}} {% endblock %}    

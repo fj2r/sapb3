@@ -8,7 +8,7 @@ protected $dom;
 protected $racine;
 protected $fichierXML;
 protected $tag;
-protected $bdd;
+protected $db;
 protected $nomTable;
 protected $maBase;
 private $UAI;
@@ -32,7 +32,7 @@ private $datas;
 
 public function __construct ($bdd){
     
-    $this->maBase = $bdd->getPDO();
+    $this->db = $bdd->getPDO();
     
 }
 
@@ -268,16 +268,24 @@ public function exportEtablissementBdd () {
 // $this->maBase->query('INSERT INTO etablissement VALUES ()')
 }
 
-public function rechercherEtablissement ($database,$enregistrement,$table,$champ,$valeur,$ordre){
+public function rechercherEtablissement ($enregistrement,$champ,$value,$champTri ='nom'){
     
-    $requete = "SELECT $enregistrement FROM $table WHERE $champ = '$valeur' ORDER BY $ordre";
-    $datas = $database->queryPDO($requete); //instance de connexion à la base
-        foreach ($datas as $liste){
-            echo $liste['commune'].' : <a href="'.$liste['lien'].'" target="_blank" >'.$liste['nom'].'</a>; <br />';
-        }
+    $statement = "SELECT $enregistrement FROM etablissement WHERE `$champ` = ? ORDER BY `$champTri` ASC ";
+    $tabDatas = array ($value);
+    $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
+    
+    
         
     }
 
-}
 
+
+    public function formEtablissements ($nomChamp = 'voeu', $listeOption = array()){
+        
+        $form = new Formulaire();
+        
+        $form->selectMenuDeroulant($nomChamp, $listeOption);
+        
+    }
+}
 ?>

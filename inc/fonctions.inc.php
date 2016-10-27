@@ -162,3 +162,18 @@ function formaterDate ($jj, $mm, $aaaa){
     $ddn = date("d/m/Y", strtotime($date_US));
     return $ddn;
 }
+
+function identificationSessionPuisCookie () {
+    if (!empty($_POST['code_conf']) && !empty($_POST['num_dossier'])){
+    $eleve->setCodeConfidentiel($_SESSION['code_conf']);
+    $eleve->setNumDossier($_SESSION['num_dossier']);
+}
+elseif(!empty($_COOKIE['code_conf']) && !empty($_COOKIE['num_dossier'])){
+    $eleve->setCodeConfidentiel($_COOKIE['code_conf']);
+    $eleve->setNumDossier($_COOKIE['num_dossier']);
+}
+else{
+    $string = 'Location: login.php?statut=eleve';
+        header($string);
+}
+}
