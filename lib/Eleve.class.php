@@ -27,10 +27,40 @@ class Eleve extends Utilisateur {
     protected $email = 'john.doe@localhost';
     protected $typeStructure ='D';
     protected $communeNaissance = 'NYC';
+    protected $redoublant  = 'N';
+    protected $idNational;
+    protected $portable;
+    protected $fixe;
+    public $nbVoeux = 0 ;
     
+    /* Les LV et options */
+    protected $LV1;
+    protected $LV2;
     
- 
+    /* eventuellement, les données des parents */
+    protected $parent1Lien;
+    protected $parent1Civilite;
+    protected $parent1Nom;
+    protected $parent1Prenom;
+    protected $parent1Fixe;
+    protected $parent1Portable;
+    protected $parent1Email;
+    protected $parent1Adresse;
+    protected $parent1CP;
+    protected $parent1Commune;
+    protected $parent1Pays;
     
+    protected $parent2Lien;
+    protected $parent2Civilite;
+    protected $parent2Nom;
+    protected $parent2Prenom;
+    protected $parent2Fixe;
+    protected $parent2Portable;
+    protected $parent2Email;
+    protected $parent2Adresse;
+    protected $parent2CP;
+    protected $parent2Commune;
+    protected $parent2Pays;
 
     public function __construct($db, $statut='eleve') {
         parent::__construct($db, $statut); //l'élève hérite du constructeur 
@@ -40,6 +70,9 @@ class Eleve extends Utilisateur {
         
     }
     /////////////////////////// accesseurs ///////////////////////////////////////
+    public function getCommuneNaissance(){
+        return $this->communeNaissance;
+    }
     public function getNumeroDossier (){
         return $this->numDossier; 
     }
@@ -169,8 +202,14 @@ class Eleve extends Utilisateur {
                                     $this->libMEF = $tableauFils ['Lib. MEF'] ;
                                     $this->codeStructure = $tableauFils ['Code Structure'] ;
                                     $this->typeStructure = $tableauFils ['Type Structure'] ;
-                                    $this->libStructure = $tableauFils ['Lib. Structure'] ;                        
+                                    $this->libStructure = $tableauFils ['Lib. Structure'] ;
+                                    $this->LV1 = $tableauFils ['Lib. Mat. Enseignée 1'] ;
+                                    $this->LV2 = $tableauFils ['Lib. Mat. Enseignée 2'] ;
                                     $this->email = $tableauFils ['Email'] ;
+                                    $this->portable = $tableauFils ['Tél. Portable'];
+                                    $this->fixe=$tableauFils ['Tél. Personnel'];
+                                    $this->email = $tableauFils ['Email'];
+                                    
 
                             }
 
@@ -184,7 +223,7 @@ class Eleve extends Utilisateur {
                 }   
             }
             catch (Exception $e){
-                die('Erreur :'.$e->getMessage());
+                die('Erreur : '.$e->getMessage());
                 
             }
             
@@ -199,7 +238,24 @@ class Eleve extends Utilisateur {
                 
     }
     public function listerProfesseurs(){
-        
+        try {
+            $statement = "SELECT `matiere`,`nomComplet` FROM attribution_matieres WHERE `Code Structure` = ?";
+                $tabDatas = array ($this->codeStructure);
+                $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
+                if ($tableau == FALSE){
+                    
+                }
+                else {
+                    if (!empty($tableau)){
+                                                
+                        return $tableau;
+                    }
+                    else {return NULL;}
+                }
+        }
+        catch (Exception $e){
+            die('Erreur : '.$e->getMessage());
+        };
     }
     public function listerVoeux(){
         
@@ -310,7 +366,7 @@ class Eleve extends Utilisateur {
                 $this->codeConf,
                 $validationTuteur = TRUE
                 );
-                var_dump($tabDatas);
+               
             
             $resultat = $this->db->queryPDOPreparedExec($statementInsert, $tabDatas);
             
@@ -324,6 +380,24 @@ class Eleve extends Utilisateur {
        
    }
    
+   public function verifierVoeux () {
+       
+       
+        $statement = "SELECT count(*) FROM validations WHERE `id_eleve` = ?";
+        $tabDatas = array ($this->id_eleve);
+        $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
+        var_dump($tableau[0][0]);
+        
+        if ($tableau[0][0] == 0){
+            
+            return $this->nbVoeux = 0;
+             
+        }
+        else {
+            return $this->nbVoeux = $tableau[0][0];
+        }
+       
+   }
    
    
 }

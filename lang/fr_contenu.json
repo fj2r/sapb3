@@ -43,7 +43,7 @@
     ],
     "traitementLogin":[
         {
-            "listeProfs":"Liste des enseignants",
+            "listeProfs":"Liste des enseignants de la classe de ",
             "tuteurs":"Membres de l'équipe pédagogique impliqués dans le tutorat",
             "labelmesNotes":"Mes résultats scolaires",
             "labelmesVoeux": "Mes choix d'orientation",

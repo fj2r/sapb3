@@ -41,6 +41,10 @@ $profilEleve =array(
     
 );
 
+$listeProfesseurs = $eleve->listerProfesseurs(); // qui sont les professeurs de sa classe ? Renvoi un tableau de dimension 2
+
+$nbVoeux  = intval($eleve->verifierVoeux()); //combien a-t-il de voeux ?
+
 ////////////////////////////Les variables communes à passer au template//////////////////
 include_once ('inc/varTwig.inc.php');
 
@@ -74,6 +78,8 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'texte_footer'=>''.$texte_footer.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
     'statut'=>''.$statut.'',
+    'listeProfesseurs'=>$listeProfesseurs,
+    'nbVoeux'=>''.$nbVoeux.''
     ) ;
 
 
@@ -82,7 +88,8 @@ $mergeVarTemplate = array_merge(
         $variablesTemplate,
         $contenuArticle,
         $contenuMenu,
-        $profilEleve); //construction du tableau avec les données à envoyer au template
+        $profilEleve
+        ); //construction du tableau avec les données à envoyer au template
 
 
 appelTemplate($template, $twig, $mergeVarTemplate); //construction de la page web
