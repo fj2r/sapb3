@@ -41,7 +41,9 @@
         {% endblock %}
         
         {% block formulaire %}{% endblock %}
-        {% block menuUtilisateur %}{% endblock %}
+        {% block menuUtilisateur %}
+            {% include 'menuBandeau.twig' %}
+        {% endblock %}
             
     {% block chapeau_bas%}   
         </div>

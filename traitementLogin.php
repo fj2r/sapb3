@@ -79,7 +79,7 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'titrePage'=>''.$titrePage.'',
     'connecte'=>''.$connecte.'',
     
-    'sexe'=>''.$sexe.'',
+    'sexe'=>''.$eleve->getSexe().'',
     'texte_footer'=>''.$texte_footer.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
     'statut'=>''.$statut.'',

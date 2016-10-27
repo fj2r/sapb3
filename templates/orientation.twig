@@ -10,7 +10,7 @@
 {% block cadre_haut %}
         {% block chapeau_haut %}{{parent()}}{% endblock %}
         {% block menuUtilisateur %}
-        
+           {{parent()}}
         {% endblock %}
         {% block chapeau_bas %}{{parent()}}{% endblock %}
     
@@ -21,7 +21,7 @@
     {% block panneauDroite %}
         {% block panneauDroiteFirstchild%} {{parent()}} {% endblock %}
             {% block article %}{{parent()}}
-                {{contenuArticle | raw}}
+                {{formulaire1 | raw}}
             {% endblock %}
         {% block panneauDroiteSecondchild %} {{parent()}} {% endblock %}    
     {% endblock %}

@@ -1,0 +1,22 @@
+{# empty Twig template #}
+{% if statut =='eleve' %}
+                <div id="menu">
+                <div class="inscription">&nbsp;<a href="profilEleve.php?statut={{statut}}">{{recapitulatifEleve}}</a>&nbsp;</div>
+                <div class="inscription">&nbsp;<a href="notes.php?statut={{statut}}">{{notesEleve}}</a>&nbsp;</div>
+                <div class="inscription">&nbsp;<a href="orientation.php?statut={{statut}}">{{nouveauVoeuEleve}}</a>&nbsp;</div>
+                </div>
+{% elseif statut == 'professeur' %}
+    <div id="menu">
+                <div class="inscription">&nbsp;<a href="profilEleve.php?statut={{statut}}">{{recapitulatifEleve}}</a>&nbsp;</div>
+                <div class="inscription">&nbsp;<a href="notes.php?statut={{statut}}">{{notesEleve}}</a>&nbsp;</div>
+                <div class="inscription">&nbsp;<a href="orientation.php?statut={{statut}}">{{nouveauVoeuEleve}}</a>&nbsp;</div>
+                </div>
+{% elseif statut == 'administratif' %}
+    <div id="menu">
+                <div class="inscription">&nbsp;<a href="profilEleve.php?statut={{statut}}">{{recapitulatifEleve}}</a>&nbsp;</div>
+                <div class="inscription">&nbsp;<a href="notes.php?statut={{statut}}">{{notesEleve}}</a>&nbsp;</div>
+                <div class="inscription">&nbsp;<a href="orientation.php?statut={{statut}}">{{nouveauVoeuEleve}}</a>&nbsp;</div>
+                </div>
+{% else %}
+                
+{%endif%}

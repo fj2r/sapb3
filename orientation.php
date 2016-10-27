@@ -41,6 +41,10 @@ $listeProfesseurs = $eleve->listerProfesseurs(); // qui sont les professeurs de 
 $nbVoeux  = intval($eleve->verifierVoeux()); //combien a-t-il de voeux ?
 $listeVoeux = $eleve->recupererVoeux();
 
+$etablissement = new \lib\Etablissement($db);   //pour construire les formulaires de choix d'étab
+$nomChamp ='voeu1'; $listeOption = array('toto','titi', 'tata');
+$formEtab = $etablissement->formEtablissement($nomChamp, $listeOption); 
+
 ////////////////////////////Les variables communes à passer au template//////////////////
 include_once ('inc/varTwig.inc.php');
 
@@ -78,6 +82,8 @@ $variablesTemplate = array(
     'listeProfesseurs'=>$listeProfesseurs,
     'nbVoeux'=>''.$nbVoeux.'',
     'listeVoeux'=>$listeVoeux,
+    
+    'formulaire1'=>''.$formEtab.'',
     ) ;
 
 

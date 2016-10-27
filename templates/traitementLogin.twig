@@ -10,9 +10,8 @@
 {% block cadre_haut %}
         {% block chapeau_haut %}{{parent()}}{% endblock %}
         {% block menuUtilisateur %}
-            {% if statut =='eleve' %}
-                {% include 'menuEleve.twig' %}
-            {%endif%}
+            {{parent()}}
+            
         {% endblock %}
         {% block chapeau_bas %}{{parent()}}{% endblock %}
     
