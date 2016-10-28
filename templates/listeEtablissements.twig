@@ -1,0 +1,17 @@
+{# empty Twig template #}
+
+{%block listeEtablissements%}
+    
+    <div class ="formulaire">
+        <form >
+            
+           {% for etab in liste%}
+               <p> <input type="checkbox" name="{{etab.UAI}}" value="{{etab.UAI}}"><a href="{{etab.lien}}" target="_blank">{{etab.nom}}</a> <i>({{etab.statut}})</i></ input></p>
+           {%endfor%}
+            
+        </form>
+        
+        
+    </div>
+    
+{%endblock%}

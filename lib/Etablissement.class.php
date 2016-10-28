@@ -333,6 +333,18 @@ class Etablissement {
 
 
         }
+    
+    public function listerEtablissement ($enregistrement,$champ1,$champ2,$values=array(),$champTri ='nom'){
+
+        $statement = "SELECT $enregistrement FROM etablissement WHERE `$champ1` = ? AND `$champ2`= ? ORDER BY `$champTri` ASC ";
+        $tabDatas = $values;
+        $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
+        
+        return $tableau;
+
+
+
+        }
 
 
 

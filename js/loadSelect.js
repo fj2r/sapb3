@@ -1,20 +1,22 @@
-function loadSelect(numeroElement) {
+function loadSelect(id, academie, type) {
 
-var numPlus1;
-numPlus1 = numeroElement + 1;
+var id;
+var academie;
+var type;
 
 $.ajax({
 	
 //La page à appeler
 
-"url": "choix"+numPlus1+".php?f"+numeroElement+"=" + $("#voeu"+ numeroElement).val(),
-"type": "GET",
-"cache": false,
-"dataType": "text",
+url     : "listeEtablissements.php",
+type    : "POST",
+data    : 'academie='+academie+'&type='+type,
+cache   : false,
+dataType: "text",
 
 //si AJAX est réussi
 "success": function (data){
-		$("#div"+numPlus1).html(data);
+		$("#"+id).html(data);
 	},
 	
 	//si ça échoue
