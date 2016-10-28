@@ -21,7 +21,38 @@
     {% block panneauDroite %}
         {% block panneauDroiteFirstchild%} {{parent()}} {% endblock %}
             {% block article %}{{parent()}}
-                {{formulaire1 | raw}}
+                <div id="choix1">
+                    {{infoFormulaire}}
+                    <form action="validationVoeu.php?statut={{statut}}" method="POST">
+                        {% if formulaire1 is defined  %}
+                        <p>{{labelForm1}} :</p>
+                        <p> <select id="formulaire1" name="formulaire1"></p>
+                        {% for option in formulaire1 %}
+                            <option value="{{option}}">{{option}}</option>
+                        {%endfor%}
+                        </select>
+                        {%endif%}
+                        {% if formulaire2 is defined  %}
+                        <p>{{labelForm2}} :</p>
+                        <p><select id="formulaire2" name="formulaire2"></p>
+                        {% for option in formulaire2 %}
+                            <option value="{{option}}">{{option}}</option>
+                        {%endfor%}
+                        </select>
+                        {%endif%}
+                        {% if formulaire3 is defined  %}
+                        <p>{{labelForm3}} :</p>
+                        <p> <select id="formulaire3" name="formulaire3"></p>
+                        {% for option in formulaire3 %}
+                            <option value="{{option}}">{{option}}</option>
+                        {%endfor%}
+                        </select>
+                        {%endif%}
+                        <input type="submit" value="Valider" />
+                    </form>
+                    
+                    
+                </div>
             {% endblock %}
         {% block panneauDroiteSecondchild %} {{parent()}} {% endblock %}    
     {% endblock %}

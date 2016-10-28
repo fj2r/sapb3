@@ -9,6 +9,8 @@ class Etablissement {
     protected $fichierXML;
     protected $tag;
     protected $db;
+    protected $pdo;
+    protected $form;
     protected $nomTable;
     protected $maBase;
     private $UAI;
@@ -30,9 +32,11 @@ class Etablissement {
     private $requete;
     private $datas;
 
-    public function __construct ($bdd){
-
-        $this->db = $bdd->getPDO();
+    public function __construct ($db){
+        
+        $this->db = $db ;
+        $this->pdo = $db->getPDO();
+        
 
     }
 
@@ -323,6 +327,8 @@ class Etablissement {
         $statement = "SELECT $enregistrement FROM etablissement WHERE `$champ` = ? ORDER BY `$champTri` ASC ";
         $tabDatas = array ($value);
         $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
+        
+        return $tableau;
 
 
 
@@ -330,13 +336,23 @@ class Etablissement {
 
 
 
-    public function formEtablissement ($nomChamp = 'voeu', $listeOption = array()){
-
-        $form = new Formulaire();
+    public  function formEtablissement ($champ, $tri){
+        
+        /* recherche des valeurs d'un champ passé comme  */
+        $statement = "SELECT DISTINCT $champ FROM etablissement ORDER BY `$tri` ASC ";
+        $tabDatas = array ();
+        $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
+        
+        $tableauPourOption = array();
+        foreach ($tableau as $tableauFils)  {
+           $tableauPourOption[] =  $tableauFils[$champ];
+           
+        }   
         
         
-
-        return $form->selectMenuDeroulant($nomChamp, $listeOption);
+       
+        return $tableauPourOption;
+        
 
     }
 }

@@ -102,7 +102,7 @@ function bandeauLogin ($statut){
             $httpReturn = $formBandeauEleve->input('num_dossier').$formBandeauEleve->input('code_conf').$formBandeauEleve->submit();
            
             return $httpReturn;
-            
+            var_dump($httpReturn);
         }
         elseif ($statut == 'professeur'){
             $tableauPourBandeau = array (
@@ -163,20 +163,22 @@ function formaterDate ($jj, $mm, $aaaa){
     return $ddn;
 }
 
-function gestionIdentification ($eleve) {
+function gestionIdentification ($user, $statut) {
+    
+    if($statut == "eleve"){
         if (isset($_SESSION['code_conf']) && isset($_SESSION['num_dossier']) 
             && ($_SESSION['code_conf'] !=NULL) && ($_SESSION['num_dossier'] !=NULL)){
-            $eleve->setCodeConfidentiel($_SESSION['code_conf']);
+            $user->setCodeConfidentiel($_SESSION['code_conf']);
 
-            $eleve->setNumDossier($_SESSION['num_dossier']);
-            $eleve->setIdEleve($_SESSION['id_eleve']);
+            $user->setNumDossier($_SESSION['num_dossier']);
+            $user->setIdEleve($_SESSION['id_eleve']);
 
             $connecte = true ;
         }
         elseif(isset($_COOKIE['code_conf']) && isset($_COOKIE['num_dossier']) && !empty($_COOKIE['code_conf']) && !empty($_COOKIE['num_dossier'])){
-                $eleve->setCodeConfidentiel($_COOKIE['code_conf']);
-                $eleve->setNumDossier($_COOKIE['num_dossier']);
-                $eleve->setIdEleve($_COOKIE['id_eleve']);
+                $user->setCodeConfidentiel($_COOKIE['code_conf']);
+                $user->setNumDossier($_COOKIE['num_dossier']);
+                $user->setIdEleve($_COOKIE['id_eleve']);
 
                 $connecte = true ;
             }
@@ -185,4 +187,56 @@ function gestionIdentification ($eleve) {
             }  
     
         return $connecte;
+    }
+    
+    elseif ($statut == "professeur") {
+        if (isset($_SESSION['code_conf']) && isset($_SESSION['num_dossier']) 
+                && ($_SESSION['code_conf'] !=NULL) && ($_SESSION['num_dossier'] !=NULL)){
+                $user->setCodeConfidentiel($_SESSION['code_conf']);
+
+                $user->setNumDossier($_SESSION['num_dossier']);
+                $user->setIdPedago($_SESSION['id_eleve']);
+
+                $connecte = true ;
+            }
+            elseif(isset($_COOKIE['code_conf']) && isset($_COOKIE['num_dossier']) && !empty($_COOKIE['code_conf']) && !empty($_COOKIE['num_dossier'])){
+                    $user->setCodeConfidentiel($_COOKIE['code_conf']);
+                    $user->setNumDossier($_COOKIE['num_dossier']);
+                    $user->setIdEleve($_COOKIE['id_eleve']);
+
+                    $connecte = true ;
+                }
+            else{
+                    $connecte = false ;
+                }  
+
+            return $connecte;
+    }
+    elseif ($statut == "administratif"){
+            if (isset($_SESSION['code_conf']) && isset($_SESSION['num_dossier']) 
+            && ($_SESSION['code_conf'] !=NULL) && ($_SESSION['num_dossier'] !=NULL)){
+            $user->setCodeConfidentiel($_SESSION['code_conf']);
+
+            $user->setNumDossier($_SESSION['num_dossier']);
+            $user->setIdAdmin($_SESSION['id_eleve']);
+
+            $connecte = true ;
+            }
+            elseif(isset($_COOKIE['code_conf']) && isset($_COOKIE['num_dossier']) && !empty($_COOKIE['code_conf']) && !empty($_COOKIE['num_dossier'])){
+                $user->setCodeConfidentiel($_COOKIE['code_conf']);
+                $user->setNumDossier($_COOKIE['num_dossier']);
+                $user->setIdEleve($_COOKIE['id_eleve']);
+
+                $connecte = true ;
+            }
+            else{
+                $connecte = false ;
+            }  
+    
+        return $connecte;
+    }
+    
+    else { 
+        return $connecte = false;
+    }
 }

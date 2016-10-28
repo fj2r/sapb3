@@ -80,13 +80,15 @@ class Formulaire {
       return $this->surround('<button type = "submit">'.$this->label.'</button>');
    }
    public function selectMenuDeroulant ($nomChamp, $listeOption = array ()){
-       $string = '<select id="'.$nomChamp.'" name="'.$nomChamp.'" >';
+       $string ="";
+       $string = '<select id="'.addslashes($nomChamp).'" name="'.addslashes($nomChamp).'" >';
+     
        foreach ($listeOption as $value){
-           $string .= '<option value="'.$value.'">'.$value.'</option>';
+           $string .= '<option value="'.$value.'" >'.$value.'</option>';
        }
        $string .= '</ select>';
        
-       return $this->surround($string);
+       return $string ;
    }
     
 }

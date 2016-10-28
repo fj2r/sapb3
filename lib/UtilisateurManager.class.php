@@ -15,7 +15,7 @@ namespace lib;
  */
 class UtilisateurManager {
 
-    private $database;
+    private $db;
     private $statement;
     
     public function __construct($maBase) {
@@ -25,7 +25,7 @@ class UtilisateurManager {
     public function createUtilisateur(\Utilisateur $utilisateur, $table, $champs, $values){
         
         $statement = 'INSERT INTO'.$table.'('.$champs.') VALUES('.$values.')' ;
-        $this->database->executePDO($statement);
+       
     }
     public function readUtilisateur(\Utilisateur $utilisateur){}
     public function updateUtilisateur(\Utilisateur $utilisateur){}
@@ -33,7 +33,7 @@ class UtilisateurManager {
     
 
     public function setDB ($db){
-        $this->database = $db;
+        $this->db = $db;
     }
     
 }

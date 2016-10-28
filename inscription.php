@@ -15,6 +15,19 @@ include_once('inc/fonctions.inc.php');
 include_once ('inc/initTwig.inc.php');
 
 
+///////////////////////////// modèle //////////////////////////////////////////
+
+$db = new lib\bdd();   
+$utilisateur = new lib\Utilisateur($db);
+
+$statut = "";
+$prenom = "";
+$nom = "";
+$sexe = "";
+
+$connecte = gestionIdentification($utilisateur, $statut);  
+
+
 
 ////////////////////////////Les variables communes à passer au template//////////////////
 include_once ('inc/varTwig.inc.php');

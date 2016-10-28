@@ -17,6 +17,18 @@ include_once ('inc/initTwig.inc.php');
 ////////////////////////////Les variables communes à passer au template//////////////////
 include_once ('inc/varTwig.inc.php');
 
+
+//////////////////////////// Modèle ////////////////////////////////////////////
+$db = new lib\bdd();   
+$utilisateur = new lib\Utilisateur($db);
+
+
+$prenom = "";
+$nom = "";
+$sexe = "";
+
+$connecte = gestionIdentification($utilisateur, $statut);  
+
 ////////////////////////////passage du tableau de variables pour template///////
 
 ///////////////éventuelle surcharge des variables pour le template ?//////////
@@ -39,6 +51,7 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'sexe'=>''.$sexe.'',
     'texte_footer'=>''.$texte_footer.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'',
+    
     'statut'=>''.$statut.'',
     ) ;
 

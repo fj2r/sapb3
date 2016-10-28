@@ -8,6 +8,20 @@ include_once('inc/fonctions.inc.php');
 include_once ('inc/initTwig.inc.php');
 
 
+//////////////////////////// Modèle ////////////////////////////////////////////
+
+$db = new lib\bdd();                //instance de la database pour passer à l'éleve.
+$utilisateur = new lib\Utilisateur($db);
+
+$statut = "";
+$prenom = "";
+$nom = "";
+$sexe = "";
+
+$connecte = gestionIdentification($utilisateur, $statut);  
+
+
+
 ////////////////////////////Les variables communes à passer au template//////////////////
 include_once ('inc/varTwig.inc.php');
 
@@ -24,7 +38,8 @@ $contenuArticle = $contenuJSON->lireContenu($page)[''.$page.''][0]; // méthode 
 
 
 
-$variablesTemplate = array('annee' => ''.$date.'',
+$variablesTemplate = array(
+    'annee' => ''.$date.'',
     'version'=>''.$version.'',
     'charset'=>''.$charset.'',
     'titrePage'=>''.$titrePage.'',

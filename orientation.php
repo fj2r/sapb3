@@ -22,7 +22,7 @@ $db = new lib\bdd();                //instance de la database pour passer à l'�
 
 $eleve = new lib\Eleve($db, $statut); //création de l'élève
 
-$connecte = gestionIdentification($eleve);        //gestion de l'identification (session & cookies)
+$connecte = gestionIdentification($eleve, $statut);        //gestion de l'identification (session & cookies)
 
 $eleve->profilEleve();                //récupération des infos sur l'élève
 
@@ -42,8 +42,18 @@ $nbVoeux  = intval($eleve->verifierVoeux()); //combien a-t-il de voeux ?
 $listeVoeux = $eleve->recupererVoeux();
 
 $etablissement = new \lib\Etablissement($db);   //pour construire les formulaires de choix d'étab
-$nomChamp ='voeu1'; $listeOption = array('toto','titi', 'tata');
-$formEtab = $etablissement->formEtablissement($nomChamp, $listeOption); 
+
+//construction des foermulaires (mis en forme dans Twig
+$champ ='academie'; $tri = 'academie';
+
+$formEtab1 = $etablissement->formEtablissement($champ, $tri); 
+
+$champ ='type'; $tri = 'type';
+
+$formEtab2 = $etablissement->formEtablissement($champ, $tri);
+
+
+
 
 ////////////////////////////Les variables communes à passer au template//////////////////
 include_once ('inc/varTwig.inc.php');
@@ -83,7 +93,9 @@ $variablesTemplate = array(
     'nbVoeux'=>''.$nbVoeux.'',
     'listeVoeux'=>$listeVoeux,
     
-    'formulaire1'=>''.$formEtab.'',
+    'formulaire1'=>$formEtab1,
+    'formulaire2'=>$formEtab2,
+   
     ) ;
 
 
