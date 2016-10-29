@@ -42,11 +42,20 @@
                     
                 </div>
                 <div class="voeuxParent">
-                    {{labelnbVoeux}} : {{nbVoeux}} <br />
+                    {{labelnbVoeux}} : {{nbVoeux}} 
+                        {% if nbVoeux < nbVoeuxMax %}
+                            <i>(il reste {{nbVoeuxMax - nbVoeux}} voeux possibles)</i>
+                        {% endif %}
+                    <br />
                     {% if nbVoeux == 0%}{{nbVoeuxNull}}. <br />
+                    {% else %} 
+                        {% include 'tableauVoeux.twig' %}
+                    
                     {%endif%}
                     
-                    <a href="orientation.php?statut={{statut}}" >{{labelLien}}</a>
+                    {% if nbVoeux < nbVoeuxMax %}
+                    <p><a href="orientation.php?statut={{statut}}" >{{labelLien}}</a></p>
+                    {% endif %}
                 </div>
             {% endblock %}
         {% block panneauDroiteSecondchild %} {{parent()}} {% endblock %}    

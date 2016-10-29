@@ -276,18 +276,7 @@ class Eleve extends Utilisateur {
      
         
     }
-    public function detruireSession(){
-        $_SESSION = array ();
-        if (ini_get("session.use_cookies")) {
-            $params = session_get_cookie_params();
-                setcookie(session_name(), '', time() - 42000,
-                $params["path"], $params["domain"],
-                $params["secure"], $params["httponly"]
-                );
-        }
-        session_destroy();
-        
-    }
+    
     
     public function genererCookie() {
        if ($this->statut == 'eleve'){
@@ -421,9 +410,11 @@ class Eleve extends Utilisateur {
    public function recupererVoeux () {
         
         if ($this->verifierVoeux() != 0){
-            $statement = "SELECT * FROM validations WHERE `id_eleve` = ?";
+            $statement = "SELECT * FROM `validations` INNER JOIN etablissement ON `validations`.`id_etab`=`etablissement`.`id_etab` WHERE `validations`.`id_eleve`= ? ORDER BY `validations`.`classement` ASC";
             $tabDatas = array ($this->id_eleve);
             $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
+           
+            
 
             return $tableau;
         }
@@ -440,4 +431,5 @@ class Eleve extends Utilisateur {
         $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
    }
    
+  
 }

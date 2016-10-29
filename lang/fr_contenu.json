@@ -49,7 +49,9 @@
             "labelmesVoeux": "Mes choix d'orientation",
             "labelnbVoeux": "Nombre de voeux d'orientation déjà enregistrés",
             "nbVoeuxNull":"Pour le moment il n'y a aucun voeu d'orientation que vous ayez enregistré.",
-            "labelLien" : "Faire un nouveau voeu d'orientation"
+            "labelLien" : "Faire un nouveau voeu d'orientation",
+            "academie" : "Académie de ",
+            "commune" : "Commune de l'établissement"
         }
     ],
     "menus":[

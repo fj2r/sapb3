@@ -35,7 +35,7 @@ $eleve->detruireCookie();
 $eleve->detruireSession();
 
 
-
+header('Location:index.php');
 
 ///////////////éventuelle surcharge des variables pour le template ?//////////
 $template = 'logout';     //Nom du template à appeler

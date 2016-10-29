@@ -33,17 +33,31 @@ $profilEleve =array(
     "codeClasse"=>''.$eleve->getCodeStructure().'',
     "id"=>''.$eleve->getId_eleve().'',
     "sexe"=>''.$eleve->getSexe().'',
-    
+    "num_eleve_etab"=>''.$eleve->getNumEleveEtab().''
     );
   
 $nbVoeux  = intval($eleve->verifierVoeux()); //combien a-t-il de voeux ?
 
-$nbVoeux = 6;
-if ($nbVoeux >=6){
+
+if ($nbVoeux >=$nbVoeuxMax){
     $message = 'Désolé mais vous avez atteint la limite maximale des voeux.';
     genererAlertBox($message);
     //header('Location:index.php');
 }
+else {
+    
+    $etablissement = new \lib\Etablissement($db);
+    $listeEtab =array();
+    $listeEtab = $_POST['etab'];
+    
+    foreach ($listeEtab as $data){
+        $etablissement->setIdEtab($data);
+        $etablissement->enregistrerVoeuStandard($data,$eleve->getId_eleve(),$eleve->getNumEleveEtab());
+    }
+           
+}
+
+//header('Location:traitementLogin.php?statut='.$statut);
 
 $listeVoeux = $eleve->recupererVoeux();
 

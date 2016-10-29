@@ -19,7 +19,8 @@ class infos {
     protected $fichierInfos;
     protected $domConfig;
     protected $domInfos;
-
+    protected $config;
+    protected $parsed_config;
 
     protected $bdd;    
     protected $adresse_postale;
@@ -38,11 +39,19 @@ class infos {
     protected $licence;
     protected $auteur;
     
+    
     public function __construct() {
         $this->fichierConfig = 'admin/config.xml';
         $this->fichierInfos ='admin/infos.xml';
+        $this->lireConfig();
     }
     
+    public function getConfig(){
+        
+        return $this->lireConfig();
+    }
+
+
     public function lireInfos (){
     $arrayInfoEtab = [];    //tableau qu'on va renvoyer
     
@@ -85,5 +94,13 @@ class infos {
     }
     
      
+    private function lireConfig (){
+        $filename='config/config.json';
+        $this->config = file_get_contents($filename);
+        $this->parsed_config = json_decode($this->config, true);
+        
+        return $this->parsed_config;
+        
+    }
     
 }

@@ -1,0 +1,10 @@
+{# empty Twig template #}
+<div class="formulaire">
+    <ul>
+    {% for etab in listeVoeux %}
+        
+        <li> N°{{etab.classement}} : ({{etab.UAI}}) - {{academie}} : {{etab.academie}} ({{commune}} : {{etab.commune}}) <a href="{{etab.lien}}">{{etab.nom}}</a></li>
+    
+    {% endfor %}
+    </ul>
+</div>

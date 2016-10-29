@@ -18,15 +18,21 @@ include_once ('inc/initTwig.inc.php');
 ///////////////////////////// modèle //////////////////////////////////////////
 
 $db = new lib\bdd();   
-$utilisateur = new lib\Utilisateur($db);
+$eleve = new lib\Eleve($db);
 
-$statut = "";
-$prenom = "";
-$nom = "";
-$sexe = "";
 
-$connecte = gestionIdentification($utilisateur, $statut);  
+$connecte = gestionIdentification($eleve, $statut);  
+$eleve->profilEleve();                //récupération des infos sur l'élève
 
+$profilEleve =array(
+    "nom"=>''.$eleve->getNom().'',
+    "prenom"=>''.$eleve->getPrenom().'',
+    "classe"=>''.$eleve->getLibStructure().'',
+    "codeClasse"=>''.$eleve->getCodeStructure().'',
+    "id"=>''.$eleve->getId_eleve().'',
+    "sexe"=>''.$eleve->getSexe().'',
+    
+    );
 
 
 ////////////////////////////Les variables communes à passer au template//////////////////
@@ -46,6 +52,13 @@ $page = 'inscription';         //Nom de l'index pour récupérer les infos pour 
 $contenuJSON = new lib\generateurArticle($page); //on instancie le générateur d'article 
 $contenuArticle = $contenuJSON->lireContenu($page)[''.$page.''][0]; // méthode pour lire les infos du fichier de langue
 
+$pageIdentifiants = 'identifiants';                //Nom de l'index pour récupérer les infos pour les menus du bandeau
+$contenuJSONidentifiants = new lib\generateurArticle($pageIdentifiants);
+$contenuIdentifiants = $contenuJSONidentifiants->lireContenu($pageIdentifiants)[''.$pageIdentifiants.''][0];
+
+$pageMenu = 'menus';                //Nom de l'index pour récupérer les infos pour les menus du bandeau
+$contenuJSONMenu = new lib\generateurArticle($pageMenu);
+$contenuMenu = $contenuJSONMenu->lireContenu($pageMenu)[''.$pageMenu.''][0];
 /////////////////////////////////////////////////////////////
 
 $variablesTemplate = array(
@@ -54,7 +67,7 @@ $variablesTemplate = array(
     'charset'=>''.$charset.'',
     'titrePage'=>''.$titrePage.'',
     'connecte'=>''.$connecte.'',
-    'sexe'=>''.$sexe.'',
+    
     'texte_footer'=>''.$texte_footer.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'',   
     'titreForm'=>$form->titre='Formulaire d\'inscription : ',

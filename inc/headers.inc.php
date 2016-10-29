@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+//
+include_once('inc/mainLib.inc.php');
 //test sur l'environnement du serveur
 
 $phpVersion = phpversion();
@@ -22,5 +25,11 @@ if (isset ($_COOKIE) && !empty($_COOKIE['PHPSESSID'])){
     
 }
 
+//récupération des informations de configuration et de personnalisation
 
+$infoSite = new \lib\infos();
 
+$tableauInfosSite = $infoSite->getConfig();
+
+$nomSite =  $tableauInfosSite['nomSite']; 
+$nbVoeuxMax = $tableauInfosSite['nbVoeuxMax']; //nombre maximal de voeux permis

@@ -13,6 +13,7 @@ class Etablissement {
     protected $form;
     protected $nomTable;
     protected $maBase;
+    private $idEtab;
     private $UAI;
     private $type;
     private $nom;
@@ -77,6 +78,9 @@ class Etablissement {
     }
     
 ////////////////////////////////Mutateurs///////////////////////////////////
+    public function setIdEtab ($data){
+        $this->idEtab = $data;
+    }
     public function setUAI ($data){
         $this->UAI = $data;
     }
@@ -346,7 +350,37 @@ class Etablissement {
 
         }
 
-
+    public function enregistrerVoeuStandard ($value,$idEleve, $numEleveEtab){
+        /* recherche des infos sur l'établissement à valider */
+        $enregistrement = "*";
+        $champ = 'id_etab';
+        $champTri="id_etab";
+        $tabInfosEtablissement = $this->rechercherEtablissement($enregistrement, $champ, $value, $champTri);
+        
+        
+        /*Recherche des infos sur les éventuels voeux déjà faits*/
+        $statement = "SELECT count(*) FROM validations WHERE `id_eleve`= ?";
+        $tabDatas = array($idEleve);
+        $tableauVoeuxDejaFaits  = $this->db->queryPDOPrepared($statement, $tabDatas);
+        
+        if ($tableauVoeuxDejaFaits[0][0] == 0 || $tableauVoeuxDejaFaits[0][0]==NULL){
+            
+            $nbVoeux = 0;
+             
+        }
+        else {
+            $nbVoeux = $tableauVoeuxDejaFaits[0][0];
+        }
+       
+        /*Inscription des voeux */
+        $iterationClassement = $nbVoeux+1;
+        $commentaire ='';
+        $statutVoeu = 'standard';
+        
+        $statement = "INSERT INTO validations (id_eleve,id_etab,commentaire,num_eleve_etab,classement,statutVoeu) VALUES (?,?,?,?,?,?) ";
+        $tabDatas = array($idEleve,$value,$commentaire,$numEleveEtab,$iterationClassement,$statutVoeu);
+        return $this->db->queryPDOPreparedExec($statement, $tabDatas);
+    }
 
     public  function formEtablissement ($champ, $tri){
         
@@ -367,5 +401,7 @@ class Etablissement {
         
 
     }
+    
+    
 }
 ?>

@@ -84,6 +84,7 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
     'statut'=>''.$statut.'',
     'listeProfesseurs'=>$listeProfesseurs,
+    'nbVoeuxMax'=>''.$nbVoeuxMax.'',
     'nbVoeux'=>''.$nbVoeux.'',
     'listeVoeux'=>$listeVoeux,
     ) ;
@@ -95,6 +96,7 @@ $mergeVarTemplate = array_merge(
         $contenuArticle,
         $contenuMenu,
         $profilEleve
+        
         ); //construction du tableau avec les données à envoyer au template
 
 
