@@ -22,9 +22,9 @@
                    <td>  </td>
                 {% elseif connecte == TRUE %}
                     <td>
-                        <a href=""><img src="templates/IMG/logoff.gif" title="{{logoutMessage}}" /></a> 
+                        <a href="logout.php?statut={{statut}}"><img src="templates/IMG/logoff.gif" title="{{logoutMessage}}" /></a> 
                     </td>
-                    <td><a href=""> {{logoutMessage}} </a></td>
+                    <td><a href="logout.php?statut={{statut}}"> {{logoutMessage}} </a></td>
                 {% endif %}
         </tr>
     </table>

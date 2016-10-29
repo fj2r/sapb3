@@ -20,14 +20,26 @@ include_once ('inc/varTwig.inc.php');
 
 //////////////////////////// Modèle ////////////////////////////////////////////
 $db = new lib\bdd();   
-$utilisateur = new lib\Utilisateur($db);
+$eleve = new lib\Eleve($db);
+
+$connecte = gestionIdentification($eleve, $statut);        //gestion de l'identification (session & cookies)
+
+$eleve->profilEleve();                //récupération des infos sur l'élève
+
+$connecte = gestionIdentification($eleve, $statut); 
+
+$profilEleve =array(
+    "nom"=>''.$eleve->getNom().'',
+    "prenom"=>''.$eleve->getPrenom().'',
+    "classe"=>''.$eleve->getLibStructure().'',
+    "codeClasse"=>''.$eleve->getCodeStructure().'',
+    "id"=>''.$eleve->getId_eleve().'',
+    "sexe"=>''.$eleve->getSexe().'',
+    
+    );
 
 
-$prenom = "";
-$nom = "";
-$sexe = "";
-
-$connecte = gestionIdentification($utilisateur, $statut);  
+ 
 
 ////////////////////////////passage du tableau de variables pour template///////
 
@@ -38,6 +50,13 @@ $page = 'login';         //Nom de l'index pour récupérer les infos pour les te
 $contenuJSON = new lib\generateurArticle($page); //on instancie le générateur d'article 
 $contenuArticle = $contenuJSON->lireContenu($page)[''.$page.''][0]; // méthode pour lire les infos du fichier de langue
 
+$pageIdentifiants = 'identifiants';                //Nom de l'index pour récupérer les infos pour les menus du bandeau
+$contenuJSONidentifiants = new lib\generateurArticle($pageIdentifiants);
+$contenuIdentifiants = $contenuJSONidentifiants->lireContenu($pageIdentifiants)[''.$pageIdentifiants.''][0];
+
+$pageMenu = 'menus';                //Nom de l'index pour récupérer les infos pour les menus du bandeau
+$contenuJSONMenu = new lib\generateurArticle($pageMenu);
+$contenuMenu = $contenuJSONMenu->lireContenu($pageMenu)[''.$pageMenu.''][0];
 /////////////////////////////////////////////////////////////
 
 
@@ -46,16 +65,20 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'charset'=>''.$charset.'',
     'titrePage'=>''.$titrePage.'',
     'connecte'=>''.$connecte.'',
-    'prenom'=>''.$prenom.'',
-    'nom'=>''.$nom.'',
-    'sexe'=>''.$sexe.'',
+    
     'texte_footer'=>''.$texte_footer.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'',
     
     'statut'=>''.$statut.'',
     ) ;
 
-$mergeVarTemplate = array_merge($variablesTemplate, $contenuArticle); //construction du tableau avec les données à envoyer au template
+$mergeVarTemplate = array_merge(
+        $contenuIdentifiants,
+        $variablesTemplate,
+        $contenuArticle,
+        $contenuMenu,
+        $profilEleve
+        ); //construction du tableau avec les données à envoyer au template
 
 
 appelTemplate($template, $twig, $mergeVarTemplate); //construction de la page web

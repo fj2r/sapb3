@@ -35,10 +35,16 @@ $profilEleve =array(
     "sexe"=>''.$eleve->getSexe().'',
     
     );
-
-$listeProfesseurs = $eleve->listerProfesseurs(); // qui sont les professeurs de sa classe ? Renvoi un tableau de dimension 2
-
+  
 $nbVoeux  = intval($eleve->verifierVoeux()); //combien a-t-il de voeux ?
+
+$nbVoeux = 6;
+if ($nbVoeux >=6){
+    $message = 'Désolé mais vous avez atteint la limite maximale des voeux.';
+    genererAlertBox($message);
+    //header('Location:index.php');
+}
+
 $listeVoeux = $eleve->recupererVoeux();
 
 $etablissement = new \lib\Etablissement($db);   //pour construire les formulaires de choix d'étab

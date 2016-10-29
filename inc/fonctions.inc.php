@@ -168,6 +168,7 @@ function gestionIdentification ($user, $statut) {
     if($statut == "eleve"){
         if (isset($_SESSION['code_conf']) && isset($_SESSION['num_dossier']) 
             && ($_SESSION['code_conf'] !=NULL) && ($_SESSION['num_dossier'] !=NULL)){
+            
             $user->setCodeConfidentiel($_SESSION['code_conf']);
 
             $user->setNumDossier($_SESSION['num_dossier']);
@@ -239,4 +240,8 @@ function gestionIdentification ($user, $statut) {
     else { 
         return $connecte = false;
     }
+}
+
+function genererAlertBox ($message){
+    echo '<html><head><script> function genererAlertBox(){alert("'.$message.'");}</script></head><body onload="genererAlertBox()"> </body></html>';
 }

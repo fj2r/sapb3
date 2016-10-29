@@ -13,8 +13,32 @@ include_once ('inc/varTwig.inc.php');
 
 ////////////////////////////passage du tableau de variables pour template///////
 
+
+$db = new lib\bdd();                //instance de la database pour passer à l'éleve.
+
+$eleve = new lib\Eleve($db, $statut); //création de l'élève
+
+$connecte = gestionIdentification($eleve, $statut);        //gestion de l'identification (session & cookies)
+
+$eleve->profilEleve();                //récupération des infos sur l'élève
+
+$profilEleve =array(
+    "nom"=>''.$eleve->getNom().'',
+    "prenom"=>''.$eleve->getPrenom().'',
+    "classe"=>''.$eleve->getLibStructure().'',
+    "codeClasse"=>''.$eleve->getCodeStructure().'',
+    "id"=>''.$eleve->getId_eleve().'',
+    "sexe"=>''.$eleve->getSexe().'',
+    
+    );
+$eleve->detruireCookie();
+$eleve->detruireSession();
+
+
+
+
 ///////////////éventuelle surcharge des variables pour le template ?//////////
-$template = 'mainTemplate';     //Nom du template à appeler
+$template = 'logout';     //Nom du template à appeler
 
 $page = 'logout';         //Nom de l'index pour récupérer les infos pour les textes
 $contenuJSON = new lib\generateurArticle($page); //on instancie le générateur d'article 
@@ -30,9 +54,7 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'charset'=>''.$charset.'',
     'titrePage'=>''.$titrePage.'',
     'connecte'=>''.$connecte.'',
-    'prenom'=>''.$prenom.'',
-    'nom'=>''.$nom.'',
-    'sexe'=>''.$sexe.'',
+    
     'texte_footer'=>''.$texte_footer.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
     
