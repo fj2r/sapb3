@@ -44,9 +44,9 @@
                             
                         <div class = "formulaire">
                             <p>Modifier le classement du voeu : </p>
-                            <form action ="modifierClassement.php" method="POST">
+                            <form action ="modifierClassement.php?statut={{statut}}&idVoeu={{idVoeu}}" method="POST">
                             {% for i in 1..nbVoeuxMax %}
-                                <p><input type="radio" name="classement" value="{{i}}">{{i}}</input><p>
+                                <p><input type="radio" name="classement" value="{{i}}">{{i}}<p>
                             {%endfor%}
                                 <input type="submit" value ="Modifier"></input>
                             </form>

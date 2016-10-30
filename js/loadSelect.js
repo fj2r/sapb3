@@ -70,3 +70,39 @@ dataType: "text",
 
 }
 
+function loadMap (id, latitude, longitude, infowindow) {
+
+var id;
+var latitude;
+var longitude;
+var infowindow;
+
+$.ajax({
+	
+//La page à appeler
+
+url     : "map.php",
+type    : "POST",
+data    : 'latitude='+latitude+'&longitude='+longitude+'&infowindow='+infowindow,
+cache   : false,
+dataType: "text",
+
+//si AJAX est réussi
+"success": function (data){
+		$("#"+id).html(data);
+	},
+	
+	//si ça échoue
+	"error": function (xhr, textStatus, errorThrown){
+			console.log("Une erreur est survenue");		
+		},
+		
+		// Fonction après tout ceci
+		"complete": function(xhr, textStatus){
+				console.log("Fin execution")
+			},
+
+
+});
+
+}

@@ -6,8 +6,8 @@
         <tr>
             <td> N°{{etab.classement}} : ({{etab.UAI}}) - <a href="{{etab.lien}}">{{etab.nom}}</a></td>
             <td>  {{academie}}{{etab.academie}} ({{commune}} : {{etab.commune}})</td>
-            <td><a href = "modificationVoeu.php?statut={{statut}}&idVoeu={{etab.id_etab}}">Modifier</a></td>
-            <td><a href ="">Supprimer</a></td>
+            <td><a href = "modificationVoeu.php?statut={{statut}}&idVoeu={{etab.id_voeu}}">Modifier</a></td>
+            <td><a href ="suppressionVoeu.php?statut={{statut}}&idVoeu={{etab.id_voeu}}">Supprimer</a></td>
         </tr>
     
     {% endfor %}

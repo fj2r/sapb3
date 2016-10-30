@@ -14,6 +14,7 @@ class Etablissement {
     protected $nomTable;
     protected $maBase;
     private $idEtab;
+    private $classement;
     private $UAI;
     private $type;
     private $nom;
@@ -129,6 +130,9 @@ class Etablissement {
     public function setLien ($data){
         $this->lien= $data;
     }
+    public function setClassement ($data){
+        $this->classement = $data;
+    }
 ////////////////////////////////Accesseurs//////////////////////////////////
 
     public function getUAI (){
@@ -178,6 +182,9 @@ class Etablissement {
     }
     public function getLien (){
         return $this->lien;
+    }
+    public function getClassement (){
+        return $this->classement;
     }
 
 
@@ -391,6 +398,27 @@ class Etablissement {
         }
     }
 
+    public function supprimerVoeu ($idVoeu){
+        $statement = "DELETE FROM validations WHERE `id_voeu`= ?";
+        $tabDatas = array($idVoeu);
+        $suppressionVoeu  = $this->db->queryPDOPreparedExec($statement, $tabDatas);
+        
+        return $suppressionVoeu;
+    }
+    
+    public function modifierClassement($idVoeu,$id_eleve, $nouveauClassement){
+        /* mise à jour des autres voeux*/
+        $statement = "UPDATE validations SET `classement` = `classement`+1 WHERE `id_eleve`= ? AND `classement`>= ?";
+        $tabDatas = array( $id_eleve,$nouveauClassement);
+        $suppressionVoeu  = $this->db->queryPDOPreparedExec($statement, $tabDatas);
+        
+        $statement = "UPDATE validations SET `classement` = ? WHERE `id_voeu`= ?";
+        $tabDatas = array($nouveauClassement, $idVoeu);
+        $suppressionVoeu  = $this->db->queryPDOPreparedExec($statement, $tabDatas);
+        
+        
+    }
+    
     public  function formEtablissement ($champ, $tri){
         
         /* recherche des valeurs d'un champ passé comme  */

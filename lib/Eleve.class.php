@@ -437,12 +437,13 @@ class Eleve extends Utilisateur {
         
    }
    
-   public function recupererVoeuAModifier ($id_etab) {
+   public function recupererVoeuAModifier ($id_voeu) {
        if ($this->verifierVoeux() != 0){
-            $statement = "SELECT * FROM `validations` INNER JOIN etablissement ON `validations`.`id_etab`=`etablissement`.`id_etab` WHERE `validations`.`id_eleve`= ? AND `etablissement`.`id_etab`= ? ORDER BY `validations`.`classement` ASC";
-            $tabDatas = array ($this->id_eleve, $id_etab );
+            $statement = "SELECT * FROM `validations` INNER JOIN `etablissement` ON `validations`.`id_etab`=`etablissement`.`id_etab` WHERE `validations`.`id_eleve`= ? AND `validations`.`id_voeu`= ? ORDER BY `validations`.`classement` ASC";
+            $tabDatas = array ($this->id_eleve, $id_voeu );
+            
             $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
-                
+            
 
             return $tableau;
         }

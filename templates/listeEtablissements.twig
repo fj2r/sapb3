@@ -1,18 +1,27 @@
 {# empty Twig template #}
 
 {%block listeEtablissements%}
+ 
     
     <div class ="formulaire">
         <form action="validationVoeux.php?statut={{statut}}" method="POST" >
             
            {% for etab in liste%}
-               <p> <input type="checkbox" name="etab[]" value="{{etab.id_etab}}"><a href="{{etab.lien}}" target="_blank">{{etab.nom}}</a> <i>({{etab.statut}})</i></ input></p>
+               <p> <input type="checkbox" name="etab[]" value="{{etab.id_etab}}" onclick="loadMap('map',{{etab.latitude_Y}},{{etab.longitude_X}},{{etab.nom}})"><a href="{{etab.lien}}" target="_blank" >{{etab.nom}}</a> <i>({{etab.statut}})</i></input></p>
+                
            {%endfor%}
         
         <INPUT TYPE="submit" NAME="submit" VALUE="Valider" />
         </form>
-        
+           <div id="map">
+        {% if app.request.isXmlHttpRequest == TRUE %}
+                {% include 'map.twig'%}
+                  
+                {% endif %}
+           </div>
         
     </div>
     
+            
+         
 {%endblock%}
