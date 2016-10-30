@@ -21,7 +21,14 @@
     {% block panneauDroite %}
         {% block panneauDroiteFirstchild%} {{parent()}} {% endblock %}
             {% block article %}{{parent()}}
-                      
+                <div class = "">
+                    {% if nbVoeux >= nbVoeuxMax %}
+                        <div class="formulaire">{{limiteVoeuxAtteinte}}</div>
+                    
+                    {% else %}
+                    <div class ="">{{infosPage}}</<div>
+                    {%endif%}
+                </div>
             {% endblock %}
         {% block panneauDroiteSecondchild %} {{parent()}} {% endblock %}    
     {% endblock %}

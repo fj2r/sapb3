@@ -72,9 +72,21 @@
         <p>Application de simulation admission post-bac sapb</p><hr />
         
         <br />
+        
         {% endblock %}
-            {% block article %}{% endblock %}
+            {% block article %}
+                
+                
+                {% block article_alt%}
+                    {% if connecte == FALSE %}
+                        {%include 'loginFalse.twig'%}
+                    
+                    {%endif%}
+                {%endblock%}
+                
+            {% endblock %}
         {% block panneauDroiteSecondchild%}
+            
         </div>
         {% endblock %}
     {% endblock %}

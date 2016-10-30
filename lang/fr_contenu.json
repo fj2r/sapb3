@@ -38,7 +38,8 @@
             "retourLogin":"Cliquez sur ce lien pour tester vos codes d'accès",
             "lien":"login.php?statut=",
             "ne_le":"né le ",
-            "a":" à "
+            "a":" à ",
+            "dejaEnregistreMessage":"ATTENTION : il semble que vous vous soyez déjà enregistré sur sAPB... Veuillez retourner sur la page de connexion pour tester vos codes d'accès. Si vos codes sont perdus veuillez le signaler à votre tuteur."
         }
     ],
     "traitementLogin":[
@@ -49,7 +50,8 @@
             "labelmesVoeux": "Mes choix d'orientation",
             "labelnbVoeux": "Nombre de voeux d'orientation déjà enregistrés",
             "nbVoeuxNull":"Pour le moment il n'y a aucun voeu d'orientation que vous ayez enregistré.",
-            "labelLien" : "Faire un nouveau voeu d'orientation",
+            "labelLien1" : "Faire un nouveau voeu d'orientation",
+            "labelLien2":"Modifier les voeux déjà réalisés",
             "academie" : "Académie de ",
             "commune" : "Commune de l'établissement"
         }
@@ -83,6 +85,21 @@
     "listeEtablissements":[
         {
             
+        }
+    ],
+    "validationVoeux":[
+        {
+            "infosPage":"Le ou les voeu(x) que vous venez de valider ont bien été enregistrés. Vous pouvez retourner sur la page de récapitulatif ou bien continuer à effectuer des voeux",
+            "limiteVoeuxAtteinte":"Désolé mais vous avez atteint la limite maximale des voeux"
+        }
+    ],
+    "modificationVoeu":[
+        {
+            "academie" : "Académie de ",
+            "commune" : "Commune de l'établissement",
+            "labelForm1" : "Filtrer par Académie",
+            "labelForm2" : "Filtrer par type",
+            "labelForm3" : "Filtrer par ?"
         }
     ]
 }

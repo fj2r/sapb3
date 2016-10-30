@@ -42,13 +42,30 @@ $eleve = new \lib\Eleve($db,$statut); //si on a toutes les infos sur l'élève a
 
 $infosEleve = $eleve->rechercheEleve($nom, $prenom, $dateDeNaissance); //et on récupère Toutes les infos sur lui dans un tableau
 
+if($infosEleve != FALSE ){
+    $connecte = TRUE;
+}
+else{
+    $connecte=FALSE;
+}
+
 $eleve->setNom($infosEleve['Nom_de_famille']);
 $eleve->setPrenom($infosEleve['Prénom']);
 $eleve->setNaissance($infosEleve['Date_Naissance']);
 $eleve->setNumEleveEtab($infosEleve['Num__Elève_Etab']);
 $eleve->setIdEleve($infosEleve['id_eleve']);
+$eleve->setSexe($infosEleve['Sexe']);
+
 
 $numDossier = $eleve->construireCodesEleve($infosEleve['id_eleve'], 5);
+if ($numDossier == FALSE){
+    $connecte = FALSE;
+    $dejaEnregistre = TRUE;
+}
+else {
+    $connecte = TRUE;
+    $dejaEnregistre = FALSE;
+}
 
 ////////////////////////////Les variables communes à passer au template//////////////////
 include_once ('inc/varTwig.inc.php');
@@ -64,6 +81,13 @@ $page = 'validationInscription';         //Nom de l'index pour récupérer les i
 $contenuJSON = new lib\generateurArticle($page); //on instancie le générateur d'article 
 $contenuArticle = $contenuJSON->lireContenu($page)[''.$page.''][0]; // méthode pour lire les infos du fichier de langue
 
+$pageIdentifiants = 'identifiants';                //Nom de l'index pour récupérer les infos pour les menus du bandeau
+$contenuJSONidentifiants = new lib\generateurArticle($pageIdentifiants);
+$contenuIdentifiants = $contenuJSONidentifiants->lireContenu($pageIdentifiants)[''.$pageIdentifiants.''][0];
+
+$pageMenu = 'menus';                //Nom de l'index pour récupérer les infos pour les menus du bandeau
+$contenuJSONMenu = new lib\generateurArticle($pageMenu);
+$contenuMenu = $contenuJSONMenu->lireContenu($pageMenu)[''.$pageMenu.''][0];
 /////////////////////////////////////////////////////////////
 
 $variablesTemplate = array(
@@ -72,13 +96,14 @@ $variablesTemplate = array(
     'charset'=>''.$charset.'',
     'titrePage'=>''.$titrePage.'',
     'connecte'=>''.$connecte.'',
-    'sexe'=>''.$sexe.'',
+    'sexe'=>''.$eleve->getSexe().'',
     'texte_footer'=>''.$texte_footer.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'',   
     'statut'=>''.$statut.'',
     'mail1'=>''.$mail1.'',
     'numDossier'=>''.$numDossier[0].'',
     'codeConf'=>''.$numDossier[1].'',
+    'dejaEnregistre'=>''.$dejaEnregistre.''
     ) ;
 
 $mergeVarTemplate = array_merge($variablesTemplate, $contenuArticle, $infosEleve); //construction du tableau avec les données à envoyer au template

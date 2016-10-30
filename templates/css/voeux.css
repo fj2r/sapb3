@@ -1,0 +1,188 @@
+@CHARSET "utf-8";
+
+/*
+	Styles pour l'espace voeux	
+*/
+/* Intitule de champs de formulaire */
+#voeux .intitule {
+	background: #E4E3F9 none;
+}
+
+table.voeux{
+	border: 1px solid grey;
+	font-size: 12px;
+}
+/* Liens vers les sites internet des �tablissements */
+table.voeux a {
+	text-decoration: underline;
+	color : blue;
+}
+
+/* Couleur en fonction du type de formation */
+/* CPGE */
+tr.voeu-1 {
+	background : #FDFFBE none; /*#FFE45C none;	*/
+}
+
+/* CPES */
+tr.voeu-2 {
+	background : #FDFFBE none; /*#FFE45C none;	*/
+}
+
+/* E5A */
+tr.voeu-21 {
+	background : #FFEDED none;	
+}
+
+/* Diplome Grand etablissement */
+tr.voeu-23 {
+	background : #EFF3FF none;
+}
+
+/* Ecole d'archi */
+tr.voeu-25 {
+	background : #D9E2E2 none;
+}
+
+/* Prepas integrees */
+tr.voeu-31 {
+	background : #FCEFD2 none;	
+}
+
+/* BTS */
+tr.voeu-41 {
+	background : #FAE4F7 none;	
+}
+
+/* DTS */
+tr.voeu-45 {
+	background : #E4F6FA none;	
+}
+
+/* DUT */
+tr.voeu-51 {
+	background : #DFDBFB none;	
+}
+
+/* MAN */
+tr.voeu-61 {
+	background : #EDFFEA none;	
+}
+
+/* BTS Agricole */
+tr.voeu-63 {
+	background : #EDE2F3 none;	
+}
+/*Formations du secteur param�dical*/
+tr.voeu-65 {
+	background : #F3EBE2 none;	
+}
+/*Formations du secteur social*/
+tr.voeu-67 {
+	background : #F3EBE2 none;	
+}
+
+/* BTS */
+tr.voeu-68 {
+	background : #FAE4F7 none;	
+}
+
+/* DCG */
+tr.voeu-71 {
+	background : #F3EBE2 none;	
+}
+
+/* DEUST */
+tr.voeu-72 {
+	background : #DEFFD9 none;	
+}
+
+/* Medecine Pharma */
+tr.voeu-74 {
+	background : #DCD9FF none;	
+}
+
+/* DMA */
+tr.voeu-81 {
+	background : #DCF1E8 none;
+}
+
+/* L1 */
+tr.voeu-82 {
+	background : #C0E0D2 none;
+}
+/* L1 pr�pas  */
+tr.voeu-83 {
+	background : #C0E0D2 none;
+}
+
+span.etat-dossier{
+	color: blue;
+	font-weight: bold;
+}
+
+/* Recherche de formations ************************************************************************/
+fieldset.criteres {
+	font-size: 12px;
+}
+table.criteres,
+table.details-formation {
+	font-size: 12px;
+}
+tr.critere-intitule{
+}
+
+select.critere{
+	background-color: #FFEB96;
+	border: 1px solid grey;
+}
+
+table.pagination {
+	font-size: 12px;
+}
+table.pagination td.bouton-page{
+	border: 1px solid grey;
+	width: 10px;
+	background-color: #F2F2F2;
+}
+table.pagination td.page-selected{
+	border: 1px solid grey;
+	width: 10px;
+	background-color: #F2F2F2;
+	font-weight: bold;
+	font-size: 16px;
+        background-color: #ffffff ;
+}	
+table.pagination td.bouton-page a:link,
+table.pagination td.bouton-page a:visited {
+	font-weight: bold;
+	color: grey;
+}
+
+/* Ordre des voeux ***************************************************************************************/
+table.voeux-classes,
+table.voeux-nonclasses{
+	font-size: 12px;
+	border: 1px solid #E0E0E0;
+}
+table.voeux-classes{
+	background-color: #ECEDFA;
+}
+table.voeux-classes hr{
+	color: #C6C6FD;
+}
+table.voeux-classes td.rang{
+	font-size: 16px;
+	font-weight: bold;
+	background-color: #C6C6FD;
+}
+table.voeux-nonclasses{
+	background-color: #F8FAEC;
+}
+table.voeux-nonclasses hr{
+	color: #F8FAEC;
+}
+input.rang{
+	text-align: center;
+	font-weight: bold;
+}

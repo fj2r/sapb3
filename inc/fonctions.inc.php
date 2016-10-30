@@ -243,5 +243,5 @@ function gestionIdentification ($user, $statut) {
 }
 
 function genererAlertBox ($message){
-    echo '<html><head><script> function genererAlertBox(){alert("'.$message.'");}</script></head><body onload="genererAlertBox()"> </body></html>';
+    echo '<script language=javascript> function genererAlertBox(){alert('.$message.')}</script><body onload="genererAlertBox()">';
 }

@@ -132,18 +132,24 @@ class Eleve extends Utilisateur {
     public function setIdEleve ($id_eleve){
         $this->id_eleve = htmlspecialchars($id_eleve);
     }
+    public function setSexe ($sexe){
+        $this->sexe = htmlspecialchars($sexe);
+    }
     ////////////////////////////////////////////////////////////////////////////
     public function rechercheEleve ($nom, $prenom, $dateDeNaissance){
         $statement = "SELECT * FROM import_eleve_complet WHERE `Nom de famille` = ? AND `Prénom` = ? AND `Date Naissance` = ?";
         $tabDatas = array ($nom,$prenom,$dateDeNaissance);
-
         $tableau = $this->db->queryPDOPrepared($statement, $tabDatas); //on récupère TOUTES les infos sur l'élève!
         
-        
+        if ($tableau !=NULL){
         $infosEleve = $tableau[0]; //ATTENTION car c'est un tableau à 2 dimensions, donc on extrait le tableau du tableau
         $infosEleve = $this->preparerTableauPourTwig($infosEleve);
         
         return $infosEleve;
+        }
+        else {
+            return FALSE;
+        }
         
     }
     public function preparerTableauPourTwig ($tableau){ // IMPORTANT : nécessaire car les champs de la database sont par défaut avec des espaces et de points, ca qui est très mal pour Twig
@@ -174,6 +180,7 @@ class Eleve extends Utilisateur {
                 
                 if ($tableau == FALSE){
                     //header('Location:logout.php');
+                    return FALSE;
                 }
                 else {
 
@@ -210,7 +217,7 @@ class Eleve extends Utilisateur {
                                     $this->fixe=$tableauFils ['Tél. Personnel'];
                                     $this->email = $tableauFils ['Email'];
                                     
-
+                                    return TRUE;
                             }
 
                         }
@@ -231,7 +238,7 @@ class Eleve extends Utilisateur {
             
         }
         
-    return ;
+    
     }
        
     public function tableauNotes (){
@@ -348,9 +355,15 @@ class Eleve extends Utilisateur {
        
        $tabIdentifiants = array($numDossier, $codeConf);
        
-       $this->enregistrerCodesEleve($id, $tabIdentifiants);
-      
-       return $tabIdentifiants;
+       $enregistrement = $this->enregistrerCodesEleve($id, $tabIdentifiants);
+       
+       if ($enregistrement == TRUE){
+            return $tabIdentifiants;
+       
+       }
+       else {
+           return FALSE;
+       }
    }
    
    public function enregistrerCodesEleve ($id, $tabIdentifiants){
@@ -422,6 +435,20 @@ class Eleve extends Utilisateur {
             return $tableau = array ();
         }
         
+   }
+   
+   public function recupererVoeuAModifier ($id_etab) {
+       if ($this->verifierVoeux() != 0){
+            $statement = "SELECT * FROM `validations` INNER JOIN etablissement ON `validations`.`id_etab`=`etablissement`.`id_etab` WHERE `validations`.`id_eleve`= ? AND `etablissement`.`id_etab`= ? ORDER BY `validations`.`classement` ASC";
+            $tabDatas = array ($this->id_eleve, $id_etab );
+            $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
+                
+
+            return $tableau;
+        }
+        else {
+            return $tableau = array ();
+        }
    }
    
    public function enregistrerVoeu () {

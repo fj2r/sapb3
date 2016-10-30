@@ -1,0 +1,191 @@
+/* Style Spécifique Integration Messagerie*/
+/* Boite affichant vous avez x message non lu sur authentification */
+#authentificationMessageNonLu {
+	border:2px solid blue;
+}
+/** X message non lu affiché sous l'identité du candiat */
+#authentificationMessageNonLuEntete {
+	position:absolute;
+	top:95px;
+	left:150px;
+}
+
+#authentificationMessageNonLu a,
+#authentificationMessageNonLuEntete a {
+	font-size:12px;
+	font-weight :bold;	
+}
+
+img.borderNone {
+	border:none;
+}
+
+/** Formulaire Identite Contact ************************************/
+#identite_contact_message td.libelle {
+	padding-right:15px;	
+}
+
+/* Contact (espace id="nouscontacter") ************************************/
+#nouscontacter #boiteMessageContact table.listeMessage,
+#nouscontacter #boiteMessageContact table.listeMessage td {
+	border:1px solid grey;	
+}
+
+#nouscontacter #boiteMessageContact table.listeMessage th  {
+	border:1px solid grey;
+	font-size:12px;
+}
+
+/* message (espace id="message") ************************************/
+/* menu des options signature, message prédéfini et objet */
+#message div.titrePage {
+	font-size:12pt;
+	font-weight:bold;
+	margin-bottom:10px;
+	text-align:center;
+	text-decoration:underline;
+	padding : 8px 0px;
+}
+
+#message #enteteMenu {
+	padding: 0; 
+    margin: 0; 
+    background: #C6E6FE; 
+    text-decoration: none; 
+    -moz-border-radius: 10px 10px 0 0; 
+    -webkit-border-radius: 10px 10px 0 0; 
+    border-radius: 10px 10px 0 0;         
+    -webkit-border-top-left-radius: 10px; /* pour Chrome */ 
+    -webkit-border-top-right-radius: 10px; /* pour Chrome */ 
+    text-align:center;
+    border-left: 1px solid #89a; 
+	border-right: 1px solid #89a; 
+	border-top: 1px solid #89a; 
+    border-bottom : none;
+}
+
+#message #menu { 
+	width:100%;
+	display :table;
+} 
+
+      
+#message #menu td.nonSel {
+        padding: 5px 20px;
+        margin: 0; 
+        background: #597CED; 
+        text-decoration: none; 
+        -moz-border-radius: 10px 10px 0 0; 
+        -webkit-border-radius: 10px 10px 0 0; 
+        border-radius: 10px 10px 0 0;         
+        -webkit-border-top-left-radius: 10px; /* pour Chrome */ 
+        -webkit-border-top-right-radius: 10px; /* pour Chrome */ 
+        cursor:pointer;
+        width:25%;
+        border-bottom : 2px solid #89a; 
+        border-top : 2px solid #89a; 
+        border-right : 1px solid #89a; 
+        border-left : 1px solid #89a; 
+}
+
+#message #menu td a { 
+	color:#FFFFFF;
+	font-weight:bold;
+	text-decoration: none; 
+}
+
+#message #menu td.sel a { 
+	color:#000;
+}
+
+#message #menu td.sel { 
+	padding: 5px 20px;
+    background: #EBF5FE;
+    border-bottom : none;
+    border-left: 1px solid #89a; 
+	border-right: 1px solid #89a; 
+	border-top: 2px solid #89a; 
+	-moz-border-radius: 10px 10px 0 0; 
+    -webkit-border-radius: 10px 10px 0 0; 
+    border-radius: 10px 10px 0 0;         
+    -webkit-border-top-left-radius: 10px; /* pour Chrome */ 
+    -webkit-border-top-right-radius: 10px; /* pour Chrome */
+}
+
+#message #menu td.onHover { 
+        background: #ADC0FE; 
+}
+
+#message #menu td.onHover a { 
+        color: #000;
+}
+
+
+/* Liste Message ***************************************/
+#message #liste_message {
+	background-color:#EBF5FE;
+	border-left: 2px solid #89a;
+	border-right: 2px solid #89a;
+	border-bottom: 2px solid #89a;
+	border-top : none;
+	padding:0 10px;
+}
+
+#message div.apercu{
+	background-color : #E7E7E7;
+	font-size:12px;
+}
+
+#message a.lienApercu {
+	font-weight:bold;
+}
+
+#message td.centrerInputEc {
+	text-align:center;
+}
+
+#message #ec_table td {
+	font-size:12px;
+}
+
+/* Details Message ***************************************/
+
+#message #details_message table td {
+	color:#000000;
+	font-family:Helvetica,sans-serif;
+	font-size:9pt;
+}
+
+#message fieldset legend {
+border:None;
+font-weight:bolder;
+width:auto;
+}
+
+#message fieldset {
+border:2px groove threedface;
+display:block;
+margin-left:2px;
+margin-right:2px;
+padding:0.35em 0.625em 0.75em;
+background-color:#EFF8FF;
+}
+
+#message .ligne_message_SAIO {
+	background-color:#FAEAF3;
+}
+
+
+
+
+/* style des lignes du tableau extreme component */
+.ligne-1 {
+	background-color: #AEE1FE;
+}
+.ligne-0 {
+	background-color: #EFF9FE;
+}
+
+.ligne-highlight{
+	background-color: #69A4FD;
+}

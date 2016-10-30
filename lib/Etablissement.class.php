@@ -351,13 +351,6 @@ class Etablissement {
         }
 
     public function enregistrerVoeuStandard ($value,$idEleve, $numEleveEtab){
-        /* recherche des infos sur l'établissement à valider */
-        $enregistrement = "*";
-        $champ = 'id_etab';
-        $champTri="id_etab";
-        $tabInfosEtablissement = $this->rechercherEtablissement($enregistrement, $champ, $value, $champTri);
-        
-        
         /*Recherche des infos sur les éventuels voeux déjà faits*/
         $statement = "SELECT count(*) FROM validations WHERE `id_eleve`= ?";
         $tabDatas = array($idEleve);
@@ -371,15 +364,31 @@ class Etablissement {
         else {
             $nbVoeux = $tableauVoeuxDejaFaits[0][0];
         }
-       
-        /*Inscription des voeux */
-        $iterationClassement = $nbVoeux+1;
-        $commentaire ='';
-        $statutVoeu = 'standard';
         
-        $statement = "INSERT INTO validations (id_eleve,id_etab,commentaire,num_eleve_etab,classement,statutVoeu) VALUES (?,?,?,?,?,?) ";
-        $tabDatas = array($idEleve,$value,$commentaire,$numEleveEtab,$iterationClassement,$statutVoeu);
-        return $this->db->queryPDOPreparedExec($statement, $tabDatas);
+        /* recherche des infos sur l'établissement à valider */
+        $enregistrement = "*";
+        $champ = 'id_etab';
+        $champTri="id_etab";
+        $tabInfosEtablissement = $this->rechercherEtablissement($enregistrement, $champ, $value, $champTri);
+         
+        /*L'établissement a enregistrer l'est-il déjà ?   */
+        $statement = "SELECT count(*) FROM validations WHERE `id_eleve`= ? AND `id_etab`= ?";
+        $tabDatas = array($idEleve, $value);
+        $VoeuxDejaFaitOuPas  = $this->db->queryPDOPrepared($statement, $tabDatas);       
+        
+        if ($VoeuxDejaFaitOuPas[0]['count(*)'] != 0 ){
+            return FALSE;
+        }
+        else{        
+            /*Inscription des voeux */
+            $iterationClassement = $nbVoeux+1;
+            $commentaire ='';
+            $statutVoeu = 'standard';
+
+            $statement = "INSERT INTO validations (id_eleve,id_etab,commentaire,num_eleve_etab,classement,statutVoeu) VALUES (?,?,?,?,?,?) ";
+            $tabDatas = array($idEleve,$value,$commentaire,$numEleveEtab,$iterationClassement,$statutVoeu);
+            return $this->db->queryPDOPreparedExec($statement, $tabDatas);
+        }
     }
 
     public  function formEtablissement ($champ, $tri){

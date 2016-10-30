@@ -21,8 +21,10 @@
     {% block panneauGauche %}{{parent()}}{%endblock%}   
     {% block panneauDroite %}
         {% block panneauDroiteFirstchild%} {{parent()}} {% endblock %}
-            {% block article %}{{parent()}}
-                <div class="liste_profs">
+            {% block article %}
+                {% block articleFirstChild %}
+                    {% if connecte == TRUE %}
+                        <div class="liste_profs">
                     {{listeProfs}} {{classe}}: <br />
                     <ul>
                         {% for list in listeProfesseurs if list.matiere != 'TUTORAT' %}
@@ -44,7 +46,7 @@
                 <div class="voeuxParent">
                     {{labelnbVoeux}} : {{nbVoeux}} 
                         {% if nbVoeux < nbVoeuxMax %}
-                            <i>(il reste {{nbVoeuxMax - nbVoeux}} voeux possibles)</i>
+                            <i>(il reste {{nbVoeuxMax - nbVoeux}} voeu{% if (nbVoeuxMax - nbVoeux)>1 %}x{%endif%} possible{% if (nbVoeuxMax - nbVoeux)>1 %}s{%endif%})</i>
                         {% endif %}
                     <br />
                     {% if nbVoeux == 0%}{{nbVoeuxNull}}. <br />
@@ -54,9 +56,16 @@
                     {%endif%}
                     
                     {% if nbVoeux < nbVoeuxMax %}
-                    <p><a href="orientation.php?statut={{statut}}" >{{labelLien}}</a></p>
+                        <div class=''>
+                    <p><a href="orientation.php?statut={{statut}}" >{{labelLien1}}</a></p>
+                   
+                        </div>
                     {% endif %}
                 </div>
+                    {%endif%}
+                {%endblock%}{{parent()}}
+                
+                
             {% endblock %}
         {% block panneauDroiteSecondchild %} {{parent()}} {% endblock %}    
     {% endblock %}

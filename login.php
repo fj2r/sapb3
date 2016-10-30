@@ -24,10 +24,16 @@ $eleve = new lib\Eleve($db);
 
 $connecte = gestionIdentification($eleve, $statut);        //gestion de l'identification (session & cookies)
 
-$eleve->profilEleve();                //récupération des infos sur l'élève
+$existenceProfil = $eleve->profilEleve();                //récupération des infos sur l'élève
 
-$connecte = gestionIdentification($eleve, $statut); 
-
+if ($existenceProfil == TRUE){
+    $eleve->genererSession();
+    $eleve->genererCookie();
+    $connecte = TRUE;
+}
+else {
+    $connecte = FALSE;
+}
 $profilEleve =array(
     "nom"=>''.$eleve->getNom().'',
     "prenom"=>''.$eleve->getPrenom().'',

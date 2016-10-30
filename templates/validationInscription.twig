@@ -27,6 +27,7 @@
                         <div class="">
                             {{identite}} : {{Prénom}}&nbsp;{{Nom_de_famille}}&sbquo;&nbsp;{{ne_le}} {{Date_Naissance}} {{a}} {{Commune_Naiss_}}.<br />
                         </div>
+                        {% if dejaEnregistre == FALSE %}
                         <div class = "">
                         {{infoMail}} : {{mail1}}<br /><br />
                         {{messageBienvenue}}<br />
@@ -42,7 +43,12 @@
                         <div class = "lien">
                             <a href="{{lien}}{{statut}}" target="_self">{{retourLogin}}</a>
                         </div>
-                        
+                        {%else %}
+                            <div class = "text">{{dejaEnregistreMessage}}</div>
+                            <div class = "lien">
+                            <a href="login.php?statut={{statut}}" target="_self">{{retourLogin}}</a>
+                        </div>
+                        {%endif%}
                     </div>
                 {% else %}  
                     <div class="article">

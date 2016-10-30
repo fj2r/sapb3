@@ -21,7 +21,9 @@
     {% block panneauDroite %}
         {% block panneauDroiteFirstchild%} {{parent()}} {% endblock %}
             {% block article %}{{parent()}}
-                <div id="choix1">
+                {% block articleFirstChild %}
+                    {% if connecte == TRUE %}
+                    <div id="choix1">
                     {{infoFormulaire}}
                     <form action=""   method="POST" onclick="loadSelect('resultats', document.getElementById('formulaire1').value, document.getElementById('formulaire2').value)">
                         {% if formulaire1 is defined  %}
@@ -59,7 +61,9 @@
                               {% include 'listeEtablissements.twig'%}
                           {%endif%}
                             
-                        </div>        
+                        </div> 
+                    {%endif%}
+                {%endblock%}
             {% endblock %}
         {% block panneauDroiteSecondchild %} {{parent()}} {% endblock %}    
     {% endblock %}

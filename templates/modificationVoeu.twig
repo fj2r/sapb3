@@ -1,0 +1,107 @@
+
+{# extension du template layout pour le template principal #}
+
+{% extends "layout_bundle.twig" %}
+
+
+{% block identifiants %}{{parent()}}{% endblock %}
+
+{% block title %}{{parent()}}Accueil{% endblock %}
+{% block cadre_haut %}
+        {% block chapeau_haut %}{{parent()}}{% endblock %}
+        {% block menuUtilisateur %}
+            {{parent()}}
+            
+        {% endblock %}
+        {% block chapeau_bas %}{{parent()}}{% endblock %}
+    
+{% endblock %}
+
+{% block contenu %}
+    {% block panneauGauche %}{{parent()}}{%endblock%}   
+    {% block panneauDroite %}
+        {% block panneauDroiteFirstchild%} {{parent()}} {% endblock %}
+            {% block article %}
+                {% block articleFirstChild %}
+                    {% if connecte == TRUE %}
+                      
+                        <div class ="formulaire">
+                            
+                            <table class ="liste_voeux">
+                                <thead class="tableHeader">Rappel du voeu à modifier :</thead>
+                            {% for etab in listeVoeux %}
+
+                                <tr>
+                                    <td> N°{{etab.classement}} : ({{etab.UAI}}) - <a href="{{etab.lien}}">{{etab.nom}}</a></td>
+                                    <td>  {{academie}}{{etab.academie}} ({{commune}} : {{etab.commune}})</td>
+                                    
+                                </tr>
+
+                            {% endfor %}
+                            </table>
+                            
+                        </div>
+                            
+                        <div class = "formulaire">
+                            <p>Modifier le classement du voeu : </p>
+                            <form action ="modifierClassement.php" method="POST">
+                            {% for i in 1..nbVoeuxMax %}
+                                <p><input type="radio" name="classement" value="{{i}}">{{i}}</input><p>
+                            {%endfor%}
+                                <input type="submit" value ="Modifier"></input>
+                            </form>
+                        </div>
+                        
+                        <div class ="formulaire">
+                            <div id="choix1">
+                    {{infoFormulaire}}
+                    <form action=""   method="POST" onclick="loadSelectPourModif('resultats', document.getElementById('formulaire1').value, document.getElementById('formulaire2').value)">
+                        {% if formulaire1 is defined  %}
+                            <p>{{labelForm1}} :</p>
+                            <p> <select id="formulaire1" name="formulaire1">
+                        {% for option in formulaire1 %}
+                            <option value="{{option}}">{{option}}</option>
+                        {%endfor%}
+                        </select>
+                        {%endif%}
+                        {% if formulaire2 is defined  %}
+                            <p>{{labelForm2}} :</p>
+                            <p><select id="formulaire2" name="formulaire2"></p>
+                        {% for option in formulaire2 %}
+                            <option value="{{option}}">{{option}}</option>
+                        {%endfor%}
+                        </select>
+                        {%endif%}
+                        {% if formulaire3 is defined  %}
+                            <p>{{labelForm3}} :</p>
+                            <p> <select id="formulaire3" name="formulaire3"></p>
+                        {% for option in formulaire3 %}
+                            <option value="{{option}}">{{option}}</option>
+                        {%endfor%}
+                        </select></p>
+                        {%endif%}
+                        
+                    </form>
+                    
+                    
+                </div>
+                        
+                        <div id="resultats">
+                          {% if app.request.isXmlHttpRequest == TRUE %}
+                              {% include 'listeEtablissementsPourModif.twig'%}
+                          {%endif%}
+                            
+                        </div> 
+
+                        </div>
+                    {%endif%}
+                {%endblock%}{{parent()}}
+                
+                
+            {% endblock %}
+        {% block panneauDroiteSecondchild %} {{parent()}} {% endblock %}    
+    {% endblock %}
+    
+{%endblock%}
+
+{% block footer %}{{parent()}}<hr />{% endblock %}

@@ -1,0 +1,11 @@
+@CHARSET "UTF-8";
+/*
+	Feuille de styles de l'espace INSCRIPTION
+	
+	date: 2/9/2010 
+*/
+
+/* Intitule de champs de formulaire */
+#inscription .intitule {
+	background: #FFF3D2 none;
+}

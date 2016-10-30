@@ -1,5 +1,8 @@
 {
     "nomSite": "sAPB",
+    "administrateur":"Administrateur du site",
+    "contact":"root@localhost",
     "nbVoeuxMax":"6"
+    
     
 }

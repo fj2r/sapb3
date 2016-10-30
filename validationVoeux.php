@@ -41,8 +41,7 @@ $nbVoeux  = intval($eleve->verifierVoeux()); //combien a-t-il de voeux ?
 
 if ($nbVoeux >=$nbVoeuxMax){
     $message = 'Désolé mais vous avez atteint la limite maximale des voeux.';
-    genererAlertBox($message);
-    //header('Location:index.php');
+    
 }
 else {
     
@@ -61,18 +60,57 @@ else {
 
 $listeVoeux = $eleve->recupererVoeux();
 
-$etablissement = new \lib\Etablissement($db);   //pour construire les formulaires de choix d'étab
+$etablissement = new \lib\Etablissement($db);   //pour récapituler les voeux
 
-//construction des foermulaires (mis en forme dans Twig
-$champ ='academie'; $tri = 'academie';
 
-$formEtab1 = $etablissement->formEtablissement($champ, $tri); 
+////////////////////////////Les variables communes à passer au template//////////////////
+include_once ('inc/varTwig.inc.php');
 
-$champ ='region'; $tri = 'region';
+////////////////////////////passage du tableau de variables pour template///////
 
-$formEtab2 = $etablissement->formEtablissement($champ, $tri);
 
-$champ ='nom'; $tri = 'nom';
- 
-$formEtab3 = $etablissement->formEtablissement($champ, $tri);
+///////////////éventuelle surcharge des variables pour le template ?//////////
+$template = 'validationVoeux';
 
+
+$page = 'validationVoeux';         //Nom de l'index pour récupérer les infos pour les textes
+$contenuJSON = new lib\generateurArticle($page); //on instancie le générateur d'article 
+$contenuArticle = $contenuJSON->lireContenu($page)[''.$page.''][0]; // méthode pour lire les infos du fichier de langue
+
+$pageIdentifiants = 'identifiants';                //Nom de l'index pour récupérer les infos pour les menus du bandeau
+$contenuJSONidentifiants = new lib\generateurArticle($pageIdentifiants);
+$contenuIdentifiants = $contenuJSONidentifiants->lireContenu($pageIdentifiants)[''.$pageIdentifiants.''][0];
+
+$pageMenu = 'menus';                //Nom de l'index pour récupérer les infos pour les menus du bandeau
+$contenuJSONMenu = new lib\generateurArticle($pageMenu);
+$contenuMenu = $contenuJSONMenu->lireContenu($pageMenu)[''.$pageMenu.''][0];
+/////////////////////////////////////////////////////////////
+
+$variablesTemplate = array(
+    'annee' => ''.$date.'',
+    'version'=>''.$version.'',
+    'charset'=>''.$charset.'',
+    'titrePage'=>''.$titrePage.'',
+    'connecte'=>''.$connecte.'',
+   
+    'texte_footer'=>''.$texte_footer.'',
+    'bandeauLogin'=>''.bandeauLogin($statut).'',   
+    'statut'=>''.$statut.'',
+    
+    'nbVoeux'=>''.$nbVoeux.'',
+    'nbVoeuxMax'=>''.$nbVoeuxMax.'',
+   
+    
+    ) ;
+
+$mergeVarTemplate = array_merge(
+        $contenuIdentifiants,
+        $variablesTemplate,
+        $contenuArticle,
+        $contenuMenu,
+        $profilEleve
+        ); //construction du tableau avec les données à envoyer au template
+
+
+
+appelTemplate($template, $twig, $mergeVarTemplate); //construction de la page web

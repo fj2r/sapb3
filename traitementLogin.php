@@ -16,24 +16,25 @@ include_once ('inc/initTwig.inc.php');
 
 
 ////////////////////////////Modèle  ////////////////////////////////////////////
-if(isset($_POST)){
-    if(empty($_POST['num_dossier']) || empty($_POST['code_conf']) || $_POST['num_dossier'] =='N° de dossier' || $_POST['code_conf']=='Mot de passe' ){
-        $string = 'Location: login.php?statut=eleve';
-        header($string);
-    }
-}
 
 $db = new lib\bdd();            //instance de la database
 
 $eleve = new lib\Eleve($db, $statut); //création de l'élève
-$eleve->setCodeConfidentiel($_POST['code_conf']);
-$eleve->setNumDossier($_POST['num_dossier']);
 
-$eleve->profilEleve(); //récupération des infos sur l'élève
+$eleve->setCodeConfidentiel($codeConf);
+$eleve->setNumDossier($numDossier);
 
-$eleve->genererSession();
-$eleve->genererCookie();
+$existenceProfil = $eleve->profilEleve(); //récupération des infos sur l'élève
 
+
+if ($existenceProfil == TRUE){
+    $eleve->genererSession();
+    $eleve->genererCookie();
+    $connecte = TRUE;
+}
+else {
+    $connecte = FALSE;
+}
 $profilEleve =array(
     "nom"=>''.$eleve->getNom().'',
     "prenom"=>''.$eleve->getPrenom().'',
@@ -72,7 +73,7 @@ $contenuMenu = $contenuJSONMenu->lireContenu($pageMenu)[''.$pageMenu.''][0];
 
 /////////////////////////////////////////////////////////////
 
-$connecte = true ;
+
 $variablesTemplate = array('annee' => ''.$date.'',
     'version'=>''.$version.'',
     'charset'=>''.$charset.'',

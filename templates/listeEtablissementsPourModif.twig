@@ -1,0 +1,20 @@
+{# empty Twig template #}
+
+{%block listeEtablissements%}
+    
+    <div class ="formulaire">
+        <form action="validationVoeux.php?statut={{statut}}" method="POST" >
+            
+           {% for etab in liste%}
+               <p> <input type="radio" name="etab" value="{{etab.id_etab}}"><a href="{{etab.lien}}" target="_blank">{{etab.nom}}</a> <i>({{etab.statut}})</i></ input></p>
+           {%endfor%}
+           {% for etab in listeVoeux %}
+        <input type ="hidden" name="etabAModifier" value="{{etab.id_etab}}" />
+            {% endfor %}
+        <INPUT TYPE="submit" NAME="submit" VALUE="Valider" />
+        </form>
+        
+        
+    </div>
+    
+{%endblock%}
