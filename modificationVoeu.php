@@ -93,12 +93,12 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'sexe'=>''.$eleve->getSexe().'',
     'texte_footer'=>''.$texte_footer.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
-    'statut'=>''.$statut.'',
-   
+    'statut'=>''.$_GET['statut'].'',
+   'idVoeu'=>''.$_GET['idVoeu'].'',
     'nbVoeuxMax'=>''.$nbVoeuxMax.'',
     'nbVoeux'=>''.$nbVoeux.'',
     'listeVoeux'=>$listeVoeux,
-    'idVoeu'=>''.$_GET['idVoeu'].'',
+    
     'formulaire1'=>$formEtab1,
     'formulaire2'=>$formEtab2
     ) ;

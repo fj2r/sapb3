@@ -406,15 +406,33 @@ class Etablissement {
         return $suppressionVoeu;
     }
     
-    public function modifierClassement($idVoeu,$id_eleve, $nouveauClassement){
-        /* mise à jour des autres voeux*/
-        $statement = "UPDATE validations SET `classement` = `classement`+1 WHERE `id_eleve`= ? AND `classement`>= ?";
-        $tabDatas = array( $id_eleve,$nouveauClassement);
-        $suppressionVoeu  = $this->db->queryPDOPreparedExec($statement, $tabDatas);
+    public function modifierClassement($idVoeu,$id_eleve,$ancienClassement, $nouveauClassement){
+        if ($nouveauClassement < $ancienClassement ){
+                /* mise à jour des autres voeux*/
+                $statement = "UPDATE validations SET `classement` = `classement`+1 WHERE `id_eleve`= ? AND `classement`>= ?";
+                $tabDatas = array( $id_eleve,$nouveauClassement);
+                $suppressionVoeu  = $this->db->queryPDOPreparedExec($statement, $tabDatas);
+
+                $statement = "UPDATE validations SET `classement` = ? WHERE `id_voeu`= ?";
+                $tabDatas = array($nouveauClassement, $idVoeu);
+                $suppressionVoeu  = $this->db->queryPDOPreparedExec($statement, $tabDatas);
+        }
+        else{
+                $statement = "UPDATE validations SET `classement` = `classement`-1 WHERE `id_eleve`= ? AND `classement`<= ? AND `classement`> ? ";
+                $tabDatas = array( $id_eleve,$nouveauClassement,$ancienClassement);
+                $suppressionVoeu  = $this->db->queryPDOPreparedExec($statement, $tabDatas);
+
+                $statement = "UPDATE validations SET `classement` = ? WHERE `id_voeu`= ?";
+                $tabDatas = array($nouveauClassement, $idVoeu);
+                $suppressionVoeu  = $this->db->queryPDOPreparedExec($statement, $tabDatas);
+        }
         
-        $statement = "UPDATE validations SET `classement` = ? WHERE `id_voeu`= ?";
-        $tabDatas = array($nouveauClassement, $idVoeu);
-        $suppressionVoeu  = $this->db->queryPDOPreparedExec($statement, $tabDatas);
+    }
+    
+    public function modifierEtablissement($idVoeu,$nouvelEtab){
+                $statement = "UPDATE validations SET `id_etab` = ? WHERE `id_voeu`= ?";
+                $tabDatas = array($nouvelEtab, $idVoeu);
+                $miseAJourVoeu  = $this->db->queryPDOPreparedExec($statement, $tabDatas);
         
         
     }

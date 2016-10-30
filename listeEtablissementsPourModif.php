@@ -57,7 +57,8 @@ $variablesTemplate = array(
     'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
     'statut'=>''.$statut.'',
     'liste'=>$liste,
-    
+    'statut'=>''.$_GET['statut'].'',
+   'idVoeu'=>''.$_GET['idVoeu'].'',
    
     ) ;
 

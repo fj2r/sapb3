@@ -15,3 +15,18 @@
 <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script> <!-- Les sources de la librairie JQuery -->
 <script type="text/javascript" src="js/jquery-ui-1.11.4/jquery-ui.min.js"></script> <!-- Les sources de la librairie JQuery UI-->
 
+<script type="text/javascript"  src="js/maplace.min.js"></script>
+
+<script type="text/javascript">
+$(function() {
+    new Maplace({
+            show_markers: false,
+    locations: [{
+        lat: 45.9,
+        lon: 10.9,
+        zoom: 8
+    }]
+}).Load();
+});
+</script>
+

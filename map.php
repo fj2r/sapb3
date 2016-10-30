@@ -40,7 +40,7 @@ $profilEleve =array(
     "classe"=>''.$eleve->getLibStructure().'',
     "codeClasse"=>''.$eleve->getCodeStructure().'',
     "id"=>''.$eleve->getId_eleve().'',
-    "sexe"=>''.$eleve->getSexe().'',
+    "sexe"=>''.$eleve->getSexe().''
     
     );
 
@@ -60,7 +60,7 @@ include_once ('inc/varTwig.inc.php');
 ////////////////////////////passage du tableau de variables pour template///////
 
 ///////////////éventuelle surcharge des variables pour le template ?//////////
-$template = 'map';     //Nom du template à appeler
+$template = 'googleMapAPI';     //Nom du template à appeler
 
 $page = 'orientation';         //Nom de l'index pour récupérer les infos pour les textes
 $contenuJSON = new lib\generateurArticle($page); //on instancie le générateur d'article 
@@ -92,8 +92,7 @@ $variablesTemplate = array(
     'nbVoeux'=>''.$nbVoeux.'',
     'listeVoeux'=>$listeVoeux,
     
-    'formulaire1'=>$formEtab1,
-    'formulaire2'=>$formEtab2,
+    
    
     ) ;
 

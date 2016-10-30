@@ -34,7 +34,7 @@ dataType: "text",
 
 }
 
-function loadSelectPourModif(id, academie, type) {
+function loadSelectPourModif(id, academie, type, statut, idVoeu) {
 
 var id;
 var academie;
@@ -44,7 +44,7 @@ $.ajax({
 	
 //La page à appeler
 
-url     : "listeEtablissementsPourModif.php",
+url     : "listeEtablissementsPourModif.php?statut="+statut+"&idVoeu="+idVoeu,
 type    : "POST",
 data    : 'academie='+academie+'&type='+type,
 cache   : false,
@@ -81,7 +81,7 @@ $.ajax({
 	
 //La page à appeler
 
-url     : "map.php",
+url     : "map.php?statut=eleve",
 type    : "POST",
 data    : 'latitude='+latitude+'&longitude='+longitude+'&infowindow='+infowindow,
 cache   : false,
@@ -106,3 +106,4 @@ dataType: "text",
 });
 
 }
+

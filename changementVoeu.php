@@ -54,8 +54,7 @@ $etablissement = new \lib\Etablissement($db);   //pour construire les formulaire
 $etablissement->setClassement($listeVoeux[0]['classement']);
 
 $idVoeu = $_GET['idVoeu'];
-$ancienClassement = $_GET['cltDep'];
-$nouveauClassement = $_POST['classement'];
-$etablissement->modifierClassement($idVoeu,$eleve->getId_eleve(),$ancienClassement ,$nouveauClassement);
+$nouvelEtab = $_POST['etab'];
+$etablissement->modifierEtablissement($idVoeu,$nouvelEtab);
 
 header('Location:modificationVoeu.php?statut='.$statut.'&idVoeu='.$idVoeu);

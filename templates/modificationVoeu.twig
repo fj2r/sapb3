@@ -44,7 +44,7 @@
                             
                         <div class = "formulaire">
                             <p>Modifier le classement du voeu : </p>
-                            <form action ="modifierClassement.php?statut={{statut}}&idVoeu={{idVoeu}}" method="POST">
+                            <form action ="modifierClassement.php?statut={{statut}}&idVoeu={{idVoeu}}&cltDep={% for etab in listeVoeux %}{{etab.classement}}{% endfor %}" method="POST">
                             {% for i in 1..nbVoeuxMax %}
                                 <p><input type="radio" name="classement" value="{{i}}">{{i}}<p>
                             {%endfor%}
@@ -55,7 +55,7 @@
                         <div class ="formulaire">
                             <div id="choix1">
                     {{infoFormulaire}}
-                    <form action=""   method="POST" onclick="loadSelectPourModif('resultats', document.getElementById('formulaire1').value, document.getElementById('formulaire2').value)">
+                    <form action=""   method="POST" onclick="loadSelectPourModif('resultats', document.getElementById('formulaire1').value, document.getElementById('formulaire2').value, '{{statut}}', '{{idVoeu}}')">
                         {% if formulaire1 is defined  %}
                             <p>{{labelForm1}} :</p>
                             <p> <select id="formulaire1" name="formulaire1">

@@ -57,12 +57,15 @@
                 </div>
                         
                         <div id="resultats">
+          
                           {% if app.request.isXmlHttpRequest == TRUE %}
                               {% include 'listeEtablissements.twig'%}
                               
                           {%endif%}
                             
                         </div> 
+                    <h5>Localisation de l'établissement :</h5>
+                    
                     {%endif%}
                 {%endblock%}
             {% endblock %}

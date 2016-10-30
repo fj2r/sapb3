@@ -3,7 +3,7 @@
 {%block listeEtablissements%}
     
     <div class ="formulaire">
-        <form action="validationVoeux.php?statut={{statut}}" method="POST" >
+        <form action="changementVoeu.php?statut={{statut}}&idVoeu={{idVoeu}}" method="POST" >
             
            {% for etab in liste%}
                <p> <input type="radio" name="etab" value="{{etab.id_etab}}"><a href="{{etab.lien}}" target="_blank">{{etab.nom}}</a> <i>({{etab.statut}})</i></ input></p>
