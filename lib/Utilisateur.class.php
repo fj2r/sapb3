@@ -17,6 +17,7 @@ class Utilisateur {
     protected $numDossier;
     protected $passwd;
     protected $maBDD;
+    public $db;
     protected $pdo;
     
     const ELEVE = 'eleve';
@@ -26,7 +27,7 @@ class Utilisateur {
 
 
     public function __construct($db, $statut='eleve') {
-        
+        $this->db = $db;
         $this->pdo = $db->getPDO();
         
         if (isset($statut)){

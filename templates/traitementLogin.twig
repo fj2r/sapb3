@@ -63,6 +63,12 @@
                     {% endif %}
                 </div>
                     {%endif%}
+                    {% block article_alt%}
+                    {% if connecte == FALSE %}
+                        {%include 'loginFalse.twig'%}
+                    
+                    {%endif%}
+                {%endblock%}
                 {%endblock%}{{parent()}}
                 
                 

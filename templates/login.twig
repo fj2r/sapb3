@@ -27,13 +27,27 @@
             {% block article %}{{parent()}}
     
     
-        
-            <div id="titre">{{titre}}</div>
-            <div class ="text"><p>{{informations}}</p></div>
-            <a href="inscription.php?statut=eleve" ><img src="templates/IMG/{{image}}" /> </a>
-        
-            <br />
-        
+                {% if statut == 'eleve'%}    
+                    <div id="titre">{{titre}}</div>
+                    <div class ="text"><p>{{informations}}</p></div>
+                    <a href="inscription.php?statut=eleve" ><img src="templates/IMG/{{image}}" /> </a>
+
+                    <br />
+                {%elseif statut == 'professeur'%}
+                    <div id="titre">{{titre}}</div>
+                    <div class ="text"><p></p></div>
+                    
+
+                    <br />
+                {%elseif statut == 'administratif'%}    
+                     <div id="titre">{{titre}}</div>
+                    <div class ="text"><p></p></div>
+                    
+
+                    <br />
+                {%else%}
+                         
+               {%endif%}
    
             {% endblock %}
         {% block panneauDroiteSecondchild %} {{parent()}} {% endblock %}    

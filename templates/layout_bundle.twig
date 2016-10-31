@@ -50,9 +50,9 @@
     </div>
     <div id="imgBiseau"></div>
     <div id="bandeau3">
-        <a target="_blank" href="">Codes perdus ?</a>
-        <a id="lien_information" href="" target="_blank"> Information</a>
-        <a id="lien_contact" href="" target="">Contact</a>
+        <a href="" id="lien_code_perdu"target="_blank">Codes perdus ?</a>
+        <a href="" id="lien_information"  target="_blank"> Information</a>
+        <a href="" id="lien_contact"  target="_blank">Contact</a>
     </div>
     </div>
     {% endblock %}
@@ -77,12 +77,7 @@
             {% block article %}
                 
                 
-                {% block article_alt%}
-                    {% if connecte == FALSE %}
-                        {%include 'loginFalse.twig'%}
-                    
-                    {%endif%}
-                {%endblock%}
+                
                 
             {% endblock %}
         {% block panneauDroiteSecondchild%}

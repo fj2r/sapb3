@@ -96,13 +96,22 @@ function bandeauLogin ($statut){
             $formBandeauEleve = new lib\Formulaire($tableauPourBandeau);
             
             $formBandeauEleve->surround = 'span';
-            $formBandeauEleve->label = 'Connexion';
-            $formBandeauEleve->size = 15 ;
-            $formBandeauEleve->type = 'password' ;
-            $httpReturn = $formBandeauEleve->input('num_dossier').$formBandeauEleve->input('code_conf').$formBandeauEleve->submit();
+            $formBandeauEleve->label = 'Numéro de dossier' ;
+            $formBandeauEleve->size = 10 ;
+            $formBandeauEleve->type = 'text' ;
+            $httpReturn = $formBandeauEleve->input('num_dossier');
            
+            $formBandeauEleve->surround = 'span';
+            $formBandeauEleve->label = 'Code confidentiel' ;
+            $formBandeauEleve->size = 10 ;
+            $formBandeauEleve->type = 'password' ;
+            $httpReturn .=$formBandeauEleve->input('code_conf');
+            
+            $formBandeauEleve->label = 'Connexion' ;
+            $httpReturn .=$formBandeauEleve->submit();
+            
             return $httpReturn;
-            var_dump($httpReturn);
+            
         }
         elseif ($statut == 'professeur'){
             $tableauPourBandeau = array (
@@ -113,11 +122,20 @@ function bandeauLogin ($statut){
             $formBandeauProf = new lib\Formulaire($tableauPourBandeau);
             
             $formBandeauProf->surround='span';
-            $formBandeauProf->label = 'Connexion';
+            $formBandeauProf->label = 'Nom d\'utilisateur';
+            $formBandeauProf->size = 20 ;
+            $formBandeauProf->type = 'text' ;
+            $httpReturn = $formBandeauProf->input('login');
+            
+            $formBandeauProf->surround='span';
+            $formBandeauProf->label = 'Mot de passe';
             $formBandeauProf->size = 20 ;
             $formBandeauProf->type = 'password' ;
-            $httpReturn = $formBandeauProf->input('login').$formBandeauProf->input('passwd').$formBandeauProf->submit();
+          
+            $httpReturn .= $formBandeauProf->input('passwd');
             
+            $formBandeauProf->label = 'Connexion';
+            $httpReturn .= $formBandeauProf->submit();
             return $httpReturn;
             
         }
@@ -131,7 +149,7 @@ function bandeauLogin ($statut){
             
                         
             $formBandeauAdmin->surround='span';
-            $formBandeauAdmin->label = 'Connexion';
+            $formBandeauAdmin->label = $formBandeauAdmin->label;
             $formBandeauAdmin->size = 20 ;
             $formBandeauAdmin->type = 'password' ;
             $httpReturn = $formBandeauAdmin->input('login').$formBandeauAdmin->input('passwd').$formBandeauAdmin->submit();
