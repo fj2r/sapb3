@@ -24,13 +24,23 @@
             {% block article %}
                 {% block articleFirstChild %}
                     {% if connecte == TRUE %}
-                      {% if statut == 'eleve' %}
-                          {%include 'traitementLoginEleve.twig'%}
-                      {%endif%}
-                      {% if statut == 'professeur' %}
-                          {%include 'traitementLoginProf.twig'%}
-                      {%endif%}
-                      
+                        <div class="formulaire">
+                            <p>{{messageDivision}} {{classeSelectionnee}}
+                        </div>
+                        <div class="formulaire ">
+                            
+                            <ul>
+                                
+                                {%for eleve in listeEleves %}
+                                    {% if eleve.nombreVoeux != 0 %}
+                                        <li><a href="avisProfesseur.php?statut={{statut}}&idEleve={{eleve.id_eleve}}">{{eleve.1}} {{eleve.2}}</a> (nombre de voeux : <strong>{{eleve.nombreVoeux}}</strong>) </li>
+                                    {% else %}
+                                    <li>{{eleve.1}} {{eleve.2}} <i>(nombre de voeux : {{eleve.nombreVoeux}})</i> </li>
+                                    {%endif%}
+                                {% endfor %}
+                            </ul>
+                            
+                        </div>
                     {%endif%}
                     {% block article_alt%}
                     {% if connecte == FALSE %}

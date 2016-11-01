@@ -5,7 +5,7 @@ namespace lib;
 class Eleve extends Utilisateur {
     
     protected $connexion;
-    protected $db;
+    public $db;
     protected $pdo;
     protected $numDossier = 000000;
     protected $codeConf = 'JD0000';
@@ -288,20 +288,7 @@ class Eleve extends Utilisateur {
     public function genererCookie() {
        if ($this->statut == 'eleve'){
            
-            setcookie('num_dossier');
-            setcookie('code_conf');
-            setcookie('num_eleve_etab');
-            setcookie('nom');
-            setcookie('prenom');
-            setcookie('classe');
-            setcookie('id_eleve');
-            unset ($_COOKIE['num_dossier']);
-            unset ($_COOKIE['code_conf']);
-            unset ($_COOKIE['num_eleve_etab']);
-            unset ($_COOKIE['nom']);
-            unset ($_COOKIE['prenom']);
-            unset ($_COOKIE['classe']);
-            unset ($_COOKIE['id_eleve']);
+            $this->detruireCookie();
            
             setcookie('num_dossier',$this->numDossier,time()+3600);
             setcookie('code_conf',md5($this->codeConf),time()+3600);

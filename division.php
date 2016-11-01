@@ -6,49 +6,59 @@
  * Utilisation dans le cadre de la licence incluse.
  */
 
+////////////////////////////* Appel du header - Sessions*//////////////////////
+include_once ('inc/headers.inc.php');
+///////////////////////////////Appel des libraires  ////////////////////////////
+include_once('inc/mainLib.inc.php');
+include_once('inc/fonctions.inc.php');
+////////////////////////////* Appel du moteur de templates Twig*////////////////
+include_once ('inc/initTwig.inc.php');
+////////////////////////////Les variables communes à passer au template//////////////////
+include_once ('inc/varTwig.inc.php');
+
+////////////////////////////Modèle  ////////////////////////////////////////////
+
+$db = new lib\bdd();            //instance de la database nécessaire pour les identifications
+
 $prof = new lib\Professeur($db, $statut); //création de l'instance professeur
 
-
-$prof->setLogin($login);
-
-$prof->setPasswordNonEncrypte($passwd);
-$prof->setPasswordEncrypte($passwd); //encrypte à la volée le pass par hachage standard
-
-$existenceProfil = $prof->existanceProf(); //récupération des infos sur le prof, s'il existe
-
-
-if ($existenceProfil == TRUE){
+if (isset($phpsessid) && !empty($phpsessid) ){
     
-    $profilProf = $prof->profilProf();
-    $prof->genererSession();
-    $prof->genererCookie();
+    
     $connecte = TRUE;
 }
 else {
     $connecte = FALSE;
 }
+
 $profilProf =array(
-    "nom"=>''.$prof->getNom().'',
-    "prenom"=>''.$prof->getPrenom().'',
-    "nomComplet"=>''.$prof->getNomComplet().'',
-    "codeStructure"=>$prof->getCodeStructure(),
-    "id_pedago"=>''.$prof->getIdPedago().'',
-    "civilite"=>''.$prof->getCivilite().'',
-    "matiere"=>$prof->getMatiere(),
+    "nom"=>''.$_SESSION['nom'].'',
+    "prenom"=>''.$_SESSION['prenom'].'',
+    "nomComplet"=>''.$_SESSION['nomComplet'].'',
+    "codeStructure"=>$_SESSION['codeStructure'],
+    "id_pedago"=>''.$_SESSION['id_pedago'].'',
+    "civilite"=>''.$_SESSION['civilite'].'',
+    "matiere"=>$_SESSION['matiere'],
     
     
 );
 
 
+$division = new lib\Division($db, $_GET['codeStructure']); //on instancie pour avoir des infos sur la classe et lister les élèves
+
+$listeEleves = $division->listerEleves(); //c'est un tableau à 1 dimension
+
+/* on va compléter le tableau en allant chercher le nombre de voeux pour chaque élève dans la liste*/
 
 
 
+//var_dump($division);
 ////////////////////////////passage du tableau de variables pour template///////
 
 ///////////////éventuelle surcharge des variables pour le template ?//////////
-$template = 'traitementLogin';     //Nom du template à appeler
+$template = 'division';     //Nom du template à appeler
 
-$page = 'traitementLogin';         //Nom de l'index pour récupérer les infos pour les textes
+$page = 'division';         //Nom de l'index pour récupérer les infos pour les textes
 $contenuJSON = new lib\generateurArticle($page); //on instancie le générateur d'article 
 $contenuArticle = $contenuJSON->lireContenu($page)[''.$page.''][0]; // méthode pour lire les infos du fichier de langue
 
@@ -73,8 +83,8 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
     'statut'=>''.$statut.'',
     'profilProf'=>$profilProf,
-    'classesProf'=>$prof->classesProf(),
-    'matieres'=>$prof->matieresProf(),
+    'classeSelectionnee'=>''.$_GET['codeStructure'].'',
+    'listeEleves'=>$listeEleves,
     ) ;
 
 

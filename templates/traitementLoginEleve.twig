@@ -1,0 +1,38 @@
+  <div class="liste_profs">
+                    {{listeProfs}} {{classe}}: <br />
+                    <ul>
+                        {% for list in listeProfesseurs if list.matiere != 'TUTORAT' %}
+                        <li> {{list.nomComplet}} <i>({{list.matiere}})</i> </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                <div class="tuteurs">
+                    {{tuteurs}} : <br />
+                     <ul>
+                    {% for list in listeProfesseurs if list.matiere=='TUTORAT' %}
+                        <li> {{list.nomComplet}} <i>({{list.matiere}})</i> </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                <div class ="lien_notes">
+                    
+                </div>
+                <div class="voeuxParent">
+                    {{labelnbVoeux}} : {{nbVoeux}} 
+                        {% if nbVoeux < nbVoeuxMax %}
+                            <i>(il reste {{nbVoeuxMax - nbVoeux}} voeu{% if (nbVoeuxMax - nbVoeux)>1 %}x{%endif%} possible{% if (nbVoeuxMax - nbVoeux)>1 %}s{%endif%})</i>
+                        {% endif %}
+                    <br />
+                    {% if nbVoeux == 0%}{{nbVoeuxNull}}. <br />
+                    {% else %} 
+                        {% include 'tableauVoeux.twig' %}
+                    
+                    {%endif%}
+                    
+                    {% if nbVoeux < nbVoeuxMax %}
+                        <div class=''>
+                    <p><a href="orientation.php?statut={{statut}}" >{{labelLien1}}</a></p>
+                   
+                        </div>
+                    {% endif %}
+                </div>

@@ -1,0 +1,12 @@
+<div class="liste_classe">
+                    {{ messageProf }} : <br />
+                    <ul>
+                        {% for classes in classesProf if classes.matiere != 'TUTORAT'%}
+                            
+                            <li> <strong><a href="division.php?statut={{statut}}&codeStructure={{classes.0 }}" target="">Classe de {{classes.0 }}</strong></a> <i>(enseignement de {{classes.matiere}})</i> </li>
+                        
+                    {% endfor %}                    
+                    </ul>
+
+</div>
+                

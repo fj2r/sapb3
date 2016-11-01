@@ -53,7 +53,8 @@
             "labelLien1" : "Faire un nouveau voeu d'orientation",
             "labelLien2":"Modifier les voeux déjà réalisés",
             "academie" : "Académie de ",
-            "commune" : "Commune de l'établissement"
+            "commune" : "Commune de l'établissement",
+            "messageProf" : "Liste des classes où vous pouvez émettre un avis sur les choix d'orientation des élèves"
         }
     ],
     "menus":[
@@ -100,6 +101,11 @@
             "labelForm1" : "Filtrer par Académie",
             "labelForm2" : "Filtrer par type",
             "labelForm3" : "Filtrer par ?"
+        }
+    ],
+    "division":[
+        {
+            "messageDivision":"Liste des élèves de la classe de"
         }
     ]
 }

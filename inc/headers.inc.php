@@ -45,6 +45,7 @@ if (isset ($_GET) && !empty($_GET['statut'])){
         }
         elseif(isset ($_POST) && !empty ($_POST['passwd'])){
             $passwd = $_POST['passwd']; //pour le cookie de profil
+            
         }
         else{
             $passwd=NULL;
