@@ -33,7 +33,7 @@
                                 
                                 {%for eleve in listeEleves %}
                                     {% if eleve.nombreVoeux != 0 %}
-                                        <li><a href="avisProfesseur.php?statut={{statut}}&idEleve={{eleve.id_eleve}}">{{eleve.1}} {{eleve.2}}</a> (nombre de voeux : <strong>{{eleve.nombreVoeux}}</strong>) </li>
+                                        <li><a href="avisProfesseur.php?statut={{statut}}&codeStructure={{classeSelectionnee}}&idEleve={{eleve.id_eleve}}">{{eleve.1}} {{eleve.2}}</a> (nombre de voeux : <strong>{{eleve.nombreVoeux}}</strong>) </li>
                                     {% else %}
                                     <li>{{eleve.1}} {{eleve.2}} <i>(nombre de voeux : {{eleve.nombreVoeux}})</i> </li>
                                     {%endif%}

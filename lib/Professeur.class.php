@@ -214,4 +214,55 @@ class Professeur extends Utilisateur {
             unset ($_COOKIE['email']);
    }
     
+   public function recupererCommentairesVoeux($voeuxEleve){
+       $resultat = array();
+       
+       foreach ($voeuxEleve as $idVoeu ){
+           
+            $statement = "SELECT * FROM `analyse_voeux` WHERE `analyse_voeux`.`id_voeu`= ? AND `analyse_voeux`.`id_pedago`= ? ";
+            $tabDatas =array ($idVoeu['id_voeu'], $this->id_pedago);
+            $requete = $this->db->queryPDOPrepared($statement, $tabDatas);
+            
+            if ($requete != NULL){
+                $resultat [$requete[0]['id_voeu']] = $requete[0]['avis'];
+            }
+            
+            
+       }
+       
+        
+        return $resultat;
+   }
+   public function ecrireCommentaireVoeu($tableauAvis){
+       
+       foreach ($tableauAvis as $idVoeu=>$avis){
+           if ($avis != '' || $avis !=NULL){
+                $nbrAvis = $this->verifierExistenceVoeu($idVoeu)[0][0]; //on vérifie si par hasard le voeu exite déjà
+                
+                if ($nbrAvis == '0'){
+                    $statement = "INSERT INTO `analyse_voeux` (`id_voeu`,`id_pedago`,`avis`) VALUES (?,?,?)  ";
+                    $tabDatas =array ($idVoeu, $this->id_pedago, $avis);
+                    $requete = $this->db->queryPDOPreparedExec($statement, $tabDatas);
+                }
+                else {
+                    $statement = "UPDATE `analyse_voeux` SET `avis` = ? WHERE `id_voeu`= ? AND `id_pedago` = ?   ";
+                    $tabDatas =array ($avis, $idVoeu, $this->id_pedago, );
+                    $requete = $this->db->queryPDOPreparedExec($statement, $tabDatas);
+                }
+                    
+                }
+            
+           }
+           
+       }
+            
+ 
+   
+   private function verifierExistenceVoeu($idVoeu){
+            $statement = "SELECT COUNT(*) FROM `analyse_voeux` WHERE `id_voeu` = ? AND `id_pedago` = ? ";
+            $tabDatas =array ($idVoeu, $this->id_pedago);
+            $requete = $this->db->queryPDOPrepared($statement, $tabDatas);
+            
+            return $requete;
+   }
 }

@@ -112,6 +112,23 @@ class Division {
          return $requete;
     }
     
-    
+    public function elevePrecedent  ($codeStructure, $nom, $prenom){
+        
+       
+        $statement = "SELECT * FROM `import_eleve_complet` WHERE `Code Structure` = ? AND (`Nom de famille`,`Prénom`) < (?,?) ORDER BY `Nom de famille` DESC,`Prénom` DESC,`Prénom 2` DESC  LIMIT 0, 1";
+        $tabDatas =array ($codeStructure,$nom, $prenom);
+        $requete = $this->db->queryPDOPrepared($statement, $tabDatas);
+        
+        return $requete;
+    }
+     public function eleveSuivant  ($codeStructure, $nom, $prenom){
+        
+       
+        $statement = "SELECT * FROM `import_eleve_complet` WHERE `Code Structure` = ? AND (`Nom de famille`,`Prénom`) > (?,?)  ORDER BY `Nom de famille`,`Prénom`,`Prénom 2`  LIMIT 0, 1";
+        $tabDatas =array ($codeStructure,$nom, $prenom);
+        $requete = $this->db->queryPDOPrepared($statement, $tabDatas);
+        
+        return $requete;
+    }
     
 }

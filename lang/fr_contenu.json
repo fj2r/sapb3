@@ -107,5 +107,10 @@
         {
             "messageDivision":"Liste des élèves de la classe de"
         }
+    ],
+    "avisProfesseur":[
+        {
+            "messageDivision":" L'élève appartient à la classe de"
+        }
     ]
 }

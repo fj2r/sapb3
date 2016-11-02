@@ -446,5 +446,47 @@ class Eleve extends Utilisateur {
         $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
    }
    
-  
+   public function informationsEleve () {
+        try {
+
+                $statement = "SELECT * FROM import_eleve_complet WHERE `id_eleve` = ?";
+                $tabDatas = array ($this->id_eleve);
+                $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
+                $tableauFils = array ();
+                $tableauFils = $tableau[0];
+
+
+                            if (!empty($tableauFils)){
+
+                                    $this->sexe = $tableauFils ['Sexe'] ;
+                                    $this->num_eleve_etab = $tableauFils ['Num. Elève Etab'] ;
+                                    $this->nom = $tableauFils ['Nom de famille'] ;
+                                    $this->prenom = $tableauFils ['Prénom'] ;
+                                    $this->prenom2 = $tableauFils ['Prénom 2'] ;
+                                    $this->prenom3 = $tableauFils ['Prénom 3'] ;
+                                    $this->naissance = $tableauFils ['Date Naissance'] ;
+                                    $this->codeMEF = $tableauFils ['Code MEF'] ;
+                                    $this->libMEF = $tableauFils ['Lib. MEF'] ;
+                                    $this->codeStructure = $tableauFils ['Code Structure'] ;
+                                    $this->typeStructure = $tableauFils ['Type Structure'] ;
+                                    $this->libStructure = $tableauFils ['Lib. Structure'] ;
+                                    $this->LV1 = $tableauFils ['Lib. Mat. Enseignée 1'] ;
+                                    $this->LV2 = $tableauFils ['Lib. Mat. Enseignée 2'] ;
+                                    $this->email = $tableauFils ['Email'] ;
+                                    $this->portable = $tableauFils ['Tél. Portable'];
+                                    $this->fixe=$tableauFils ['Tél. Personnel'];
+                                    $this->email = $tableauFils ['Email'];
+                                    
+                                    return $tableauFils;
+                            }
+                            else { return FALSE;}
+
+                        }
+                        catch (Exception $e){
+                            die('Erreur :'.$e->getMessage());
+                        }
+
+       
+       
+   }
 }

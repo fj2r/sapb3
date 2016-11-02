@@ -243,3 +243,30 @@ display: inline-block ; position : relative ; clear:both ;
 div .avis_p1 {
 margin-left: 15px; border-style: dashed; border-color: grey; border-width: thin; color: blue; background-color : lightgrey; font-size:120%; padding:10px;
 }
+
+.elevePrecedent{
+    display : inline-block;
+    position: relative;
+    float : left ;
+}
+
+.eleveSuivant{
+    display : inline-block;
+    position: relative;
+    float : right ;
+}
+
+
+div .navigationEleve{
+display: block;  clear: both;
+font-weight:normal;
+	border-radius: 5px;
+	background-color: #FC716D; 
+	margin:5px 5px 5px 5px;
+	border-style : solid; 
+	border-width : thin;
+	border-color : #900000 ;
+	box-shadow: 0px 2px 5px #555;
+	padding : 5px 5px 5px 2px;
+	width : 100%;
+	}
