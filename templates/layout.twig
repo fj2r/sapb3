@@ -24,8 +24,10 @@
         <div id="footer"> 
             
             {% block footer %}
-            <div id="pied">
-                &copy;{{texte_footer}} {{date|date('Y')}} - Version {{version}}
+                <div class="spacer"></div>
+                <div id="pied">
+                    <hr style="clear: both;"></hr>
+                    <span id="copyright">&copy;{{texte_footer}} {{date|date('Y')}} - Version {{version}}</span>
             </div>
             {% endblock %}
             

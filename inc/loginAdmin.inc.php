@@ -6,38 +6,64 @@
  * Utilisation dans le cadre de la licence incluse.
  */
 
-$eleve = new lib\Eleve($db, $statut); //création de l'élève
+$admin = new lib\Administratif($db, $statut);
 
-$eleve->setCodeConfidentiel($codeConf);
-$eleve->setNumDossier($numDossier);
+if (isset($phpsessid) && !empty($phpsessid) && !isset($_POST['passwd']) ){
+    $admin->setLogin($login);
+    $profilAdmin = $admin->profilAdmin();
+    $admin->genererSession();
+    
+    
+    
+    $profilAdmin =array(
+    "nom"=>''.$admin->getNom().'',
+    "prenom"=>''.$admin->getPrenom().'',
+    
+    "id_admin"=>''.$admin->getIdAdmin().'',
+    "civilite"=>''.$admin->getCivilite().'',
+    
+    
+    
+);
+    
+    $connecte = TRUE;
+    
+    
+}
+else {
+$admin->setLogin($login);
 
-$existenceProfil = $eleve->profilEleve(); //récupération des infos sur l'élève
+$admin->setPasswordNonEncrypte($passwd);
+$admin->setPasswordEncrypte($passwd); //encrypte à la volée le pass par hachage standard
+
+$existenceProfil = $admin->existanceAdmin(); //récupération des infos sur le prof, s'il existe
 
 
 if ($existenceProfil == TRUE){
-    $eleve->genererSession();
-    $eleve->genererCookie();
+    
+    $profilAdmin = $admin->profilAdmin();
+    $admin->genererSession();
+    $admin->genererCookie();
     $connecte = TRUE;
 }
 else {
     $connecte = FALSE;
 }
-$profilEleve =array(
-    "nom"=>''.$eleve->getNom().'',
-    "prenom"=>''.$eleve->getPrenom().'',
-    "classe"=>''.$eleve->getLibStructure().'',
-    "codeClasse"=>''.$eleve->getCodeStructure().'',
-    "id"=>''.$eleve->getId_eleve().'',
-    "sexe"=>''.$eleve->getSexe().'',
-    "numEleveEtab"=>''.$eleve->getNumEleveEtab().'',
+
+
+$profilAdmin =array(
+    "nom"=>''.$admin->getNom().'',
+    "prenom"=>''.$admin->getPrenom().'',
     
-);
+    
+    "id_admin"=>''.$admin->getIdAdmin().'',
+    "civilite"=>''.$admin->getCivilite().'',
+       
+    
+    );
 
-$listeProfesseurs = $eleve->listerProfesseurs(); // qui sont les professeurs de sa classe ? Renvoi un tableau de dimension 2
 
-$nbVoeux  = intval($eleve->verifierVoeux()); //combien a-t-il de voeux ?
-$listeVoeux = $eleve->recupererVoeux();
-
+}
 
 
 ////////////////////////////passage du tableau de variables pour template///////
@@ -65,15 +91,12 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'charset'=>''.$charset.'',
     'titrePage'=>''.$titrePage.'',
     'connecte'=>''.$connecte.'',
-    
-    'sexe'=>''.$eleve->getSexe().'',
+      
     'texte_footer'=>''.$texte_footer.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
     'statut'=>''.$statut.'',
-    'listeProfesseurs'=>$listeProfesseurs,
-    'nbVoeuxMax'=>''.$nbVoeuxMax.'',
-    'nbVoeux'=>''.$nbVoeux.'',
-    'listeVoeux'=>$listeVoeux,
+    'profilAdmin'=>$profilAdmin,
+    
     ) ;
 
 
@@ -82,7 +105,7 @@ $mergeVarTemplate = array_merge(
         $variablesTemplate,
         $contenuArticle,
         $contenuMenu,
-        $profilEleve
+        $profilAdmin
         
         ); //construction du tableau avec les données à envoyer au template
 

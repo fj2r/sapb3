@@ -16,52 +16,24 @@ include_once ('inc/varTwig.inc.php');
 
 $db = new lib\bdd();                //instance de la database pour passer à l'éleve.
 
+if ($statut = 'eleve'){
 $eleve = new lib\Eleve($db, $statut); //création de l'élève
 
 $connecte = gestionIdentification($eleve, $statut);        //gestion de l'identification (session & cookies)
 
-$eleve->profilEleve();                //récupération des infos sur l'élève
-
-$profilEleve =array(
-    "nom"=>''.$eleve->getNom().'',
-    "prenom"=>''.$eleve->getPrenom().'',
-    "classe"=>''.$eleve->getLibStructure().'',
-    "codeClasse"=>''.$eleve->getCodeStructure().'',
-    "id"=>''.$eleve->getId_eleve().'',
-    "sexe"=>''.$eleve->getSexe().'',
-    
-    );
 $eleve->detruireCookie();
 $eleve->detruireSession();
 
-
+}
+elseif($statut ='professeur'){
+    $prof = new lib\Professeur($db, $statut);
+    $prof->detruireCookie();
+    $prof->detruireSession();
+}
+elseif($statut = 'administratif'){
+    $admin = new lib\Administratif($db, $statut);
+    $admin->detruireCookie();
+    $admin->detruireSession();
+}
 header('Location:index.php');
 
-///////////////éventuelle surcharge des variables pour le template ?//////////
-$template = 'logout';     //Nom du template à appeler
-
-$page = 'logout';         //Nom de l'index pour récupérer les infos pour les textes
-$contenuJSON = new lib\generateurArticle($page); //on instancie le générateur d'article 
-$contenuArticle = $contenuJSON->lireContenu($page)[''.$page.''][0]; // méthode pour lire les infos du fichier de langue
-
-$connecte = FALSE;
-/////////////////////////////////////////////////////////////
-
-
-
-$variablesTemplate = array('annee' => ''.$date.'',
-    'version'=>''.$version.'',
-    'charset'=>''.$charset.'',
-    'titrePage'=>''.$titrePage.'',
-    'connecte'=>''.$connecte.'',
-    
-    'texte_footer'=>''.$texte_footer.'',
-    'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
-    
-    ) ;
-
-
-$mergeVarTemplate = array_merge($variablesTemplate, $contenuArticle); //construction du tableau avec les données à envoyer au template
-
-
-appelTemplate($template, $twig, $mergeVarTemplate); //construction de la page web

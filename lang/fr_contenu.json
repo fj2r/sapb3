@@ -54,15 +54,26 @@
             "labelLien2":"Modifier les voeux déjà réalisés",
             "academie" : "Académie de ",
             "commune" : "Commune de l'établissement",
-            "messageProf" : "Liste des classes où vous pouvez émettre un avis sur les choix d'orientation des élèves"
+            "messageProf" : "Liste des classes où vous pouvez émettre un avis sur les choix d'orientation des élèves",
+            "messageAdmin":"Choix d'un module",
+            "lienAudit":"Audit du remplissage des voeux par les professeurs.",
+            "voeuxElevesPreCommission":"Edition PDF des voeux des élèves.",
+            "avisP1":"Avis du chef d'établissement.",
+            "avisDefinitifCommission":"Emettre un avis définitif pour la commission.",
+            "voeuxElevesPostCommission":"Edition PDF des voeux des élèves POST-COMMISSION.",
+            "PDFPourFamilles":"Edition PDF des voeux des élèves POST-COMMISSION."
         }
     ],
     "menus":[
         {
             "recapitulatifEleve":"Récapitulatif",
             "notesEleve":"Notes",
-            "nouveauVoeuEleve":"Nouveau Voeu"
-            
+            "nouveauVoeuEleve":"Nouveau Voeu",
+            "choixDeLaClasse":"Choix de la classe",
+            "menuPrincipal":"Menu Principal",
+            "editionPDF":"Edition PDF des Voeux",
+            "AvisP1":"Avis du Chef d'Etablissement",
+            "avisCommission":"Avis de la Commission"
         }
     ],
     "identifiants":[

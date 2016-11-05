@@ -67,7 +67,31 @@ if (isset ($_GET) && !empty($_GET['statut'])){
         }
     }
     elseif($statut =='administratif'){
+            if(isset ($_SESSION) && !empty ($_SESSION['passwd'])){
+            $passwd = $_SESSION['passwd']; //pour le cookie de profil
+        }
+        elseif(isset ($_POST) && !empty ($_POST['passwd'])){
+            $passwd = $_POST['passwd']; //pour le cookie de profil
+            
+        }
+        else{
+            $passwd=NULL;
+        }
 
+        if (isset ($_COOKIE) && !empty($_COOKIE['login'])){
+
+           $login = $_COOKIE['login']; //pour le cookie de profil
+
+        }
+        elseif(isset ($_SESSION) && !empty ($_SESSION['login'])){
+            $login = $_SESSION['login']; //pour le cookie de profil
+        }
+        elseif(isset ($_POST) && !empty ($_POST['login'])){
+            $login = $_POST['login']; //pour le cookie de profil
+        }
+        else {
+            $login=NULL;
+        }
     }
    
     

@@ -32,31 +32,13 @@ class Professeur extends Utilisateur {
         parent::__construct($db, $statut);
     }
     
-        public function setLogin ($data){
-        $this->login = $data;
-    }
-    public function setPasswordNonEncrypte ($data){
-        $this->passwd = $data;
-    }
-    public function setPasswordEncrypte ($data){
-        
-        $this->passwordEncrypte = $this->encrypte($data);
-    }
-    public function setCivilite($data){
-        $this->civilite = $data;
-    }
-     public function setNom($data){
-        $this->nom = $data;
-    }
-     public function setPrenom($data){
-        $this->prenom = $data;
-    }
+   
+    
+    
       public function setNomComplet($data){
         $this->nomComplet = $data;
     }
-      public function setEmail($data){
-        $this->email = $data;
-    }
+   
       public function setIdPedago($data){
         $this->id_pedago = $data;
     }
@@ -67,27 +49,11 @@ class Professeur extends Utilisateur {
         $this->matiere = $data;
     }
     
-    public function getPasswordEncrypte(){
-        return $this->passwordEncrypte;
-    }
-    public function getCivilite(){
-        return $this->civilite;
-    }
-    public function getNom(){
-        return $this->nom;
-    }
-    public function getPrenom(){
-        return $this->prenom;
-    }
+   
     public function getNomComplet(){
         return $this->nomComplet;
     }
-    public function getEmail(){
-        return $this->email;
-    }
-    public function getLogin(){
-        return $this->login;
-    }
+    
     public function getIdPedago(){
         return $this->id_pedago;
     }
@@ -102,12 +68,7 @@ class Professeur extends Utilisateur {
     
     
     
-    private function encrypte ($password){
-        return password_hash($password, PASSWORD_DEFAULT); //on fait un hachage standard... le sel est mis de façon aléatoire.
-    }
-    private function verifierPassword ($password, $hash) {
-        return password_verify($password, $hash);
-    }
+    
     
     public function existanceProf(){
         
@@ -150,6 +111,7 @@ class Professeur extends Utilisateur {
        
         return $requete; //on retourne un seul tableau de dimension 2 contenant 3 tableaux...profil/matieres/codeStructure(classe + matiere associée)
     }
+    
     public function matieresProf (){
         $statement = "SELECT DISTINCT `matiere` FROM `attribution_matieres` INNER JOIN `equipe_pedagogique` ON `attribution_matieres`.`nomComplet` = `equipe_pedagogique`.`nomComplet` WHERE `equipe_pedagogique`.`id_pedago`=?  ";
         $tabDatas =array ($this->id_pedago);

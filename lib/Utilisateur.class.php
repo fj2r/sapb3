@@ -15,10 +15,15 @@ class Utilisateur {
     protected $login;
     protected $codeConf;
     protected $numDossier;
+    protected $passwordEncrypte;
     protected $passwd;
     protected $maBDD;
     public $db;
     protected $pdo;
+    protected $civilite;
+    protected $nom;
+    protected $prenom;
+    protected $email;
     
     const ELEVE = 'eleve';
     const PROFESSEUR = 'professeur';
@@ -38,7 +43,56 @@ class Utilisateur {
        }
        
     }
-   ///////////////////////*Gestion des cookies*//////////////////////////////
+   
+    public function setLogin ($data){
+        $this->login = $data;
+    }
+    public function setCivilite($data){
+        $this->civilite = $data;
+    }
+    public function setNom($data){
+        $this->nom = $data;
+    }
+    public function setPrenom($data){
+        $this->prenom = $data;
+    }
+    public function setEmail($data){
+        $this->email = $data;
+    }
+    public function setPasswordNonEncrypte ($data){
+        $this->passwd = $data;
+    }
+    public function setPasswordEncrypte ($data){
+        
+        $this->passwordEncrypte = $this->encrypte($data);
+    }
+    
+    
+     public function getPasswordEncrypte(){
+        return $this->passwordEncrypte;
+    }
+    public function getCivilite(){
+        return $this->civilite;
+    }
+    public function getNom(){
+        return $this->nom;
+    }
+    public function getPrenom(){
+        return $this->prenom;
+    }
+    public function getEmail(){
+        return $this->email;
+    }
+    public function getLogin(){
+        return $this->login;
+    }
+    
+    
+
+///////////////////////*Gestion des cookies*//////////////////////////////
+    
+    
+    
     public function detruireCookie() {
         if ($this->statut== self::ELEVE){
             setcookie('sapb_num_dossier','',time()-3600*3);
@@ -152,6 +206,14 @@ class Utilisateur {
             }
         }
         
+    }
+    
+    
+    protected function encrypte ($password){
+        return password_hash($password, PASSWORD_DEFAULT); //on fait un hachage standard... le sel est mis de façon aléatoire.
+    }
+    protected function verifierPassword ($password, $hash) {
+        return password_verify($password, $hash);
     }
     
     

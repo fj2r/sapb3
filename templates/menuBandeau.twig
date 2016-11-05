@@ -7,15 +7,15 @@
                 </div>
 {% elseif statut == 'professeur' %}
     <div id="menu">
-                <div class="inscription">&nbsp;<a href="traitementLogin.php?statut={{statut}}">{{recapitulatifEleve}}</a>&nbsp;</div>
-                <div class="inscription">&nbsp;<a href="notesEleve.php?statut={{statut}}">{{notesEleve}}</a>&nbsp;</div>
-                <div class="inscription">&nbsp;<a href="orientation.php?statut={{statut}}">{{nouveauVoeuEleve}}</a>&nbsp;</div>
+                <div class="inscription">&nbsp;<a href="traitementLogin.php?statut={{statut}}">{{choixDeLaClasse}}</a>&nbsp;</div>
+                
                 </div>
 {% elseif statut == 'administratif' %}
     <div id="menu">
-                <div class="inscription">&nbsp;<a href="traitementLogin.php?statut={{statut}}">{{recapitulatifEleve}}</a>&nbsp;</div>
-                <div class="inscription">&nbsp;<a href="notesEleve.php?statut={{statut}}">{{notesEleve}}</a>&nbsp;</div>
-                <div class="inscription">&nbsp;<a href="orientation.php?statut={{statut}}">{{nouveauVoeuEleve}}</a>&nbsp;</div>
+                <div class="inscription">&nbsp;<a href="traitementLogin.php?statut={{statut}}">{{menuPrincipal}}</a>&nbsp;</div>
+                <div class="inscription">&nbsp;<a href="notesEleve.php?statut={{statut}}">{{editionPDF}}</a>&nbsp;</div>
+                <div class="inscription">&nbsp;<a href="orientation.php?statut={{statut}}">{{AvisP1}}</a>&nbsp;</div>
+                <div class="inscription">&nbsp;<a href="orientation.php?statut={{statut}}">{{avisCommission}}</a>&nbsp;</div>
                 </div>
 {% else %}
                 

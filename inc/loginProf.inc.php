@@ -8,8 +8,30 @@
 
 $prof = new lib\Professeur($db, $statut); //création de l'instance professeur
 
-
-$prof->setLogin($login);
+if (isset($phpsessid) && !empty($phpsessid) && !isset($_POST['passwd']) ){
+    $prof->setLogin($login);
+    $profilProf = $prof->profilProf();
+    $prof->genererSession();
+    
+    
+    $profilProf =array(
+    "nom"=>''.$prof->getNom().'',
+    "prenom"=>''.$prof->getPrenom().'',
+    "nomComplet"=>''.$prof->getNomComplet().'',
+    "codeStructure"=>$prof->getCodeStructure(),
+    "id_pedago"=>''.$prof->getIdPedago().'',
+    "civilite"=>''.$prof->getCivilite().'',
+    "matiere"=>$prof->getMatiere(),
+    
+    
+);
+    
+    $connecte = TRUE;
+    
+    
+}
+else {
+    $prof->setLogin($login);
 
 $prof->setPasswordNonEncrypte($passwd);
 $prof->setPasswordEncrypte($passwd); //encrypte à la volée le pass par hachage standard
@@ -27,6 +49,8 @@ if ($existenceProfil == TRUE){
 else {
     $connecte = FALSE;
 }
+
+
 $profilProf =array(
     "nom"=>''.$prof->getNom().'',
     "prenom"=>''.$prof->getPrenom().'',
@@ -38,6 +62,11 @@ $profilProf =array(
     
     
 );
+
+
+}
+
+
 
 
 

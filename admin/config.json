@@ -17,8 +17,11 @@
       },
       "informations_administration": {
          "proviseur": "M. Philippe TAMISIER",
+         "mail_proviseur":"",
          "proviseur_adjoint": "M. Jean-Marc BALLANDRAS",
-         "administrateur_sapb": "Frédéric ROUSSEAU"
+         "mail_proviseur_adjoint":"",
+         "administrateur_sapb": "Frédéric ROUSSEAU",
+         "mail_administrateur":""
       }
    }
 }

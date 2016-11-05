@@ -102,7 +102,7 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'voeuxEleve'=>$voeuxEleve, //tableau de dimension 2 (1array par voeu)
     'avisProf'=>$avisProfDejaEmis,
     ) ;
-var_dump($avisProfDejaEmis);
+//var_dump($infosEleve);
 
 $mergeVarTemplate = array_merge(
         $contenuIdentifiants,

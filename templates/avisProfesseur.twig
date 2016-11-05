@@ -50,7 +50,7 @@
                         
                         
                         <div class="formulaire">
-                             <form action="traitementAvisProfesseur.php?statut={{statut}}&idPedago={{id_pedago}}" class="" method ="POST" >
+                             <form action="traitementAvisProfesseur.php?statut={{statut}}&idPedago={{id_pedago}}&codeStructure={{infosEleve.35}}&idEleve={{infosEleve.id_eleve}}" class="" method ="POST" >
                                 {% for voeu in voeuxEleve %}
 
                                     <div class="">
@@ -83,4 +83,4 @@
     
 {%endblock%}
 
-{% block footer %}{{parent()}}<hr />{% endblock %}
+{% block footer %}{{parent()}}{% endblock %}

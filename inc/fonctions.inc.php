@@ -149,11 +149,19 @@ function bandeauLogin ($statut){
             
                         
             $formBandeauAdmin->surround='span';
-            $formBandeauAdmin->label = $formBandeauAdmin->label;
+            $formBandeauAdmin->label = 'Nom d\'utilisateur';
+            $formBandeauAdmin->size = 20 ;
+            $formBandeauAdmin->type = 'text' ;
+            $httpReturn = $formBandeauAdmin->input('login');
+            
+            $formBandeauAdmin->surround='span';
+            $formBandeauAdmin->label = 'Mot de passe';
             $formBandeauAdmin->size = 20 ;
             $formBandeauAdmin->type = 'password' ;
-            $httpReturn = $formBandeauAdmin->input('login').$formBandeauAdmin->input('passwd').$formBandeauAdmin->submit();
-            
+          
+            $httpReturn .= $formBandeauAdmin->input('passwd');
+            $formBandeauAdmin->label = 'Connexion';
+            $httpReturn .= $formBandeauAdmin->submit();
              return $httpReturn;
         }
 
@@ -262,4 +270,8 @@ function gestionIdentification ($user, $statut) {
 
 function genererAlertBox ($message){
     echo '<script language=javascript> function genererAlertBox(){alert('.$message.')}</script><body onload="genererAlertBox()">';
+}
+
+function VerifierConnexion (){
+    
 }

@@ -49,3 +49,4 @@ $prof->setIdPedago($idPedago);
 $prof->ecrireCommentaireVoeu($_POST);
 
 
+header ('Location:avisProfesseur.php?&statut='.$statut.'&codeStructure='.$_GET['codeStructure'].'&idEleve='.$_GET['idEleve'].'');

@@ -30,7 +30,9 @@
                       {% if statut == 'professeur' %}
                           {%include 'traitementLoginProf.twig'%}
                       {%endif%}
-                      
+                      {% if statut == 'administratif' %}
+                          {%include 'traitementLoginAdmin.twig'%}
+                      {%endif%}
                     {%endif%}
                     {% block article_alt%}
                     {% if connecte == FALSE %}
@@ -47,4 +49,4 @@
     
 {%endblock%}
 
-{% block footer %}{{parent()}}<hr />{% endblock %}
+{% block footer %}{{parent()}}{% endblock %}
