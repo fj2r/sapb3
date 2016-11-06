@@ -216,7 +216,24 @@ class Utilisateur {
         return password_verify($password, $hash);
     }
     
+    ////////////////////////////////////////////////////////////////////////////
     
+    public function listerClasses (){
+            $statement = "SELECT DISTINCT `Code Structure` FROM `import_eleve_complet`";
+            $tabDatas = array ();
+            return $tableau = $this->db->queryPDOPrepared($statement, $tabDatas);
+    }
+    
+    public function listerTotaliteEleves (){
+            $statement = "SELECT * FROM `import_eleve_complet`";
+            $tabDatas = array ();
+            return $tableau = $this->db->queryPDOPrepared($statement, $tabDatas);
+    }
+    public function listerParDivision($codeStructure){
+            $statement = "SELECT * FROM `import_eleve_complet` WHERE `Code Structure`=?";
+            $tabDatas = array ($codeStructure);
+            return $tableau = $this->db->queryPDOPrepared($statement, $tabDatas);
+    }
     
 }
 

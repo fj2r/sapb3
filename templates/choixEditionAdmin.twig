@@ -1,0 +1,38 @@
+
+{# extension du template layout pour le template principal #}
+
+{% extends "layout_bundle.twig" %}
+
+
+{% block identifiants %}{{parent()}}{% endblock %}
+
+{% block title %}{{parent()}}Accueil{% endblock %}
+{% block cadre_haut %}
+        {% block chapeau_haut %}{{parent()}}{% endblock %}
+        {% block menuUtilisateur %}
+        
+        {% endblock %}
+        {% block chapeau_bas %}{{parent()}}{% endblock %}
+    
+{% endblock %}
+
+{% block contenu %}
+    {% block panneauGauche %}{{parent()}}{%endblock%}   
+    {% block panneauDroite %}
+        {% block panneauDroiteFirstchild%} {{parent()}} {% endblock %}
+            {% block article %}{{parent()}}
+                <div class="formulaire">
+                    <p>Liste des classes</p>
+                    <ul>
+                        {% for division in listeDivisions%}
+                            <li><a href ="constructionPDF.php?statut={{statut}}&codeStructure={{division.0}}">{{division.0}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endblock %}
+        {% block panneauDroiteSecondchild %} {{parent()}} {% endblock %}    
+    {% endblock %}
+    
+{%endblock%}
+
+{% block footer %}{{parent()}}{% endblock %}

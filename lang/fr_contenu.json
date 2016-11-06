@@ -61,7 +61,7 @@
             "avisP1":"Avis du chef d'établissement.",
             "avisDefinitifCommission":"Emettre un avis définitif pour la commission.",
             "voeuxElevesPostCommission":"Edition PDF des voeux des élèves POST-COMMISSION.",
-            "PDFPourFamilles":"Edition PDF des voeux des élèves POST-COMMISSION."
+            "PDFPourFamilles":"Edition PDF des avis de la commission pour envoi aux familles."
         }
     ],
     "menus":[
@@ -123,5 +123,8 @@
         {
             "messageDivision":" L'élève appartient à la classe de"
         }
-    ]
+    ],
+    "choixEditionAdmin":[{
+            
+    }]
 }

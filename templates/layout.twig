@@ -6,8 +6,9 @@
         {% block head %}
             <title>{% block title %}{{titrePage}} - {% endblock %}</title>
             {{ include('meta.twig',{charset:'UTF-8'},with_context= true) }}
+             {{ include ('Scripts.twig') }}
             {{ include('FeuillesDeStyle.twig') }}
-            {{ include ('Scripts.twig') }}
+           
         {% endblock %}
         
     </head>
@@ -36,6 +37,10 @@
             <div id ="map">
             {%include 'googleMapAPI.twig'%}
             </div>
+            {%block js %}
+           
+            
+            {%endblock%}
     </body>
     
     

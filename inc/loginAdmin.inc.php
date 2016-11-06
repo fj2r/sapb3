@@ -5,66 +5,8 @@
  * Copyleft LMN Autun.
  * Utilisation dans le cadre de la licence incluse.
  */
-
 $admin = new lib\Administratif($db, $statut);
-
-if (isset($phpsessid) && !empty($phpsessid) && !isset($_POST['passwd']) ){
-    $admin->setLogin($login);
-    $profilAdmin = $admin->profilAdmin();
-    $admin->genererSession();
-    
-    
-    
-    $profilAdmin =array(
-    "nom"=>''.$admin->getNom().'',
-    "prenom"=>''.$admin->getPrenom().'',
-    
-    "id_admin"=>''.$admin->getIdAdmin().'',
-    "civilite"=>''.$admin->getCivilite().'',
-    
-    
-    
-);
-    
-    $connecte = TRUE;
-    
-    
-}
-else {
-$admin->setLogin($login);
-
-$admin->setPasswordNonEncrypte($passwd);
-$admin->setPasswordEncrypte($passwd); //encrypte à la volée le pass par hachage standard
-
-$existenceProfil = $admin->existanceAdmin(); //récupération des infos sur le prof, s'il existe
-
-
-if ($existenceProfil == TRUE){
-    
-    $profilAdmin = $admin->profilAdmin();
-    $admin->genererSession();
-    $admin->genererCookie();
-    $connecte = TRUE;
-}
-else {
-    $connecte = FALSE;
-}
-
-
-$profilAdmin =array(
-    "nom"=>''.$admin->getNom().'',
-    "prenom"=>''.$admin->getPrenom().'',
-    
-    
-    "id_admin"=>''.$admin->getIdAdmin().'',
-    "civilite"=>''.$admin->getCivilite().'',
-       
-    
-    );
-
-
-}
-
+include_once ('inc/identificationAdmin.inc.php');
 
 ////////////////////////////passage du tableau de variables pour template///////
 
@@ -86,7 +28,8 @@ $contenuMenu = $contenuJSONMenu->lireContenu($pageMenu)[''.$pageMenu.''][0];
 /////////////////////////////////////////////////////////////
 
 
-$variablesTemplate = array('annee' => ''.$date.'',
+$variablesTemplate = array(
+    'annee' => ''.$date.'',
     'version'=>''.$version.'',
     'charset'=>''.$charset.'',
     'titrePage'=>''.$titrePage.'',
