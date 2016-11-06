@@ -27,15 +27,15 @@
             
             <div class ="formContenu">
             <form action="{{lienSubmit}}{{arguments}}" method="{{method}}" />
-            <label>{{labelNom}} : </label>{{nom|raw}}<br />
-                <label>{{labelPrenom}} : </label>{{prenom|raw}}<br />
-                <label>{{labelNaissance}} : </label>{{jj|raw}}{{mm|raw}}{{aaaa|raw}}<br />
+                <div><label>{{labelNom}} : </label>{{nom|raw}}<br /></div>
+                <div><label>{{labelPrenom}} : </label>{{prenom|raw}}<br /></div>
+                <div><label>{{labelNaissance}} : </label>{{jj|raw}}{{mm|raw}}{{aaaa|raw}}<br /></div>
               
-                <label>{{labelMail1}} :</label>{{mail1|raw}}<br />
+                <div><label>{{labelMail1}} :</label>{{mail1|raw}}<br /></div>
                 
-                <label>{{labelMail2}} :</label>{{mail2|raw}}<br />
+                <div><label>{{labelMail2}} :</label>{{mail2|raw}}<br /></div>
                 
-                {{submit|raw}}
+                <div>{{submit|raw}}</div>
 
 
             </form>

@@ -44,6 +44,7 @@ include_once ('inc/varTwig.inc.php');
 
 $form = formulaireInscription();
 $form->surround = 'span';
+$form->label = 'Valider';
 ///////////////éventuelle surcharge des variables pour le template ?//////////
 $template = 'inscription';
 

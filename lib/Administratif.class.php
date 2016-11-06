@@ -129,6 +129,54 @@ class Administratif extends Utilisateur {
             unset ($_COOKIE['nomComplet']);
             unset ($_COOKIE['email']);
    }
+   
+   public function ecrireCommentaireP1($tableauAvis){
+       foreach ($tableauAvis as $idVoeu=>$avis){
+           if ($avis != '' || $avis !=NULL){
+                $nbrAvis = $this->verifierExistenceVoeu($idVoeu)[0][0]; //on vérifie si par hasard le voeu exite déjà
+                
+                if ($nbrAvis == '0'){
+                    $statement = "INSERT INTO `analyse_voeux_prov` (`id_voeu`,`id_admin`,`avis`) VALUES (?,?,?)  ";
+                    $tabDatas =array ($idVoeu, $this->id_admin, $avis);
+                    $requete = $this->db->queryPDOPreparedExec($statement, $tabDatas);
+                }
+                else {
+                    $statement = "UPDATE `analyse_voeux_prov` SET `avis` = ? WHERE `id_voeu`= ? AND `id_admin` = ?   ";
+                    $tabDatas =array ($avis, $idVoeu, $this->id_admin, );
+                    $requete = $this->db->queryPDOPreparedExec($statement, $tabDatas);
+                }
+                    
+                }
+            
+           }
+   }
     
+   private function verifierExistenceVoeu($idVoeu){
+            $statement = "SELECT COUNT(*) FROM `analyse_voeux_prov` WHERE `id_voeu` = ? AND `id_admin` = ? ";
+            $tabDatas =array ($idVoeu, $this->id_admin);
+            $requete = $this->db->queryPDOPrepared($statement, $tabDatas);
+            
+            return $requete;
+   }
+   
+   public function recupererCommentairesVoeux($voeuxEleve){
+       $resultat = array();
+       
+       foreach ($voeuxEleve as $idVoeu ){
+           
+            $statement = "SELECT * FROM `analyse_voeux_prov` WHERE `analyse_voeux_prov`.`id_voeu`= ? AND `analyse_voeux_prov`.`id_admin`= ? ";
+            $tabDatas =array ($idVoeu['id_voeu'], $this->id_admin);
+            $requete = $this->db->queryPDOPrepared($statement, $tabDatas);
+            
+            if ($requete != NULL){
+                $resultat [$requete[0]['id_voeu']] = $requete[0]['avis'];
+            }
+            
+            
+       }
+       
+        
+        return $resultat;
+   }
     
 }

@@ -59,8 +59,14 @@
 
                                     </div>
                                     <div class ="">
-                                        <textarea id="{{voeu.id_voeu}}" rows="3" cols="100" name="{{voeu.id_voeu}}" />{{avisProf[voeu.id_voeu]}}</textarea>
+                                        <span> <textarea id="{{voeu.id_voeu}}" rows="3" cols="100" name="{{voeu.id_voeu}}" />{{avisAdmin[voeu.id_voeu]}}</textarea></span>
+                                        {% if avisAdmin[voeu.id_voeu] is empty  %}
+                                        <span></span>
+                                        {%else%}
+                                            <span><img src ="templates/IMG/Check-3-icon.png" /></span>
+                                        {%endif%}
                                     </div>
+                                    
                                     <div class="toolbar">
                                         <p>Avis des enseignants pour ce voeu : </p>
                                         <ul>

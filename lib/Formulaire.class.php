@@ -17,7 +17,7 @@ class Formulaire {
  
    private $data = array();
    private $html = '';
-   public $label = 'Valider';
+   public $label = '';
    public $surround = 'p'; //pour générer des tag propres autour des champs
    public $size = 25;
    public $titre = 'formulaire';
@@ -71,7 +71,7 @@ class Formulaire {
    
    public function input ($nomChamp){
       
-      return $this->surround('<span> '.$this->label.' : </span><input name="'.$nomChamp.'" value="" type="'.$this->type.'" size="'.$this->size.'" '
+      return $this->surround('&nbsp;<span>'.$this->label.'</span>&nbsp;<input name="'.$nomChamp.'" value="" type="'.$this->type.'" size="'.$this->size.'" '
               . ' /> &nbsp;');
       
    }

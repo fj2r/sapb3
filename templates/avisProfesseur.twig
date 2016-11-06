@@ -24,7 +24,7 @@
             {% block article %}
                 {% block articleFirstChild %}
                     {% if connecte == TRUE %}
-                        <div class="formulaire navigationEleve">
+                        <div class=" navigationEleve">
                             
                                 {% if elevePrecedent == NULL%}
                                 <div></div> 
@@ -59,7 +59,12 @@
 
                                     </div>
                                     <div class ="">
-                                        <textarea id="{{voeu.id_voeu}}" rows="3" cols="100" name="{{voeu.id_voeu}}" />{{avisProf[voeu.id_voeu]}}</textarea>
+                                        <span><textarea id="{{voeu.id_voeu}}" rows="3" cols="100" name="{{voeu.id_voeu}}" />{{avisProf[voeu.id_voeu]}}</textarea></span>
+                                        {% if avisProf[voeu.id_voeu] is empty  %}
+                                        <span></span>
+                                        {%else%}
+                                            <span><img src ="templates/IMG/Check-3-icon.png" /></span>
+                                        {%endif%}
                                     </div>
 
                                 {%endfor%}
