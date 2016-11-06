@@ -489,4 +489,13 @@ class Eleve extends Utilisateur {
        
        
    }
+   
+   public function recupererAvisProfesseurs (){
+       $statement = "SELECT * FROM `validations` INNER JOIN `analyse_voeux` ON `validations`.`id_voeu` = `analyse_voeux`.`id_voeu` "
+               . "INNER JOIN `equipe_pedagogique` ON `analyse_voeux`.`id_pedago`=`equipe_pedagogique`.`id_pedago` "
+               . " WHERE `validations`.`id_eleve` = ?";
+        $tabDatas = array ($this->id_eleve);
+        $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
+        return $tableau;
+   }
 }

@@ -124,7 +124,14 @@
             "messageDivision":" L'élève appartient à la classe de"
         }
     ],
-    "choixEditionAdmin":[{
+    "choixEditionAdmin":[
+        {
             
-    }]
+        }
+    ],
+    "avisAdministratif" : [
+        {
+         "":""   
+        }
+    ]
 }

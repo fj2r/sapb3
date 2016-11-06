@@ -131,4 +131,11 @@ class Division {
         return $requete;
     }
     
+    public function premierListeDivision (){
+        $statement = "SELECT DISTINCT `id_eleve` FROM `import_eleve_complet` WHERE `Code Structure` = ? ORDER BY `Nom de famille`,`Prénom`,`Date Naissance` LIMIT 0, 1";
+        $tabDatas =array ($this->codeStructure);
+        $requete = $this->db->queryPDOPrepared($statement, $tabDatas);
+        
+        return $requete;
+    }
 }

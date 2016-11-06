@@ -24,9 +24,23 @@
                 <div class="formulaire">
                     <p>Liste des classes</p>
                     <ul>
-                        {% for division in listeDivisions%}
-                            <li><a href ="constructionPDF.php?statut={{statut}}&codeStructure={{division.0}}">{{division.0}}</a></li>
-                        {% endfor %}
+                        {% if typeEdition == 'pdfPreCommission' or typeEdition == 'pdfPostCommission' or typeEdition == 'pdfEnvoi'%}
+                            {% for division in listeDivisions%}
+                                <li><a href ="constructionPDF.php?statut={{statut}}&codeStructure={{division.0}}&type={{typeEdition}}">{{division.0}}</a></li>
+                            {% endfor %}
+                        {% elseif typeEdition == 'avisP1' %}
+                            {% for division in listeDivisions%}
+                                <li><a href ="avisAdministratif.php?statut={{statut}}&codeStructure={{division.0}}&type={{typeEdition}}">{{division.0}}</a></li>
+                            {% endfor %}
+                        {% elseif typeEdition == 'avisCommission' %}
+                             {% for division in listeDivisions%}
+                                <li><a href ="avisAdministratif.php?statut={{statut}}&codeStructure={{division.0}}&type={{typeEdition}}">{{division.0}}</a></li>
+                            {% endfor %}
+                        {%elseif typeEdition == 'audit'%}
+                            {% for division in listeDivisions%}
+                                <li><a href ="auditProfesseurs.php?statut={{statut}}&codeStructure={{division.0}}&type={{typeEdition}}">{{division.0}}</a></li>
+                            {% endfor %}
+                        {% endif%}
                     </ul>
                 </div>
             {% endblock %}

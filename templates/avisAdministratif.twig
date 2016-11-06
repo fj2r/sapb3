@@ -1,0 +1,95 @@
+
+{# extension du template layout pour le template principal #}
+
+{% extends "layout_bundle.twig" %}
+
+
+{% block identifiants %}{{parent()}}{% endblock %}
+
+{% block title %}{{parent()}}Accueil{% endblock %}
+{% block cadre_haut %}
+        {% block chapeau_haut %}{{parent()}}{% endblock %}
+        {% block menuUtilisateur %}
+            {{parent()}}
+            
+        {% endblock %}
+        {% block chapeau_bas %}{{parent()}}{% endblock %}
+    
+{% endblock %}
+
+{% block contenu %}
+    {% block panneauGauche %}{{parent()}}{%endblock%}   
+    {% block panneauDroite %}
+        {% block panneauDroiteFirstchild%} {{parent()}} {% endblock %}
+            {% block article %}
+                {% block articleFirstChild %}
+                    {% if connecte == TRUE %}
+                        <div class="formulaire navigationEleve">
+                            
+                                {% if elevePrecedent == NULL%}
+                                <div></div> 
+                                {%else%}
+                                    
+                                    <div class="elevePrecedent"><a href ="avisAdministratif.php?statut={{statut}}&codeStructure={{classe}}&idEleve={{elevePrecedent.id_eleve}}"><img src ="templates/IMG/left_arrow.png" /></a>  {{elevePrecedent.5}} {{elevePrecedent.7}}</div> 
+                                    
+                                {%endif%}
+                                {% if eleveSuivant == NULL%}
+                                <div></div> 
+                                {%else%}
+                                    <div class="eleveSuivant">{{eleveSuivant.5}} {{eleveSuivant.7}} <a href ="avisAdministratif.php?statut={{statut}}&codeStructure={{classe}}&idEleve={{eleveSuivant.id_eleve}}"><img src ="templates/IMG/right_arrow.png" /></a></div> 
+                                
+                                {%endif%}
+                        </div>
+                        <div class="formulaire">
+                            <p>Identité de l'élève : {{infosEleve.5}} {{infosEleve.7}}
+                        </div>
+                        
+                        <div class="formulaire">
+                            <p>{{messageDivision}} {{classeSelectionnee}}
+                        </div>
+                        
+                        
+                        <div class="formulaire">
+                             <form action="traitementAvisAdministratif.php?statut={{statut}}&idAdmin={{id_admin}}&codeStructure={{infosEleve.35}}&idEleve={{infosEleve.id_eleve}}" class="" method ="POST" >
+                                {% for voeu in voeuxEleve %}
+
+                                    <div class="">
+                                        <span>Voeu classé n°{{voeu.classement}} : </span>
+                                        <span><strong>{{voeu.nom}}</strong></p> <p><a href ="{{voeu.lien}}" target ="_blank">(Voir la présentation de l'établissement sur le site de l'ONISEP)</a></span>
+
+                                    </div>
+                                    <div class ="">
+                                        <textarea id="{{voeu.id_voeu}}" rows="3" cols="100" name="{{voeu.id_voeu}}" />{{avisProf[voeu.id_voeu]}}</textarea>
+                                    </div>
+                                    <div class="toolbar">
+                                        <p>Avis des enseignants pour ce voeu : </p>
+                                        <ul>
+                                        {%for commentaire in avisProfesseurs if commentaire.id_voeu == voeu.id_voeu%}
+                                            <li><i>{{commentaire.nomComplet}} : {{commentaire.avis}}</i></li>
+                                        {%endfor%}
+                                        </ul>
+                                    </div>
+                                    <br />
+                                    <hr />
+                                {%endfor%}
+                            <input type ="submit" value ="Envoyer" />
+                             
+                            </form>
+                        </div>
+                    {%endif%}
+                    {% block article_alt%}
+                    {% if connecte == FALSE %}
+                        {%include 'loginFalse.twig'%}
+                    
+                    {%endif%}
+                {%endblock%}
+                {%endblock%}{{parent()}}
+                
+                
+            {% endblock %}
+        {% block panneauDroiteSecondchild %} {{parent()}} {% endblock %}    
+    {% endblock %}
+    
+{%endblock%}
+
+{% block footer %}{{parent()}}{% endblock %}

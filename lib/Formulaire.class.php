@@ -24,7 +24,7 @@ class Formulaire {
    public $submit = 'inscription.php';
    public $argumentsURL = ''; //pour le passage d'arguments en GET
    public $method = 'POST';
-   public $type ='password';
+   public $type ='text';
     
    public function __construct($data=array()) {
        $this->data = $data ;

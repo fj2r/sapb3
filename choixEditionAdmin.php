@@ -30,7 +30,8 @@ include_once ('inc/identificationAdmin.inc.php');
 if (isset ($_GET)){
     $typeEdition = $_GET['type'];
     
-    if ( $typeEdition ==='pdfPreCommission' OR $typeEdition==='pdfPostCommission' OR $typeEdition ==='pdfEnvoi'){
+    if ( $typeEdition ==='pdfPreCommission' OR $typeEdition==='pdfPostCommission' OR $typeEdition ==='pdfEnvoi'
+            OR $typeEdition ==='avisP1' OR $typeEdition ==='avisCommission'){
         
        $listeDivisions = $admin->listerClasses();
              
@@ -74,6 +75,7 @@ $variablesTemplate = array(
     'statut'=>''.$statut.'',
     'profilAdmin'=>$profilAdmin,
     'listeDivisions'=>$listeDivisions,
+    'typeEdition'=>''.$typeEdition.''
     
     ) ;
 //var_dump($infosEleve);

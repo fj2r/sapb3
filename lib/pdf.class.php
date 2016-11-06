@@ -42,7 +42,7 @@ class pdf {
         
     }
     public function recupererDonneesListing(){
-        
+        /* Attention à l'encodage des fichiers! (ce n'est pas de l'unicode) */
         $this->today = date('j/n/Y');
         $this->h_titre=file_get_contents('lib/tfpdf/courrier/h_titre.txt');
         $this->h_soustitre=file_get_contents('lib/tfpdf/courrier/h_soustitre.txt');
@@ -74,6 +74,9 @@ class pdf {
      }
      
      public function listeElevesParDivision ($codeStructure){
+         
+         $this->recupererDonneesListing();  //On récupère les donées pour constuire le courrier
+         
          $statement = "SELECT * FROM `import_eleve_complet` WHERE `Code Structure` = ? ORDER BY `Nom de famille`,`Prénom` ";
             $tabDatas = array ($codeStructure);
             $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
@@ -89,8 +92,18 @@ class pdf {
                     $this->prenom = $profilEleveComplet[0]['Prénom'];
                     $this->classe = $profilEleveComplet[0]['Code Structure'];
                     $this->vrainom = $this->prenom.' '.$this->nom.', classe de '.$this->classe;
-                    $this->c_texte_p2 = str_replace('votre enfant',$this->vrainom, $this->c_texte_p2);
-                    //TODO !!!!!!
+                    $this->c_texte_p2 = str_replace('votre enfant',$this->vrainom, $this->c_texte_p2); //pour injecter le nom de l'élève dans le courrier
+                    
+                    /*Construction de la liste des voeux
+                      atention : il faut changer l'encodage à cause de FPDF et insérer des sauts de ligne html forcés !!*/
+                   
+                    foreach ($profilEleveComplet as $voeu){
+                        $classt = $voeu['classement'];$nom = $voeu['nom'];$acad=$voeu['academie']; $commune = $voeu['commune'];
+                        $this->voeux_total .= mb_convert_encoding(" \n- Voeux n°$classt : $nom  (Académie : $acad ; $commune .)","CP1252");
+                       
+                    }
+                    
+                    
                     $this->pdfVoeuxEleves();
                 }
                 
@@ -114,9 +127,8 @@ class pdf {
 
     public function pdfVoeuxEleves (){
         
-        $this->recupererDonneesListing();
-        //calcul de la date
-
+        
+        
         $this->pdf->SetAuthor('lmautun');
 
         //premiere page
@@ -173,7 +185,7 @@ class pdf {
         $this->pdf->MultiCell (180,7,"$this->c_texte_p2",0,'J');
         $this->pdf->Ln(1);
         //les voeux
-        $this->pdf->SetXY(20,65);
+        $this->pdf->SetXY(20,75);
         $this->pdf->SetFont('Times','',10);
         $this->pdf->MultiCell (180,7,"$this->voeux_total",0,'J');
 

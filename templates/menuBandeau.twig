@@ -13,9 +13,10 @@
 {% elseif statut == 'administratif' %}
     <div id="menu">
                 <div class="inscription">&nbsp;<a href="traitementLogin.php?statut={{statut}}">{{menuPrincipal}}</a>&nbsp;</div>
-                <div class="inscription">&nbsp;<a href="notesEleve.php?statut={{statut}}">{{editionPDF}}</a>&nbsp;</div>
-                <div class="inscription">&nbsp;<a href="orientation.php?statut={{statut}}">{{AvisP1}}</a>&nbsp;</div>
-                <div class="inscription">&nbsp;<a href="orientation.php?statut={{statut}}">{{avisCommission}}</a>&nbsp;</div>
+                <div class="inscription">&nbsp;<a href="choixEditionAdmin.php?statut={{statut}}&type=pdfPreCommission">{{editionPDF}}</a>&nbsp;</div>
+                <div class="inscription">&nbsp;<a href="choixEditionAdmin.php?statut={{statut}}&type=avisP1">{{AvisP1}}</a>&nbsp;</div>
+                
+                <div class="inscription"> &nbsp;<a href="choixEditionAdmin.php?statut={{statut}}&type=avisCommission">{{avisCommission}}</a>&nbsp;</div>
                 </div>
 {% else %}
                 
