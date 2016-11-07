@@ -77,7 +77,7 @@ class pdf {
          
          $this->recupererDonneesListing();  //On récupère les donées pour constuire le courrier
          
-         $statement = "SELECT * FROM `import_eleve_complet` WHERE `Code Structure` = ? ORDER BY `Nom de famille`,`Prénom` ";
+         $statement = "SELECT * FROM `import_eleve_complet` WHERE `Code Structure` = ? ORDER BY `Nom de famille`,`Prénom`,`Date Naissance` ";
             $tabDatas = array ($codeStructure);
             $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
             
@@ -106,9 +106,13 @@ class pdf {
                     
                     $this->pdfVoeuxEleves();
                 }
+                else{
+                    
+                    
+                }
                 
             }     
-           
+           $this->pdf->Output();
             
            
      }
@@ -197,7 +201,7 @@ class pdf {
         $this->pdf->MultiCell (180,3,"$this->f_adresses",0,'C');
 
 
-        $this->pdf->Output();
+        
         }
 
  
