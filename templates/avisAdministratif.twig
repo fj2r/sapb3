@@ -24,33 +24,28 @@
             {% block article %}
                 {% block articleFirstChild %}
                     {% if connecte == TRUE %}
-                        <div class="formulaire navigationEleve">
+                        <div class=" navigationEleve">
                             
                                 {% if elevePrecedent == NULL%}
                                 <div></div> 
                                 {%else%}
                                     
-                                    <div class="elevePrecedent"><a href ="avisAdministratif.php?statut={{statut}}&codeStructure={{classe}}&idEleve={{elevePrecedent.id_eleve}}"><img src ="templates/IMG/left_arrow.png" /></a>  {{elevePrecedent.5}} {{elevePrecedent.7}}</div> 
+                                    <div class="elevePrecedent"><a href ="avisAdministratif.php?statut={{statut}}&codeStructure={{classe}}&idEleve={{elevePrecedent.id_eleve}}&type={{type}}"><img src ="templates/IMG/left_arrow.png" /></a>  {{elevePrecedent.5}} {{elevePrecedent.7}}</div> 
                                     
                                 {%endif%}
                                 {% if eleveSuivant == NULL%}
                                 <div></div> 
                                 {%else%}
-                                    <div class="eleveSuivant">{{eleveSuivant.5}} {{eleveSuivant.7}} <a href ="avisAdministratif.php?statut={{statut}}&codeStructure={{classe}}&idEleve={{eleveSuivant.id_eleve}}"><img src ="templates/IMG/right_arrow.png" /></a></div> 
+                                    <div class="eleveSuivant">{{eleveSuivant.5}} {{eleveSuivant.7}} <a href ="avisAdministratif.php?statut={{statut}}&codeStructure={{classe}}&idEleve={{eleveSuivant.id_eleve}}&type={{type}}"><img src ="templates/IMG/right_arrow.png" /></a></div> 
                                 
                                 {%endif%}
                         </div>
                         <div class="formulaire">
-                            <p>Identité de l'élève : {{infosEleve.5}} {{infosEleve.7}}
+                            <p>Identité de l'élève : <strong>{{infosEleve.5}} {{infosEleve.7}} ({{classeSelectionnee}})</strong></p>
                         </div>
-                        
+                          {%if type == 'avisP1'%}                                          
                         <div class="formulaire">
-                            <p>{{messageDivision}} {{classeSelectionnee}}
-                        </div>
-                        
-                        
-                        <div class="formulaire">
-                             <form action="traitementAvisAdministratif.php?statut={{statut}}&idAdmin={{id_admin}}&codeStructure={{infosEleve.35}}&idEleve={{infosEleve.id_eleve}}" class="" method ="POST" >
+                             <form action="traitementAvisAdministratif.php?statut={{statut}}&idAdmin={{id_admin}}&codeStructure={{infosEleve.35}}&idEleve={{infosEleve.id_eleve}}&type={{type}}" class="" method ="POST" >
                                 {% for voeu in voeuxEleve %}
 
                                     <div class="">
@@ -59,7 +54,7 @@
 
                                     </div>
                                     <div class ="">
-                                        <span> <textarea id="{{voeu.id_voeu}}" rows="3" cols="100" name="{{voeu.id_voeu}}" />{{avisAdmin[voeu.id_voeu]}}</textarea></span>
+                                        <span> <textarea id="{{voeu.id_voeu}}" rows="3" cols="100" name="{{voeu.id_voeu}}" >{{avisAdmin[voeu.id_voeu]}}</textarea></span>
                                         {% if avisAdmin[voeu.id_voeu] is empty  %}
                                         <span></span>
                                         {%else%}
@@ -67,7 +62,7 @@
                                         {%endif%}
                                     </div>
                                     
-                                    <div class="toolbar">
+                                    <div class="avis_p1">
                                         <p>Avis des enseignants pour ce voeu : </p>
                                         <ul>
                                         {%for commentaire in avisProfesseurs if commentaire.id_voeu == voeu.id_voeu%}
@@ -82,6 +77,66 @@
                              
                             </form>
                         </div>
+                       {%elseif type== 'avisCommission'%}
+                           <div class="formulaire">
+                             <form action="traitementAvisAdministratif.php?statut={{statut}}&idAdmin={{id_admin}}&codeStructure={{infosEleve.35}}&idEleve={{infosEleve.id_eleve}}&type={{type}}" class="" method ="POST" >
+                                {% for voeu in voeuxEleve %}
+
+                                    <div class="">
+                                        <span>Voeu classé n°{{voeu.classement}} : </span>
+                                        <span><strong>{{voeu.nom}}</strong></p> <p><a href ="{{voeu.lien}}" target ="_blank">(Voir la présentation de l'établissement sur le site de l'ONISEP)</a></span>
+
+                                    </div>
+                                                                        
+                                    <div class="avis_p1">
+                                        <p>Avis des enseignants pour ce voeu : </p>
+                                        <ul>
+                                        {%for commentaire in avisProfesseurs if commentaire.id_voeu == voeu.id_voeu%}
+                                            <li><i>{{commentaire.nomComplet}} : {{commentaire.avis}}</i></li>
+                                        {%endfor%}
+                                        </ul>
+                                    </div>
+                                        <div class="avis_p1">
+                                        <p>Avis du chef d'établissement pour ce voeu : </p>
+                                        <ul>
+                                            {%if avisAdmin[voeu.id_voeu] != '' %}
+                                            <li><i>{{avisAdmin[voeu.id_voeu]}}</i></li>
+                                            {%else%}
+                                            <p><i>Pas d'avis émis pour l'instant...</i></p>
+                                            {%endif%}
+                                        </ul>
+                                    </div>
+                                            {% set clef1 = ['decision-',(voeu.id_voeu)]|join %}
+                                            
+                                        <div class="radioBox">
+                                            <p>{{labelCommission}} : </p><br />
+                                            <input type ="radio" name="decision-{{voeu.id_voeu}}" value="{{bttradio1|raw}}" {%if decisionCommission[clef1] == bttradio1|raw %}checked{% endif %} >{{bttradio1|raw}} 
+                                            {%if decisionCommission[clef1] == bttradio1|raw %}<img src ="templates/IMG/Check-3-icon.png" height="16px" width="16px" /> {% endif %}
+                                                <br/>
+                                            <input type ="radio" name="decision-{{voeu.id_voeu}}" value="{{bttradio2|raw}}" {%if decisionCommission[clef1] == bttradio2|raw %}checked{% endif %} >{{bttradio2|raw}}
+                                            {%if decisionCommission[clef1] == bttradio2|raw %} <img src ="templates/IMG/Check-3-icon.png" height="16px" width="16px" /> {% endif %}
+                                                <br/>
+                                            <input type ="radio" name="decision-{{voeu.id_voeu}}" value="{{bttradio3|raw}}" {%if decisionCommission[clef1] == bttradio3|raw %}checked{% endif %} >{{bttradio3|raw}}
+                                            {%if decisionCommission[clef1] == bttradio3|raw %} <img src ="templates/IMG/Check-3-icon.png" height="16px" width="16px" /> {% endif %}
+                                            <br/>
+                                            <input type ="radio" name="decision-{{voeu.id_voeu}}" value="{{bttradio4|raw}}" {%if decisionCommission[clef1] == bttradio4|raw %}checked{% endif %} >{{bttradio4|raw}}
+                                            {%if decisionCommission[clef1] == bttradio4|raw %} <img src ="templates/IMG/Check-3-icon.png" height="16px" width="16px" /> {% endif %}
+                                            <br/>                                     
+                                         </div>
+                                         <div class="avisCommission">
+                                             <p>{{labelAvisCommission}} : </p>
+                                             {% set clef2 =  ['avis-',(voeu.id_voeu)]|join %} 
+                                             <span><textarea id="{{voeu.id_voeu}}" rows="3" cols="100" name="avis-{{voeu.id_voeu}}" >{%if decisionCommission[clef2] != '' %}{{decisionCommission[clef2]}}{% endif %}</textarea></span>
+                                                  {%if decisionCommission[clef2] != '' %} <span><img src ="templates/IMG/Check-3-icon.png" height="" width="" /></span> {% endif %}
+                                         </div>
+                                    <br />
+                                    <hr />
+                                {%endfor%}
+                            <input type ="submit" value ="Envoyer" />
+                             
+                            </form>
+                        </div>
+                       {%endif%}     
                     {%endif%}
                     {% block article_alt%}
                     {% if connecte == FALSE %}

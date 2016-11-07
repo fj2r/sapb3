@@ -150,10 +150,63 @@ class Administratif extends Utilisateur {
             
            }
    }
-    
+   
+   public function ecrireAvisCommission($tableauAvis){
+        
+       foreach ($tableauAvis as $clef=>$data){
+            //*D'abord traiter la clé pour en extraire le n°du voeu*/
+            $delimiter ="-";
+            $splitArray = explode($delimiter, $clef);
+            $type = $splitArray[0];
+            $idVoeu = $splitArray[1];
+            /*puis on peut continuer*/
+            
+           if ($data != '' || $data  !=NULL){
+              
+                $nbrAvis = $this->verifierExistenceAvis($idVoeu)[0][0]; //on vérifie si par hasard l'avis exite déjà
+                
+                if ($nbrAvis == '0'){
+                     if ($type == 'decision'){
+                            $statement = "INSERT INTO `decision_commission` (`id_voeu`,`decision_commission`) VALUES (?,?)  "; //d'abord on inscrit la décision
+                            $tabDatas =array ($idVoeu,$data ,);
+                            $requete = $this->db->queryPDOPreparedExec($statement, $tabDatas);
+                            
+                     }
+                     elseif ($type == 'avis'){
+                            $statement = "UPDATE `decision_commission` SET  `avis_commission` = ? WHERE `id_voeu`= ? "; //puis on update le  même voeu pour l'avis facultatif
+                            $tabDatas =array ($data , $idVoeu );
+                            $requete = $this->db->queryPDOPreparedExec($statement, $tabDatas);
+                     }
+                }
+                else { //si le voeu existe déjà alors on update simplement
+                    if ($type == 'decision'){
+                            $statement = "UPDATE `decision_commission` SET  `decision_commission` = ? WHERE `id_voeu`= ? "; //d'abord on inscrit la décision
+                            $tabDatas =array ($data ,$idVoeu);
+                            $requete = $this->db->queryPDOPreparedExec($statement, $tabDatas);
+                            
+                     }
+                     elseif ($type == 'avis'){
+                            $statement = "UPDATE `decision_commission` SET  `avis_commission` = ? WHERE `id_voeu`= ? "; //puis on update le  même voeu pour l'avis facultatif
+                            $tabDatas =array ($data , $idVoeu );
+                            $requete = $this->db->queryPDOPreparedExec($statement, $tabDatas);
+                }
+                    
+                }
+            
+           }
+   }
+} 
    private function verifierExistenceVoeu($idVoeu){
             $statement = "SELECT COUNT(*) FROM `analyse_voeux_prov` WHERE `id_voeu` = ? AND `id_admin` = ? ";
             $tabDatas =array ($idVoeu, $this->id_admin);
+            $requete = $this->db->queryPDOPrepared($statement, $tabDatas);
+            
+            return $requete;
+   }
+   
+   private function verifierExistenceAvis($idVoeu){
+            $statement = "SELECT COUNT(*) FROM `decision_commission` WHERE `id_voeu` = ? ";
+            $tabDatas =array ($idVoeu);
             $requete = $this->db->queryPDOPrepared($statement, $tabDatas);
             
             return $requete;
@@ -178,5 +231,20 @@ class Administratif extends Utilisateur {
         
         return $resultat;
    }
-    
+   
+   public function recupererAvisCommission($voeuxEleve){
+        $resultat = array();
+        foreach ($voeuxEleve as $idVoeu){
+            $statement = "SELECT * FROM `decision_commission` WHERE `decision_commission`.`id_voeu`= ? ";
+            $tabDatas =array ($idVoeu['id_voeu']);
+            $requete = $this->db->queryPDOPrepared($statement, $tabDatas);
+            
+            if ($requete != NULL){
+                $resultat ['decision-'.$requete[0]['id_voeu']] = $requete[0]['decision_commission'];
+                $resultat ['avis-'.$requete[0]['id_voeu']] = $requete[0]['avis_commission'];
+            }
+            
+        }
+        return $resultat ;
+    }
 }

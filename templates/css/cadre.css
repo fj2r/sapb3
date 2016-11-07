@@ -212,7 +212,7 @@ clear: both;
 font-weight:normal;
 border-radius: 5px;
 background-color: #D1E2EC; 
-margin:5px 5px 5px 5px;
+margin:10px 5px 10px 5px;
 border-style : solid; 
 border-width : thin;
 border-color : lightskyblue ;
@@ -228,7 +228,7 @@ padding : 5px 5px 5px 2px;
             display : block; clear: both; padding : 5px;
         }
         div .formulaire div input {
-            float : right ;
+            
         }
         div .formulaire div button {
             float : right ;
@@ -239,7 +239,7 @@ display: block; float: none;position:relative;
 font-weight:normal;
 	border-radius: 10px;
 	background-color: #D1E2EC; 
-	margin:2px 2px 2px 5px;
+	margin:10px 2px 10px 5px;
 	border-style : solid ;
 	border-width : thin;
 	border-color : lightgrey ;
@@ -256,28 +256,31 @@ display: inline-block ; position : relative ; clear:both ;
 }
 
 div .avis_p1 {
-margin-left: 15px; border-style: dashed; border-color: grey; border-width: thin; color: blue; background-color : lightgrey; font-size:120%; padding:10px;
+margin-left: 15px;
+border-style: dashed;
+border-color: lightskyblue;
+border-width: thin;
+color: #24246A; background-color : #DCD9FF; font-size:120%; padding:10px;
 }
 
 .elevePrecedent{
-    display : inline-block;
-    position: relative;
+    
     float : left ;
 }
 
 .eleveSuivant{
-    display : inline-block;
-    position: relative;
+    
     float : right ;
 }
 
 
-div .navigationEleve {
-display: inline-block; float : none ; 
-font-weight:normal;
+.navigationEleve {
+        display: block; float : none ; 
+        height: 25px ; 
+        font-weight:normal;
 	border-radius: 5px;
 	background-color: #fae4e0; 
-	margin:5px 5px 5px 5px;
+	margin:10px 5px 10px 5px;
 	border-style : solid; 
 	border-width : thin;
 	border-color : #F4BDC7 ;
@@ -286,7 +289,4 @@ font-weight:normal;
 	width : 100%;
 	}
         
-        div .navigationEleve div{
-display:inline; float : none ; clear: both;
-
-	}
+      

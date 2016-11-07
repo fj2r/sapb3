@@ -24,6 +24,15 @@ $admin = new lib\Administratif($db, $statut);
 include_once ('inc/identificationAdmin.inc.php');
 
 $admin->setIdAdmin($_SESSION['id_admin']);
-$admin->ecrireCommentaireP1($_POST);
 
-header ('Location:avisAdministratif.php?&statut='.$statut.'&codeStructure='.$_GET['codeStructure'].'&idEleve='.$_GET['idEleve'].'');
+/* pour mettre un avis venant du P1 */
+if ($_GET['type'] == 'avisP1'){
+    $admin->ecrireCommentaireP1($_POST);
+}
+
+elseif ($_GET['type'] == 'avisCommission'){
+  
+    $admin->ecrireAvisCommission($_POST);
+}
+
+header ('Location:avisAdministratif.php?&statut='.$statut.'&codeStructure='.$_GET['codeStructure'].'&idEleve='.$_GET['idEleve'].'&type='.$_GET['type'].'');

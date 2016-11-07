@@ -44,8 +44,9 @@ $infosEleve = $eleve->informationsEleve();  // et hop on sait tout de lui
 $voeuxEleve = $eleve->recupererVoeux();     // et on a tous ses voeux
 $avisProfesseurs = $eleve->recupererAvisProfesseurs();
 
-$avisAdminDejaEmis = $admin->recupererCommentairesVoeux($voeuxEleve); //pour chaque voeu le prof a peut-être déja émis un avis ?
-        
+$avisAdminDejaEmis = $admin->recupererCommentairesVoeux($voeuxEleve); //pour chaque voeu le P1 a peut-être déja émis un avis ?
+
+$decisionCommission = $admin->recupererAvisCommission($voeuxEleve);
 
 $elevePrecedent = $division->elevePrecedent($eleve->getCodeStructure(), $eleve->getNom(), $eleve->getPrenom())[0];
 $eleveSuivant = $division->eleveSuivant($eleve->getCodeStructure(), $eleve->getNom(), $eleve->getPrenom())[0];
@@ -91,10 +92,12 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'infosEleve'=>$infosEleve, //on passe un tab à 1 dimension
     'voeuxEleve'=>$voeuxEleve, //tableau de dimension 2 (1array par voeu)
     'avisProfesseurs'=>$avisProfesseurs,
-    'avisAdmin'=>$avisAdminDejaEmis
+    'avisAdmin'=>$avisAdminDejaEmis,
+    'type'=>''.$_GET['type'].'',
+    'decisionCommission' => $decisionCommission,
     
     ) ;
-//var_dump($infosEleve);
+
 
 $mergeVarTemplate = array_merge(
         $contenuIdentifiants,
@@ -102,6 +105,7 @@ $mergeVarTemplate = array_merge(
         $contenuArticle,
         $contenuMenu,
         $profilAdmin
+        
         
         
         ); //construction du tableau avec les données à envoyer au template
