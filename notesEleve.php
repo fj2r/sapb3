@@ -13,43 +13,51 @@ include_once('inc/mainLib.inc.php');
 include_once('inc/fonctions.inc.php');
 ////////////////////////////* Appel du moteur de templates Twig*////////////////
 include_once ('inc/initTwig.inc.php');
+////////////////////////////Les variables communes à passer au template//////////////////
+include_once ('inc/varTwig.inc.php');
 
 
-///////////////////////////// modèle //////////////////////////////////////////
+////////////////////////////Modèle  ////////////////////////////////////////////
+$db = new lib\bdd();                //instance de la database pour passer à l'éleve.
 
-$db = new lib\bdd();   
-$eleve = new lib\Eleve($db);
+$eleve = new lib\Eleve($db, $statut); //création de l'élève
 
+$connecte = gestionIdentification($eleve, $statut);        //gestion de l'identification (session & cookies)
 
-$connecte = gestionIdentification($eleve, $statut);  
-$eleve->profilEleve();                //récupération des infos sur l'élève
-
+$existenceProfil = $eleve->profilEleve();                //récupération des infos sur l'élève
+if ($existenceProfil == TRUE){
+    $eleve->genererSession();
+    $eleve->genererCookie();
+    $connecte = TRUE;
+}
+else {
+    $connecte = FALSE;
+}
 $profilEleve =array(
     "nom"=>''.$eleve->getNom().'',
     "prenom"=>''.$eleve->getPrenom().'',
     "classe"=>''.$eleve->getLibStructure().'',
     "codeClasse"=>''.$eleve->getCodeStructure().'',
-    "id"=>''.$eleve->getId_eleve().'',
+    "idEleve"=>''.$eleve->getId_eleve().'',
     "sexe"=>''.$eleve->getSexe().'',
     
     );
 
+$listeProfesseurs = $eleve->listerProfesseurs(); // qui sont les professeurs de sa classe ? Renvoi un tableau de dimension 2
 
-////////////////////////////Les variables communes à passer au template//////////////////
-include_once ('inc/varTwig.inc.php');
+/*Construction du tableau de notes*/
+$notes = new \lib\Notes($db, $statut, $_GET['idEleve']);
+$notes->setCodeStructure($eleve->getCodeStructure());
+$matieresNotes = $notes->matieresSelectionnees();
 
-////////////////////////////passage du tableau de variables pour template///////
 
-////////////////////////////Construction du formulaire//////////////////////////
+$mesNotes = $notes->recupererNotes();           // pour préremplir le formulaire
+//var_dump($mesNotes);
 
-$form = formulaireInscription();
-$form->surround = 'span';
-$form->label = '';
 ///////////////éventuelle surcharge des variables pour le template ?//////////
-$template = 'inscription';
+$template = 'notes';     //Nom du template à appeler
 
-
-$page = 'inscription';         //Nom de l'index pour récupérer les infos pour les textes
+$page = 'notes';         //Nom de l'index pour récupérer les infos pour les textes
 $contenuJSON = new lib\generateurArticle($page); //on instancie le générateur d'article 
 $contenuArticle = $contenuJSON->lireContenu($page)[''.$page.''][0]; // méthode pour lire les infos du fichier de langue
 
@@ -60,7 +68,9 @@ $contenuIdentifiants = $contenuJSONidentifiants->lireContenu($pageIdentifiants)[
 $pageMenu = 'menus';                //Nom de l'index pour récupérer les infos pour les menus du bandeau
 $contenuJSONMenu = new lib\generateurArticle($pageMenu);
 $contenuMenu = $contenuJSONMenu->lireContenu($pageMenu)[''.$pageMenu.''][0];
+
 /////////////////////////////////////////////////////////////
+
 
 $variablesTemplate = array(
     'annee' => ''.$date.'',
@@ -69,23 +79,24 @@ $variablesTemplate = array(
     'titrePage'=>''.$titrePage.'',
     'connecte'=>''.$connecte.'',
     
+    'sexe'=>''.$eleve->getSexe().'',
     'texte_footer'=>''.$texte_footer.'',
-    'bandeauLogin'=>''.bandeauLogin($statut).'',   
-    'titreForm'=>$form->titre='Formulaire d\'inscription : ',
-    'lienSubmit'=>$form->submit='validationInscription.php',
-    'arguments'=>$form->argumentsURL='?statut=eleve',
-    'method'=>$form->method='POST',
-    'nom'=>$form->input('nom'),
-    'prenom'=>$form->input('prenom'),
-    'jj'=>$form->select('jj'),
-    'mm'=>$form->select('mm'),
-    'aaaa'=>$form->select('aaaa'),
-    'mail1'=>$form->input('mail1'),
-    'mail2'=>$form->input('mail2'),
-    'submit'=>$form->submit(),
+    'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
+    'statut'=>''.$statut.'',
+    'listeProfesseurs'=>$listeProfesseurs,
+    'matieres'=>$matieresNotes,
+    'mesNotes'=>$mesNotes,
+   
     ) ;
 
-$mergeVarTemplate = array_merge($variablesTemplate, $contenuArticle); //construction du tableau avec les données à envoyer au template
+
+$mergeVarTemplate = array_merge(
+        $contenuIdentifiants,
+        $variablesTemplate,
+        $contenuArticle,
+        $contenuMenu,
+        $profilEleve
+        ); //construction du tableau avec les données à envoyer au template
 
 
 appelTemplate($template, $twig, $mergeVarTemplate); //construction de la page web

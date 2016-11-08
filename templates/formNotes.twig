@@ -1,0 +1,19 @@
+
+<div class="formulaire">
+<form action="traitementNotes.php?statut={{statut}}&idEleve={{idEleve}}" method ="POST" >
+    <table>
+        <thead><tr><th></th><th>{{trim1}}</th><th>{{trim2}}</th></tr></thead>
+    {% for matiere in matieres if matiere.matiere !='TUTORAT' %}
+        <tr>
+            <td>{{matiere.matiere}}</td>
+            <td><input type="text" name="T1-{{matiere.matiere}}" {%for note in mesNotes if note.matiere == matiere.matiere %}value="{{note.moyennes_t1}}"{%endfor%}/>
+            </td>
+            <td><input type="text" name="T2-{{matiere.matiere}}"{%for note in mesNotes if note.matiere == matiere.matiere%} value="{{note.moyennes_t2}}"{%endfor%}/>
+            </td>
+        </tr>
+    {%endfor%}
+    </table>
+    <input type="submit" value ="Valider" />
+</form>
+    
+</div>

@@ -27,7 +27,7 @@ $profilEleve =array(
     "prenom"=>''.$eleve->getPrenom().'',
     "classe"=>''.$eleve->getLibStructure().'',
     "codeClasse"=>''.$eleve->getCodeStructure().'',
-    "id"=>''.$eleve->getId_eleve().'',
+    "idEleve"=>''.$eleve->getId_eleve().'',
     "sexe"=>''.$eleve->getSexe().'',
     "numEleveEtab"=>''.$eleve->getNumEleveEtab().'',
     

@@ -1,0 +1,39 @@
+
+{# extension du template layout pour le template principal #}
+
+{% extends "layout_bundle.twig" %}
+
+
+{% block identifiants %}{{parent()}}{% endblock %}
+
+{% block title %}{{parent()}}Accueil{% endblock %}
+{% block cadre_haut %}
+        {% block chapeau_haut %}{{parent()}}{% endblock %}
+        {% block menuUtilisateur %}
+           {{parent()}}
+        {% endblock %}
+        {% block chapeau_bas %}{{parent()}}{% endblock %}
+    
+{% endblock %}
+
+{% block contenu %}
+    {% block panneauGauche %}{{parent()}}{%endblock%}   
+    {% block panneauDroite %}
+        {% block panneauDroiteFirstchild%} {{parent()}} {% endblock %}
+            {% block article %}{{parent()}}
+                {% block articleFirstChild %}
+                    {% if connecte == TRUE %}
+                    
+                        {% include 'formNotes.twig'%}
+                    
+                    
+                    
+                    {%endif%}
+                {%endblock%}
+            {% endblock %}
+        {% block panneauDroiteSecondchild %} {{parent()}} {% endblock %}    
+    {% endblock %}
+    
+{%endblock%}
+
+{% block footer %}{{parent()}}{% endblock %}

@@ -18,6 +18,7 @@ class Formulaire {
    private $data = array();
    private $html = '';
    public $label = '';
+   public $submitLabel = 'Valider';
    public $surround = 'p'; //pour générer des tag propres autour des champs
    public $size = 25;
    public $titre = 'formulaire';
@@ -79,7 +80,8 @@ class Formulaire {
        return $this->surround('<select name="'.$nomChamp.'">'.$this->getOptionValue($nomChamp).'</select>');
    }
    public function submit (){
-      return $this->surround('<button type = "submit">'.$this->label.'</button>');
+       
+      return $this->surround('<button type = "submit">'.$this->submitLabel.'</button>');
    }
    public function selectMenuDeroulant ($nomChamp, $listeOption = array ()){
        $string ="";

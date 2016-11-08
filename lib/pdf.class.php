@@ -105,6 +105,7 @@ class pdf {
                     
                     
                     $this->pdfVoeuxEleves();
+                    $this->voeux_total = '';
                 }
                 else{
                     

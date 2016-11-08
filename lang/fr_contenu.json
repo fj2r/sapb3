@@ -139,5 +139,10 @@
          "labelAvisCommission":"Avis de la commission de validation pour le voeu (facultatif)"
          
         }
-    ]
+    ],
+    "notes" : [{
+            "labelNotes" : "Veuillez remplir le tableau des moyennes pour chacune des matières",
+            "trim1" : "Moyennes du premier trimestre",
+            "trim2": "Moyennes du second trimestre"
+    }] 
 }

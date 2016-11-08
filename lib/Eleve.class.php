@@ -250,7 +250,7 @@ class Eleve extends Utilisateur {
                 $tabDatas = array ($this->codeStructure);
                 $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
                 if ($tableau == FALSE){
-                    
+                    return FALSE ;
                 }
                 else {
                     if (!empty($tableau)){
