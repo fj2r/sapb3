@@ -27,6 +27,8 @@ if (isset($_POST) && !empty($_POST)){
     $POSTechappe = new lib\TraitementFormulaire();
     $donneesFormulaire = $POSTechappe->echappementChaine($_POST); //traitement pour échapper les caractères si nécessaires en prétraitement
 }
+else {echo ' header(\'Location: inscription.php?statut='.$_GET['statut'].'\'); ';}
+
 /*A NOTER IMPORTANT : Les données utilisateur ne sont pas vérifiés car tout est traité par PDO en requêtes préparées...donc PDO gère */
 $statut = $_GET['statut'];
 $nom    = $_POST['nom'];
@@ -38,6 +40,14 @@ $mail1  = $_POST['mail1'];
 $mail2  = $_POST['mail2'];
 $dateDeNaissance = formaterDate($jj, $mm, $aaaa);
 
+/////////Test sur les champs : vides ou pas ? //////////////////
+if ($nom=="" || $prenom=="" || $mail1 =="" || $mail2==""){
+    
+    //echo '<script type="text/javascript" language="javascript">  var temp ="Veuillez remplir tous les champs."; alert(temp) </script>';
+    header ('Location: inscription.php?statut='.$statut); //sinon on redirige 
+    exit();
+}
+//////////
 $eleve = new \lib\Eleve($db,$statut); //si on a toutes les infos sur l'élève alors on l'instancie
 
 $infosEleve = $eleve->rechercheEleve($nom, $prenom, $dateDeNaissance); //et on récupère Toutes les infos sur lui dans un tableau
@@ -47,6 +57,9 @@ if($infosEleve != FALSE ){
 }
 else{
     $connecte=FALSE;
+    echo '<script type="text/javascript" language="javascript">  var temp = "Erreur : Vous n\'etes pas reconnu! Vérifiez l\'orthographe de vos noms et prénoms.";  alert(temp) </script>';
+    echo '<p><a href="inscription.php?statut='.$statut.'">Cliquez ici pour recommencer l\'inscription</a></p>';
+    exit ();
 }
 
 $eleve->setNom($infosEleve['Nom_de_famille']);
@@ -55,9 +68,16 @@ $eleve->setNaissance($infosEleve['Date_Naissance']);
 $eleve->setNumEleveEtab($infosEleve['Num__Elève_Etab']);
 $eleve->setIdEleve($infosEleve['id_eleve']);
 $eleve->setSexe($infosEleve['Sexe']);
+if($infosEleve['Email'] ==""){
+    $eleve->setEmail($mail1);
+    $eleve->verifierEmail();
+}
+else {$eleve->setEmail($infosEleve['Email']);}
 
 
 $numDossier = $eleve->construireCodesEleve($infosEleve['id_eleve'], 5);
+$eleve->mailingEleves(); //on génère et on envoie un mail ...si le serveur veut bien :(
+
 if ($numDossier == FALSE){
     $connecte = FALSE;
     $dejaEnregistre = TRUE;

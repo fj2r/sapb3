@@ -61,6 +61,13 @@ class Eleve extends Utilisateur {
     protected $parent2CP;
     protected $parent2Commune;
     protected $parent2Pays;
+    
+    /* Données utiles pour le mailing */
+    protected $SMTP='smtp.fr.oleane.com';
+    protected $EXP='labo-svt@lm-autun.net';
+    protected $port_SMTP='25';
+    
+    
 
     public function __construct($db, $statut='eleve') {
         parent::__construct($db, $statut); //l'élève hérite du constructeur 
@@ -135,6 +142,7 @@ class Eleve extends Utilisateur {
     public function setSexe ($sexe){
         $this->sexe = htmlspecialchars($sexe);
     }
+    
     ////////////////////////////////////////////////////////////////////////////
     public function rechercheEleve ($nom, $prenom, $dateDeNaissance){
         $statement = "SELECT * FROM import_eleve_complet WHERE `Nom de famille` = ? AND `Prénom` = ? AND `Date Naissance` = ?";
@@ -498,4 +506,68 @@ class Eleve extends Utilisateur {
         $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
         return $tableau;
    }
+   
+   public function mailingEleves(){
+        ini_set("SMTP", $this->SMTP);
+        ini_set("sendmail_from", $this->EXP);
+        ini_set("smtp_port", $this->port_SMTP);
+
+        //message en mode texte (affiché uniquement si l'affichage en HTML n'est pas possible)
+        $msg_texte = "Bonjour\n";
+        $msg_texte  .= "Vous venez de recevoir un E-mail de l\'application sAPB"; 
+
+        $msg_html = "<html><body><b>Bonjour $this->prenom, </b><br>";
+        $msg_html .= "<font color=\"red\">Bienvenue dans l'application sAPB, merci de vous être enregistré : veuillez noter les numéros suivants car ils sont nécessaires pour se connecter : </font><br />
+        <ul><em></em>
+        <li>Numéro de dossier : $this->numDossier<br />
+        <li>code confidentiel : $this->codeConf<br />
+        </ul>
+
+        <span>Veuillez conserver précieusement ces codes ;\n en cas de perte ou de problème de connexion, contactez votre tuteur.</span>
+
+        </body></html>"; 
+
+        $sujet="Codes d'Inscription pour sAPB";
+
+        $limite = "-----=" . md5( uniqid ( rand() ) ); 
+
+        $headers = "From: \"Application sAPB\"<labo-svt@lm-autun.net>\n";
+        $headers .= "MIME-Version: 1.0\n";
+        $headers .= "Content-Type: multipart/alternative; boundary=\"$limite\""; 
+
+        $destinataire = $this->email;
+        //echo 'Ce script envoie un mail à '.$destinataire.'.';
+
+        $message = "This is a multi-part message in MIME format.\n\n";
+        $message .= "--" . $limite . "\n";
+        $message .= "Content-Type: text/plain; charset=\"iso-8859-1\"\n";
+        $message .= "Content-Transfer-Encoding: 8bit\n\n";
+        $message .= $msg_texte;
+        $message .= "\n\n";
+        $message .= "--" . $limite . "\n";
+        $message .= "Content-Type: text/html; charset=\"iso-8859-1\"\n";
+        $message .= "Content-Transfer-Encoding: 8bit\n\n";
+        $message .= $msg_html;
+        $message .= "\n\n";
+        $message .= "--" . $limite . "--\n";
+
+        mail($destinataire, $sujet, $message, $headers);
+   }
+   
+   public function verifierEmail (){
+       $statement = "SELECT `Email` FROM `import_eleve_complet` WHERE `import_eleve_complet`.`id_eleve` = ?";
+       $tabDatas = array($this->id_eleve);
+       $tableau = $this->db->queryPDOPrepared($statement, $tabDatas);
+       $tableauFils = $tableau[0];
+       echo $tableauFils['Email'];
+       
+       if ($tableauFils['Email']==""){
+           $statementUpdate= "UPDATE `import_eleve_complet` SET `Email`= ? WHERE `import_eleve_complet`.`id_eleve` = ? ";
+           $tabDatas = array($this->email, $this->id_eleve);
+           $resultat = $this->db->queryPDOPreparedExec($statementUpdate, $tabDatas);
+           return $resultat;
+       }
+       else {return $tableauFils['Email'];}
+   }
+   
 }
