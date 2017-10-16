@@ -25,7 +25,7 @@ class bdd {
     private $infos_connexion;
     private $parsed_json;
 
-    public function __construct($host='localhost', $dbname='sapb3', $dbuser='root', $passwd='fred2001') {
+    public function __construct($host='localhost', $dbname='sapb', $dbuser='rousseauf', $passwd='wmvsd4') {
         
           $this->host = $host;
           $this->dbname = $dbname;

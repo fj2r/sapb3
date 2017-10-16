@@ -27,7 +27,11 @@ class Professeur extends Utilisateur {
     protected $codeStructure =array();
     protected $matiere = array();
     protected $id_pedago;
-    
+    protected $URL_AD = "adlycee.lyc-lmautun.loc";
+    protected $nomCompteAD = "Consultweb";
+    protected $passwdCompteAD = "Intranet08" ; 
+
+
     public function __construct($db, $statut = 'professeur') {
         parent::__construct($db, $statut);
     }
@@ -226,5 +230,74 @@ class Professeur extends Utilisateur {
             $requete = $this->db->queryPDOPrepared($statement, $tabDatas);
             
             return $requete;
+   }
+   
+   public function bindingAD ($login,$passwd){
+        $message = "vous n\'êtes pas reconnu dans l\'annuaire du lyc&eacute;e, contactez le responsable.";
+
+        // connexion à l'annuaire AD en anonymous (on fait que de la lecture et en plus c'est pas un LDAP standard..
+        $connection_ldap = ldap_connect($this->URL_AD,"389")
+	or die("<br />Impossible de se connecter &agrave; l'annuaire Active Directory du lyc&eacute;e !!! <br /> Veuillez contacter le responsable du site.");
+        
+        ldap_set_option($connection_ldap, LDAP_OPT_PROTOCOL_VERSION, "3");
+	echo '<br /><i>&nbsp;Connexion &agrave; partir de l\'annuaire Active Directory du lyc&eacute;e... </i>';
+        // binding  vers le serveur AD
+        $ldapbind = ldap_bind($connection_ldap, $this->nomCompteAD ,$this->passwdCompteAD)
+		or die("<br />Vos identifiants $login ne sont pas reconnus dans l'annuaire, veuillez vous identifier &agrave; nouveau");
+	$base_ldap = "OU=IACA,DC=lyc-lmautun,DC=loc";
+	
+        if ($ldapbind)
+	{    
+		// preparation des donn&eacute;es			
+		// on récupère le distinguishedName
+		$dn= 'CN='.$login.',OU=PROFESSEURS,OU=Users,OU=Site par défaut,OU=IACA,DC=lyc-lmautun,DC=loc'; 		 
+		$attribut1="name";
+		//$attribut2="password";
+				
+		//comparaison du login dans l'annuaire
+            $resultat=ldap_compare($connection_ldap, $dn, $attribut1, $login);
+            
+            if ($resultat === -1) {return ldap_error($ldapbind);}
+            elseif ($resultat == FALSE) {return $message;}
+            elseif ($resultat == TRUE) {
+                //r&eacute;cup&eacute;rer les donn&eacute;es dans AD
+                $filter="(|(cn=$login*))";
+                $justthese = array( "cn", "displayName", "sn", "name", "givenName" );
+                $sr=ldap_search($connection_ldap, $base_ldap, $filter, $justthese);
+                $info = ldap_get_entries($connection_ldap, $sr);
+
+                echo '<br />'.$info["count"]." entr&eacute;es trouv&eacute;es.\n";
+                //on coupe le nom en plusieurs parties (pour avoir le pr&eacute;nom)
+
+                $nom= utf8_decode($info[0]["sn"][0]);
+                $prenom= utf8_decode($info[0]["givenname"][0]);
+                             
+                echo '<br /> Vous &ecirc;tes bien identifi&eacute; avec le nom d\'utilisateur suivant : '.$nom.' '.$prenom ;
+                
+                $enregistrement = $this->enregistrementProfBDD($login,$passwd);
+                
+                return $enregistrement;
+                }
+        
+	}
+	else
+	{
+		return 0;
+	}
+        
+        
+   }
+   
+   protected function enregistrementProfBDD ($login, $passwd){
+       
+       //hachage du passwd/////
+       $crypted_passwd = $this->encrypte($passwd);
+       ////////////////////////
+       
+       $statement = "UPDATE `identifiants_pedago` SET `id_pedago` = ? , `login` = ? , `password` = ? " ;
+       $tabDatas = array($this->id_pedago,$login, $crypted_passwd);
+       $requete =$this->db->queryPDOPreparedExec($statement,$tabDatas);
+       
+       return TRUE;
    }
 }
