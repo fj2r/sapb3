@@ -47,7 +47,7 @@ $contenuArticle = $contenuJSON->lireContenu($page)[''.$page.''][0]; // méthode 
 
 
 /////////////////////////////////////////////////////////////
-var_dump($CPGE);
+
  $connecte = true ;
 $variablesTemplate = array(
     'annee' => ''.$date.'',

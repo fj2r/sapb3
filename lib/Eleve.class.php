@@ -418,13 +418,28 @@ class Eleve extends Utilisateur {
    public function recupererVoeux () {
         
         if ($this->verifierVoeux() != 0){
+            //pour les établissements non CPGE
             $statement = "SELECT * FROM `validations` INNER JOIN etablissement ON `validations`.`id_etab`=`etablissement`.`id_etab` WHERE `validations`.`id_eleve`= ? ORDER BY `validations`.`classement` ASC";
             $tabDatas = array ($this->id_eleve);
             $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
            
+          
+            //pour les CPGE
+            $statement2 = "SELECT * FROM `validations` INNER JOIN etablissement_CPGE ON `validations`.`id_etab`=`etablissement_CPGE`.`id_etab` WHERE `validations`.`id_eleve`= ? ORDER BY `validations`.`classement` ASC ";
+            $tabDatas2 = array($this->id_eleve);
+            $tableau2 = $this->db->queryPDOPrepared($statement2, $tabDatas2);
             
-
-            return $tableau;
+            if ($tableau != FALSE && $tableau2 != FALSE){
+                $fusionTab = array_merge($tableau, $tableau2);        
+            }
+            elseif ($tableau == FALSE) {
+                $fusionTab = $tableau2;
+            }
+            elseif ($tableau2 == FALSE){
+                $fusionTab = $tableau;
+            }
+            
+            return $fusionTab;
         }
         else {
             return $tableau = array ();

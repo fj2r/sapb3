@@ -1,8 +1,8 @@
 {
-    "nomSite": "sAPB",
+    "nomSite": "sim'OrientationPostBac",
     "administrateur":"Administrateur du site",
     "contact":"root@localhost",
-    "nbVoeuxMax":"6"
+    "nbVoeuxMax":"10"
     
     
 }
