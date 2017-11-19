@@ -23,11 +23,14 @@ $db = new lib\bdd();
 $etablissement = new \lib\Etablissement($db);  
 
 $enregistrement = '*';
+$champ0='formation';
 $champ1='academie';
 $champ2='type';
 $values=array($_POST['academie'], $_POST['type']);
+$values_CPGE=array($_POST['academie'], $_POST['type']);
 $champTri='nom';
 $liste=$etablissement->listerEtablissement($enregistrement, $champ1, $champ2, $values, $champTri);
+$CPGE=$etablissement->listerCPGE($enregistrement,$champ0, $champ1, $champ2,$values_CPGE, $champTri);
 
 ////////////////////////////Les variables communes à passer au template//////////////////
 include_once ('inc/varTwig.inc.php');
@@ -44,7 +47,7 @@ $contenuArticle = $contenuJSON->lireContenu($page)[''.$page.''][0]; // méthode 
 
 
 /////////////////////////////////////////////////////////////
-
+var_dump($CPGE);
  $connecte = true ;
 $variablesTemplate = array(
     'annee' => ''.$date.'',
@@ -57,6 +60,7 @@ $variablesTemplate = array(
     'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
     'statut'=>''.$statut.'',
     'liste'=>$liste,
+    'CPGE'=>$CPGE,
    
     ) ;
 

@@ -145,6 +145,7 @@ class bdd {
         }
         else { return null; }
     }
+    
     public function queryPDOPreparedExec ($statement, $tabDatas){
        
         if (is_array($tabDatas)){

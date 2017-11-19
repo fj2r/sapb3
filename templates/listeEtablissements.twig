@@ -11,10 +11,13 @@
                <div id="mapChild0">
                    {% if app.request.isXmlHttpRequest == TRUE %}
                 {% include 'map.twig'%}
-                  
+                
                 {% endif %}
                </div>
            {%endfor%}
+           {% for cpge in CPGE %}
+               <p> <input type="checkbox" name="etab[]" value="{{cpge.id_etab}}" onchange="loadMap('mapChild0','{{cpge.nom}}')"><a href="" target="_blank" >{{cpge.nom}} - pr&eacute;pas {{cpge.formation}}</a> </input></p>
+           {% endfor %}
         
         <INPUT TYPE="submit" NAME="submit" VALUE="Valider" />
         </form>

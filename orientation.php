@@ -50,7 +50,7 @@ $listeVoeux = $eleve->recupererVoeux();
 
 $etablissement = new \lib\Etablissement($db);   //pour construire les formulaires de choix d'étab
 
-//construction des foermulaires (mis en forme dans Twig
+//construction des formulaires (mis en forme dans Twig)
 $champ ='academie'; $tri = 'academie';
 
 $formEtab1 = $etablissement->formEtablissement($champ, $tri); 

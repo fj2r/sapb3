@@ -345,6 +345,15 @@ class Etablissement {
 
         }
     
+    public function rechercherCPGE ($enregistrement,$champ,$value,$champTri ='formation'){
+        
+        $statement = "SELECT $etablissement FROM `etablissement_CPGE` WHERE `$champ` = ? ORDER BY `$champTri` ASC ";
+        $tabDatas = array ($value);
+        $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
+        
+        return $tableau;
+    }
+    
     public function listerEtablissement ($enregistrement,$champ1,$champ2,$values=array(),$champTri ='nom'){
 
         $statement = "SELECT $enregistrement FROM etablissement WHERE `$champ1` = ? AND `$champ2`= ? ORDER BY `$champTri` ASC ";
@@ -353,9 +362,18 @@ class Etablissement {
         
         return $tableau;
 
-
-
         }
+        
+    public function listerCPGE ($enregistrement,$champ0,$champ1,$champ2,$values=array(),$champTri ='formation'){
+       ///on récupère la liste de chaque CPGE
+        $statement = "SELECT $enregistrement FROM `etablissement_CPGE` WHERE `$champ1` = ? AND `$champ2`= ? ORDER BY `$champTri` ASC ";
+        $tabDatas = $values;
+        $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
+        
+        return $tableau;
+        
+    }
+    
 
     public function enregistrerVoeuStandard ($value,$idEleve, $numEleveEtab){
         /*Recherche des infos sur les éventuels voeux déjà faits*/
@@ -437,20 +455,27 @@ class Etablissement {
         
     }
     
-    public  function formEtablissement ($champ, $tri){
+    public  function formEtablissement ($champ0, $tri0){
         
         /* recherche des valeurs d'un champ passé comme  */
-        $statement = "SELECT DISTINCT $champ FROM etablissement ORDER BY `$tri` ASC ";
+        $statement = "SELECT DISTINCT $champ0 FROM etablissement ORDER BY `$tri0` ASC ";
         $tabDatas = array ();
         $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
         
         $tableauPourOption = array();
         foreach ($tableau as $tableauFils)  {
-           $tableauPourOption[] =  $tableauFils[$champ];
+           $tableauPourOption[] =  $tableauFils[$champ0];
            
-        }   
+        }
         
-        
+        //recherche pour les CPGE
+       $statementCPGE = "SELECT DISTINCT $champ0 FROM `etablissement_CPGE` ORDER BY `$tri0` ASC ";
+       $tabDatasCPGE = array();
+       $tableauCPGE = $this->db->queryPDOPrepared($statementCPGE, $tabDatasCPGE);
+       
+       foreach ($tableauCPGE as $tableauFils2){
+           $tableauPourOption[] = $tableauFils2[$champ0];
+       }
        
         return $tableauPourOption;
         
