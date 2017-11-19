@@ -77,6 +77,7 @@ class Professeur extends Utilisateur {
     public function existanceProf(){
         
         
+        
         $statement = "SELECT `password` FROM `identifiants_pedago` WHERE `login`=?  ";
         $tabDatas =array ($this->login);
         $requete = $this->db->queryPDOPrepared($statement, $tabDatas);
@@ -88,21 +89,23 @@ class Professeur extends Utilisateur {
             return TRUE;
         }
         else {
-            return FALSE;
+            $existenceDansAD = $this->bindingAD($this->login, $this->passwd);
+            return $existenceDansAD;
         }
         
     }
     
     public function profilProf (){
-        $statement = "SELECT * FROM `identifiants_pedago` INNER JOIN `equipe_pedagogique` ON `identifiants_pedago`.`id_pedago` = `equipe_pedagogique`.`id_pedago` WHERE `identifiants_pedago`.`login`=?  ";
+        $statement = "SELECT * FROM `identifiants_pedago` INNER JOIN `professeurs` ON `identifiants_pedago`.`id_pedago` = `professeurs`.`id_pedago` WHERE `identifiants_pedago`.`login`=?  ";
         $tabDatas =array ($this->login);
         $requete = $this->db->queryPDOPrepared($statement, $tabDatas);
         
         
+        if ($requete){
         $this->id_pedago = $requete[0]['id_pedago'];
         $this->login = $requete[0]['login'];
         $this->passwordEncrypte = $requete[0]['password'];
-        $this->civilite = $requete[0]['civilite'];
+        //$this->civilite = $requete[0]['civilite']; //Non dispo sur les bases fournies...:(
         $this->nom = $requete[0]['nom'];
         $this->prenom = $requete[0]['prenom'];
         $this->nomComplet = $requete[0]['nomComplet'];
@@ -114,7 +117,9 @@ class Professeur extends Utilisateur {
         
        
         return $requete; //on retourne un seul tableau de dimension 2 contenant 3 tableaux...profil/matieres/codeStructure(classe + matiere associée)
-    }
+        }
+        
+        }
     
     public function matieresProf (){
         $statement = "SELECT DISTINCT `matiere` FROM `attribution_matieres` INNER JOIN `equipe_pedagogique` ON `attribution_matieres`.`nomComplet` = `equipe_pedagogique`.`nomComplet` WHERE `equipe_pedagogique`.`id_pedago`=?  ";
@@ -232,7 +237,7 @@ class Professeur extends Utilisateur {
             return $requete;
    }
    
-   public function bindingAD ($login,$passwd){
+   private function bindingAD ($login,$passwd){
         $message = "vous n\'êtes pas reconnu dans l\'annuaire du lyc&eacute;e, contactez le responsable.";
 
         // connexion à l'annuaire AD en anonymous (on fait que de la lecture et en plus c'est pas un LDAP standard..

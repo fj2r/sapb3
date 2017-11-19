@@ -50,7 +50,11 @@
                {%endif%}
    
             {% endblock %}
-        {% block panneauDroiteSecondchild %} {{parent()}} {% endblock %}    
+        {% block panneauDroiteSecondchild %} {{parent()}}
+            {% if statut == 'professeur'%}
+                <div class="texte">ATTENTION : pour vous connecter, utilisez vos codes d'accès au réseau pédagogique.</div>
+            {%endif%}
+        {% endblock %}    
     {% endblock %}
 {% endblock %}
 

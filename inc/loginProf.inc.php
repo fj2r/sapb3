@@ -31,27 +31,28 @@ if (isset($phpsessid) && !empty($phpsessid) && !isset($_POST['passwd']) ){
     
 }
 else {
+    
     $prof->setLogin($login);
 
-$prof->setPasswordNonEncrypte($passwd);
-$prof->setPasswordEncrypte($passwd); //encrypte à la volée le pass par hachage standard
+    $prof->setPasswordNonEncrypte($passwd);
+    $prof->setPasswordEncrypte($passwd); //encrypte à la volée le pass par hachage standard
 
-$existenceProfil = $prof->existanceProf(); //récupération des infos sur le prof, s'il existe
+    $existenceProfil = $prof->existanceProf(); //récupération des infos sur le prof, s'il existe
 
 
-if ($existenceProfil == TRUE){
+    if ($existenceProfil == TRUE){
     
     $profilProf = $prof->profilProf();
     $prof->genererSession();
     $prof->genererCookie();
     $connecte = TRUE;
-}
-else {
+    }
+    else {
     $connecte = FALSE;
-}
+    }
 
 
-$profilProf =array(
+    $profilProf =array(
     "nom"=>''.$prof->getNom().'',
     "prenom"=>''.$prof->getPrenom().'',
     "nomComplet"=>''.$prof->getNomComplet().'',
