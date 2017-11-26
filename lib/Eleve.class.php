@@ -514,14 +514,33 @@ class Eleve extends Utilisateur {
    }
    
    public function recupererAvisProfesseurs (){
-       $statement = "SELECT * FROM `validations` INNER JOIN `analyse_voeux` ON `validations`.`id_voeu` = `analyse_voeux`.`id_voeu` "
-               . "INNER JOIN `equipe_pedagogique` ON `analyse_voeux`.`id_pedago`=`equipe_pedagogique`.`id_pedago` "
+       $statement = "SELECT * FROM `validations`".
+               " INNER JOIN `analyse_voeux` ON `validations`.`id_voeu` = `analyse_voeux`.`id_voeu` "
+               . "INNER JOIN `professeurs` ON `analyse_voeux`.`id_pedago`=`professeurs`.`id_pedago` "
                . " WHERE `validations`.`id_eleve` = ?";
-        $tabDatas = array ($this->id_eleve);
+       
+       $tabDatas = array ($this->id_eleve);
+        //var_dump($this->id_eleve);
         $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
+        //var_dump($tableau);
         return $tableau;
    }
    
+   public function listeProfesseursEleve (){
+       //qui sont les professeurs de cet élève ???
+       $statement = "SELECT * FROM `professeurs`".
+               " INNER JOIN `attribution_matieres` ON `professeurs`.`nomComplet` = `attribution_matieres`.`nomComplet` "
+               
+               . " WHERE `attribution_matieres`.`Code Structure` = ?";
+       
+       $tabDatas = array ($this->codeStructure);
+    
+       $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
+       //var_dump($tableau);
+       return $tableau;
+   }
+
+
    public function mailingEleves(){
         ini_set("SMTP", $this->SMTP);
         ini_set("sendmail_from", $this->EXP);
@@ -529,10 +548,10 @@ class Eleve extends Utilisateur {
 
         //message en mode texte (affiché uniquement si l'affichage en HTML n'est pas possible)
         $msg_texte = "Bonjour\n";
-        $msg_texte  .= "Vous venez de recevoir un E-mail de l\'application sAPB"; 
+        $msg_texte  .= "Vous venez de recevoir un E-mail de l\'application SPS (Simulation ParcourSup)"; 
 
         $msg_html = "<html><body><b>Bonjour $this->prenom, </b><br>";
-        $msg_html .= "<font color=\"red\">Bienvenue dans l'application sAPB, merci de vous être enregistré : veuillez noter les numéros suivants car ils sont nécessaires pour se connecter : </font><br />
+        $msg_html .= "<font color=\"red\">Bienvenue dans l'application SPS, merci de vous être enregistré : veuillez noter les numéros suivants car ils sont nécessaires pour se connecter : </font><br />
         <ul><em></em>
         <li>Numéro de dossier : $this->numDossier<br />
         <li>code confidentiel : $this->codeConf<br />

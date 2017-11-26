@@ -43,6 +43,8 @@ else {
 $infosEleve = $eleve->informationsEleve();  // et hop on sait tout de lui
 $voeuxEleve = $eleve->recupererVoeux();     // et on a tous ses voeux
 $avisProfesseurs = $eleve->recupererAvisProfesseurs();
+$listeProfesseursEleve = $eleve->listeProfesseursEleve();
+
 
 $avisAdminDejaEmis = $admin->recupererCommentairesVoeux($voeuxEleve); //pour chaque voeu le P1 a peut-être déja émis un avis ?
 

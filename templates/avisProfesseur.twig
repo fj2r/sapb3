@@ -54,7 +54,7 @@
                                 {% for voeu in voeuxEleve %}
 
                                     <div class="">
-                                        Voeu classé n°{{voeu.classement}} : <br />
+                                        <strong> Voeu classé n°{{voeu.classement}} : </strong><br />
                                         <p><strong>{{voeu.nom}}</strong></p> <p><a href ="{{voeu.lien}}" target ="_blank">(Voir la présentation de l'établissement sur le site de l'ONISEP)</a></p>
 
                                     </div>
@@ -63,7 +63,7 @@
                                         {% if avisProf[voeu.id_voeu] is empty  %}
                                         <span></span>
                                         {%else%}
-                                            <span><img src ="templates/IMG/Check-3-icon.png" /></span>
+                                            <span><img src ="templates/IMG/Check-3-icon.png" alt="Avis enregistr&eacute; pour ce v&oelig;u." /></span> 
                                         {%endif%}
                                     </div>
 
