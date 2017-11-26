@@ -373,6 +373,14 @@ class Etablissement {
         return $tableau;
         
     }
+    public function listerBTS ($enregistrement,$champ0,$values=array(),$champTri ='type'){
+        ///on récupère la liste de chaque type de BTS
+        $statement = "SELECT $enregistrement FROM `filieres_BTS` WHERE `$champ0` = ? ORDER BY `$champTri` ASC ";
+        $tabDatas = $values;
+        $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
+        
+        return $tableau;
+    }
     
 
     public function enregistrerVoeuStandard ($value,$idEleve, $numEleveEtab){
@@ -477,9 +485,20 @@ class Etablissement {
            $tableauPourOption[] = $tableauFils2[$champ0];
        }
        
-        return $tableauPourOption;
-        
+       return $tableauPourOption;
 
+    }
+    
+    public function formBTS ($champ0, $tri0){
+       $statementBTS = "SELECT DISTINCT $champ0 FROM `filieres_BTS` ORDER BY `$tri0` ASC ";
+       $tabDatasBTS = array();
+       $tableauBTS = $this->db->queryPDOPrepared($statementBTS, $tabDatasBTS);
+       
+       foreach ($tableauBTS as $tableauFils3){
+           $tableauPourOption[] = $tableauFils3[$champ0];
+       }
+       
+       return $tableauPourOption;
     }
     
     

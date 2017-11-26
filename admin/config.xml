@@ -3,7 +3,7 @@
 
     <identifiants_base>
             <host>localhost</host>
-            <nomdb>sapb3</nomdb>
+            <nomdb>sapb</nomdb>
             <login>root</login>
             <passwd>fred2001</passwd>
     </identifiants_base>
@@ -19,7 +19,7 @@
     </informations_etablissement>
 
     <informations_administration>
-        <proviseur>M. Philippe TAMISIER</proviseur>
+        <proviseur>M. Karl TANGUY</proviseur>
         <proviseur_adjoint>M. Jean-Marc BALLANDRAS</proviseur_adjoint>
         <administrateur_sapb>Frédéric ROUSSEAU</administrateur_sapb>
     </informations_administration>

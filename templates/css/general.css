@@ -3,7 +3,7 @@
 	Feuille de styles de base de l'application Postbac
 	
 	date: 2/9/2010 
-	Modifi� par Fred R. 22/11/2011
+	Modifi� par Fred R. 22/11/2017
 */
 
 /* Ne pas afficher les �l�ments suivants � l'impression */
@@ -29,7 +29,10 @@ body {
 IMG {
 border : none; 
 }
-
+h2 {
+    text-decoration: underline;
+    font-size: 1.2em;
+}
 
 /* Classes simples ******************************************************************************/
 .titre {

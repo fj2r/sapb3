@@ -1,8 +1,9 @@
-function loadSelect(id, academie, type) {
+function loadSelect(id, academie, type, secteur) {
 
 var id;
 var academie;
 var type;
+var secteur;
 
 $.ajax({
 	
@@ -10,7 +11,7 @@ $.ajax({
 
 url     : "listeEtablissements.php",
 type    : "POST",
-data    : 'academie='+academie+'&type='+type,
+data    : 'academie='+academie+'&type='+type+'&secteur='+secteur,
 cache   : false,
 dataType: "text",
 

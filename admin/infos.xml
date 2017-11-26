@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <infos_produit>
-    <nom_application>sAPB</nom_application>
-    <version>3.0</version>
-    <dev>alpha</dev>
+    <nom_application>SPS-SimulationParcourSup</nom_application>
+    <version>4.0</version>
+    <dev>beta_0.4</dev>
     <auteur>Frédéric ROUSSEAU</auteur>
     <licence></licence>
 </infos_produit>

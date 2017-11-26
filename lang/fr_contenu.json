@@ -89,9 +89,11 @@
         {
             "messageOnisep":"Pour vous aider à choisir une formation, une filière, vous pouvez visiter le site de l'ONISEP",
             "infoFormulaire" : "Pour rechercher un établissement ou d'une formation par académie",
-            "labelForm1" : "Filtrer par Académie",
-            "labelForm2" : "Filtrer par type",
-            "labelForm3" : "Filtrer par ?"
+            "labelForm1" : "UFR, CPGE et écoles : Filtrer par Académie",
+            "labelForm2" : "UFR, CPGE et écoles : Filtrer par type",
+            "labelForm3" : "BTS ou DMA : Filtrer par secteur d'activité "
+            
+            
         }
     ],
     "listeEtablissements":[
@@ -109,9 +111,9 @@
         {
             "academie" : "Académie de ",
             "commune" : "Commune de l'établissement",
-            "labelForm1" : "Filtrer par Académie",
-            "labelForm2" : "Filtrer par type",
-            "labelForm3" : "Filtrer par ?"
+            "labelForm1" : "UFR, CPGE et écoles : Filtrer par Académie",
+            "labelForm2" : "UFR, CPGE et écoles : Filtrer par type",
+            "labelForm3" : "BTS ou DMA : Filtrer par secteur d'activité"
         }
     ],
     "division":[

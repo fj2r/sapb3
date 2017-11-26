@@ -2,7 +2,7 @@
    "informations": {
       "identifiants_base": {
          "host": "localhost",
-         "nomdb": "sapb3",
+         "nomdb": "sapb",
          "login": "root",
          "passwd": "fred2001"
       },
@@ -16,9 +16,9 @@
          "telephone": ""
       },
       "informations_administration": {
-         "proviseur": "M. Philippe TAMISIER",
+         "proviseur": "M. Karl TANGUY",
          "mail_proviseur":"",
-         "proviseur_adjoint": "M. Jean-Marc BALLANDRAS",
+         "proviseur_adjoint": "M. ",
          "mail_proviseur_adjoint":"",
          "administrateur_sapb": "Frédéric ROUSSEAU",
          "mail_administrateur":""

@@ -59,8 +59,9 @@ $champ ='type'; $tri = 'type';
 
 $formEtab2 = $etablissement->formEtablissement($champ, $tri);
 
+$champ = 'secteur' ; $tri= 'secteur';
 
-
+$formEtab3 = $etablissement->formBTS($champ, $tri);
 
 ////////////////////////////Les variables communes à passer au template//////////////////
 include_once ('inc/varTwig.inc.php');
@@ -102,6 +103,7 @@ $variablesTemplate = array(
     
     'formulaire1'=>$formEtab1,
     'formulaire2'=>$formEtab2,
+    'formulaire3'=>$formEtab3,
    
     ) ;
 

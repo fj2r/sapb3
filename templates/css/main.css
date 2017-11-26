@@ -2,7 +2,7 @@
 	Admision Post Bac : Ministere de recherche et de l'enseignement superieur
 	SQLI 2011
 	
-	MODIFIE PAR FRED LE 01112011
+	MODIFIE PAR FRED LE 01112017
 ############################################################################ */
 
 /* ############################################################################
@@ -56,7 +56,7 @@ h1 {
 	color: #A7CC1A;
 	margin: 0 0 20px 0;
 }
-h2 {font-size: 14px;margin: 0 0 5px 0;color:#AA2182}
+h2 {font-size: 10px;margin: 0 0 5px 0;color:#AA2182 ; text-decoration: underline;}
 body {
 	font-size:12px;
 	font-family:Arial, Verdana, Helvetica, sans-serif;

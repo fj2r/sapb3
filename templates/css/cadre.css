@@ -206,6 +206,7 @@ div .tuteurs{
 	}
 	
 div .formulaire{
+position : relative;
 display: block;
 float:none;
 clear: both;
@@ -224,9 +225,7 @@ padding : 5px 5px 5px 2px;
             font-size: 1.2em;
             font-weight: bold;
         }
-        div .formulaire div {
-            display : block; clear: both; padding : 5px;
-        }
+        
         div .formulaire div input {
             
         }
@@ -288,5 +287,43 @@ color: #24246A; background-color : #DCD9FF; font-size:120%; padding:10px;
 	padding : 5px 5px 5px 2px;
 	width : 100%;
 	}
+       
+        .wrapper{
+            position : relative ; 
+        }
+        .bts1 {
+            position : relative ;float : left;
+            top:0px ; left: 0px;
+            display : inline-block;clear: none
+                ;
+            
+            background-color: #fae4e0;
+            margin:10px 5px 10px 5px;
+	border-style : solid; 
+	border-width : thin;
+	border-color : #F4BDC7 ;
+	box-shadow: 0px 2px 5px #555;
+	padding : 5px 5px 5px 2px;
+	width : 45%;
+        }
+
+        .bts2 {
+            position :relative  ;float : left;
+            top:0px ; right: 0px;
+            display : inline-block;clear: none
+                ;
+            
+            background-color: #fae4e0;
+            margin:10px 5px 10px 5px;
+	border-style : solid; 
+	border-width : thin;
+	border-color : #F4BDC7 ;
+	box-shadow: 0px 2px 5px #555;
+	padding : 5px 5px 5px 2px;
+	width : 45%;
+        }
+  
+        .clearboth {
+            clear: both;
+        }
         
-      

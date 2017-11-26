@@ -47,16 +47,22 @@ else {
     
     $etablissement = new \lib\Etablissement($db);
     $listeEtab =array();
-    $listeEtab = $_POST['etab'];
-    
-    foreach ($listeEtab as $data){
-        $etablissement->setIdEtab($data);
-        $etablissement->enregistrerVoeuStandard($data,$eleve->getId_eleve(),$eleve->getNumEleveEtab());
+    if ($_POST['etab']){
+        $listeEtab = $_POST['etab'];
+
+
+        foreach ($listeEtab as $data){
+            $etablissement->setIdEtab($data);
+            $etablissement->enregistrerVoeuStandard($data,$eleve->getId_eleve(),$eleve->getNumEleveEtab());
+        }
+    }
+    else {
+        header('Location:orientation.php?statut='.$statut);
     }
            
 }
 
-//header('Location:traitementLogin.php?statut='.$statut);
+
 
 $listeVoeux = $eleve->recupererVoeux();
 

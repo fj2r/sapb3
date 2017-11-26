@@ -429,14 +429,31 @@ class Eleve extends Utilisateur {
             $tabDatas2 = array($this->id_eleve);
             $tableau2 = $this->db->queryPDOPrepared($statement2, $tabDatas2);
             
-            if ($tableau != FALSE && $tableau2 != FALSE){
-                $fusionTab = array_merge($tableau, $tableau2);        
+            //pour les BTS et DMA
+            $statement3 = "SELECT * FROM `validations` INNER JOIN filieres_BTS ON `validations`.`id_etab` = `filieres_BTS`.`id_etab` WHERE `validations`.`id_eleve`= ? ORDER BY `validations`.`classement` ASC  ";
+            $tabDatas3 = array($this->id_eleve);
+            $tableau3 = $this->db->queryPDOPrepared($statement3, $tabDatas3);
+            
+            if ($tableau != FALSE && $tableau2 != FALSE && $tableau3 != FALSE){
+                $fusionTab = array_merge($tableau, $tableau2, $tableau3);        
             }
-            elseif ($tableau == FALSE) {
+            elseif ($tableau == FALSE && $tableau2 !=FALSE && $tableau3 != FALSE) {
+                $fusionTab = array_merge($tableau2, $tableau3);
+            }
+            elseif ($tableau2 == FALSE && $tableau != FALSE && $tableau3 != FALSE){
+                $fusionTab = array_merge($tableau, $tableau3);
+            }
+            elseif ($tableau != FALSE && $tableau2 !=FALSE && $tableau3 == FALSE ){
+                $fusionTab = array_merge($tableau,$tableau2);
+            }
+            elseif ($tableau != FALSE && $tableau2 == FALSE && $tableau3 == FALSE){
+                $fusionTab = $tableau;
+            }
+            elseif ($tableau == FALSE && $tableau2 !=FALSE && $tableau3 == FALSE) {
                 $fusionTab = $tableau2;
             }
-            elseif ($tableau2 == FALSE){
-                $fusionTab = $tableau;
+            elseif ($tableau == FALSE && $tableau2 ==FALSE && $tableau3 != FALSE){
+                $fusionTab = $tableau3;
             }
             
             return $fusionTab;
