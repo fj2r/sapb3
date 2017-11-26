@@ -11,6 +11,7 @@ $prof = new lib\Professeur($db, $statut); //création de l'instance professeur
 if (isset($phpsessid) && !empty($phpsessid) && !isset($_POST['passwd']) ){
     $prof->setLogin($login);
     $profilProf = $prof->profilProf();
+    
     $prof->genererSession();
     
     
@@ -43,6 +44,7 @@ else {
     if ($existenceProfil == TRUE){
     
     $profilProf = $prof->profilProf();
+    
     $prof->genererSession();
     $prof->genererCookie();
     $connecte = TRUE;

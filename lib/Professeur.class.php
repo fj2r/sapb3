@@ -113,8 +113,9 @@ class Professeur extends Utilisateur {
         
         /* Ses matières et ses classes ?? */
         $this->matiere = $this->matieresProf();
-        $this->codeStructure = $this->classesProf();
+        //$this->codeStructure = $this->classesProf();
         
+        //var_dump ($this->matiere) ;var_dump($this->codeStructure) ;
        
         return $requete; //on retourne un seul tableau de dimension 2 contenant 3 tableaux...profil/matieres/codeStructure(classe + matiere associée)
         }
@@ -122,17 +123,23 @@ class Professeur extends Utilisateur {
         }
     
     public function matieresProf (){
-        $statement = "SELECT DISTINCT `matiere` FROM `attribution_matieres` INNER JOIN `equipe_pedagogique` ON `attribution_matieres`.`nomComplet` = `equipe_pedagogique`.`nomComplet` WHERE `equipe_pedagogique`.`id_pedago`=?  ";
-        $tabDatas =array ($this->id_pedago);
+        
+        $statement = "SELECT DISTINCT `matiere` FROM `attribution_matieres` WHERE `nomComplet`= ?  ";
+        $tabDatas =array ($this->nomComplet);
         $requete = $this->db->queryPDOPrepared($statement, $tabDatas);
         
-        return $requete;
+        $this->setMatiere($requete[0]['matiere'] );
+        //var_dump($requete[0]);
+        return $requete[0];
     }
     public function classesProf (){
-        $statement = "SELECT DISTINCT `Code Structure`,`matiere` FROM `attribution_matieres` INNER JOIN `equipe_pedagogique` ON `attribution_matieres`.`nomComplet` = `equipe_pedagogique`.`nomComplet` WHERE `equipe_pedagogique`.`id_pedago`=?  ";
-        $tabDatas =array ($this->id_pedago);
+        $statement = "SELECT `Code Structure`,`matiere` FROM `attribution_matieres` WHERE `nomComplet`=?  ";
+        $tabDatas =array ($this->nomComplet);
         $requete = $this->db->queryPDOPrepared($statement, $tabDatas);
         
+        //$this->setCodeStructure($requete[0]['Code Structure']);
+        
+        //var_dump($requete);
         return $requete;
     }
     
