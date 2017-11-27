@@ -25,29 +25,43 @@
                 {% block articleFirstChild %}
                     {% if connecte == TRUE %}
                       
-                        <div class ="formulaire">
-                            
+                        <div class="formulaire">
                             <table class ="liste_voeux">
                                 <thead class="tableHeader">Rappel du voeu à modifier :</thead>
                             {% for etab in listeVoeux %}
-
-                                <tr>
+                                {%if etab.UAI != NULL and etab.type !="Classes Préparatoires aux Grandes Ecoles" %}
+                                    <tr>
                                     <td> N°{{etab.classement}} : ({{etab.UAI}}) - <a href="{{etab.lien}}">{{etab.nom}}</a></td>
                                     <td>  {{academie}}{{etab.academie}} ({{commune}} : {{etab.commune}})</td>
                                     
-                                </tr>
+                                    </tr>
+                                {%elseif etab.UAI == NULL and etab.type == "Classes Préparatoires aux Grandes Ecoles" %}
+                                    <tr>
+                                        <td> N°{{etab.classement}} : <a href="{{etab.lien}}">{{etab.nom}} - {{etab.formation}} ({{etab.commune}})</a></td>
+                                    <td></td>
+                                    
+                                    </tr>
+                                {%else%}
+                                    <tr>
+                                    <td> N°{{etab.classement}} : {#<a href="{{etab.lien}}">#}{{etab.type}}{#</a>#}</td>
+                                    <td></td>
+                                    
+                                    </tr>
 
+                                {%endif%}
                             {% endfor %}
+
                             </table>
-                            
                         </div>
                             
                         <div class = "formulaire">
                             <p>Modifier le classement du voeu : </p>
                             <form action ="modifierClassement.php?statut={{statut}}&idVoeu={{idVoeu}}&cltDep={% for etab in listeVoeux %}{{etab.classement}}{% endfor %}" method="POST">
-                            {% for i in 1..nbVoeuxMax %}
-                                <p><input type="radio" name="classement" value="{{i}}">{{i}}<p>
+                                <select name  ="classement">
+                                {% for i in 1..nbVoeuxMax %}
+                                    <option>{{i}}</option>
                             {%endfor%}
+                                </select>
                                 <input type="submit" value ="Modifier"></input>
                             </form>
                         </div>
@@ -55,7 +69,7 @@
                         <div class ="formulaire">
                             <div id="choix1">
                     {{infoFormulaire}}
-                    <form action=""   method="POST" onclick="loadSelectPourModif('resultats', document.getElementById('formulaire1').value, document.getElementById('formulaire2').value, '{{statut}}', '{{idVoeu}}')">
+                    <form action=""   method="POST" onclick="loadSelectPourModif('resultats', document.getElementById('formulaire1').value, document.getElementById('formulaire2').value,document.getElementById('formulaire3').value, '{{statut}}', '{{idVoeu}}')">
                         {% if formulaire1 is defined  %}
                             <p>{{labelForm1}} :</p>
                             <p> <select id="formulaire1" name="formulaire1">

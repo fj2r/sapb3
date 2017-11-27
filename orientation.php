@@ -51,17 +51,7 @@ $listeVoeux = $eleve->recupererVoeux();
 $etablissement = new \lib\Etablissement($db);   //pour construire les formulaires de choix d'étab
 
 //construction des formulaires (mis en forme dans Twig)
-$champ ='academie'; $tri = 'academie';
-
-$formEtab1 = $etablissement->formEtablissement($champ, $tri); 
-
-$champ ='type'; $tri = 'type';
-
-$formEtab2 = $etablissement->formEtablissement($champ, $tri);
-
-$champ = 'secteur' ; $tri= 'secteur';
-
-$formEtab3 = $etablissement->formBTS($champ, $tri);
+require_once 'inc/formulaires.inc.php';
 
 ////////////////////////////Les variables communes à passer au template//////////////////
 include_once ('inc/varTwig.inc.php');

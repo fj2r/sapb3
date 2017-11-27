@@ -456,10 +456,11 @@ class Etablissement {
     }
     
     public function modifierEtablissement($idVoeu,$nouvelEtab){
-                $statement = "UPDATE validations SET `id_etab` = ? WHERE `id_voeu`= ?";
-                $tabDatas = array($nouvelEtab, $idVoeu);
-                $miseAJourVoeu  = $this->db->queryPDOPreparedExec($statement, $tabDatas);
         
+                $statement = "UPDATE validations SET `id_etab` = ? WHERE `id_voeu`= ?";
+                $tabDatas = array($nouvelEtab[0], $idVoeu);
+                $miseAJourVoeu  = $this->db->queryPDOPreparedExec($statement, $tabDatas);
+                
         
     }
     

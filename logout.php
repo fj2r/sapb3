@@ -16,7 +16,7 @@ include_once ('inc/varTwig.inc.php');
 
 $db = new lib\bdd();                //instance de la database pour passer à l'éleve.
 
-if ($statut = 'eleve'){
+if ($statut == 'eleve'){
 $eleve = new lib\Eleve($db, $statut); //création de l'élève
 
 $connecte = gestionIdentification($eleve, $statut);        //gestion de l'identification (session & cookies)
@@ -25,12 +25,12 @@ $eleve->detruireCookie();
 $eleve->detruireSession();
 
 }
-elseif($statut ='professeur'){
+elseif($statut == 'professeur'){
     $prof = new lib\Professeur($db, $statut);
     $prof->detruireCookie();
     $prof->detruireSession();
 }
-elseif($statut = 'administratif'){
+elseif($statut == 'administratif'){
     $admin = new lib\Administratif($db, $statut);
     $admin->detruireCookie();
     $admin->detruireSession();

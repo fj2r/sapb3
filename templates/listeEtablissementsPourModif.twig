@@ -4,14 +4,33 @@
     
     <div class ="formulaire">
         <form action="changementVoeu.php?statut={{statut}}&idVoeu={{idVoeu}}" method="POST" >
-            
+            <div class="wrapper">
+          <div class = "bts1">
+              <h2>Liste des grandes &eacute;coles, universit&eacute;s et CPGE :</h2>
            {% for etab in liste%}
-               <p> <input type="radio" name="etab" value="{{etab.id_etab}}"><a href="{{etab.lien}}" target="_blank">{{etab.nom}}</a> <i>({{etab.statut}})</i></ input></p>
+               <p> <input type="checkbox" name="etab[]" value="{{etab.id_etab}}" onclick="loadMap('mapChild0','{{etab.latitude_Y}}','{{etab.longitude_X}}','{{etab.nom}}')"><a href="{{etab.lien}}" target="_blank" >{{etab.nom}}</a> <i>({{etab.statut}})</i></input></p>
+               <div id="mapChild0">
+                   {% if app.request.isXmlHttpRequest == TRUE %}
+                {% include 'map.twig'%}
+                
+                {% endif %}
+               </div>
            {%endfor%}
-           {% for etab in listeVoeux %}
-        <input type ="hidden" name="etabAModifier" value="{{etab.id_etab}}" />
-            {% endfor %}
-        <INPUT TYPE="submit" NAME="submit" VALUE="Valider" />
+           {% for cpge in CPGE %}
+               <p> <input type="checkbox" name="etab[]" value="{{cpge.id_etab}}" onchange="loadMap('mapChild0','{{cpge.nom}}')"><a href="{{cpge.lien}}" target ="_blank">{{cpge.nom}} - pr&eacute;pas {{cpge.formation}}</a> </input></p>
+           {% endfor %}
+            </div>
+            
+           <div class="bts2">
+               <h2>Liste des fili&egrave;res de BTS et DMA :</h2>
+           {%for bts in BTS%}
+               
+               <p> <input type="checkbox" name="etab[]" value="{{bts.id_etab}}" onchange="loadMap('mapChild0','{{bts.type}}')">{{bts.type}}</input></p>
+               
+           {%endfor%}
+            </div>
+            <div class ="clearboth"><INPUT TYPE="submit" NAME="submit" VALUE="Valider" /></div>
+            </div>  
         </form>
         
         

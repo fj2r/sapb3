@@ -22,21 +22,7 @@ $type = $_POST ['type'];
 $db = new lib\bdd();  
 $etablissement = new \lib\Etablissement($db);  
 
-$enregistrement = '*';
-$champ0='formation';
-$champ1='academie';
-$champ2='type';
-$values=array($_POST['academie'], $_POST['type']);
-$values_CPGE=array($_POST['academie'], $_POST['type']);
-
-$champTri='nom';
-$liste=$etablissement->listerEtablissement($enregistrement, $champ1, $champ2, $values, $champTri);
-$CPGE=$etablissement->listerCPGE($enregistrement,$champ0, $champ1, $champ2,$values_CPGE, $champTri);
-
-$values_BTS=array($_POST['secteur']);
-$champ0='secteur';
-$champTri='type';
-$BTS=$etablissement->listerBTS($enregistrement,$champ0, $values_BTS, $champTri);
+require_once 'inc/constructeurTabEtablissements.inc.php';
 
 ////////////////////////////Les variables communes à passer au template//////////////////
 include_once ('inc/varTwig.inc.php');

@@ -40,7 +40,7 @@ else {
 
     $existenceProfil = $prof->existanceProf(); //récupération des infos sur le prof, s'il existe
 
-
+    
     if ($existenceProfil == TRUE){
     
     $profilProf = $prof->profilProf();

@@ -19,7 +19,7 @@ class Professeur extends Utilisateur {
     protected $login;
     protected $passwordEncrypte;
     protected $passwd;
-    protected $civilite ;
+    protected $civilite = 'M.';
     protected $nom ;
     protected $prenom;
     protected $nomComplet;
@@ -36,7 +36,7 @@ class Professeur extends Utilisateur {
         parent::__construct($db, $statut);
     }
     
-   
+    
     
     
       public function setNomComplet($data){
@@ -103,14 +103,22 @@ class Professeur extends Utilisateur {
         
         if ($requete){
         $this->id_pedago = $requete[0]['id_pedago'];
+            $this->setIdPedago($this->id_pedago);
         $this->login = $requete[0]['login'];
+            $this->setLogin($this->login);
         $this->passwordEncrypte = $requete[0]['password'];
+            $this->setPasswordEncrypte($this->passwordEncrypte);
         //$this->civilite = $requete[0]['civilite']; //Non dispo sur les bases fournies...:(
         $this->nom = $requete[0]['nom'];
+            $this->setNom($this->nom);
         $this->prenom = $requete[0]['prenom'];
+            $this->setPrenom($this->prenom);
         $this->nomComplet = $requete[0]['nomComplet'];
+            $this->setNomComplet($this->nomComplet);
         $this->email = $requete[0]['email'];
-        
+            $this->setEmail($this->email);
+            
+            
         /* Ses matières et ses classes ?? */
         $this->matiere = $this->matieresProf();
         //$this->codeStructure = $this->classesProf();
@@ -278,11 +286,11 @@ class Professeur extends Utilisateur {
                 $sr=ldap_search($connection_ldap, $base_ldap, $filter, $justthese);
                 $info = ldap_get_entries($connection_ldap, $sr);
 
-                echo '<br />'.$info["count"]." entr&eacute;es trouv&eacute;es.\n";
+                echo '<br />'.$info["count"]." entr&eacute; trouv&eacute;es.\n";
                 //on coupe le nom en plusieurs parties (pour avoir le pr&eacute;nom)
 
-                $nom= utf8_decode($info[0]["sn"][0]);
-                $prenom= utf8_decode($info[0]["givenname"][0]);
+                $nom= ($info[0]["sn"][0]);
+                $prenom= ($info[0]["givenname"][0]);
                              
                 echo '<br /> Vous &ecirc;tes bien identifi&eacute; avec le nom d\'utilisateur suivant : '.$nom.' '.$prenom ;
                 

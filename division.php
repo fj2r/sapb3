@@ -24,14 +24,7 @@ $prof = new lib\Professeur($db, $statut); //création de l'instance professeur
 
 if (isset($phpsessid) && !empty($phpsessid) ){
     
-    
-    $connecte = TRUE;
-}
-else {
-    $connecte = FALSE;
-}
-
-$profilProf =array(
+    $profilProf =array(
     "nom"=>''.$_SESSION['nom'].'',
     "prenom"=>''.$_SESSION['prenom'].'',
     "nomComplet"=>''.$_SESSION['nomComplet'].'',
@@ -41,7 +34,14 @@ $profilProf =array(
     "matiere"=>$_SESSION['matiere'],
     
     
-);
+    );
+    $connecte = TRUE;
+}
+else {
+    $connecte = FALSE;
+}
+
+
 
 
 $division = new lib\Division($db, $_GET['codeStructure']); //on instancie pour avoir des infos sur la classe et lister les élèves

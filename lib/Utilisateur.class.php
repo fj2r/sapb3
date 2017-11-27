@@ -24,6 +24,7 @@ class Utilisateur {
     protected $nom;
     protected $prenom;
     protected $email;
+    private   $salt = 'optiplex';
     
     const ELEVE = 'eleve';
     const PROFESSEUR = 'professeur';
@@ -208,12 +209,19 @@ class Utilisateur {
         
     }
     
-    
     protected function encrypte ($password){
-        return password_hash($password, PASSWORD_DEFAULT); //on fait un hachage standard... le sel est mis de façon aléatoire.
+        
+        return sha1($password.$this->salt); //on fait un hachage standard... le sel est mis de façon aléatoire.
+    
     }
     protected function verifierPassword ($password, $hash) {
-        return password_verify($password, $hash);
+        
+        if (sha1($password.$this->salt == $hash)){
+            return TRUE;
+        }
+        else { return FALSE ; }
+       
+        
     }
     
     ////////////////////////////////////////////////////////////////////////////

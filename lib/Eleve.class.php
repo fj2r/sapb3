@@ -465,14 +465,48 @@ class Eleve extends Utilisateur {
    }
    
    public function recupererVoeuAModifier ($id_voeu) {
+      
        if ($this->verifierVoeux() != 0){
-            $statement = "SELECT * FROM `validations` INNER JOIN `etablissement` ON `validations`.`id_etab`=`etablissement`.`id_etab` WHERE `validations`.`id_eleve`= ? AND `validations`.`id_voeu`= ? ORDER BY `validations`.`classement` ASC";
-            $tabDatas = array ($this->id_eleve, $id_voeu );
-            
+            //pour les établissements non CPGE
+            $statement = "SELECT * FROM `validations` INNER JOIN etablissement ON `validations`.`id_etab`=`etablissement`.`id_etab` WHERE `validations`.`id_voeu`= ? ORDER BY `validations`.`classement` ASC";
+            $tabDatas = array ($id_voeu);
             $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
             
-
-            return $tableau;
+          
+            //pour les CPGE
+            $statement2 = "SELECT * FROM `validations` INNER JOIN etablissement_CPGE ON `validations`.`id_etab`=`etablissement_CPGE`.`id_etab` WHERE `validations`.`id_voeu`= ? ORDER BY `validations`.`classement` ASC ";
+            $tabDatas2 = array($id_voeu);
+            $tableau2 = $this->db->queryPDOPrepared($statement2, $tabDatas2);
+            
+            //pour les BTS et DMA
+            $statement3 = "SELECT * FROM `validations` INNER JOIN filieres_BTS ON `validations`.`id_etab` = `filieres_BTS`.`id_etab` WHERE `validations`.`id_voeu`= ? ORDER BY `validations`.`classement` ASC  ";
+            $tabDatas3 = array($id_voeu);
+            $tableau3 = $this->db->queryPDOPrepared($statement3, $tabDatas3);
+            
+            
+            if ($tableau != FALSE && $tableau2 != FALSE && $tableau3 != FALSE){
+                $fusionTab = array_merge($tableau, $tableau2, $tableau3);        
+            }
+            elseif ($tableau == FALSE && $tableau2 !=FALSE && $tableau3 != FALSE) {
+                $fusionTab = array_merge($tableau2, $tableau3);
+            }
+            elseif ($tableau2 == FALSE && $tableau != FALSE && $tableau3 != FALSE){
+                $fusionTab = array_merge($tableau, $tableau3);
+            }
+            elseif ($tableau != FALSE && $tableau2 !=FALSE && $tableau3 == FALSE ){
+                $fusionTab = array_merge($tableau,$tableau2);
+            }
+            elseif ($tableau != FALSE && $tableau2 == FALSE && $tableau3 == FALSE){
+                $fusionTab = $tableau;
+            }
+            elseif ($tableau == FALSE && $tableau2 !=FALSE && $tableau3 == FALSE) {
+                $fusionTab = $tableau2;
+            }
+            elseif ($tableau == FALSE && $tableau2 ==FALSE && $tableau3 != FALSE){
+                $fusionTab = $tableau3;
+            }
+            
+            return $fusionTab;
         }
         else {
             return $tableau = array ();

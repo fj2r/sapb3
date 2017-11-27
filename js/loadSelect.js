@@ -35,11 +35,12 @@ dataType: "text",
 
 }
 
-function loadSelectPourModif(id, academie, type, statut, idVoeu) {
+function loadSelectPourModif(id, academie, type, secteur , statut, idVoeu) {
 
 var id;
 var academie;
 var type;
+var secteur;
 
 $.ajax({
 	
@@ -47,7 +48,7 @@ $.ajax({
 
 url     : "listeEtablissementsPourModif.php?statut="+statut+"&idVoeu="+idVoeu,
 type    : "POST",
-data    : 'academie='+academie+'&type='+type,
+data    : 'academie='+academie+'&type='+type+'&secteur='+secteur,
 cache   : false,
 dataType: "text",
 

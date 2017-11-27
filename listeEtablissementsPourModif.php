@@ -14,20 +14,18 @@ include_once('inc/fonctions.inc.php');
 ////////////////////////////* Appel du moteur de templates Twig*////////////////
 include_once ('inc/initTwig.inc.php');
 
+$id_voeu = $_GET['idVoeu'];
 
 $academie = $_POST['academie'];
 
 $type = $_POST ['type'];
 
+$secteur = $_POST ['secteur'];
+
 $db = new lib\bdd();  
 $etablissement = new \lib\Etablissement($db);  
 
-$enregistrement = '*';
-$champ1='academie';
-$champ2='type';
-$values=array($_POST['academie'], $_POST['type']);
-$champTri='nom';
-$liste=$etablissement->listerEtablissement($enregistrement, $champ1, $champ2, $values, $champTri);
+require_once 'inc/constructeurTabEtablissements.inc.php';
 
 ////////////////////////////Les variables communes à passer au template//////////////////
 include_once ('inc/varTwig.inc.php');
@@ -57,6 +55,8 @@ $variablesTemplate = array(
     'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
     'statut'=>''.$statut.'',
     'liste'=>$liste,
+    'CPGE'=>$CPGE,
+    'BTS'=>$BTS,
     'statut'=>''.$_GET['statut'].'',
    'idVoeu'=>''.$_GET['idVoeu'].'',
    
