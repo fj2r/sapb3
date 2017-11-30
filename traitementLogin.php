@@ -19,16 +19,20 @@ include_once ('inc/varTwig.inc.php');
 ////////////////////////////Modèle  ////////////////////////////////////////////
 
 $db = new lib\bdd();            //instance de la database nécessaire pour les identifications
-
-if ($statut == "eleve"){
-    require 'inc/loginEleve.inc.php';
-}
-elseif ($statut =="professeur"){
-    require 'inc/loginProf.inc.php';
-}
-elseif ($statut == "administratif") {
-    require 'inc/loginAdmin.inc.php';
-}
-else{ 
+if ((isset($_POST['login']) && $_POST['login']=='') || (isset($_POST['login']) && $_POST['passwd']=='')){
     header('Location:index.php');
+}
+else{
+    if ($statut == "eleve"){
+        require 'inc/loginEleve.inc.php';
+    }
+    elseif ($statut =="professeur"){
+        require 'inc/loginProf.inc.php';
+    }
+    elseif ($statut == "administratif") {
+        require 'inc/loginAdmin.inc.php';
+    }
+    else{ 
+        header('Location:index.php');
+    }
 }

@@ -36,12 +36,15 @@ class pdf {
     public $classe;
     public $vrainom;
     
+    
+    
+    
     public function __construct($db, $tfpdf) {
         $this->db = $db;
         $this->pdf = $tfpdf;
         
     }
-    public function recupererDonneesListing(){
+    private function recupererDonneesListing(){
         /* Attention à l'encodage des fichiers! (ce n'est pas de l'unicode) */
         $this->today = date('j/n/Y');
         $this->h_titre=file_get_contents('lib/tfpdf/courrier/h_titre.txt');
@@ -51,7 +54,7 @@ class pdf {
         $this->c_titre=file_get_contents('lib/tfpdf/courrier/c_titre.txt');
         $this->c_objet=file_get_contents('lib/tfpdf/courrier/c_objet.txt');
         $this->c_texte_p1=file_get_contents('lib/tfpdf/courrier/c_texte_p1.txt');
-        $this->c_texte_p2 =file_get_contents('lib/tfpdf/courrier/c_texte_p2.txt');
+        $this->c_texte_p2 = file_get_contents('lib/tfpdf/courrier/c_texte_p2.txt');
         $this->c_signature=file_get_contents('lib/tfpdf/courrier/c_signature.txt');
         $this->f_adresses=file_get_contents('lib/tfpdf/courrier/f_adresses.txt');
         
@@ -75,24 +78,28 @@ class pdf {
      
      public function listeElevesParDivision ($codeStructure){
          
-         $this->recupererDonneesListing();  //On récupère les donées pour constuire le courrier
+         
          
          $statement = "SELECT * FROM `import_eleve_complet` WHERE `Code Structure` = ? ORDER BY `Nom de famille`,`Prénom`,`Date Naissance` ";
             $tabDatas = array ($codeStructure);
             $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
-            
+            //var_dump($tableau);
             //$listeVoeux = $this->listerVoeuxEleves($tableau);
             foreach ($tableau as $infosEleve){
+                $this->recupererDonneesListing();  //On récupère les donées pour constuire le courrier
                 
                 $profilEleveComplet = $this->listerVoeuxIndividuels($infosEleve['id_eleve']);
-                //var_dump($profilEleveComplet[0]);
+                
                 if ($profilEleveComplet != FALSE){
                     $this->id_eleve = $profilEleveComplet[0]['id_eleve'];
                     $this->nom = $profilEleveComplet[0]['Nom de famille'];
+                   
                     $this->prenom = $profilEleveComplet[0]['Prénom'];
+                    
                     $this->classe = $profilEleveComplet[0]['Code Structure'];
                     $this->vrainom = $this->prenom.' '.$this->nom.', classe de '.$this->classe;
-                    $this->c_texte_p2 = str_replace('votre enfant',$this->vrainom, $this->c_texte_p2); //pour injecter le nom de l'élève dans le courrier
+                    
+                    $this->c_texte_p2 = str_replace('votre enfant',$this->prenom, $this->c_texte_p2); //pour injecter le nom de l'élève dans le courrier
                     
                     /*Construction de la liste des voeux
                       atention : il faut changer l'encodage à cause de FPDF et insérer des sauts de ligne html forcés !!*/

@@ -36,6 +36,9 @@ if (isset ($_GET)){
        $listeDivisions = $admin->listerClasses();
              
     }
+    else {
+        $listeDivisions = array();
+    }
 
 
 }

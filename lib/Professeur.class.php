@@ -82,16 +82,20 @@ class Professeur extends Utilisateur {
         $tabDatas =array ($this->login);
         $requete = $this->db->queryPDOPrepared($statement, $tabDatas);
         
-        $hash = $requete[0]['password'];
         
-        if ($this->verifierPassword($this->passwd, $hash) == TRUE) {
-            
-            return TRUE;
+        
+        if ($requete != FALSE){
+            $hash = $requete[0]['password'];
+                if ($this->verifierPassword($this->passwd, $hash) == TRUE) {
+
+                    return TRUE;
+                }
+                else {
+                    $existenceDansAD = $this->bindingAD($this->login, $this->passwd);
+                    return $existenceDansAD;
+                }
         }
-        else {
-            $existenceDansAD = $this->bindingAD($this->login, $this->passwd);
-            return $existenceDansAD;
-        }
+        else { return FALSE ; } 
         
     }
     

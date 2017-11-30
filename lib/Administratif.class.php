@@ -50,13 +50,17 @@ class Administratif extends Utilisateur {
         
         $hash = $requete[0]['password'];
         
-        if ($this->verifierPassword($this->passwd, $hash) == TRUE) {
-            
-            return TRUE;
+        if ($requete != FALSE){
+
+                if ($this->verifierPassword($this->passwd, $hash) == TRUE) {
+
+                    return TRUE;
+                }
+                else {
+                    return FALSE;
+                }
         }
-        else {
-            return FALSE;
-        }
+        else { return FALSE ; }
         
     }
     public function profilAdmin (){
@@ -83,7 +87,7 @@ class Administratif extends Utilisateur {
     
     
     public function genererSession(){
-        $_SESSION = array ();
+        $_SESSION = array (); //destruction du tableau de session précédent
         $_SESSION = array (
             'id_admin' => ''.$this->id_admin.'',
             'login' => ''.$this->login.'',
@@ -111,23 +115,26 @@ class Administratif extends Utilisateur {
             
             setcookie('prenom',$this->prenom,time()+3600);            
             setcookie('email',$this->email, time()+3600);
+            setcookie('fonction',$this->fonction,time()+3600);
        }
    }   
     public function detruireCookie() {
-            setcookie('id_pedago');
-            setcookie('login');
-            setcookie('civilite');
-            setcookie('nom');
-            setcookie('nomComplet');
-            setcookie('prenom');
-                        setcookie('email');
-            unset ($_COOKIE['id_pedago']);
+            setcookie('id_admin','',  time()-3600);
+            setcookie('login','',  time()-3600);
+            setcookie('civilite','',  time()-3600);
+            setcookie('nom','',  time()-3600);
+            
+            setcookie('prenom','',  time()-3600);
+            setcookie('email','',  time()-3600);
+            setcookie('fonction',$this->fonction,time()-3600);
+            unset ($_COOKIE['id_admin']);
             unset ($_COOKIE['login']);
             unset ($_COOKIE['civilite']);
             unset ($_COOKIE['nom']);
             unset ($_COOKIE['prenom']);
-            unset ($_COOKIE['nomComplet']);
+            
             unset ($_COOKIE['email']);
+            unset ($_COOKIE['fonction']);
    }
    
    public function ecrireCommentaireP1($tableauAvis){

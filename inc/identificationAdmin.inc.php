@@ -47,13 +47,7 @@ if ($existenceProfil == TRUE){
     $listeClasses = $admin->listerClasses();
     
     $connecte = TRUE;
-}
-else {
-    $connecte = FALSE;
-}
-
-
-$profilAdmin =array(
+    $profilAdmin =array(
     "nom"=>''.$admin->getNom().'',
     "prenom"=>''.$admin->getPrenom().'',
     
@@ -63,6 +57,15 @@ $profilAdmin =array(
        
     
     );
+    
+}
+else {
+    $connecte = FALSE;
+    header('Location:index.php');
+}
+
+
+
 
 
 }

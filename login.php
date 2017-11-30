@@ -20,32 +20,6 @@ include_once ('inc/varTwig.inc.php');
 
 //////////////////////////// Modèle ////////////////////////////////////////////
 $db = new lib\bdd();   
-$eleve = new lib\Eleve($db);
-
-$connecte = gestionIdentification($eleve, $statut);        //gestion de l'identification (session & cookies)
-
-$existenceProfil = $eleve->profilEleve();                //récupération des infos sur l'élève
-
-if ($existenceProfil == TRUE){
-    $eleve->genererSession();
-    $eleve->genererCookie();
-    $connecte = TRUE;
-}
-else {
-    $connecte = FALSE;
-}
-$profilEleve =array(
-    "nom"=>''.$eleve->getNom().'',
-    "prenom"=>''.$eleve->getPrenom().'',
-    "classe"=>''.$eleve->getLibStructure().'',
-    "codeClasse"=>''.$eleve->getCodeStructure().'',
-    "id"=>''.$eleve->getId_eleve().'',
-    "sexe"=>''.$eleve->getSexe().'',
-    
-    );
-
-
- 
 
 ////////////////////////////passage du tableau de variables pour template///////
 
@@ -70,13 +44,47 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'version'=>''.$version.'',
     'charset'=>''.$charset.'',
     'titrePage'=>''.$titrePage.'',
-    'connecte'=>''.$connecte.'',
+    'connecte'=> FALSE,
     
     'texte_footer'=>''.$texte_footer.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'',
     
     'statut'=>''.$statut.'',
     ) ;
+
+
+////////////////////cas selon le statut /////////////////////////////////
+
+if ($_GET['statut'] == 'eleve'){
+$eleve = new lib\Eleve($db);
+
+$eleve->detruireCookie();
+$eleve->detruireSession();
+
+$connecte = gestionIdentification($eleve, $statut);        //gestion de l'identification (session & cookies)
+
+$existenceProfil = $eleve->profilEleve();                //récupération des infos sur l'élève
+
+if ($existenceProfil == TRUE){
+    $eleve->genererSession();
+    $eleve->genererCookie();
+    $connecte = TRUE;
+}
+else {
+    $connecte = FALSE;
+}
+$profilEleve =array(
+    "nom"=>''.$eleve->getNom().'',
+    "prenom"=>''.$eleve->getPrenom().'',
+    "classe"=>''.$eleve->getLibStructure().'',
+    "codeClasse"=>''.$eleve->getCodeStructure().'',
+    "id"=>''.$eleve->getId_eleve().'',
+    "sexe"=>''.$eleve->getSexe().'',
+    
+    );
+
+
+
 
 $mergeVarTemplate = array_merge(
         $contenuIdentifiants,
@@ -88,3 +96,41 @@ $mergeVarTemplate = array_merge(
 
 
 appelTemplate($template, $twig, $mergeVarTemplate); //construction de la page web
+}
+elseif ($_GET['statut']=='professeur'){
+    $prof = new lib\Professeur($db);
+    $prof->detruireCookie();
+    $prof->detruireSession();
+    
+    
+    
+    $mergeVarTemplate = array_merge(
+        $contenuIdentifiants,
+        $variablesTemplate,
+        $contenuArticle,
+        $contenuMenu
+        
+        ); //construction du tableau avec les données à envoyer au template
+
+
+appelTemplate($template, $twig, $mergeVarTemplate); //construction de la page web
+}
+elseif ($_GET['statut']=='administratif'){
+    $admin = new \lib\Administratif($db);
+    $admin ->detruireCookie();
+    $admin ->detruireSession();
+    
+    $mergeVarTemplate = array_merge(
+        $contenuIdentifiants,
+        $variablesTemplate,
+        $contenuArticle,
+        $contenuMenu
+        
+        ); //construction du tableau avec les données à envoyer au template
+
+
+appelTemplate($template, $twig, $mergeVarTemplate); //construction de la page web
+}
+else {
+ header('Location:index.php');
+}

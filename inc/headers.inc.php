@@ -110,11 +110,7 @@ if (isset ($_COOKIE) && !empty($_COOKIE['PHPSESSID'])){
    $phpsessid = $_COOKIE['PHPSESSID']; //pour le cookie de session
     
 }
-if (isset ($_COOKIE) && !empty($_COOKIE['PHPSESSID'])){
-    
-   $phpsessid = $_COOKIE['PHPSESSID']; //pour le cookie de session
-    
-}
+
 
 //récupération des informations de configuration et de personnalisation
 

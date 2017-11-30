@@ -305,6 +305,7 @@ class Eleve extends Utilisateur {
             setcookie('prenom',$this->prenom,time()+3600);
             setcookie('classe',$this->codeStructure, time()+3600);
             setcookie('id_eleve',$this->id_eleve, time()+3600);
+            
        }
    }   
     public function detruireCookie() {
@@ -315,6 +316,8 @@ class Eleve extends Utilisateur {
             setcookie('prenom');
             setcookie('classe');
             setcookie('id_eleve');
+            setcookie('PHPSESSID');
+            
             unset ($_COOKIE['num_dossier']);
             unset ($_COOKIE['code_conf']);
             unset ($_COOKIE['num_eleve_etab']);
@@ -322,6 +325,7 @@ class Eleve extends Utilisateur {
             unset ($_COOKIE['prenom']);
             unset ($_COOKIE['classe']);
             unset ($_COOKIE['id_eleve']);
+            unset ($_COOKIE['PHPSESSID']);
    }
    
      public function envoiMail() {
