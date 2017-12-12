@@ -13,9 +13,9 @@ $statut = (isset($_GET['statut']) &&
         ? $_GET['statut']
         : $statut='eleve';                          // on assigne le statut par défaut à élève s'il n'est pas passé en paramètre
 $date = date('d/m/Y');                              // la date du jour
-$version = '3.0';                                   // la version de sapb
+$version = '3.1';                                   // la version de sapb
 $charset = "UTF-8";                                 // le charset par défaut
-$titrePage = 'sAPB';                                // le titre des fenêtres
+$titrePage = 'simulation ParcourSup';               // le titre des fenêtres
 
 
 

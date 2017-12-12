@@ -20,10 +20,13 @@ if (isset ($_GET) && !empty($_GET['statut'])){
         elseif(isset ($_POST) && !empty ($_POST['code_conf'])){
             $codeConf = $_POST['code_conf']; //pour le cookie de profil
         }
+        elseif (isset($_COOKIE) && !empty ($_COOKIE['code_conf'])) {
+            $codeConf = $_COOKIE['code_conf'];
+        }
         else{
             $codeConf=NULL;
         }
-
+        
         if (isset ($_COOKIE) && !empty($_COOKIE['num_dossier'])){
 
            $numDossier = $_COOKIE['num_dossier']; //pour le cookie de profil
@@ -38,6 +41,7 @@ if (isset ($_GET) && !empty($_GET['statut'])){
         else {
             $numDossier=NULL;
         }
+        
     }
     elseif($statut=='professeur'){
         if(isset ($_SESSION) && !empty ($_SESSION['passwd'])){
@@ -108,7 +112,7 @@ else{
 if (isset ($_COOKIE) && !empty($_COOKIE['PHPSESSID'])){
     
    $phpsessid = $_COOKIE['PHPSESSID']; //pour le cookie de session
-    
+   
 }
 
 

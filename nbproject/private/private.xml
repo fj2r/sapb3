@@ -3,14 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/sapb3/templates/modificationVoeu.twig</file>
-            <file>file:/var/www/sapb3/changementVoeu.php</file>
-            <file>file:/var/www/sapb3/templates/listeEtablissementsPourModif.twig</file>
-            <file>file:/var/www/sapb3/listeEtablissementsPourModif.php</file>
-            <file>file:/var/www/sapb3/lib/Etablissement.class.php</file>
+            <file>file:/var/www/sapb3/templates/layout_bundle.twig</file>
+            <file>file:/var/www/sapb3/templates/traitementLogin.twig</file>
+            <file>file:/var/www/sapb3/lib/Professeur.class.php</file>
+            <file>file:/var/www/sapb3/inc/identificationAdmin.inc.php</file>
+            <file>file:/var/www/sapb3/templates/login.twig</file>
+            <file>file:/var/www/sapb3/inc/loginAdmin.inc.php</file>
+            <file>file:/var/www/sapb3/login.php</file>
+            <file>file:/var/www/sapb3/lib/Utilisateur.class.php</file>
+            <file>file:/var/www/sapb3/inc/headers.inc.php</file>
+            <file>file:/var/www/sapb3/traitementLogin.php</file>
+            <file>file:/var/www/sapb3/lib/Administratif.class.php</file>
             <file>file:/var/www/sapb3/lib/Eleve.class.php</file>
-            <file>file:/var/www/sapb3/js/loadSelect.js</file>
-            <file>file:/var/www/sapb3/modificationVoeu.php</file>
+            <file>file:/var/www/sapb3/inc/fonctions.inc.php</file>
+            <file>file:/var/www/sapb3/inc/loginProf.inc.php</file>
+            <file>file:/var/www/sapb3/logout.php</file>
         </group>
     </open-files>
 </project-private>

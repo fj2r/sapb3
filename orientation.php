@@ -24,35 +24,33 @@ $eleve = new lib\Eleve($db, $statut); //création de l'élève
 
 $connecte = gestionIdentification($eleve, $statut);        //gestion de l'identification (session & cookies)
 
-$existenceProfil = $eleve->profilEleve();                //récupération des infos sur l'élève
-if ($existenceProfil == TRUE){
-    $eleve->genererSession();
-    $eleve->genererCookie();
-    $connecte = TRUE;
-}
-else {
-    $connecte = FALSE;
-}
-$profilEleve =array(
-    "nom"=>''.$eleve->getNom().'',
-    "prenom"=>''.$eleve->getPrenom().'',
-    "classe"=>''.$eleve->getLibStructure().'',
-    "codeClasse"=>''.$eleve->getCodeStructure().'',
-    "idEleve"=>''.$eleve->getId_eleve().'',
-    "sexe"=>''.$eleve->getSexe().'',
+if ($connecte == TRUE){
+    $existenceProfil = $eleve->profilEleve();                //récupération des infos sur l'élève
     
-    );
+    
 
-$listeProfesseurs = $eleve->listerProfesseurs(); // qui sont les professeurs de sa classe ? Renvoi un tableau de dimension 2
+        $profilEleve =array(
+            "nom"=>''.$eleve->getNom().'',
+            "prenom"=>''.$eleve->getPrenom().'',
+            "classe"=>''.$eleve->getLibStructure().'',
+            "codeClasse"=>''.$eleve->getCodeStructure().'',
+            "idEleve"=>''.$eleve->getId_eleve().'',
+            "sexe"=>''.$eleve->getSexe().'',
 
-$nbVoeux  = intval($eleve->verifierVoeux()); //combien a-t-il de voeux ?
-$listeVoeux = $eleve->recupererVoeux();
+            );
+            
+        $listeProfesseurs = $eleve->listerProfesseurs(); // qui sont les professeurs de sa classe ? Renvoi un tableau de dimension 2
 
-$etablissement = new \lib\Etablissement($db);   //pour construire les formulaires de choix d'étab
+        $nbVoeux  = intval($eleve->verifierVoeux()); //combien a-t-il de voeux ?
+        $listeVoeux = $eleve->recupererVoeux();
 
-//construction des formulaires (mis en forme dans Twig)
-require_once 'inc/formulaires.inc.php';
+        $etablissement = new \lib\Etablissement($db);   //pour construire les formulaires de choix d'étab
 
+        //construction des formulaires (mis en forme dans Twig)
+        require_once 'inc/formulaires.inc.php';
+    
+}
+//var_dump($connecte);
 ////////////////////////////Les variables communes à passer au template//////////////////
 include_once ('inc/varTwig.inc.php');
 

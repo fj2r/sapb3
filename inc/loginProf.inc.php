@@ -167,7 +167,7 @@ appelTemplate($template, $twig, $mergeVarTemplate); //construction de la page we
     else {
     
     $connecte = FALSE;
-    //header('Location:index.php');
+    header('Location:index.php');
     }
 
 

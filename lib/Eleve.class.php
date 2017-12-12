@@ -181,9 +181,10 @@ class Eleve extends Utilisateur {
     public function profilEleve (){
       
         if ($this->statut =='eleve'){
+            
             try {
-                $statement = "SELECT * FROM cfg_eleves WHERE numDossier = ? AND codeConf = ?";
-                $tabDatas = array ($this->numDossier, $this->codeConf);
+                $statement = "SELECT * FROM cfg_eleves WHERE numDossier = ? ";
+                $tabDatas = array ($this->numDossier);
                 $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
                 
                 if ($tableau == FALSE){

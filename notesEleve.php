@@ -24,15 +24,25 @@ $eleve = new lib\Eleve($db, $statut); //création de l'élève
 
 $connecte = gestionIdentification($eleve, $statut);        //gestion de l'identification (session & cookies)
 
-$existenceProfil = $eleve->profilEleve();                //récupération des infos sur l'élève
-if ($existenceProfil == TRUE){
-    $eleve->genererSession();
-    $eleve->genererCookie();
-    $connecte = TRUE;
+if ($connecte == TRUE){
+    $existenceProfil = $eleve->profilEleve(); //récupération des infos sur l'élève
+    
 }
 else {
-    $connecte = FALSE;
+    $eleve->setCodeConfidentiel($codeConf);
+    $eleve->setNumDossier($numDossier);
+    
+    $existenceProfil = $eleve->profilEleve(); //récupération des infos sur l'élève
+    if ($existenceProfil == TRUE){
+        $eleve->genererSession();
+        $eleve->genererCookie();
+        $connecte = TRUE;
+    }
+    else {
+        $connecte = FALSE;
+    }
 }
+
 $profilEleve =array(
     "nom"=>''.$eleve->getNom().'',
     "prenom"=>''.$eleve->getPrenom().'',

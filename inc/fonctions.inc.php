@@ -200,19 +200,19 @@ function gestionIdentification ($user, $statut) {
             $user->setNumDossier($_SESSION['num_dossier']);
             $user->setIdEleve($_SESSION['id_eleve']);
 
-            $connecte = true ;
+            $connecte = TRUE ;
         }
         elseif(isset($_COOKIE['code_conf']) && isset($_COOKIE['num_dossier']) && !empty($_COOKIE['code_conf']) && !empty($_COOKIE['num_dossier'])){
                 $user->setCodeConfidentiel($_COOKIE['code_conf']);
                 $user->setNumDossier($_COOKIE['num_dossier']);
                 $user->setIdEleve($_COOKIE['id_eleve']);
 
-                $connecte = true ;
+                $connecte = TRUE ;
             }
         else{
-                $connecte = false ;
+                $connecte = FALSE ;
             }  
-    
+            
         return $connecte;
     }
     
