@@ -31,7 +31,7 @@ $orientation= 'P';
 $unit= 'mm';
 $size= 'A4';
  
-$codeStructure = $_GET['codeStructure'];
+$codeStructure = htmlentities($_GET['codeStructure'])  ;
 
 
         

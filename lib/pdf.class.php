@@ -80,7 +80,7 @@ class pdf {
          
          
          
-         $statement = "SELECT * FROM `import_eleve_complet` WHERE `Code Structure` = ? ORDER BY `Nom de famille`,`Prénom`,`Date Naissance` ";
+            $statement = "SELECT * FROM `import_eleve_complet` WHERE `Code Structure` = ? ORDER BY `Nom de famille`,`Prénom`,`Date Naissance` ";
             $tabDatas = array ($codeStructure);
             $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
             //var_dump($tableau);
@@ -88,22 +88,35 @@ class pdf {
             foreach ($tableau as $infosEleve){
                 $this->recupererDonneesListing();  //On récupère les donées pour constuire le courrier
                 
-                $profilEleveComplet = $this->listerVoeuxIndividuels($infosEleve['id_eleve']);
+                $InformationsEleve = $this->informationsEleve($infosEleve['id_eleve']);
                 
-                if ($profilEleveComplet != FALSE){
-                    $this->id_eleve = $profilEleveComplet[0]['id_eleve'];
-                    $this->nom = $profilEleveComplet[0]['Nom de famille'];
+///////////////////////////////////// Début de construction du courrier///////////////////////////////////////////////
+                    $this->id_eleve = $InformationsEleve[0]['id_eleve'];
+                    $this->nom = utf8_decode($InformationsEleve[0]['Nom de famille']) ;
                    
-                    $this->prenom = $profilEleveComplet[0]['Prénom'];
+                    $this->prenom = utf8_decode($InformationsEleve[0]['Prénom'])  ;
                     
-                    $this->classe = $profilEleveComplet[0]['Code Structure'];
+                    $this->classe = $InformationsEleve[0]['Code Structure'];
                     $this->vrainom = $this->prenom.' '.$this->nom.', classe de '.$this->classe;
                     
                     $this->c_texte_p2 = str_replace('votre enfant',$this->prenom, $this->c_texte_p2); //pour injecter le nom de l'élève dans le courrier
-                    
+                                    
+                
+                    $this->voeux_total = ''; //réinitialisation des voeux
+/////////////////////////////////////traitement des voeux classiques///////////////////////////////////////////////////
+                $profilEleveComplet = $this->listerVoeuxIndividuels($infosEleve['id_eleve']);
+/////////////////////////////////////traitement des voeux type CPGE///////////////////////////////////////////////////
+                $profilEleveCPGE = $this->listerVoeuxCPGE($infosEleve['id_eleve']);
+                              
+/////////////////////////////////////traitement des voeux type BTS///////////////////////////////////////////////////
+                $profilEleveBTS = $this->listerVoeuxBTS($infosEleve['id_eleve']);
+ 
+                
+                if ($profilEleveComplet != FALSE ){
+                   
                     /*Construction de la liste des voeux
                       atention : il faut changer l'encodage à cause de FPDF et insérer des sauts de ligne html forcés !!*/
-                   
+                    
                     foreach ($profilEleveComplet as $voeu){
                         $classt = $voeu['classement'];$nom = $voeu['nom'];$acad=$voeu['academie']; $commune = $voeu['commune'];
                         $classt=  utf8_decode($classt);
@@ -111,35 +124,91 @@ class pdf {
                         $acad=  utf8_decode($acad);
                         $commune= utf8_decode($commune);
                         
-                        $this->voeux_total .= mb_convert_encoding(" \n- Voeux n°$classt : $nom  (Académie : $acad ; $commune .)","CP1252");
+                        $this->voeux_total .= mb_convert_encoding(" \n- Voeux n°$classt : $nom  (Académie : $acad ; $commune.)","CP1252");
                        
-                    }
+                    }                   
                     
-                    
-                    $this->pdfVoeuxEleves();
-                    $this->voeux_total = '';
                 }
-                else{
-                    
-                    
+                if ($profilEleveCPGE != FALSE){
+                    foreach ($profilEleveCPGE as $voeu){
+                        $classt = $voeu['classement'];$formation = $voeu['formation'];$acad=$voeu['academie']; $commune = $voeu['commune']; $nomEtab=$voeu['nom'];
+                        $classt=  utf8_decode($classt);
+                        $formation= utf8_decode($formation);
+                        $acad=  utf8_decode($acad);
+                        $commune= utf8_decode($commune);
+                        $nomEtab = utf8_decode($nomEtab);
+                        
+                        $this->voeux_total .= mb_convert_encoding(" \n- Voeux n°$classt : $formation  ($nomEtab - Académie : $acad ; $commune.)","CP1252");
+                       
+                    }  
                 }
                 
-            }     
+                if ($profilEleveBTS != FALSE)    {
+                    foreach ($profilEleveBTS as $voeu){
+                        $classt = $voeu['classement'];$secteur = $voeu['secteur'];$type =$voeu['type']; 
+                        $classt=  utf8_decode($classt);
+                        $secteur= utf8_decode($secteur);
+                        $type=  utf8_decode($type);
+                                                
+                        $this->voeux_total .= mb_convert_encoding(" \n- Voeux n°$classt : $type  (Secteur de formation : $secteur.)","CP1252");
+                       
+                    }  
+                }
+                    
+                $this->pdfVoeuxEleves();
+                $this->voeux_total = '';
+                }   
+
+                
+
            $this->pdf->Output();
             
            
      }
      
+     public function informationsEleve ($id_eleve){
+         $statement =" SELECT * FROM `import_eleve_complet` WHERE `import_eleve_complet`.`id_eleve`= ?";
+         $tabDatas=array($id_eleve);
+         $infosEleve = $this->db->queryPDOPrepared($statement,$tabDatas);
+         return $infosEleve;
+     }
+     
      public function listerVoeuxIndividuels ($id_eleve){
+                
                 $statement = "SELECT DISTINCT * FROM `validations` "
                     . "INNER JOIN etablissement ON `validations`.`id_etab`=`etablissement`.`id_etab` "
                     . "INNER JOIN `import_eleve_complet` ON `validations`.`id_eleve`=`import_eleve_complet`.`id_eleve`  WHERE `validations`.`id_eleve`= ? ORDER BY `validations`.`classement` ASC";
                 $tabDatas = array ($id_eleve);
-               return  $tableau = $this->db->queryPDOPrepared($statement, $tabDatas);
+             
+          $tableau = $this->db->queryPDOPrepared($statement, $tabDatas);
+          
+          if ($tableau != NULL){ return $tableau; }
+          else {return $tableau=array(); }   
      
                 
      }
-     
+     public function listerVoeuxCPGE ($id_eleve){
+         $tableau=array();
+                $statement = "SELECT DISTINCT * FROM `validations` "
+                    . "INNER JOIN etablissement_CPGE ON `validations`.`id_etab`=`etablissement_CPGE`.`id_etab` "
+                    . "INNER JOIN `import_eleve_complet` ON `validations`.`id_eleve`=`import_eleve_complet`.`id_eleve`  WHERE `validations`.`id_eleve`= ? ORDER BY `validations`.`classement` ASC";
+                $tabDatas = array ($id_eleve);
+          $tableau = $this->db->queryPDOPrepared($statement, $tabDatas);
+         if ($tableau != NULL){ return $tableau; }
+          else {return $tableau=array(); } 
+                
+     }
+     public function listerVoeuxBTS ($id_eleve){
+         $tableau=array();
+                $statement = "SELECT DISTINCT * FROM `validations` "
+                    . "INNER JOIN filieres_BTS ON `validations`.`id_etab`=`filieres_BTS`.`id_etab` "
+                    . "INNER JOIN `import_eleve_complet` ON `validations`.`id_eleve`=`import_eleve_complet`.`id_eleve`  WHERE `validations`.`id_eleve`= ? ORDER BY `validations`.`classement` ASC";
+                $tabDatas = array ($id_eleve);
+          $tableau = $this->db->queryPDOPrepared($statement, $tabDatas);
+          if ($tableau != NULL){ return $tableau; }
+          else {return $tableau=array(); } 
+                
+     }
 
 
     public function pdfVoeuxEleves (){
