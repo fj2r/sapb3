@@ -410,8 +410,8 @@ class Eleve extends Utilisateur {
         
         
         if ($tableau[0][0] == 0){
-            
-            return $this->nbVoeux = 0;
+            $this->nbVoeux = 0;
+            return NULL;
              
         }
         else {
@@ -421,8 +421,8 @@ class Eleve extends Utilisateur {
    }
    
    public function recupererVoeux () {
-        
-        if ($this->verifierVoeux() != 0){
+        $fusionTab = array();
+        if ($this->verifierVoeux() != 0 || $this->verifierVoeux() != NULL ){
             //pour les établissements non CPGE
             $statement = "SELECT * FROM `validations` INNER JOIN etablissement ON `validations`.`id_etab`=`etablissement`.`id_etab` WHERE `validations`.`id_eleve`= ? ORDER BY `validations`.`classement` ASC";
             $tabDatas = array ($this->id_eleve);
@@ -461,10 +461,11 @@ class Eleve extends Utilisateur {
                 $fusionTab = $tableau3;
             }
             
-            return $fusionTab;
+            if ($fusionTab){ return $fusionTab ;}
         }
         else {
-            return $tableau = array ();
+            $fusionTab = array();
+            return $fusionTab;
         }
         
    }

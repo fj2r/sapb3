@@ -106,6 +106,11 @@ class pdf {
                    
                     foreach ($profilEleveComplet as $voeu){
                         $classt = $voeu['classement'];$nom = $voeu['nom'];$acad=$voeu['academie']; $commune = $voeu['commune'];
+                        $classt=  utf8_decode($classt);
+                        $nom= utf8_decode($nom);
+                        $acad=  utf8_decode($acad);
+                        $commune= utf8_decode($commune);
+                        
                         $this->voeux_total .= mb_convert_encoding(" \n- Voeux n°$classt : $nom  (Académie : $acad ; $commune .)","CP1252");
                        
                     }

@@ -76,7 +76,7 @@ class Notes extends Eleve {
                 $matiere = $splitArray[1];
                 $matiere = str_replace('_', ' ', $matiere); // ATTENTION car le POST rajoute des _ qu'il faut vite virer
                 
-               
+                
                 
                 /*puis on peut continuer*/
                 

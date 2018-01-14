@@ -206,7 +206,7 @@ class Professeur extends Utilisateur {
     
    public function recupererCommentairesVoeux($voeuxEleve){
        $resultat = array();
-       
+    if ($voeuxEleve){   
        foreach ($voeuxEleve as $idVoeu ){
            
             $statement = "SELECT * FROM `analyse_voeux` WHERE `analyse_voeux`.`id_voeu`= ? AND `analyse_voeux`.`id_pedago`= ? ";
@@ -223,6 +223,10 @@ class Professeur extends Utilisateur {
         
         return $resultat;
    }
+   else {return NULL;}
+   }
+   
+   
    public function ecrireCommentaireVoeu($tableauAvis){
        
        foreach ($tableauAvis as $idVoeu=>$avis){
