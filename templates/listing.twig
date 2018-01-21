@@ -1,0 +1,47 @@
+{# empty Twig template #}
+{% extends "layout_bundle.twig" %}
+
+
+{% block identifiants %}{{parent()}}{% endblock %}
+
+{% block title %}{{parent()}}Accueil{% endblock %}
+{% block cadre_haut %}
+        {% block chapeau_haut %}{{parent()}}{% endblock %}
+        {% block menuUtilisateur %}
+            {{parent()}}
+        {% endblock %}
+        {% block chapeau_bas %}{{parent()}}{% endblock %}
+    
+{% endblock %}
+
+{% block contenu %}
+    {% block panneauGauche %}{{parent()}}{%endblock%}   
+    {% block panneauDroite %}
+        {% block panneauDroiteFirstchild%} {{parent()}} {% endblock %}
+            {% block article %}{{parent()}}
+                
+               
+                    <table border="1">
+                        <th>Liste des élèves de la classe de {{nomClasse}}</th>
+                        <th>Numéros de dossier</th>
+                        <th>Codes confidentiels </th>
+                        {%for eleve in listing %}
+                            <tr>
+                                <td>{{eleve.4}} {{eleve.3}}</td>
+                                <td>{{eleve.numDossier}}</td>
+                                <td>{{eleve.codeConf}}</td>
+                            </tr>
+                        {%endfor%}
+                    
+                        
+                   
+                    </table>
+                
+                
+            {% endblock %}
+        {% block panneauDroiteSecondchild %} {{parent()}} {% endblock %}    
+    {% endblock %}
+    
+{%endblock%}
+
+{% block footer %}{{parent()}}{% endblock %}

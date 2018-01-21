@@ -146,5 +146,9 @@
             "labelNotes" : "Veuillez remplir le tableau des moyennes pour chacune des matières",
             "trim1" : "Moyennes du premier trimestre",
             "trim2": "Moyennes du second trimestre"
+    }],
+    "listing" : [{
+            "intro" : "Liste des Numéros de Dossiers et Codes Confidentiels des élèves de votre classe"
+            
     }] 
 }

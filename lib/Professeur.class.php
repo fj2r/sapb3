@@ -329,4 +329,15 @@ class Professeur extends Utilisateur {
        
        return TRUE;
    }
+   public function listingParClasse ($classe){
+       
+        $statement = "SELECT `cfg_eleves`.`id_eleve`,`cfg_eleves`.`numDossier`, `cfg_eleves`.`codeConf`, `import_eleve_complet`.`Prénom`, `import_eleve_complet`.`Nom de Famille`"
+                . "FROM `cfg_eleves` INNER JOIN `import_eleve_complet` ON "
+                . "`cfg_eleves`.`id_eleve`=`import_eleve_complet`.`id_eleve` "
+                . "WHERE `import_eleve_complet`.`Code Structure`=? ORDER BY `import_eleve_complet`.`Nom de Famille` ";
+        $tabDatas =array ($classe);
+        $requete = $this->db->queryPDOPrepared($statement, $tabDatas);
+       
+        return $requete;
+   }
 }
