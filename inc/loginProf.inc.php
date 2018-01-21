@@ -25,7 +25,8 @@ if (isset($phpsessid) && !empty($phpsessid) && !isset($_POST['passwd']) ){
     "id_pedago"=>''.$prof->getIdPedago().'',
     "civilite"=>''.$prof->getCivilite().'',
     "matiere"=>$prof->getMatiere(),
-    
+    "tuteur"=>$prof->getTuteur(),
+    "classeTuteur"=>$prof->getClasseTuteur(),
     
 );
 
@@ -108,6 +109,8 @@ else {
         "id_pedago"=>''.$prof->getIdPedago().'',
         "civilite"=>''.$prof->getCivilite().'',
         "matiere"=>$prof->getMatiere(),
+        "tuteur"=>$prof->getTuteur(),
+        "classeTuteur"=>$prof->getClasseTuteur(),
 
 
         );

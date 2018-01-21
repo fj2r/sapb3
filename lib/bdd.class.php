@@ -157,6 +157,22 @@ class bdd {
         else { return FALSE; }
     }
     
+    public function queryPDOPreparedCount ($statement,$tabDatas){
+        if (is_array($tabDatas)){
+            $requete = $this->getPDO()->prepare($statement);
+            $requete->execute($tabDatas);
+            
+            $resultat = $requete->rowCount();
+            if ($resultat != null){
+                return TRUE;
+            }
+            else {
+                return FALSE;
+            }
+        }
+        else { return null; }
+    }
+    
     
     
     //////////////////////mutateurs/////////////////////////////////////////////

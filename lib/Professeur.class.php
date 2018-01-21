@@ -27,6 +27,8 @@ class Professeur extends Utilisateur {
     protected $codeStructure =array();
     protected $matiere = array();
     protected $id_pedago;
+    protected $tuteur = FALSE;
+    protected $classeTuteur = array();
     protected $URL_AD = "adlycee.lyc-lmautun.loc";
     protected $nomCompteAD = "Consultweb";
     protected $passwdCompteAD = "Intranet08" ; 
@@ -34,6 +36,7 @@ class Professeur extends Utilisateur {
 
     public function __construct($db, $statut = 'professeur') {
         parent::__construct($db, $statut);
+        
     }
     
     
@@ -52,7 +55,12 @@ class Professeur extends Utilisateur {
       public function setMatiere($data){
         $this->matiere = $data;
     }
-    
+    public function setTuteur ($data){
+        $this->tuteur = $data;
+    }
+    public function setClasseTuteur ($data){
+        $this->classeTuteur = $data;
+    }
    
     public function getNomComplet(){
         return $this->nomComplet;
@@ -67,8 +75,12 @@ class Professeur extends Utilisateur {
     public function getMatiere(){
         return $this->matiere;
     }
-    
-    
+    public function getTuteur(){
+        return $this->tuteur;
+    }
+    public function getClasseTuteur (){
+        return $this->classeTuteur;
+    }
     
     
     
@@ -101,6 +113,8 @@ class Professeur extends Utilisateur {
     }
     
     public function profilProf (){
+        
+                
         $statement = "SELECT * FROM `identifiants_pedago` INNER JOIN `professeurs` ON `identifiants_pedago`.`id_pedago` = `professeurs`.`id_pedago` WHERE `identifiants_pedago`.`login`=?  ";
         $tabDatas =array ($this->login);
         $requete = $this->db->queryPDOPrepared($statement, $tabDatas);
@@ -129,7 +143,7 @@ class Professeur extends Utilisateur {
         //$this->codeStructure = $this->classesProf();
         
         //var_dump ($this->matiere) ;var_dump($this->codeStructure) ;
-       
+        $this->estTuteur(); //est il tuteur ??
         return $requete; //on retourne un seul tableau de dimension 2 contenant 3 tableaux...profil/matieres/codeStructure(classe + matiere associée)
         }
         
@@ -143,8 +157,34 @@ class Professeur extends Utilisateur {
         
         $this->setMatiere($requete[0]['matiere'] );
         //var_dump($requete[0]);
-        return $requete[0];
+        
     }
+    private function estTuteur (){
+        $matiere="TUTORAT";
+        $statement = "SELECT * FROM attribution_matieres WHERE nomComplet LIKE ? AND matiere LIKE ?  ";
+        $tabDatas =array ($this->nomComplet, $matiere);
+        $requete = $this->db->queryPDOPreparedCount($statement, $tabDatas);
+        if ($requete != NULL || $requete !=0) {
+             $this->setTuteur(TRUE);
+             $this->classeTuteur();
+        }
+        else {
+            $this->setTuteur(FALSE);
+        }
+       
+        //var_dump($requete[0]);
+        
+    }
+    
+    private function classeTuteur () {
+        $matiere="TUTORAT";
+        $statement = "SELECT `Code Structure` FROM `attribution_matieres` WHERE nomComplet LIKE ? AND matiere LIKE ?   ";
+        $tabDatas =array ($this->nomComplet, $matiere);
+        $requete = $this->db->queryPDOPrepared($statement, $tabDatas);
+        
+        $this->setClasseTuteur($requete);
+    }
+    
     public function classesProf (){
         $statement = "SELECT `Code Structure`,`matiere` FROM `attribution_matieres` WHERE `nomComplet`=?  ";
         $tabDatas =array ($this->nomComplet);

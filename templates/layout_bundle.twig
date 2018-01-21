@@ -13,6 +13,11 @@
                 {% elseif connecte == TRUE %}
                     <td><img src="templates/IMG/login.png" /></td>
                     <td> {% if sexe == 'F' %}{{messageF}}{%else%}{{messageM}}{% endif %} {{connecteur1}} : {{prenom|capitalize}} {{nom|upper}} </td>
+                    <td> {%if tuteur == TRUE %} <i>(Tuteur de la classe de 
+                            {%for classe in classeTuteur %}
+                             {{classe.0}}
+                            {%endfor%}
+                            )</i>{%endif%}</td> 
                 {% endif %}
             {%endif%}
          

@@ -57,6 +57,7 @@ else {
 }
 
 $classe = htmlentities($_GET['classe']);
+$statut = htmlentities($_GET['statut']);
 $listing = $prof->listingParClasse($classe);
 
 ///////////////éventuelle surcharge des variables pour le template ?//////////
@@ -87,7 +88,7 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
     'listing'=> $listing,
     'nomClasse'=>''.$classe.'',
-    
+    'statut'=>''.$statut.''
     ) ;
 
 

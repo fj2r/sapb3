@@ -4,8 +4,24 @@
                     <ul>
                         {% for classes in classesProf if classes.matiere != 'TUTORAT'%}
                             
-                            <li> <strong><a href="division.php?statut={{statut}}&codeStructure={{classes.0 }}" target="">Classe de {{classes.0 }}</strong></a> <i>(enseignement de {{classes.matiere}})</i> </li>
-                            <br />
+                            <li> <strong><a href="division.php?statut={{statut}}&codeStructure={{classes.0 }}" target="">Classe de {{classes.0 }}</strong></a> 
+                            <i>(enseignement de {{classes.matiere}})</i> </li>
+                            
+                            {%if tuteur == TRUE %}
+                                {%for nomClasse in classeTuteur%}
+                                    
+                                    {%if nomClasse.0 == classes.0 %}
+                                        <span>POUR LES TUTEURS :</span>
+                                        <a href='listing.php?statut=professeur&classe={{nomClasse.0}}'>
+                                             Voir les codes d'accès des élèves de {{nomClasse.0}} 
+                                            <img src="templates/IMG/listing.png" 
+                                             alt="Voir les codes d'accès des élèves"
+                                             width="24px" height="24px"/>
+                                        </a>
+                                        {%endif%}
+                                    {%endfor%}
+                                {%endif%}
+                              <br />  
                     {% endfor %}                    
                     </ul>
 
