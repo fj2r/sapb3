@@ -55,7 +55,31 @@
 
                                     <div class="">
                                         <strong> Voeu classé n°{{voeu.classement}} : </strong><br />
-                                        <p><strong>{{voeu.nom}}</strong></p> <p><a href ="{{voeu.lien}}" target ="_blank">(Voir la présentation de l'établissement sur le site de l'ONISEP)</a></p>
+                                        <p><strong>
+                                                {%if voeu.secteur != empty %}{{voeu.secteur}} : 
+                                                {%endif%}
+                                                <strong>
+                                                {{voeu.type}}, {{voeu.nom}}
+                                                {%if voeu.sigle != empty %}({{voeu.sigle}}){%endif%}
+                                                
+                                                </strong>
+                                                {%if voeu.academie !=empty%}
+                                                    <i>(Académie : {{voeu.academie|upper}})</i>
+                                                {%endif%}
+                                                {%if voeu.formation !=empty%}
+                                                - Filière : {{voeu.formation}}
+                                                {%endif%}
+                                            </strong>
+                                            {%if voeu.statut != empty %} - Etablissement {{voeu.statut}}{%endif%}
+                                        </p>
+                                        <p>
+                                            
+                                        </p>
+                                        {%if voeu.lien != empty %}
+                                        <p>
+                                            <a href ="{{voeu.lien}}" target ="_blank">(Voir la présentation de l'établissement ou de la formation sur le site de l'ONISEP) <img src="templates/IMG/onisep.jpg" width="24px" height="24px"/> </a>
+                                        </p>
+                                        {%endif%}
 
                                     </div>
                                     <div class ="">

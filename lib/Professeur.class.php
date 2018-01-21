@@ -86,13 +86,14 @@ class Professeur extends Utilisateur {
         
         if ($requete != FALSE){
             $hash = $requete[0]['password'];
+            
                 if ($this->verifierPassword($this->passwd, $hash) == TRUE) {
 
                     return TRUE;
                 }
                 else {
-                    $existenceDansAD = $this->bindingAD($this->login, $this->passwd);
-                    return $existenceDansAD;
+                    //$existenceDansAD = $this->bindingAD($this->login, $this->passwd);
+                    return FALSE;
                 }
         }
         else { return FALSE ; } 

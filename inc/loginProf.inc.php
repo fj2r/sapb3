@@ -85,10 +85,10 @@ appelTemplate($template, $twig, $mergeVarTemplate); //construction de la page we
 else {
     
     $prof->setLogin($login);
-
+   
     $prof->setPasswordNonEncrypte($passwd);
     $prof->setPasswordEncrypte($passwd); //encrypte à la volée le pass par hachage standard
-
+   
     $existenceProfil = $prof->existanceProf(); //récupération des infos sur le prof, s'il existe
     
     

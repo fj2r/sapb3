@@ -1,13 +1,13 @@
-La procédure Admission Post Bac (A.P.B.) sera importante pour l'orientation en classe de terminale car elle déterminera les affectations des élèves en fonction de leurs demandes de poursuite d'étude et de leurs résultats.
-Dans le cadre du travail sur l'orientation en classe de première, Monsieur Rousseau, professeur au lycée militaire d'Autun, a développé une application permettant de réaliser une simulation de la procédure Admission Post Bac.
-Afin d'aider les élèves dans leurs futurs choix, et de pouvoir les renseigner sur la pertinence de  leurs voeux, nous mettons en place une action sur l'orientation avec les professeurs principaux et les professeurs tuteurs des élèves de première qui comporte plusieurs phases :
+La procÃ©dure ParcourSup sera importante pour l'orientation en classe de terminale car elle dÃ©terminera les affectations des Ã©lÃ¨ves en fonction de leurs demandes de poursuite d'Ã©tude et de leurs rÃ©sultats.
+Dans le cadre du travail sur l'orientation en classe de premiÃ¨re, Monsieur Rousseau, professeur au lycÃ©e militaire d'Autun, a dÃ©veloppÃ© une application permettant de rÃ©aliser une simulation de la procÃ©dure ParcourSup.
+Afin d'aider les Ã©lÃ¨ves dans leurs futurs choix et de pouvoir les renseigner sur la pertinence de  leurs voeux, nous mettons en place une action sur l'orientation avec les professeurs principaux et les professeurs tuteurs des Ã©lÃ¨ves de premiÃ¨re qui comporte plusieurs phases :
 
-   -	Détermination des choix de poursuite d'étude par les élèves et renseignement du logiciel de Simulation APB (février 2017) ;
+   -	DÃ©termination des choix de poursuite d'Ã©tude par les Ã©lÃ¨ves et renseignement du logiciel de Simulation ParcourSup (janvier 2018) ;
 
-   -	Renseignement sur le logiciel des moyennes du premier et deuxième trimestre de la classe de première (février et mars 2017) ;
+   -	Renseignement sur le logiciel des moyennes du premier et deuxiÃ¨me trimestre de la classe de premiÃ¨re (fÃ©vrier et mars 2018) ;
 
-   -	Avis circonstanciés des enseignants sur chacun des choix présentés par les élèves (mars-avril 2017) ;
+   -	Avis circonstanciÃ©s des enseignants sur chacun des choix prÃ©sentÃ©s par les Ã©lÃ¨ves (mars-avril 2018) ;
 
-   -	Analyse des demandes des élèves et des avis des enseignants par une commission interne au lycée (début mai 2017) ;
+   -	Analyse des demandes des Ã©lÃ¨ves et des avis des enseignants par une commission interne au lycÃ©e (dÃ©but mai 2018) ;
 
-   -	Retour aux élèves et aux parents des avis de la commission sur les choix présentés (mai-juin 2017).
+   -	Retour aux Ã©lÃ¨ves et aux parents des avis de la commission sur les choix prÃ©sentÃ©s (juin 2018).

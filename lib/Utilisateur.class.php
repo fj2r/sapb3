@@ -216,7 +216,7 @@ class Utilisateur {
     }
     protected function verifierPassword ($password, $hash) {
         
-        if (sha1($password.$this->salt == $hash)){
+        if (sha1($password.$this->salt) == $hash){
             return TRUE;
         }
         else { return FALSE ; }

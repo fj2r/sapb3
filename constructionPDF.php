@@ -17,6 +17,7 @@ include_once ('inc/initTwig.inc.php');
 ////////////////////////////Les variables communes à passer au template//////////////////
 include_once ('inc/varTwig.inc.php');
 ////////////////////////////inclusion des lib pour fpdf/////////////////////////
+include_once ('lib/fpdf/fpdf.php');
 include_once ('lib/tfpdf/tfpdf.php');
 include_once ('lib/pdf.class.php');
 
@@ -35,7 +36,7 @@ $codeStructure = htmlentities($_GET['codeStructure'])  ;
 
 
         
-$tfpdf = new tFPDF($orientation, $unit, $size);
+$tfpdf = new FPDF($orientation, $unit, $size);
 $publication = new \lib\pdf($db , $tfpdf);
 
 $listeEleves = $publication->listeElevesParDivision($codeStructure);

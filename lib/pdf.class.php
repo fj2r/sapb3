@@ -47,16 +47,16 @@ class pdf {
     private function recupererDonneesListing(){
         /* Attention à l'encodage des fichiers! (ce n'est pas de l'unicode) */
         $this->today = date('j/n/Y');
-        $this->h_titre=file_get_contents('lib/tfpdf/courrier/h_titre.txt');
-        $this->h_soustitre=file_get_contents('lib/tfpdf/courrier/h_soustitre.txt');
-        $this->l_infos=file_get_contents('lib/tfpdf/courrier/l_infos1.txt');
-        $this->l_infos2=file_get_contents('lib/tfpdf/courrier/l_infos2.txt');
-        $this->c_titre=file_get_contents('lib/tfpdf/courrier/c_titre.txt');
-        $this->c_objet=file_get_contents('lib/tfpdf/courrier/c_objet.txt');
-        $this->c_texte_p1=file_get_contents('lib/tfpdf/courrier/c_texte_p1.txt');
-        $this->c_texte_p2 = file_get_contents('lib/tfpdf/courrier/c_texte_p2.txt');
-        $this->c_signature=file_get_contents('lib/tfpdf/courrier/c_signature.txt');
-        $this->f_adresses=file_get_contents('lib/tfpdf/courrier/f_adresses.txt');
+        $this->h_titre=  utf8_decode(file_get_contents('lib/tfpdf/courrier/h_titre.txt'));
+        $this->h_soustitre=utf8_decode(file_get_contents('lib/tfpdf/courrier/h_soustitre.txt'));
+        $this->l_infos=utf8_decode(file_get_contents('lib/tfpdf/courrier/l_infos1.txt'));
+        //$this->l_infos2=utf8_decode(file_get_contents('lib/tfpdf/courrier/l_infos2.txt'));
+        $this->c_titre=utf8_decode(file_get_contents('lib/tfpdf/courrier/c_titre.txt'));
+        $this->c_objet=utf8_decode(file_get_contents('lib/tfpdf/courrier/c_objet.txt'));
+        $this->c_texte_p1=utf8_decode(file_get_contents('lib/tfpdf/courrier/c_texte_p1.txt'));
+        $this->c_texte_p2 = utf8_decode(file_get_contents('lib/tfpdf/courrier/c_texte_p2.txt'));
+        $this->c_signature=utf8_decode(file_get_contents('lib/tfpdf/courrier/c_signature.txt'));
+        $this->f_adresses=utf8_decode(file_get_contents('lib/tfpdf/courrier/f_adresses.txt'));
         
     }
      public function listerVoeuxEleves ($listeEleves){
@@ -77,8 +77,7 @@ class pdf {
      }
      
      public function listeElevesParDivision ($codeStructure){
-         
-         
+               
          
             $statement = "SELECT * FROM `import_eleve_complet` WHERE `Code Structure` = ? ORDER BY `Nom de famille`,`Prénom`,`Date Naissance` ";
             $tabDatas = array ($codeStructure);
@@ -119,11 +118,11 @@ class pdf {
                     
                     foreach ($profilEleveComplet as $voeu){
                         $classt = $voeu['classement'];$nom = $voeu['nom'];$acad=$voeu['academie']; $commune = $voeu['commune'];
-                        $classt=  utf8_decode($classt);
+                        /*$classt=  utf8_decode($classt);
                         $nom= utf8_decode($nom);
                         $acad=  utf8_decode($acad);
                         $commune= utf8_decode($commune);
-                        
+                        */
                         $this->voeux_total .= mb_convert_encoding(" \n- Voeux n°$classt : $nom  (Académie : $acad ; $commune.)","CP1252");
                        
                     }                   
@@ -132,11 +131,11 @@ class pdf {
                 if ($profilEleveCPGE != FALSE){
                     foreach ($profilEleveCPGE as $voeu){
                         $classt = $voeu['classement'];$formation = $voeu['formation'];$acad=$voeu['academie']; $commune = $voeu['commune']; $nomEtab=$voeu['nom'];
-                        $classt=  utf8_decode($classt);
+                        /*$classt=  utf8_decode($classt);
                         $formation= utf8_decode($formation);
                         $acad=  utf8_decode($acad);
                         $commune= utf8_decode($commune);
-                        $nomEtab = utf8_decode($nomEtab);
+                        $nomEtab = utf8_decode($nomEtab);*/
                         
                         $this->voeux_total .= mb_convert_encoding(" \n- Voeux n°$classt : $formation  ($nomEtab - Académie : $acad ; $commune.)","CP1252");
                        
@@ -146,9 +145,9 @@ class pdf {
                 if ($profilEleveBTS != FALSE)    {
                     foreach ($profilEleveBTS as $voeu){
                         $classt = $voeu['classement'];$secteur = $voeu['secteur'];$type =$voeu['type']; 
-                        $classt=  utf8_decode($classt);
+                        /*$classt=  utf8_decode($classt);
                         $secteur= utf8_decode($secteur);
-                        $type=  utf8_decode($type);
+                        $type=  utf8_decode($type);*/
                                                 
                         $this->voeux_total .= mb_convert_encoding(" \n- Voeux n°$classt : $type  (Secteur de formation : $secteur.)","CP1252");
                        
@@ -222,8 +221,8 @@ class pdf {
         
         //$this->pdf->AddFont('DejaVu','','DejaVuSansCondensed.ttf',true); //pour l'UTF-8
         //$this->pdf->SetFont('DejaVu','',11);
-        $this->pdf->Image('lib/tfpdf/IMG/header_RF.png',90,6,30);
-        $this->pdf->Image('lib/tfpdf/IMG/leftcol_logo_terre.png',2,30,45);
+        $this->pdf->Image('lib/fpdf/IMG/header_RF.png',90,6,30);
+        $this->pdf->Image('lib/fpdf/IMG/leftcol_logo_terre.png',2,30,45);
         $this->pdf->SetFont('Arial','I',8);
         $this->pdf->SetXY(10,55);
         $this->pdf->MultiCell(35,3,"$this->l_infos",0,'J');
@@ -263,7 +262,7 @@ class pdf {
         $this->pdf->SetXY(30,260);
         $this->pdf->SetFont('Times','',10);
 
-        $this->pdf->MultiCell (180,3,"$this->f_adresses",0,'C');
+        $this->pdf->MultiCell (180,5,"$this->f_adresses",0,'C');
 
         //deuxieme page
         $this->pdf->AddPage();
@@ -276,7 +275,7 @@ class pdf {
         $this->pdf->MultiCell (180,7,"$this->voeux_total",0,'J');
 
         //le footer
-        $this->pdf->Image('lib/tfpdf/IMG/footer_pucelle.png',40,265,15);
+        $this->pdf->Image('lib/fpdf/IMG/footer_pucelle.png',40,265,15);
         $this->pdf->SetXY(42,270);
         $this->pdf->SetFont('Times','',10);
 

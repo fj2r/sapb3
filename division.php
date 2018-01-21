@@ -38,7 +38,23 @@ if (isset($phpsessid) && !empty($phpsessid) ){
     $connecte = TRUE;
 }
 else {
-    $connecte = FALSE;
+     $profilProf = $prof->profilProf();
+
+        $prof->genererSession();
+        $prof->genererCookie();
+        $connecte = TRUE;
+
+        $profilProf =array(
+        "nom"=>''.$prof->getNom().'',
+        "prenom"=>''.$prof->getPrenom().'',
+        "nomComplet"=>''.$prof->getNomComplet().'',
+        "codeStructure"=>$prof->getCodeStructure(),
+        "id_pedago"=>''.$prof->getIdPedago().'',
+        "civilite"=>''.$prof->getCivilite().'',
+        "matiere"=>$prof->getMatiere(),
+
+
+        );
 }
 
 
