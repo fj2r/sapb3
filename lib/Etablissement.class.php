@@ -348,7 +348,7 @@ class Etablissement {
     
     public function rechercherCPGE ($enregistrement,$champ,$value,$champTri ='formation'){
         
-        $statement = "SELECT $etablissement FROM `etablissement_CPGE` WHERE `$champ` = ? ORDER BY `$champTri` ASC ";
+        $statement = "SELECT $etablissement FROM `etablissement_cpge` WHERE `$champ` = ? ORDER BY `$champTri` ASC ";
         $tabDatas = array ($value);
         $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
         
@@ -367,7 +367,7 @@ class Etablissement {
         
     public function listerCPGE ($enregistrement,$champ0,$champ1,$champ2,$values=array(),$champTri ='formation'){
        ///on récupère la liste de chaque CPGE
-        $statement = "SELECT $enregistrement FROM `etablissement_CPGE` WHERE `$champ1` = ? AND `$champ2`= ? ORDER BY `$champTri` ASC ";
+        $statement = "SELECT $enregistrement FROM `etablissement_cpge` WHERE `$champ1` = ? AND `$champ2`= ? ORDER BY `$champTri` ASC ";
         $tabDatas = $values;
         $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
         
@@ -376,7 +376,7 @@ class Etablissement {
     }
     public function listerBTS ($enregistrement,$champ0,$values=array(),$champTri ='type'){
         ///on récupère la liste de chaque type de BTS
-        $statement = "SELECT $enregistrement FROM `filieres_BTS` WHERE `$champ0` = ? ORDER BY `$champTri` ASC ";
+        $statement = "SELECT $enregistrement FROM `filieres_bts` WHERE `$champ0` = ? ORDER BY `$champTri` ASC ";
         $tabDatas = $values;
         $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
         
@@ -487,7 +487,7 @@ class Etablissement {
         }
         
         //recherche pour les CPGE
-       $statementCPGE = "SELECT DISTINCT $champ0 FROM `etablissement_CPGE` ORDER BY `$tri0` ASC ";
+       $statementCPGE = "SELECT DISTINCT $champ0 FROM `etablissement_cpge` ORDER BY `$tri0` ASC ";
        $tabDatasCPGE = array();
        $tableauCPGE = $this->db->queryPDOPrepared($statementCPGE, $tabDatasCPGE);
        
@@ -500,7 +500,7 @@ class Etablissement {
     }
     
     public function formBTS ($champ0, $tri0){
-       $statementBTS = "SELECT DISTINCT $champ0 FROM `filieres_BTS` ORDER BY `$tri0` ASC ";
+       $statementBTS = "SELECT DISTINCT $champ0 FROM `filieres_bts` ORDER BY `$tri0` ASC ";
        $tabDatasBTS = array();
        $tableauBTS = $this->db->queryPDOPrepared($statementBTS, $tabDatasBTS);
        

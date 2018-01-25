@@ -433,14 +433,14 @@ class Eleve extends Utilisateur {
           
             //pour les CPGE
             $statement2 = "SELECT * FROM `validations` INNER JOIN"
-                    . " etablissement_CPGE ON `validations`.`id_etab`=`etablissement_CPGE`.`id_etab` "
+                    . " etablissement_cpge ON `validations`.`id_etab`=`etablissement_cpge`.`id_etab` "
                     . "WHERE `validations`.`id_eleve`= ? ORDER BY `validations`.`classement` ASC ";
             $tabDatas2 = array($this->id_eleve);
             $tableau2 = $this->db->queryPDOPrepared($statement2, $tabDatas2);
             
             //pour les BTS et DMA
             $statement3 = "SELECT * FROM `validations` INNER JOIN"
-                    . " filieres_BTS ON `validations`.`id_etab` = `filieres_BTS`.`id_etab` "
+                    . " filieres_bts ON `validations`.`id_etab` = `filieres_bts`.`id_etab` "
                     . "WHERE `validations`.`id_eleve`= ? ORDER BY `validations`.`classement` ASC  ";
             $tabDatas3 = array($this->id_eleve);
             $tableau3 = $this->db->queryPDOPrepared($statement3, $tabDatas3);
@@ -497,12 +497,12 @@ class Eleve extends Utilisateur {
             
           
             //pour les CPGE
-            $statement2 = "SELECT * FROM `validations` INNER JOIN etablissement_CPGE ON `validations`.`id_etab`=`etablissement_CPGE`.`id_etab` WHERE `validations`.`id_voeu`= ? ORDER BY `validations`.`classement` ASC ";
+            $statement2 = "SELECT * FROM `validations` INNER JOIN etablissement_cpge ON `validations`.`id_etab`=`etablissement_cpge`.`id_etab` WHERE `validations`.`id_voeu`= ? ORDER BY `validations`.`classement` ASC ";
             $tabDatas2 = array($id_voeu);
             $tableau2 = $this->db->queryPDOPrepared($statement2, $tabDatas2);
             
             //pour les BTS et DMA
-            $statement3 = "SELECT * FROM `validations` INNER JOIN filieres_BTS ON `validations`.`id_etab` = `filieres_BTS`.`id_etab` WHERE `validations`.`id_voeu`= ? ORDER BY `validations`.`classement` ASC  ";
+            $statement3 = "SELECT * FROM `validations` INNER JOIN filieres_bts ON `validations`.`id_etab` = `filieres_bts`.`id_etab` WHERE `validations`.`id_voeu`= ? ORDER BY `validations`.`classement` ASC  ";
             $tabDatas3 = array($id_voeu);
             $tableau3 = $this->db->queryPDOPrepared($statement3, $tabDatas3);
             

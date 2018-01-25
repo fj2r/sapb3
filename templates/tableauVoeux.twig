@@ -4,7 +4,7 @@
         
     {% for etab in listeVoeux %}
         
-            {{comm.num_eleve_etab}}
+            
         {%if etab.UAI != NULL and etab.type !="Classes Préparatoires aux Grandes Ecoles" %}
             <tr>
             <td> N°{{etab.classement}} : ({{etab.UAI}}) - <a href="{{etab.lien}}">{{etab.nom}}</a></td>

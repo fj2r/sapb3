@@ -78,7 +78,7 @@
     ],
     "identifiants":[
         {
-            "connecteFALSE":"Vous n'êtes pas connecté",
+            "nonConnecte":"Vous n'êtes pas connecté",
             "messageM":"Vous êtes bien connecté",
             "massageF":"Vous êtes bien connectée",
             "connecteur1" : "en tant que",

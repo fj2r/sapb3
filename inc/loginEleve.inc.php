@@ -39,6 +39,7 @@ $profilEleve =array(
     "numEleveEtab"=>''.$eleve->getNumEleveEtab().'',
     
 );
+//var_dump($profilEleve);
 
 $listeProfesseurs = $eleve->listerProfesseurs(); // qui sont les professeurs de sa classe ? Renvoi un tableau de dimension 2
 
@@ -81,7 +82,8 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'nbVoeuxMax'=>''.$nbVoeuxMax.'',
     'nbVoeux'=>''.$nbVoeux.'',
     'listeVoeux'=>$listeVoeux,
-    'listeCommentaires'=>$listeCommentaires
+    'listeCommentaires'=>$listeCommentaires,
+    'profil'=>$profilEleve,
 
     ) ;
 

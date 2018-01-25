@@ -205,8 +205,7 @@ class Professeur extends Utilisateur {
             'prenom' => ''.$this->prenom.'',
             'civilite' => ''.$this->civilite.'',
             'nomComplet' => ''.$this->nomComplet.'',
-            'codeStructure' => $this->codeStructure,
-            'matiere' => $this->matiere,
+            
             'email' => ''.$this->email.'',
         );
         

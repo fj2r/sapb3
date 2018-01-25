@@ -23,26 +23,8 @@ $db = new lib\bdd();            //instance de la database nécessaire pour les i
 
 $prof = new lib\Professeur($db, $statut); //création de l'instance professeur
 
-if (isset($phpsessid) && !empty($phpsessid) ){
-    
-    
-    $connecte = TRUE;
-}
-else {
-    $connecte = FALSE;
-}
+require_once 'inc/idProf.inc.php';
 
-$profilProf =array(
-    "nom"=>''.$_SESSION['nom'].'',
-    "prenom"=>''.$_SESSION['prenom'].'',
-    "nomComplet"=>''.$_SESSION['nomComplet'].'',
-    "codeStructure"=>$_SESSION['codeStructure'],
-    "id_pedago"=>''.$_SESSION['id_pedago'].'',
-    "civilite"=>''.$_SESSION['civilite'].'',
-    "matiere"=>$_SESSION['matiere'],
-    
-    
-);
 $prof->setIdPedago($_SESSION['id_pedago']); // penser à passer l'id à l'objet...
 
 
@@ -57,7 +39,8 @@ $eleve = new \lib\Eleve($db, 'eleve');      //mais qui est donc cet élève ??
 $eleve->setIdEleve($_GET['idEleve']);
 $infosEleve = $eleve->informationsEleve();  // et hop on sait tout de lui
 $voeuxEleve = $eleve->recupererVoeux();     // et on a tous ses voeux
-
+$commentaireEleve = $eleve->recupererCommentaireVoeuParEleve();
+//var_dump($commentaireEleve);
 $avisProfDejaEmis = $prof->recupererCommentairesVoeux($voeuxEleve); //pour chaque voeu le prof a peut-être déja émis un avis ?
         
 $elevePrecedent = $division->elevePrecedent($eleve->getCodeStructure(), $eleve->getNom(), $eleve->getPrenom())[0];
@@ -83,7 +66,8 @@ $contenuMenu = $contenuJSONMenu->lireContenu($pageMenu)[''.$pageMenu.''][0];
 /////////////////////////////////////////////////////////////
 
 
-$variablesTemplate = array('annee' => ''.$date.'',
+$variablesTemplate = array(
+    'annee' => ''.$date.'',
     'version'=>''.$version.'',
     'charset'=>''.$charset.'',
     'titrePage'=>''.$titrePage.'',
@@ -92,15 +76,16 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'texte_footer'=>''.$texte_footer.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
     'statut'=>''.$statut.'',
-    'profilProf'=>$profilProf,
-    'classeSelectionnee'=>''.$_GET['codeStructure'].'',
+    'profil'=>$profilProf,
+    'classeSelectionnee'=>''.htmlentities($_GET['codeStructure']).'',
     'listeEleves'=>$listeEleves,
-    'classe'=>''.$_GET['codeStructure'].'',
+    'classe'=>''.htmlentities($_GET['codeStructure']).'',
     'elevePrecedent'=>$elevePrecedent,
     'eleveSuivant'=>$eleveSuivant,
     'infosEleve'=>$infosEleve, //on passe un tab à 1 dimension
     'voeuxEleve'=>$voeuxEleve, //tableau de dimension 2 (1array par voeu)
-    'avisProf'=>$avisProfDejaEmis,
+    'commentaireEleve'=>$commentaireEleve,
+    'avisProf'=>$avisProfDejaEmis
     ) ;
 //var_dump($infosEleve);
 

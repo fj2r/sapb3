@@ -24,8 +24,9 @@
             {% block article %}
                 {% block articleFirstChild %}
                     {% if connecte == TRUE %}
+                        
                         <div class=" navigationEleve">
-                            
+                           
                                 {% if elevePrecedent == NULL%}
                                 <div></div> 
                                 {%else%}
@@ -51,11 +52,12 @@
                         
                         <div class="formulaire">
                              <form action="traitementAvisProfesseur.php?statut={{statut}}&idPedago={{id_pedago}}&codeStructure={{infosEleve.35}}&idEleve={{infosEleve.id_eleve}}" class="" method ="POST" >
-                                {% for voeu in voeuxEleve %}
+                                
+                                 {% for voeu in voeuxEleve %}
 
                                     <div class="">
-                                        <strong> Voeu classé n°{{voeu.classement}} : </strong><br />
-                                        <p><strong>
+                                        <p><br /><strong> Voeu classé n°{{voeu.classement}} : </strong>
+                                        <strong>
                                                 {%if voeu.secteur != empty %}{{voeu.secteur}} : 
                                                 {%endif%}
                                                 <strong>
@@ -71,6 +73,14 @@
                                                 {%endif%}
                                             </strong>
                                             {%if voeu.statut != empty %} - Etablissement {{voeu.statut}}{%endif%}
+                                            {%if commentaireEleve !=FALSE %}
+                                                {%for comm in commentaireEleve%}
+                                                    {%if comm.id_voeu == voeu.id_voeu%}
+                                                    <ul><li> <strong><i>Précision sur le voeu : {{comm.1}}.</i></strong></li></ul>
+                                                    {%endif%}
+                                                {%endfor%}
+                                            {%endif%}
+                                            
                                         </p>
                                         <p>
                                             

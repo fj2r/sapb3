@@ -38,7 +38,7 @@ $variablesTemplate = array(
     'texte_footer'=>''.$texte_footer.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
     'statut'=>''.$statut.'',
-    'profilAdmin'=>$profilAdmin,
+    'profil'=>$profilAdmin,
     
     ) ;
 

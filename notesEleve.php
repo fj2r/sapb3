@@ -60,11 +60,11 @@ $notes = new \lib\Notes($db, $statut, $_GET['idEleve']);
 $notes->setCodeStructure($eleve->getCodeStructure());
 $matieresNotes = $notes->matieresSelectionnees();
 
-var_dump($matieresNotes);
+//var_dump($matieresNotes);
 
 $mesNotes = $notes->recupererNotes();           // pour préremplir le formulaire
 //var_dump($mesNotes);
-var_dump($mesNotes);
+//var_dump($mesNotes);
 ///////////////éventuelle surcharge des variables pour le template ?//////////
 $template = 'notes';     //Nom du template à appeler
 
@@ -89,7 +89,7 @@ $variablesTemplate = array(
     'charset'=>''.$charset.'',
     'titrePage'=>''.$titrePage.'',
     'connecte'=>''.$connecte.'',
-    
+    'profil'=>$profilEleve,
     'sexe'=>''.$eleve->getSexe().'',
     'texte_footer'=>''.$texte_footer.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 

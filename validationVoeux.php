@@ -101,6 +101,7 @@ $variablesTemplate = array(
     'charset'=>''.$charset.'',
     'titrePage'=>''.$titrePage.'',
     'connecte'=>''.$connecte.'',
+    'profil'=>$profilEleve,
    
     'texte_footer'=>''.$texte_footer.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'',   

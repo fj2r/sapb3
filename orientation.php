@@ -83,6 +83,7 @@ $variablesTemplate = array(
     'charset'=>''.$charset.'',
     'titrePage'=>''.$titrePage.'',
     'connecte'=>''.$connecte.'',
+    'profil'=>$profilEleve,
     
     'sexe'=>''.$eleve->getSexe().'',
     'texte_footer'=>''.$texte_footer.'',

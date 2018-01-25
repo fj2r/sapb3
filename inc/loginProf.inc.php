@@ -63,7 +63,7 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'texte_footer'=>''.$texte_footer.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
     'statut'=>''.$statut.'',
-    'profilProf'=>$profilProf,
+    'profil'=>$profilProf,
     'classesProf'=>$prof->classesProf(),
     'matieres'=>$prof->matieresProf(),
     ) ;
@@ -146,7 +146,7 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'texte_footer'=>''.$texte_footer.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
     'statut'=>''.$statut.'',
-    'profilProf'=>$profilProf,
+    'profil'=>$profilProf,
     'classesProf'=>$prof->classesProf(),
     'matieres'=>$prof->matieresProf(),
     ) ;

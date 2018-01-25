@@ -189,7 +189,7 @@ class pdf {
      public function listerVoeuxCPGE ($id_eleve){
          $tableau=array();
                 $statement = "SELECT DISTINCT * FROM `validations` "
-                    . "INNER JOIN etablissement_CPGE ON `validations`.`id_etab`=`etablissement_CPGE`.`id_etab` "
+                    . "INNER JOIN etablissement_cpge ON `validations`.`id_etab`=`etablissement_cpge`.`id_etab` "
                     . "INNER JOIN `import_eleve_complet` ON `validations`.`id_eleve`=`import_eleve_complet`.`id_eleve`  WHERE `validations`.`id_eleve`= ? ORDER BY `validations`.`classement` ASC";
                 $tabDatas = array ($id_eleve);
           $tableau = $this->db->queryPDOPrepared($statement, $tabDatas);
@@ -200,7 +200,7 @@ class pdf {
      public function listerVoeuxBTS ($id_eleve){
          $tableau=array();
                 $statement = "SELECT DISTINCT * FROM `validations` "
-                    . "INNER JOIN filieres_BTS ON `validations`.`id_etab`=`filieres_BTS`.`id_etab` "
+                    . "INNER JOIN filieres_bts ON `validations`.`id_etab`=`filieres_bts`.`id_etab` "
                     . "INNER JOIN `import_eleve_complet` ON `validations`.`id_eleve`=`import_eleve_complet`.`id_eleve`  WHERE `validations`.`id_eleve`= ? ORDER BY `validations`.`classement` ASC";
                 $tabDatas = array ($id_eleve);
           $tableau = $this->db->queryPDOPrepared($statement, $tabDatas);

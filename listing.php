@@ -21,40 +21,10 @@ $db = new lib\bdd();            //instance de la database nécessaire pour les i
 
 $prof = new lib\Professeur($db, $statut); //création de l'instance professeur
 
-if (isset($phpsessid) && !empty($phpsessid) ){
-    
-    $profilProf =array(
-    "nom"=>''.$_SESSION['nom'].'',
-    "prenom"=>''.$_SESSION['prenom'].'',
-    "nomComplet"=>''.$_SESSION['nomComplet'].'',
-    "codeStructure"=>$_SESSION['codeStructure'],
-    "id_pedago"=>''.$_SESSION['id_pedago'].'',
-    "civilite"=>''.$_SESSION['civilite'].'',
-    "matiere"=>$_SESSION['matiere'],
-    
-    
-    );
-    $connecte = TRUE;
-}
-else {
-     $profilProf = $prof->profilProf();
 
-        $prof->genererSession();
-        $prof->genererCookie();
-        $connecte = TRUE;
-
-        $profilProf =array(
-        "nom"=>''.$prof->getNom().'',
-        "prenom"=>''.$prof->getPrenom().'',
-        "nomComplet"=>''.$prof->getNomComplet().'',
-        "codeStructure"=>$prof->getCodeStructure(),
-        "id_pedago"=>''.$prof->getIdPedago().'',
-        "civilite"=>''.$prof->getCivilite().'',
-        "matiere"=>$prof->getMatiere(),
+require_once 'inc/idProf.inc.php';
 
 
-        );
-}
 
 $classe = htmlentities($_GET['classe']);
 $statut = htmlentities($_GET['statut']);
@@ -88,7 +58,8 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
     'listing'=> $listing,
     'nomClasse'=>''.$classe.'',
-    'statut'=>''.$statut.''
+    'statut'=>''.$statut.'',
+    'profil'=>$profilProf
     ) ;
 
 
