@@ -48,14 +48,17 @@ else {
     $etablissement = new \lib\Etablissement($db);
     $listeEtab =array();
     if ($_POST['etab']){
-        $listeEtab = $_POST['etab'];
-
-
-        foreach ($listeEtab as $data){
+        $data = htmlentities($_POST['etab']);
+        $idEtab = $data;    
             $etablissement->setIdEtab($data);
             $etablissement->enregistrerVoeuStandard($data,$eleve->getId_eleve(),$eleve->getNumEleveEtab());
+
+        if ($_POST['commentaire']){
+        $commentaire = htmlentities($_POST['commentaire']);
+            $etablissement->ajouterCommentaire($idEtab, $commentaire);
         }
     }
+    
     else {
         header('Location:orientation.php?statut='.$statut);
     }

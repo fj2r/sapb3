@@ -33,6 +33,7 @@ class Etablissement {
     private $lien;
     private $requete;
     private $datas;
+    private $commentaire ="";
 
     public function __construct ($db){
         
@@ -429,6 +430,9 @@ class Etablissement {
         $tabDatas = array($idVoeu);
         $suppressionVoeu  = $this->db->queryPDOPreparedExec($statement, $tabDatas);
         
+        //et suppression du commentaire éventuel
+        $this->enleverCommentaire($idVoeu);
+        
         return $suppressionVoeu;
     }
     
@@ -458,14 +462,19 @@ class Etablissement {
     public function modifierEtablissement($idVoeu,$nouvelEtab){
         
                 $statement = "UPDATE validations SET `id_etab` = ? WHERE `id_voeu`= ?";
-                $tabDatas = array($nouvelEtab[0], $idVoeu);
+                $tabDatas = array($nouvelEtab, $idVoeu);
                 $miseAJourVoeu  = $this->db->queryPDOPreparedExec($statement, $tabDatas);
                 
         
     }
+    public function modifierCommentaire($idVoeu, $commentaire){
+                $statement = "UPDATE commentaire SET `commentaire` = ? WHERE `id_voeu`= ?";
+                $tabDatas = array($commentaire, $idVoeu);
+                $miseAJourCommentaire  = $this->db->queryPDOPreparedExec($statement, $tabDatas);
+    }
     
     public  function formEtablissement ($champ0, $tri0){
-        
+        //Attention : dans ce menu déroulant on ne passe que les étab standards + CPGE
         /* recherche des valeurs d'un champ passé comme  */
         $statement = "SELECT DISTINCT $champ0 FROM etablissement ORDER BY `$tri0` ASC ";
         $tabDatas = array ();
@@ -502,6 +511,30 @@ class Etablissement {
        return $tableauPourOption;
     }
     
+    public function ajouterCommentaire ($idEtab, $commentaire) {
+        
+        //on récupère le num de voeu qui correspond à l'établissement
+        $statement = "SELECT * FROM validations WHERE `validations`.`id_etab` = ?";
+        $tabDatas = array($idEtab);
+        $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
+        
+        $idVoeu = $tableau[0]['id_voeu'];
+        
+        //Ajoute un commentaire via 1 champ texte pour 1 voeu
+        $statement1 = "INSERT INTO `commentaires` (id_voeu, commentaire) VALUES (?,?) " ;
+        $tabDatas1 = array($idVoeu, $commentaire);
+        $tableau1  = $this->db->queryPDOPreparedExec($statement1, $tabDatas1);
+        
+    }
+    public function enleverCommentaire ($idVoeu){
+        //var_dump($idVoeu);
+        //Supprime 1 commentaire sur le voeu donné
+        $statement = "DELETE FROM `commentaires` WHERE `commentaires`.`id_voeu` = ? ";
+        $tabDatas = array($idVoeu);
+        $tableau = $this->db->queryPDOPreparedExec($statement, $tabDatas);
+    }
+    
     
 }
+
 ?>

@@ -47,14 +47,31 @@ $profilEleve =array(
 );
 
 $nbVoeux  = intval($eleve->verifierVoeux()); //combien a-t-il de voeux ?
-$listeVoeux = $eleve->recupererVoeuAModifier($_GET['idVoeu']);
+
+$idVoeu = ($_GET['idVoeu']);
+
+$listeVoeux = $eleve->recupererVoeuAModifier($idVoeu);
 
 
+        
 $etablissement = new \lib\Etablissement($db);   //pour construire les formulaires de choix d'étab
 $etablissement->setClassement($listeVoeux[0]['classement']);
 
-$idVoeu = $_GET['idVoeu'];
-$nouvelEtab = $_POST['etab'];
-$etablissement->modifierEtablissement($idVoeu,$nouvelEtab);
+
+
+
+if ($_POST['etab']){
+    $nouvelEtab = ($_POST['etab']);
+    
+    $etablissement->modifierEtablissement($idVoeu,$nouvelEtab);
+
+    if ($_POST['commentaire'] && $_POST['commentaire'] != ""){
+        $commentaire = htmlentities($_POST['commentaire']);
+        $etablissement->modifierCommentaire($idVoeu, $commentaire);
+
+    }
+}
+
+
 
 header('Location:modificationVoeu.php?statut='.$statut.'&idVoeu='.$idVoeu);

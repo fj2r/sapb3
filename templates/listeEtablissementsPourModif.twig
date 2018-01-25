@@ -4,33 +4,49 @@
     
     <div class ="formulaire">
         <form action="changementVoeu.php?statut={{statut}}&idVoeu={{idVoeu}}" method="POST" >
-            <div class="wrapper">
-          <div class = "bts1">
+            <div class="commentaireEtab">
+                   <fieldset>
+                   <label for= "commentaire" ><i>Commentaire éventuel ou précisions sur l'établissement choisi ou la filière choisie :</i></label>
+                   <textarea class="textareaCommentaire" name = "commentaire"></textarea>
+                   </fieldset>
+               </div>
+          <div class="wrapper">
+          <div class = "etabNonBts bts1">
               <h2>Liste des grandes &eacute;coles, universit&eacute;s et CPGE :</h2>
            {% for etab in liste%}
-               <p> <input type="checkbox" name="etab[]" value="{{etab.id_etab}}" onclick="loadMap('mapChild0','{{etab.latitude_Y}}','{{etab.longitude_X}}','{{etab.nom}}')"><a href="{{etab.lien}}" target="_blank" >{{etab.nom}}</a> <i>({{etab.statut}})</i></input></p>
+               
+                   <p> <input type="radio" name="etab" value="{{etab.id_etab}}" onclick="loadMap('mapChild0','{{etab.latitude_Y}}','{{etab.longitude_X}}','{{etab.nom}}') "><strong><a href="{{etab.lien}}" target="_blank" >{{etab.nom}}</a></strong> <i>({{etab.statut}})</i></input></p>
+               
+               
+               
                <div id="mapChild0">
                    {% if app.request.isXmlHttpRequest == TRUE %}
                 {% include 'map.twig'%}
                 
                 {% endif %}
                </div>
+               
            {%endfor%}
            {% for cpge in CPGE %}
-               <p> <input type="checkbox" name="etab[]" value="{{cpge.id_etab}}" onchange="loadMap('mapChild0','{{cpge.nom}}')"><a href="{{cpge.lien}}" target ="_blank">{{cpge.nom}} - pr&eacute;pas {{cpge.formation}}</a> </input></p>
+               
+               <p> <input type="radio" name="etab" value="{{cpge.id_etab}}" onchange="loadMap('mapChild0','{{cpge.nom}}')"><strong><a href="{{cpge.lien}}" target ="_blank">{{cpge.nom}} - pr&eacute;pas {{cpge.formation}}</a> </strong></input></p>
+                
+               
            {% endfor %}
             </div>
             
            <div class="bts2">
                <h2>Liste des fili&egrave;res de BTS et DMA :</h2>
            {%for bts in BTS%}
-               
-               <p> <input type="checkbox" name="etab[]" value="{{bts.id_etab}}" onchange="loadMap('mapChild0','{{bts.type}}')">{{bts.type}}</input></p>
+              
+               <p> <input type="radio" name="etab" value="{{bts.id_etab}}" onchange="loadMap('mapChild0','{{bts.type}}')"><strong>{{bts.type}}</strong></input></p>
+                
                
            {%endfor%}
             </div>
             <div class ="clearboth"><INPUT TYPE="submit" NAME="submit" VALUE="Valider" /></div>
             </div>  
+            
         </form>
         
         

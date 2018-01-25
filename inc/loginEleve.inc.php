@@ -44,7 +44,7 @@ $listeProfesseurs = $eleve->listerProfesseurs(); // qui sont les professeurs de 
 
 $nbVoeux  = intval($eleve->verifierVoeux()); //combien a-t-il de voeux ?
 $listeVoeux = $eleve->recupererVoeux();
-
+$listeCommentaires = $eleve->recupererCommentaireVoeuParEleve();
 
 
 ////////////////////////////passage du tableau de variables pour template///////
@@ -81,6 +81,8 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'nbVoeuxMax'=>''.$nbVoeuxMax.'',
     'nbVoeux'=>''.$nbVoeux.'',
     'listeVoeux'=>$listeVoeux,
+    'listeCommentaires'=>$listeCommentaires
+
     ) ;
 
 

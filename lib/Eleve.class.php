@@ -424,18 +424,24 @@ class Eleve extends Utilisateur {
         $fusionTab = array();
         if ($this->verifierVoeux() != 0 || $this->verifierVoeux() != NULL ){
             //pour les établissements non CPGE
-            $statement = "SELECT * FROM `validations` INNER JOIN etablissement ON `validations`.`id_etab`=`etablissement`.`id_etab` WHERE `validations`.`id_eleve`= ? ORDER BY `validations`.`classement` ASC";
+            $statement = "SELECT * FROM `validations` INNER JOIN"
+                    . " etablissement ON `validations`.`id_etab`=`etablissement`.`id_etab` "
+                    . "WHERE `validations`.`id_eleve`= ? ORDER BY `validations`.`classement` ASC";
             $tabDatas = array ($this->id_eleve);
             $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
            
           
             //pour les CPGE
-            $statement2 = "SELECT * FROM `validations` INNER JOIN etablissement_CPGE ON `validations`.`id_etab`=`etablissement_CPGE`.`id_etab` WHERE `validations`.`id_eleve`= ? ORDER BY `validations`.`classement` ASC ";
+            $statement2 = "SELECT * FROM `validations` INNER JOIN"
+                    . " etablissement_CPGE ON `validations`.`id_etab`=`etablissement_CPGE`.`id_etab` "
+                    . "WHERE `validations`.`id_eleve`= ? ORDER BY `validations`.`classement` ASC ";
             $tabDatas2 = array($this->id_eleve);
             $tableau2 = $this->db->queryPDOPrepared($statement2, $tabDatas2);
             
             //pour les BTS et DMA
-            $statement3 = "SELECT * FROM `validations` INNER JOIN filieres_BTS ON `validations`.`id_etab` = `filieres_BTS`.`id_etab` WHERE `validations`.`id_eleve`= ? ORDER BY `validations`.`classement` ASC  ";
+            $statement3 = "SELECT * FROM `validations` INNER JOIN"
+                    . " filieres_BTS ON `validations`.`id_etab` = `filieres_BTS`.`id_etab` "
+                    . "WHERE `validations`.`id_eleve`= ? ORDER BY `validations`.`classement` ASC  ";
             $tabDatas3 = array($this->id_eleve);
             $tableau3 = $this->db->queryPDOPrepared($statement3, $tabDatas3);
             
@@ -461,6 +467,8 @@ class Eleve extends Utilisateur {
                 $fusionTab = $tableau3;
             }
             
+            
+            
             if ($fusionTab){ return $fusionTab ;}
         }
         else {
@@ -468,6 +476,15 @@ class Eleve extends Utilisateur {
             return $fusionTab;
         }
         
+   }
+   
+   public function recupererCommentaireVoeuParEleve (){
+            $statement = "SELECT * FROM `commentaires` INNER JOIN `validations` ON"
+                    . "`commentaires`.`id_voeu` = `validations`.`id_voeu` WHERE `validations`.`id_eleve`= ? ";
+            $tabDatas = array ($this->id_eleve);
+            $tableau  = $this->db->queryPDOPrepared($statement, $tabDatas);
+            
+            return $tableau;
    }
    
    public function recupererVoeuAModifier ($id_voeu) {
@@ -513,6 +530,7 @@ class Eleve extends Utilisateur {
             }
             
             return $fusionTab;
+            
         }
         else {
             return $tableau = array ();

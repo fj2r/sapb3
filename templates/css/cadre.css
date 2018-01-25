@@ -296,7 +296,7 @@ color: #24246A; background-color : #DCD9FF; font-size:120%; padding:10px;
         .wrapper{
             position : relative ; 
         }
-        .bts1 {
+        .bts1, .etabNonBts {
             position : relative ;float : left;
             top:0px ; left: 0px;
             display : inline-block;clear: none
@@ -326,6 +326,12 @@ color: #24246A; background-color : #DCD9FF; font-size:120%; padding:10px;
 	box-shadow: 0px 2px 5px #555;
 	padding : 5px 5px 5px 2px;
 	width : 45%;
+        }
+        
+        .textareaCommentaire {
+            width: 90% ;
+            height: 30px;
+            padding : 0px;
         }
   
         .clearboth {

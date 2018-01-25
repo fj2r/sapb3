@@ -50,6 +50,9 @@ if ($connecte == TRUE){
         require_once 'inc/formulaires.inc.php';
     
 }
+else {
+        header('Location:index.php?statut='.$statut);
+    }
 //var_dump($connecte);
 ////////////////////////////Les variables communes à passer au template//////////////////
 include_once ('inc/varTwig.inc.php');
