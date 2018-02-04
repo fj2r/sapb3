@@ -47,7 +47,14 @@ class Notes extends Eleve {
                 }
                 else {
                     if (!empty($tableau)){
-                                                
+                        $i = 0; // le tableau des matières a afficher doit être nettoyé des '.' pour l'affichage.
+                        foreach ($tableau as $chaine ){
+                            
+                            $chaine = str_replace('.',' ',$chaine);
+                            $tableau = array_replace ($tableau, array($i => $chaine));
+                            $i++;
+                        }
+                        
                         return $tableau;
                     }
                     else {return NULL;}
@@ -75,12 +82,15 @@ class Notes extends Eleve {
                 $trimestre = $splitArray[0];
                 $matiere = $splitArray[1];
                 $matiere = str_replace('_', ' ', $matiere); // ATTENTION car le POST rajoute des _ qu'il faut vite virer
+                $matiere = str_replace('.', ' ', $matiere); // pour éviter que les . passés soient virés !
                 
                 
                 
                 /*puis on peut continuer*/
                 
                 if ($trimestre == 'T1' && $note !=''){
+                    
+                    $note = str_replace(',', '.', $note);
                     
                     if ($this->verifierNotesT1($matiere)[0][0] == '0' ){
                     $statement = "INSERT INTO `notes` (`id_eleve`, `matiere`, `moyennes_t1`) VALUES (?,?,?)  ";
@@ -94,6 +104,9 @@ class Notes extends Eleve {
                     }
                 }
                 elseif ($trimestre == 'T2' && $note !=''){
+                    
+                    $note = str_replace(',', '.', $note);
+                    
                     if ($this->verifierNotesT2($matiere)[0][0] == '0'){
                     $statement = "INSERT INTO `notes` (`id_eleve`, `matiere`, `moyennes_t2`) VALUES (?,?,?)  ";
                     $tabDatas = array ($this->id_eleve,$matiere, $note );
