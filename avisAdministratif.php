@@ -42,6 +42,7 @@ else {
     
 $infosEleve = $eleve->informationsEleve();  // et hop on sait tout de lui
 $voeuxEleve = $eleve->recupererVoeux();     // et on a tous ses voeux
+//var_dump($voeuxEleve);
 $avisProfesseurs = $eleve->recupererAvisProfesseurs();
 $listeProfesseursEleve = $eleve->listeProfesseursEleve();
 
@@ -85,7 +86,7 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'texte_footer'=>''.$texte_footer.'',
     'bandeauLogin'=>''.bandeauLogin($statut).'', //pour la construction du bandeau 
     'statut'=>''.$statut.'',
-    'profilAdmin'=>$profilAdmin,
+    'profil'=>$profilAdmin,
     'classeSelectionnee'=>''.$_GET['codeStructure'].'',
     'listeEleves'=>$listeEleves,
     'classe'=>''.$_GET['codeStructure'].'',
@@ -99,7 +100,7 @@ $variablesTemplate = array('annee' => ''.$date.'',
     'decisionCommission' => $decisionCommission,
     
     ) ;
-
+//var_dump($profilAdmin);
 
 $mergeVarTemplate = array_merge(
         $contenuIdentifiants,

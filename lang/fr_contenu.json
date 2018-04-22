@@ -135,9 +135,9 @@
         {
          "labelCommission":"Décision de la commission pour ce voeu d'orientation",
          "bttradio1":"Voeu qui semble actuellement adapté aux résultats et aux capacités de votre enfant.",
-         "bttradio2":"Voeu qui semble difficiel à obtenir actuelement au vu des résultats et/ou du travail de votre enfant.",
+         "bttradio2":"Voeu qui semble difficile à obtenir actuellement au vu des résultats et/ou du travail de votre enfant.",
          "bttradio3":"Voeu qui semble actuellement irréaliste au vu des résultats et/ou du travail de votre enfant.",
-         "bttradio4":"Sans avis de la commission (voeu trop imprécis, absence de voeu, vie active, etc.).",
+         "bttradio4":"Sans avis de la commission (voeu trop imprécis, absence de voeu, etc.).",
          "labelAvisCommission":"Avis de la commission de validation pour le voeu (facultatif)"
          
         }

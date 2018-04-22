@@ -81,7 +81,7 @@ $variablesTemplate = array(
     'typeEdition'=>''.$typeEdition.''
     
     ) ;
-//var_dump($infosEleve);
+//var_dump($profilAdmin);
 
 $mergeVarTemplate = array_merge(
         $contenuIdentifiants,

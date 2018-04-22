@@ -50,7 +50,7 @@
 
                                     <div class="">
                                         <span>Voeu classé n°{{voeu.classement}} : </span>
-                                        <span><strong>{{voeu.nom}}</strong></p> <p><a href ="{{voeu.lien}}" target ="_blank">(Voir la présentation de l'établissement sur le site de l'ONISEP)</a></span>
+                                        <span><strong>{{voeu.nom}}</strong> ({{voeu.type}};{{voeu.tutelle}}-{{voeu.commune}})</p> <p><a href ="{{voeu.lien}}" target ="_blank">(Voir la présentation de l'établissement sur le site de l'ONISEP)</a></span>
 
                                     </div>
                                     <div class ="">
@@ -82,9 +82,18 @@
                              <form action="traitementAvisAdministratif.php?statut={{statut}}&idAdmin={{id_admin}}&codeStructure={{infosEleve.35}}&idEleve={{infosEleve.id_eleve}}&type={{type}}" class="" method ="POST" >
                                 {% for voeu in voeuxEleve %}
 
-                                    <div class="">
+                                    <div class="formulaire">
                                         <span>Voeu classé n°{{voeu.classement}} : </span>
-                                        <span><strong>{{voeu.nom}}</strong></p> <p><a href ="{{voeu.lien}}" target ="_blank">(Voir la présentation de l'établissement sur le site de l'ONISEP)</a></span>
+                                        <span><h3><strong><u>{{voeu.nom}}</u></strong></h3><span>
+                                            <p>Informations : {{voeu.type}}
+                                               {%if voeu.universite is not empty %} ({{voeu.universite}}) {%endif%}
+                                                
+                                                - {{voeu.statut}} - </p>
+                                            <p>Localisation : {{voeu.commune}}/{{voeu.academie}}</p> 
+                                            {%if voeu.commentaire is not empty %}
+                                            <p><i>commentaire  : {{voeu.commentaire}}</i></p>
+                                            {%endif%}
+                                            <p><a href ="{{voeu.lien}}" target ="_blank">(Voir la présentation de l'établissement sur le site de l'ONISEP)</a></span>
 
                                     </div>
                                                                         
