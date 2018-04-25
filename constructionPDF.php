@@ -34,11 +34,13 @@ $size= 'A4';
  
 $codeStructure = htmlentities($_GET['codeStructure'])  ;
 
+$typePDF = htmlentities($_GET['type']) ;
 
         
 $tfpdf = new FPDF($orientation, $unit, $size);
 $publication = new \lib\pdf($db , $tfpdf);
 
+$publication->setType($typePDF);
 $listeEleves = $publication->listeElevesParDivision($codeStructure);
 
 
