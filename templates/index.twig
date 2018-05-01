@@ -14,7 +14,7 @@
         {% block panneauDroiteFirstchild%} {{parent()}} {% endblock %}
             {% block article %}{{parent()}}
                 
-            <div id="index_ul">
+            <div id="index_ul" class="row">
                 <ul type="square">
                     <li>
                         <img src="templates/IMG/eleve.png" />&nbsp;<a href="{{lien_eleve}}">El&egrave;ves</a>
@@ -27,11 +27,11 @@
                     </li>
                 </ul>
             </div>
-            <div id="splashscreen">
-            <div><h3><strong>{{splash1}}</strong></h3>
+            <div id="splashscreen" class="row">
+            <div><h6><strong>{{splash1}}</strong></h6>
                              <br />
             </div>
-            <div><h3><strong>{{splash2}}</strong></h3>
+            <div><h6><strong>{{splash2}}</strong></h6>
             </div>
             </div>
             {% endblock %}

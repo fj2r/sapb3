@@ -1,4 +1,4 @@
-@CHARSET "ISO-8859-1";
+@CHARSET "UTF-8";
 /*
 	Feuille de styles pour le menu par onglets (espaces)
 	et sous rubriques
@@ -64,11 +64,11 @@
 }
 
 #menu div {
-	margin-top:10px;/* la valeur doit etre égale au padding de #menu li */
+	margin-top:10px;/* la valeur doit etre ï¿½gale au padding de #menu li */
 }
 
 #menuactif {
-	/* permet de recouvrir la bordure du sous-menu pour l'espace sélectionné */
+	/* permet de recouvrir la bordure du sous-menu pour l'espace sï¿½lectionnï¿½ */
 	position:relative; 
 	top:1px; 
 	z-index:10;

@@ -1,22 +1,22 @@
 {# empty Twig template #}
 {% if statut =='eleve' %}
                 <div id="menu">
-                <div class="inscription col-lg-3">&nbsp;<a href="traitementLogin.php?statut={{statut}}">{{recapitulatifEleve}}</a>&nbsp;</div>
-                <div class="inscription col-lg-3">&nbsp;<a href="notesEleve.php?statut={{statut}}&idEleve={{idEleve}}">{{notesEleve}}</a>&nbsp;</div>
-                <div class="inscription col-lg-3">&nbsp;<a href="orientation.php?statut={{statut}}">{{nouveauVoeuEleve}}</a>&nbsp;</div>
+                <div class="inscription ">&nbsp;<a href="traitementLogin.php?statut={{statut}}">{{recapitulatifEleve}}</a>&nbsp;</div>
+                <div class="inscription ">&nbsp;<a href="notesEleve.php?statut={{statut}}&idEleve={{idEleve}}">{{notesEleve}}</a>&nbsp;</div>
+                <div class="inscription ">&nbsp;<a href="orientation.php?statut={{statut}}">{{nouveauVoeuEleve}}</a>&nbsp;</div>
                 </div>
 {% elseif statut == 'professeur' %}
     <div id="menu">
-                <div class="inscription col-lg-3">&nbsp;<a href="traitementLogin.php?statut={{statut}}">{{choixDeLaClasse}}</a>&nbsp;</div>
+                <div class="inscription ">&nbsp;<a href="traitementLogin.php?statut={{statut}}">{{choixDeLaClasse}}</a>&nbsp;</div>
                 
                 </div>
 {% elseif statut == 'administratif' %}
     <div id="menu">
-                <div class="inscription col-lg-3">&nbsp;<a href="traitementLogin.php?statut={{statut}}">{{menuPrincipal}}</a>&nbsp;</div>
-                <div class="inscription col-lg-3">&nbsp;<a href="choixEditionAdmin.php?statut={{statut}}&type=pdfPreCommission">{{editionPDF}}</a>&nbsp;</div>
-                <div class="inscription col-lg-3">&nbsp;<a href="choixEditionAdmin.php?statut={{statut}}&type=avisP1">{{AvisP1}}</a>&nbsp;</div>
+                <div class="inscription ">&nbsp;<a href="traitementLogin.php?statut={{statut}}">{{menuPrincipal}}</a>&nbsp;</div>
+                <div class="inscription ">&nbsp;<a href="choixEditionAdmin.php?statut={{statut}}&type=pdfPreCommission">{{editionPDF}}</a>&nbsp;</div>
+                <div class="inscription ">&nbsp;<a href="choixEditionAdmin.php?statut={{statut}}&type=avisP1">{{AvisP1}}</a>&nbsp;</div>
                 
-                <div class="inscription col-lg-3"> &nbsp;<a href="choixEditionAdmin.php?statut={{statut}}&type=avisCommission">{{avisCommission}}</a>&nbsp;</div>
+                <div class="inscription "> &nbsp;<a href="choixEditionAdmin.php?statut={{statut}}&type=avisCommission">{{avisCommission}}</a>&nbsp;</div>
                 </div>
 {% else %}
                 
