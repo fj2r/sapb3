@@ -4,7 +4,7 @@
 
 {% block identifiants %}{{parent()}}
         
-    <table class ="header_table" >
+    <table class ="header_table col-lg-12" >
         <tr>
          
             {% if connecte is defined %}
@@ -41,10 +41,10 @@
 {% endblock %}
 {% block cadre_haut %}{{parent()}}
     {% block chapeau_haut%}                    
-    <div id="chapeau">
-        <a href="index.php"><div id="logo_mesr"></div></a>
-    <div id="bandeau2">
-        <div id="connexion">
+    <div id="chapeau" class="row">
+        <div class="col-lg-3">    <a href="index.php"><div id="logo_mesr"></div></a></div>
+    <div id="bandeau2" >
+        <div id="connexion" class="col-lg-6">
         {% endblock %}
         
         {% block formulaire %}{% endblock %}
@@ -55,26 +55,30 @@
     {% block chapeau_bas%}   
         </div>
     </div>
-    <div id="imgBiseau"></div>
-    <div id="bandeau3">
-        <a href="" id="lien_code_perdu"target="_blank">Codes perdus ?</a>
-        <a href="" id="lien_information"  target="_blank"> Information</a>
-        <a href="" id="lien_contact"  target="_blank">Contact</a>
+    <div id="imgBiseau" class="col-lg-offset-11 col-lg-1"></div>
+    <div id="bandeau3" class="row" >
+        <div class="col-lg-offset-9 col-lg-3">
+            <a href="" id="lien_code_perdu"target="_blank" >Codes perdus ?</a>
+            <a href="" id="lien_information"  target="_blank" > Information</a>
+            <a href="" id="lien_contact"  target="_blank" >Contact</a>
+        </div>
     </div>
     </div>
+        
     {% endblock %}
 {% endblock %}
 
 
 {% block contenu %}{{parent()}}
+    
     {% block panneauGauche %} 
-        <div id="panneaugauche">
+        <div id="panneaugauche" class = "col-lg-2">
         <img src="templates/IMG/sps.png" />
         </div>
     {% endblock %}
     {% block panneauDroite %}
         {% block panneauDroiteFirstchild%}
-        <div id ="panneaudroite">
+        <div id ="panneaudroite" class="col-lg-9">
         
         <p>Application de simulation ParcourSup</p><hr />
         
