@@ -1,0 +1,23 @@
+/*
+Sapb - Simulation Application Post-Bac. 
+Copyleft LMN Autun.
+Utilisation dans le cadre de la licence incluse.
+*/
+/* 
+    Created on : 1 mai 2018, 19:37:41
+    Author     : fred
+*/
+
+#panneaugauche {
+    
+    background-image : url('../IMG/sps.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    
+    
+    
+}
+#panneaugauche img {
+    max-height: 100%;
+    max-width: 100%;
+}

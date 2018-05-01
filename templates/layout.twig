@@ -15,18 +15,30 @@
     <body>
        <div id ="cadre" class="container">
         <div id ="header" class="row"> 
-            <div id="identifiants" class="row"> {% block identifiants %}{% endblock %}</div>
-            <div id ="cadre_haut" class="row">{% block cadre_haut %}{% endblock %}</div>
+            <div id="identifiants" class="row"> 
+                <div class="col-lg-12">
+                
+            {% block identifiants %}{% endblock %}
+                </div>
+            </div>
+            <div id ="cadre_haut" class="row">
+                <div class="col-lg-12">
+                cadre haut
+                {% block cadre_haut %}{% endblock %}
+            </div>
+            </div>
         </div>
+            
+            
         <div id="content" class="row">
-        {% block contenu %}{% endblock %}
-       </div>
+            {% block contenu %}{% endblock %}
+        </div>
         
         <div id="footer" class ="row"> 
             
             {% block footer %}
-                <div class="spacer" class="col-lg-1"></div>
-                <div id="pied" class="col-lg-11">
+               
+                <div id="pied" class="col-lg-12">
                     <hr style="clear: both;"></hr>
                     <span id="copyright">&copy;{{texte_footer}} {{date|date('Y')}} - Version {{version}}</span>
             </div>

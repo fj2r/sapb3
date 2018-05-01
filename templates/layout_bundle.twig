@@ -3,13 +3,13 @@
 {% extends "layout.twig" %}
 
 {% block identifiants %}{{parent()}}
-        
-    <table class ="header_table col-lg-12" >
+      
+    <table class ="header_table  table  table-striped table-condensed" >
         <tr>
          
             {% if connecte is defined %}
                 {% if connecte == FALSE %}
-                   <td>{{nonConnecte}} </td>
+                   <td>identifiants : {{nonConnecte}} </td>
                 {% elseif connecte == TRUE %}
                     <td><img src="templates/IMG/login.png" /></td>
                     <td> {{messageM}} {{connecteur1}} : {{profil.prenom|capitalize}} {{profil.nom|upper}}. </td>
@@ -19,7 +19,7 @@
                             {%endfor%}
                             )</i>{%endif%}</td> 
                 {% endif %}
-            {%else %}    <td> {{nonConnecte}} </td>
+            {%else %}    <td>  {{nonConnecte}} </td>
             {%endif%}
             
          
@@ -35,27 +35,30 @@
                 {% endif %}
         </tr>
     </table>
-    <br />
+    
+    
                 
         
 {% endblock %}
 {% block cadre_haut %}{{parent()}}
-    {% block chapeau_haut%}                    
     <div id="chapeau" class="">
+    {% block chapeau_haut%}                    
+    
         <div class="col-lg-2">    <a href="index.php"><div id="logo_mesr" ></div></a></div>
     <div id="bandeau2" class="col-lg-9" >
-        <div id="connexion" class="">
-        {% endblock %}
         
-        {% block formulaire %}{% endblock %}
+        
+        
+        {# {% block formulaire %}{% endblock %} #}
         {% block menuUtilisateur %}
             {% include 'menuBandeau.twig' %}
         {% endblock %}
             
-    {% block chapeau_bas%}   
-        </div>
+      
     </div>
     <div id="imgBiseau" class="col-lg-offset-11 col-lg-1"></div>
+    {% endblock %}
+    {% block chapeau_bas%} 
     <div id="bandeau3" class="row" >
         <div class="col-lg-12 ">
             <a href="" id="lien_code_perdu"target="_blank" >Codes perdus ?</a>
@@ -63,9 +66,10 @@
             <a href="" id="lien_contact"  target="_blank" >Contact</a>
         </div>
     </div>
-    </div>
+    
         
     {% endblock %}
+    </div>
 {% endblock %}
 
 
@@ -73,17 +77,19 @@
     
     {% block panneauGauche %} 
         <div id="panneaugauche" class = "col-lg-2">
-        <img src="templates/IMG/sps.png" />
+        {# <img src="templates/IMG/sps.png" /> #}
         </div>
     {% endblock %}
     {% block panneauDroite %}
+        
         {% block panneauDroiteFirstchild%}
-        <div id ="panneaudroite" class="col-lg-9">
+        <div id ="panneaudroite" class="col-lg-8">
+        <div >
         
         <p>Application de simulation ParcourSup</p><hr />
         
         <br />
-        
+        </div>
         {% endblock %}
             {% block article %}
                 
@@ -95,6 +101,7 @@
             
         </div>
         {% endblock %}
+        
     {% endblock %}
 {% endblock %}
 

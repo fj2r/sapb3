@@ -9,9 +9,13 @@
 {% block cadre_haut %}
 {% block chapeau_haut %}{{parent()}}{% endblock %}
     {% block formulaire %} {{parent()}}
-    <form action ="traitementLogin.php?statut={{statut}}" method ="POST">
-            {{bandeauLogin|raw}}
-    </form>
+        <div id="connexion" class="row">
+            <div class="col-lg-12 ">
+            <form class="form-inline" action ="traitementLogin.php?statut={{statut}}" method ="POST">
+                    {{bandeauLogin|raw}}
+            </form>
+            </div>
+        </div>
     {% endblock %}
     {% block menuUtilisateur %}
             
@@ -25,6 +29,9 @@
     {% block panneauDroite %}
         {% block panneauDroiteFirstchild%} {{parent()}} {% endblock %}
             {% block article %}{{parent()}}
+                
+                <div class="row">
+                    <div class="col-lg-12">
     
     
                 {% if statut == 'eleve'%}    
@@ -48,17 +55,22 @@
                 {%else%}
                          
                {%endif%}
-   
+                    </div>
+                </div>
             {% endblock %}
         {% block panneauDroiteSecondchild %} {{parent()}}
             
+                
             {% if statut == 'professeur'%}
                 <div class="texte">ATTENTION : pour vous connecter, utilisez les codes fournis par l'administrateur du site.</div>
             {%endif%}
             {% if statut == 'administratif'%}
                 <div class="texte">ATTENTION : pour vous connecter, utilisez les codes d'accès fournis par l'administateur du site.</div>
             {%endif%}
-        {% endblock %}    
+                
+            
+        {% endblock %} 
+    
     {% endblock %}
 {% endblock %}
 
